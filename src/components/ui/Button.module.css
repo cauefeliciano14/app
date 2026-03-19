@@ -1,0 +1,89 @@
+/* ═══════════════════════════════════════════════════
+   Button — Reusable button with variant & size support
+   ═══════════════════════════════════════════════════ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-speed);
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ── Sizes ── */
+.sizeMd {
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.sizeSm {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+}
+
+/* ── Variant: Primary ── */
+.variantPrimary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.variantPrimary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-primary);
+}
+
+/* ── Variant: Ghost ── */
+.variantGhost {
+  background: transparent;
+  border: 1px solid var(--border-input-hover);
+  color: var(--text-secondary);
+}
+
+.variantGhost:hover:not(:disabled) {
+  background: var(--surface-subtle-hover);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+/* ── Variant: Danger ── */
+.variantDanger {
+  background: var(--color-error-btn-bg);
+  color: var(--color-error-light);
+  border: 1px solid var(--color-error-border);
+}
+
+.variantDanger:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.35);
+  border-color: var(--color-error);
+  transform: translateY(-1px);
+}
+
+/* ── Variant: Accent ── */
+.variantAccent {
+  background: var(--color-accent-subtle);
+  color: var(--color-accent-light);
+  border: 1px solid var(--color-accent-border);
+}
+
+.variantAccent:hover:not(:disabled) {
+  background: var(--color-accent-bg-hover);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-glow-accent);
+  transform: translateY(-1px);
+}
+
+/* ── Disabled (all variants) ── */
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

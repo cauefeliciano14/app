@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { tagPill, btnSmall } from './equipmentStyles';
+import css from './equipment.module.css';
 import { getArmorByName } from '../../rules/data/armorRules';
 
 interface InventoryItem {
@@ -28,14 +28,14 @@ const separator: React.CSSProperties = {
 };
 
 const detailLabel: React.CSSProperties = {
-  color: '#64748b',
+  color: 'var(--text-faint)',
   fontSize: '0.75rem',
   textTransform: 'uppercase' as const,
   letterSpacing: '0.5px',
 };
 
 const detailValue: React.CSSProperties = {
-  color: '#cbd5e1',
+  color: 'var(--text-body)',
   fontSize: '0.85rem',
   fontWeight: 500,
 };
@@ -79,7 +79,7 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
 
   if (inventory.length === 0) {
     return (
-      <p style={{ color: '#64748b', fontSize: '0.9rem', margin: 0 }}>
+      <p style={{ color: 'var(--text-faint)', fontSize: '0.9rem', margin: 0 }}>
         Você não possui nenhum item no seu inventário. Adicione Equipamento Inicial acima ou adicione itens da lista abaixo.
       </p>
     );
@@ -99,9 +99,9 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
         const isEquipped = isEquippedArmor || isEquippedShield;
         return (
           <div key={item.id} style={{
-            background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent',
+            background: i % 2 === 0 ? 'var(--surface-row-alt)' : 'transparent',
             borderRadius: '6px',
-            border: '1px solid rgba(255,255,255,0.04)',
+            border: '1px solid var(--border-faint)',
             overflow: 'hidden',
           }}>
             {/* Header row */}
@@ -113,18 +113,18 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: 0 }}>
-                <span style={{ color: '#f1f5f9', fontWeight: 600, fontSize: '0.9rem' }}>{item.name}</span>
+                <span style={{ color: 'var(--text-bright)', fontWeight: 600, fontSize: '0.9rem' }}>{item.name}</span>
                 {base?.type && (
-                  <span style={{ ...tagPill, flexShrink: 0 }}>{base.type}</span>
+                  <span className={css.tagPill} style={{ flexShrink: 0 }}>{base.type}</span>
                 )}
                 {item.isStartingGear && (
-                  <span style={{ ...tagPill, background: 'rgba(249,115,22,0.15)', color: '#f97316', flexShrink: 0 }}>Inicial</span>
+                  <span className={css.tagPill} style={{ background: 'var(--color-accent-subtle)', color: 'var(--color-accent)', flexShrink: 0 }}>Inicial</span>
                 )}
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} onClick={e => e.stopPropagation()}>
-                <button onClick={() => onChangeQuantity(item.id, -1)} style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', cursor: 'pointer', fontSize: '0.8rem' }}>-</button>
-                <span style={{ color: '#f1f5f9', fontWeight: 600, fontSize: '0.85rem', minWidth: '20px', textAlign: 'center' }}>{item.quantity}</span>
-                <button onClick={() => onChangeQuantity(item.id, 1)} style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', cursor: 'pointer', fontSize: '0.8rem' }}>+</button>
+                <button onClick={() => onChangeQuantity(item.id, -1)} style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid var(--border-input)', background: 'var(--surface-ghost)', color: 'var(--text-body)', cursor: 'pointer', fontSize: '0.8rem' }}>-</button>
+                <span style={{ color: 'var(--text-bright)', fontWeight: 600, fontSize: '0.85rem', minWidth: '20px', textAlign: 'center' }}>{item.quantity}</span>
+                <button onClick={() => onChangeQuantity(item.id, 1)} style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid var(--border-input)', background: 'var(--surface-ghost)', color: 'var(--text-body)', cursor: 'pointer', fontSize: '0.8rem' }}>+</button>
                 {(isArmorItem || isShieldItem) && onEquipArmor && onEquipShield && (
                   <button
                     onClick={() => {
@@ -135,10 +135,10 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
                       }
                     }}
                     style={{
-                      background: isEquipped ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
-                      border: `1px solid ${isEquipped ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                      background: isEquipped ? 'var(--color-magic-bg)' : 'var(--border-faint)',
+                      border: `1px solid ${isEquipped ? 'var(--color-magic-border)' : 'rgba(255,255,255,0.07)'}`,
                       borderRadius: '5px',
-                      color: isEquipped ? '#a78bfa' : '#64748b',
+                      color: isEquipped ? 'var(--color-magic)' : 'var(--text-faint)',
                       padding: '3px 8px',
                       fontSize: '0.72rem',
                       cursor: 'pointer',
@@ -151,16 +151,16 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
               </div>
             </div>
 
-            {/* Expanded details — D&D Beyond style */}
+            {/* Expanded details */}
             {isOpen && (
               <div style={{ padding: '0 12px 14px 12px', display: 'flex', flexDirection: 'column' }}>
                 {/* Item type & subtype header */}
                 {base && (
                   <>
-                    <div style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '2px' }}>
+                    <div style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginBottom: '2px' }}>
                       {base.category && <span>{base.category}</span>}
                       {base.type && base.type !== base.category && <span> · {base.type}</span>}
-                      {base.isMagic && base.rarity && <span> · <span style={{ color: '#a78bfa' }}>{base.rarity}</span></span>}
+                      {base.isMagic && base.rarity && <span> · <span style={{ color: 'var(--color-magic)' }}>{base.rarity}</span></span>}
                     </div>
                     <div style={separator} />
                   </>
@@ -201,12 +201,12 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
                 </div>
 
                 {/* Properties */}
-                {base?.properties && base.properties !== '—' && (
+                {base?.properties && base.properties !== '\u2014' && (
                   <>
                     <div style={separator} />
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                       {base.properties.split(', ').map((p: string) => (
-                        <span key={p} style={tagPill}>{p}</span>
+                        <span key={p} className={css.tagPill}>{p}</span>
                       ))}
                     </div>
                   </>
@@ -216,7 +216,7 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
                 {base?.attunement && (
                   <>
                     <div style={separator} />
-                    <div style={{ color: '#a78bfa', fontSize: '0.82rem', fontStyle: 'italic' }}>
+                    <div style={{ color: 'var(--color-magic)', fontSize: '0.82rem', fontStyle: 'italic' }}>
                       {base.attunement}
                     </div>
                   </>
@@ -226,7 +226,7 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
                 {base?.description && (
                   <>
                     <div style={separator} />
-                    <p style={{ color: '#94a3b8', fontSize: '0.82rem', margin: 0, lineHeight: 1.6, maxHeight: '150px', overflowY: 'auto' }}>
+                    <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', margin: 0, lineHeight: 1.6, maxHeight: '150px', overflowY: 'auto' }}>
                       {typeof base.description === 'string' && base.description.length > 600
                         ? base.description.slice(0, 600) + '...'
                         : base.description}
@@ -251,10 +251,10 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
                   </>
                 )}
 
-                {/* Remove button — centered */}
+                {/* Remove button */}
                 <div style={separator} />
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4px' }}>
-                  <button onClick={() => onRemoveItem(item.id)} style={{ ...btnSmall('danger'), padding: '8px 24px', fontSize: '0.82rem' }}>
+                  <button onClick={() => onRemoveItem(item.id)} className={`${css.btnSmall} ${css.btnDanger}`} style={{ padding: '8px 24px', fontSize: '0.82rem' }}>
                     Remover Item
                   </button>
                 </div>

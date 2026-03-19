@@ -1,0 +1,54 @@
+.card {
+  background: var(--color-accent-bg);
+  border: 1px solid var(--border-accent-subtle);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardIncomplete {
+  border-color: var(--border-accent);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.incompleteBadge {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #000;
+  font-weight: 900;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.titleText {
+  color: var(--color-accent);
+  font-weight: 700;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.toolChipWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.toolChip {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: help;
+  border-bottom: 1px dotted rgba(226, 232, 240, 0.4);
+}

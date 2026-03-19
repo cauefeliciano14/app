@@ -4,7 +4,7 @@ import armorData from '../../data/armor.json';
 import equipmentData from '../../data/equipment.json';
 import toolsData from '../../data/tools.json';
 import magicItemsData from '../../data/magicItems.json';
-import { inputStyle, tagPill, rowAlt } from './equipmentStyles';
+import css from './equipment.module.css';
 
 interface ItemCatalogProps {
   onAddItem: (item: any) => void;
@@ -90,14 +90,14 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
   };
 
   const detailLabel: React.CSSProperties = {
-    color: '#64748b',
+    color: 'var(--text-faint)',
     fontSize: '0.75rem',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.5px',
   };
 
   const detailValue: React.CSSProperties = {
-    color: '#cbd5e1',
+    color: 'var(--text-body)',
     fontSize: '0.85rem',
     fontWeight: 500,
   };
@@ -106,17 +106,17 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
       {/* Search */}
       <div style={{ position: 'relative' }}>
-        <span style={{ position: 'absolute', left: '12px', top: '10px', color: '#64748b' }}>🔍</span>
+        <span style={{ position: 'absolute', left: '12px', top: '10px', color: 'var(--text-faint)' }}>&#128269;</span>
         <input
           type="text"
           placeholder="Buscar item..."
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
-          style={inputStyle}
+          className={css.inputStyle}
         />
       </div>
 
-      {/* Category pills — two rows wrap */}
+      {/* Category pills */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
         {CATEGORY_FILTERS.map(f => {
           const isActive = activeFilter === f;
@@ -130,10 +130,10 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
                 fontSize: '0.78rem',
                 fontWeight: 600,
                 cursor: 'pointer',
-                border: isActive ? '1px solid #f97316' : '1px solid rgba(255,255,255,0.12)',
-                background: isActive ? 'rgba(249,115,22,0.15)' : 'transparent',
-                color: isActive ? '#f97316' : '#94a3b8',
-                transition: 'all 0.15s',
+                border: isActive ? '1px solid var(--color-accent)' : '1px solid rgba(255,255,255,0.12)',
+                background: isActive ? 'var(--color-accent-subtle)' : 'transparent',
+                color: isActive ? 'var(--color-accent)' : 'var(--text-dim)',
+                transition: 'all var(--transition-fast)',
               }}
             >
               {f}
@@ -144,30 +144,30 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
 
       {/* Checkboxes */}
       <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#94a3b8', fontSize: '0.82rem', cursor: 'pointer' }}>
-          <input type="checkbox" checked={showCommon} onChange={e => setShowCommon(e.target.checked)} style={{ accentColor: '#f97316' }} /> Comum
+        <label style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-dim)', fontSize: '0.82rem', cursor: 'pointer' }}>
+          <input type="checkbox" checked={showCommon} onChange={e => setShowCommon(e.target.checked)} style={{ accentColor: 'var(--color-accent)' }} /> Comum
         </label>
-        <label style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#94a3b8', fontSize: '0.82rem', cursor: 'pointer' }}>
-          <input type="checkbox" checked={showMagic} onChange={e => setShowMagic(e.target.checked)} style={{ accentColor: '#a78bfa' }} /> Mágico
+        <label style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--text-dim)', fontSize: '0.82rem', cursor: 'pointer' }}>
+          <input type="checkbox" checked={showMagic} onChange={e => setShowMagic(e.target.checked)} style={{ accentColor: 'var(--color-magic)' }} /> Mágico
         </label>
       </div>
 
       {/* Count */}
-      <div style={{ color: '#64748b', fontSize: '0.8rem' }}>{filtered.length} itens encontrados</div>
+      <div style={{ color: 'var(--text-faint)', fontSize: '0.8rem' }}>{filtered.length} itens encontrados</div>
 
       {/* List */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', maxHeight: '500px', overflowY: 'auto' }}>
         {filtered.slice(0, 100).map((item, i) => {
           const isExpanded = expandedItem === `${item.name}-${i}`;
           return (
-            <div key={`${item.name}-${i}`} style={{ ...rowAlt(i), borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}>
+            <div key={`${item.name}-${i}`} className={i % 2 === 0 ? css.rowEven : css.rowOdd} style={{ borderRadius: '4px', border: '1px solid rgba(255,255,255,0.03)' }}>
               <div
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', cursor: 'pointer' }}
                 onClick={() => setExpandedItem(isExpanded ? null : `${item.name}-${i}`)}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: 0 }}>
-                  <span style={{ color: '#f1f5f9', fontSize: '0.88rem', fontWeight: 500 }}>{item.name}</span>
-                  <span style={{ color: '#64748b', fontSize: '0.72rem', flexShrink: 0 }}>{item.type}</span>
+                  <span style={{ color: 'var(--text-bright)', fontSize: '0.88rem', fontWeight: 500 }}>{item.name}</span>
+                  <span style={{ color: 'var(--text-faint)', fontSize: '0.72rem', flexShrink: 0 }}>{item.type}</span>
                   {item.isMagic && item.rarity && (
                     <span style={{ color: rarityColor(item.rarity), fontSize: '0.7rem', fontWeight: 600, flexShrink: 0 }}>
                       {item.rarity}
@@ -182,10 +182,10 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
                     fontSize: '0.78rem',
                     fontWeight: 700,
                     cursor: 'pointer',
-                    border: '1px solid rgba(34,197,94,0.4)',
+                    border: '1px solid var(--color-success-border)',
                     background: 'rgba(34,197,94,0.12)',
-                    color: '#86efac',
-                    transition: 'all 0.15s',
+                    color: 'var(--color-success-light)',
+                    transition: 'all var(--transition-fast)',
                     flexShrink: 0,
                   }}
                 >
@@ -196,7 +196,7 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
               {isExpanded && (
                 <div style={{ padding: '4px 12px 12px 12px', display: 'flex', flexDirection: 'column' }}>
                   {/* Type header */}
-                  <div style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '2px' }}>
+                  <div style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginBottom: '2px' }}>
                     {item.category}
                     {item.type && item.type !== item.category && <span> · {item.type}</span>}
                   </div>
@@ -231,12 +231,12 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
                   </div>
 
                   {/* Properties */}
-                  {item.properties && item.properties !== '—' && (
+                  {item.properties && item.properties !== '\u2014' && (
                     <>
                       <div style={separator} />
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                         {item.properties.split(', ').map((p: string) => (
-                          <span key={p} style={tagPill}>{p}</span>
+                          <span key={p} className={css.tagPill}>{p}</span>
                         ))}
                       </div>
                     </>
@@ -246,7 +246,7 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
                   {item.attunement && (
                     <>
                       <div style={separator} />
-                      <div style={{ color: '#a78bfa', fontSize: '0.82rem', fontStyle: 'italic' }}>
+                      <div style={{ color: 'var(--color-magic)', fontSize: '0.82rem', fontStyle: 'italic' }}>
                         {item.attunement}
                       </div>
                     </>
@@ -256,7 +256,7 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
                   {item.description && (
                     <>
                       <div style={separator} />
-                      <p style={{ color: '#94a3b8', fontSize: '0.82rem', margin: 0, lineHeight: 1.5, maxHeight: '150px', overflowY: 'auto' }}>
+                      <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', margin: 0, lineHeight: 1.5, maxHeight: '150px', overflowY: 'auto' }}>
                         {typeof item.description === 'string' && item.description.length > 500
                           ? item.description.slice(0, 500) + '...'
                           : item.description}
@@ -269,7 +269,7 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
           );
         })}
         {filtered.length > 100 && (
-          <div style={{ color: '#64748b', fontSize: '0.8rem', padding: '12px', textAlign: 'center' }}>
+          <div style={{ color: 'var(--text-faint)', fontSize: '0.8rem', padding: '12px', textAlign: 'center' }}>
             Mostrando 100 de {filtered.length} itens. Refine sua busca para ver mais.
           </div>
         )}

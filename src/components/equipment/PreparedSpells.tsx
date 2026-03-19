@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { btnSmall, tagPill } from './equipmentStyles';
+import css from './equipment.module.css';
 
 interface PreparedSpellsProps {
   learnedCantrips: string[];
@@ -16,14 +16,14 @@ const separator: React.CSSProperties = {
 };
 
 const detailLabel: React.CSSProperties = {
-  color: '#64748b',
+  color: 'var(--text-faint)',
   fontSize: '0.75rem',
   textTransform: 'uppercase' as const,
   letterSpacing: '0.5px',
 };
 
 const detailValue: React.CSSProperties = {
-  color: '#cbd5e1',
+  color: 'var(--text-body)',
   fontSize: '0.85rem',
   fontWeight: 500,
 };
@@ -45,7 +45,7 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
 
   if (learnedCantrips.length === 0 && preparedSpells.length === 0) {
     return (
-      <p style={{ color: '#64748b', fontSize: '0.9rem', margin: 0 }}>
+      <p style={{ color: 'var(--text-faint)', fontSize: '0.9rem', margin: 0 }}>
         Você não possui nenhuma magia preparada no momento. Aprenda e prepare magias da sua lista de magias disponíveis abaixo.
       </p>
     );
@@ -58,8 +58,8 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
 
     return (
       <div key={name} style={{
-        background: 'rgba(255,255,255,0.02)', borderRadius: '6px',
-        border: '1px solid rgba(255,255,255,0.04)', overflow: 'hidden',
+        background: 'var(--surface-row-alt)', borderRadius: '6px',
+        border: '1px solid var(--border-faint)', overflow: 'hidden',
       }}>
         <div
           onClick={() => setExpandedSpell(isExpanded ? null : name)}
@@ -69,15 +69,15 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ color: '#f1f5f9', fontWeight: 500, fontSize: '0.9rem' }}>{name}</span>
+            <span style={{ color: 'var(--text-bright)', fontWeight: 500, fontSize: '0.9rem' }}>{name}</span>
             {spell?.school && (
-              <span style={{ ...tagPill, color: schoolColor(spell.school), background: `${schoolColor(spell.school)}15` }}>
+              <span className={css.tagPill} style={{ color: schoolColor(spell.school), background: `${schoolColor(spell.school)}15` }}>
                 {spell.school}
               </span>
             )}
           </div>
           {!isExpanded && (
-            <button onClick={e => { e.stopPropagation(); onRemove(); }} style={{ ...btnSmall('danger'), padding: '4px 10px', fontSize: '0.75rem' }}>
+            <button onClick={e => { e.stopPropagation(); onRemove(); }} className={`${css.btnSmall} ${css.btnDanger}`} style={{ padding: '4px 10px', fontSize: '0.75rem' }}>
               Remover
             </button>
           )}
@@ -86,9 +86,9 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
         {isExpanded && spell && (
           <div style={{ padding: '0 12px 12px 12px', display: 'flex', flexDirection: 'column' }}>
             {/* School & level */}
-            <div style={{ color: '#94a3b8', fontSize: '0.82rem' }}>
+            <div style={{ color: 'var(--text-dim)', fontSize: '0.82rem' }}>
               {spell.school && <span style={{ color: schoolColor(spell.school) }}>{spell.school}</span>}
-              {isCantrip ? ' · Truque' : ' · Nível 1'}
+              {isCantrip ? ' \u00B7 Truque' : ' \u00B7 N\u00EDvel 1'}
             </div>
             <div style={separator} />
 
@@ -96,7 +96,7 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '10px', padding: '4px 0' }}>
               {spell.castingTime && (
                 <div>
-                  <div style={detailLabel}>Tempo de Conjuração</div>
+                  <div style={detailLabel}>Tempo de Conjura\u00E7\u00E3o</div>
                   <div style={detailValue}>{spell.castingTime}</div>
                 </div>
               )}
@@ -114,7 +114,7 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
               )}
               {spell.duration && (
                 <div>
-                  <div style={detailLabel}>Duração</div>
+                  <div style={detailLabel}>Dura\u00E7\u00E3o</div>
                   <div style={detailValue}>{spell.duration}</div>
                 </div>
               )}
@@ -124,7 +124,7 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
             {spell.description && (
               <>
                 <div style={separator} />
-                <p style={{ color: '#94a3b8', fontSize: '0.82rem', margin: 0, lineHeight: 1.6, maxHeight: '200px', overflowY: 'auto' }}>
+                <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', margin: 0, lineHeight: 1.6, maxHeight: '200px', overflowY: 'auto' }}>
                   {spell.description}
                 </p>
               </>
@@ -133,7 +133,7 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
             {/* Remove button centered */}
             <div style={separator} />
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4px' }}>
-              <button onClick={onRemove} style={{ ...btnSmall('danger'), padding: '8px 24px', fontSize: '0.82rem' }}>
+              <button onClick={onRemove} className={`${css.btnSmall} ${css.btnDanger}`} style={{ padding: '8px 24px', fontSize: '0.82rem' }}>
                 Remover {isCantrip ? 'Truque' : 'Magia'}
               </button>
             </div>
@@ -147,7 +147,7 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {learnedCantrips.length > 0 && (
         <div>
-          <h5 style={{ margin: '0 0 8px 0', color: '#a78bfa', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <h5 style={{ margin: '0 0 8px 0', color: 'var(--color-magic)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Truques ({learnedCantrips.length})
           </h5>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -157,7 +157,7 @@ export const PreparedSpells: React.FC<PreparedSpellsProps> = ({
       )}
       {preparedSpells.length > 0 && (
         <div>
-          <h5 style={{ margin: '0 0 8px 0', color: '#38bdf8', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <h5 style={{ margin: '0 0 8px 0', color: 'var(--color-info)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Magias Preparadas ({preparedSpells.length})
           </h5>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>

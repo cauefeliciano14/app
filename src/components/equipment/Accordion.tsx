@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { accordionWrap, summaryBase } from './equipmentStyles';
+import css from './equipment.module.css';
 
 interface AccordionProps {
   title: string;
@@ -31,26 +31,23 @@ export const Accordion: React.FC<AccordionProps> = ({ title, badge, isOpen, onTo
   }, [children, isOpen]);
 
   return (
-    <div style={{
-      ...accordionWrap,
-      border: incomplete ? '1px solid rgba(249,115,22,0.5)' : '1px solid rgba(255,255,255,0.06)',
-    }}>
-      <div onClick={onToggle} style={summaryBase}>
+    <div className={`${css.accordionWrap} ${incomplete ? css.accordionWrapIncomplete : ''}`}>
+      <div onClick={onToggle} className={css.summaryBase}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
           {incomplete && (
-            <span style={{ width: 16, height: 16, borderRadius: '50%', background: '#f97316', color: '#000', fontWeight: 900, fontSize: '0.65rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>!</span>
+            <span style={{ width: 16, height: 16, borderRadius: '50%', background: 'var(--color-accent)', color: '#000', fontWeight: 900, fontSize: '0.65rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>!</span>
           )}
           <span>{title}</span>
           {badge && <span style={{ marginLeft: '4px' }}>{badge}</span>}
         </div>
         <span style={{
           fontSize: '0.75rem',
-          color: '#64748b',
+          color: 'var(--text-faint)',
           fontWeight: 400,
           transition: 'transform 0.2s',
           transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)',
           display: 'inline-block',
-        }}>▾</span>
+        }}>&#9662;</span>
       </div>
       <div style={{
         maxHeight: height !== undefined ? height : (isOpen ? 'none' : 0),

@@ -1,0 +1,95 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-sm) 0;
+  margin-bottom: var(--space-md);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--surface-header);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ── Back button ── */
+.btnBack {
+  background: transparent;
+  border: 1px solid var(--border-input-hover);
+  color: var(--text-secondary);
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btnBack:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: none;
+  box-shadow: none;
+}
+
+.spacer {
+  width: 85px;
+}
+
+/* ── Progress bar wrapper ── */
+.progressWrapper {
+  flex: 1;
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+/* ── Advance button area ── */
+.advanceArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.btnAdvance {
+  background: transparent;
+  border: 1px solid rgba(249, 115, 22, 0.6);
+  color: var(--color-accent);
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.btnAdvance:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-bg-hover);
+  transform: none;
+  box-shadow: none;
+}
+
+.btnAdvanceDisabled {
+  background: var(--color-accent-bg-hover);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  color: rgba(249, 115, 22, 0.4);
+  cursor: not-allowed;
+}
+
+.btnAdvanceDisabled:hover {
+  background: var(--color-accent-bg-hover);
+  border-color: rgba(249, 115, 22, 0.2);
+  transform: none;
+  box-shadow: none;
+}
