@@ -94,6 +94,10 @@ function makeActionableBonusErrors(errors: string[]): string[] {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Escolhas obrigatórias de espécie (condicional)
+// ---------------------------------------------------------------------------
+
 function getRequiredSpeciesChoices(
   speciesId: string,
   currentChoices: Record<string, string>
@@ -313,6 +317,21 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
       const selectedCantrips = choices.spellSelections.cantrips;
       const preparedSpells = choices.spellSelections.prepared;
       const requiredCantrips = spellData.cantripsKnownByLevel[Math.min(level - 1, 19)] ?? 0;
+      if (requiredCantrips > 0) {
+        const current = choices.spellSelections.cantrips.length;
+        if (current < requiredCantrips) {
+          byStep.equipment.push(`Escolha mais ${requiredCantrips - current} truque(s) para completar a seleção (${current}/${requiredCantrips}).`);
+        }
+      }
+
+      // Magias preparadas/conhecidas
+      const requiredSpells = getRequiredSpellSelections(choices.classId, level);
+      if (requiredSpells > 0) {
+        const current = choices.spellSelections.prepared.length;
+        if (current < requiredSpells) {
+          const verb = spellData.preparedSpellsByLevel ? 'Prepare' : 'Escolha';
+          byStep.equipment.push(`${verb} mais ${requiredSpells - current} magia(s) para completar a seleção (${current}/${requiredSpells}).`);
+        }
       const requiredSpells = getRequiredSpellSelections(choices.classId, level);
       const validCantrips = getValidSpellNames(choices.classId, 'cantrip');
       const validLevel1Spells = getValidSpellNames(choices.classId, 1);
