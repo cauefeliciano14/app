@@ -25,6 +25,9 @@ export interface CharacterChoices {
   backgroundBonusDistribution: BackgroundBonusDistribution | null;
   equippedArmorId?: string;
   hasShield?: boolean;
+  backgroundChoices?: {
+    toolProficiency?: string;
+  };
   equipmentChoices: { classOption: 'A' | 'B' | null; backgroundOption: 'A' | 'B' | null };
   inventoryWeapons?: string[];
   spellSelections: { cantrips: string[]; prepared: string[] };

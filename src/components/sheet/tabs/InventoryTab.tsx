@@ -1,4 +1,5 @@
 import type { CharacterPlayState } from '../../../types/playState';
+import { getArmorByName } from '../../../rules/data/armorRules';
 
 interface InventoryItem {
   name: string;
@@ -12,6 +13,10 @@ interface InventoryTabProps {
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
   onManageEquipment: () => void;
+  equippedArmorId?: string | null;
+  hasShieldEquipped?: boolean;
+  onEquipArmor?: (armorId: string | null) => void;
+  onEquipShield?: (equipped: boolean) => void;
 }
 
 export function InventoryTab({
@@ -19,8 +24,22 @@ export function InventoryTab({
   playState,
   onUpdatePlayState,
   onManageEquipment,
+  equippedArmorId,
+  hasShieldEquipped,
+  onEquipArmor,
+  onEquipShield,
 }: InventoryTabProps) {
   const toggleEquipped = (itemName: string) => {
+    // Also update armor/shield engine state when toggling armor items
+    const armorEntry = getArmorByName(itemName);
+    if (armorEntry && onEquipArmor && onEquipShield) {
+      if (armorEntry.type === 'shield') {
+        onEquipShield(!hasShieldEquipped);
+      } else {
+        const isCurrentlyEquipped = equippedArmorId === armorEntry.id;
+        onEquipArmor(isCurrentlyEquipped ? null : armorEntry.id);
+      }
+    }
     onUpdatePlayState(prev => {
       const equipped = prev.equippedItemIds.includes(itemName)
         ? prev.equippedItemIds.filter(id => id !== itemName)

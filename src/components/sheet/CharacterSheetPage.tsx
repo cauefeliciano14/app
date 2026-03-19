@@ -47,6 +47,12 @@ interface CharacterSheetPageProps {
   backgroundSkills?: string[];
   backgroundTool?: string;
   backgroundEquipment?: string;
+
+  // Armor/shield equip state
+  equippedArmorId?: string | null;
+  hasShieldEquipped?: boolean;
+  onEquipArmor?: (armorId: string | null) => void;
+  onEquipShield?: (equipped: boolean) => void;
 }
 
 export function CharacterSheetPage({
@@ -70,6 +76,10 @@ export function CharacterSheetPage({
   backgroundSkills,
   backgroundTool,
   backgroundEquipment,
+  equippedArmorId,
+  hasShieldEquipped,
+  onEquipArmor,
+  onEquipShield,
 }: CharacterSheetPageProps) {
   const handleAddCondition = (condition: string) => {
     onUpdatePlayState(prev => ({
@@ -194,6 +204,10 @@ export function CharacterSheetPage({
           backgroundSkills={backgroundSkills}
           backgroundTool={backgroundTool}
           backgroundEquipment={backgroundEquipment}
+          equippedArmorId={equippedArmorId}
+          hasShieldEquipped={hasShieldEquipped}
+          onEquipArmor={onEquipArmor}
+          onEquipShield={onEquipShield}
         />
       </div>
     </div>

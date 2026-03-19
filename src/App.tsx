@@ -17,8 +17,9 @@ import { AttributesStep } from './components/AttributesStep'
 import { SpeciesDetails } from './components/SpeciesDetails'
 import { GlossaryTooltipProvider } from './components/GlossaryTooltip'
 import { EquipmentStep } from './components/EquipmentStep'
-import { isAttributesStepComplete } from './utils/attributeUtils'
+// isAttributesStepComplete is now consumed inside validation.ts
 import { deriveSheet } from './rules/engine/index'
+import { validateChoices } from './rules/engine/validation'
 import { calculateMaxHP as engineCalculateMaxHP } from './rules/calculators/combat'
 import { getClassHPData } from './rules/data/classRules'
 import type { CharacterChoices, BackgroundBonusDistribution } from './rules/types/CharacterChoices'
@@ -156,6 +157,8 @@ interface Character {
     startingEquipmentAdded: boolean;
     inventory: any[];
     currency: { cp: number; sp: number; ep: number; gp: number; pp: number; };
+    equippedArmorId: string | null;
+    hasShieldEquipped: boolean;
   };
   spells: {
     learnedCantrips: string[];
@@ -814,38 +817,81 @@ const ToolProficiencyCard: React.FC<ToolProficiencyCardProps> = ({
   );
 };
 
+const ValidationBanner: React.FC<{ errors: string[] }> = ({ errors }) => {
+  if (errors.length === 0) return null;
+  return (
+    <div style={{
+      background: 'rgba(239,68,68,0.08)',
+      border: '1px solid rgba(239,68,68,0.25)',
+      borderRadius: '8px',
+      padding: '12px 16px',
+      marginBottom: '12px',
+    }}>
+      <div style={{ color: '#f87171', fontWeight: 600, fontSize: '0.85rem', marginBottom: '4px' }}>
+        Pendências ({errors.length})
+      </div>
+      {errors.map((err, i) => (
+        <div key={i} style={{ color: '#fca5a5', fontSize: '0.82rem', lineHeight: 1.5 }}>
+          • {err}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const CREATION_STORAGE_KEY = 'dnd_creation_state';
+const CREATION_STATE_VERSION = 1;
+
+const DEFAULT_CHARACTER: Character = {
+  name: '',
+  portrait: null,
+  species: null,
+  characterClass: null,
+  choices: {},
+  talentSelections: {},
+  languages: ['common'],
+  attributes: {
+    method: null,
+    base: { forca: 8, destreza: 8, constituicao: 8, inteligencia: 8, sabedoria: 8, carisma: 8 },
+    backgroundBonus: { forca: 0, destreza: 0, constituicao: 0, inteligencia: 0, sabedoria: 0, carisma: 0 },
+    final: { forca: 8, destreza: 8, constituicao: 8, inteligencia: 8, sabedoria: 8, carisma: 8 },
+    modifiers: { forca: -1, destreza: -1, constituicao: -1, inteligencia: -1, sabedoria: -1, carisma: -1 }
+  },
+  equipment: {
+    classOption: null,
+    backgroundOption: null,
+    startingEquipmentAdded: false,
+    inventory: [],
+    currency: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
+    equippedArmorId: null,
+    hasShieldEquipped: false,
+  },
+  spells: {
+    learnedCantrips: [],
+    preparedSpells: [],
+  }
+};
+
+function loadCreationState(): { character: Character; currentStep: number; auxiliaryState?: any } | null {
+  try {
+    const raw = localStorage.getItem(CREATION_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed.version !== CREATION_STATE_VERSION) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
 function App() {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [character, setCharacter] = useState<Character>({
-    name: '',
-    portrait: null,
-    species: null,
-    characterClass: null,
-    choices: {},
-    talentSelections: {},
-    languages: ['common'],
-    attributes: {
-      method: null,
-      base: { forca: 8, destreza: 8, constituicao: 8, inteligencia: 8, sabedoria: 8, carisma: 8 },
-      backgroundBonus: { forca: 0, destreza: 0, constituicao: 0, inteligencia: 0, sabedoria: 0, carisma: 0 },
-      final: { forca: 8, destreza: 8, constituicao: 8, inteligencia: 8, sabedoria: 8, carisma: 8 },
-      modifiers: { forca: -1, destreza: -1, constituicao: -1, inteligencia: -1, sabedoria: -1, carisma: -1 }
-    },
-    equipment: {
-      classOption: null,
-      backgroundOption: null,
-      startingEquipmentAdded: false,
-      inventory: [],
-      currency: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 }
-    },
-    spells: {
-      learnedCantrips: [],
-      preparedSpells: [],
-    }
-  });
+  const savedState = React.useMemo(() => loadCreationState(), []);
+
+  const [currentStep, setCurrentStep] = useState(savedState?.currentStep ?? 0);
+  const [character, setCharacter] = useState<Character>(savedState?.character ?? DEFAULT_CHARACTER);
   const [isPortraitModalOpen, setIsPortraitModalOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-  
+
   // Phase 2 states
   const [currentPhase, setCurrentPhase] = useState(1);
   const [characterLevel, setCharacterLevel] = useState(1);
@@ -859,10 +905,11 @@ function App() {
   });
 
   // Origem step state
-  const [selectedBackground, setSelectedBackground] = useState<any>(null);
-  const [attrChoiceMode, setAttrChoiceMode] = useState<'' | 'triple' | 'double'>('');
-  const [attrPlus1, setAttrPlus1] = useState('');
-  const [attrPlus2, setAttrPlus2] = useState('');
+  // TODO: Migrar estes estados auxiliares para dentro de `character` no futuro
+  const [selectedBackground, setSelectedBackground] = useState<any>(savedState?.auxiliaryState?.selectedBackground ?? null);
+  const [attrChoiceMode, setAttrChoiceMode] = useState<'' | 'triple' | 'double'>(savedState?.auxiliaryState?.attrChoiceMode ?? '');
+  const [attrPlus1, setAttrPlus1] = useState(savedState?.auxiliaryState?.attrPlus1 ?? '');
+  const [attrPlus2, setAttrPlus2] = useState(savedState?.auxiliaryState?.attrPlus2 ?? '');
 
   // Atributos state
   const ATTR_METADATA: Record<string, { full: string, desc: string }> = {
@@ -888,8 +935,8 @@ function App() {
   // ---------------------------------------------------------------------------
   // Derived Sheet — calculado pelo rules engine a partir do estado do personagem
   // ---------------------------------------------------------------------------
-  const derivedSheet = React.useMemo(() => {
-    // Construir BackgroundBonusDistribution a partir dos estados locais
+  // Construir choices uma vez — compartilhado entre derivação e validação
+  const choices = React.useMemo((): CharacterChoices => {
     let backgroundBonusDistribution: BackgroundBonusDistribution | null = null;
     if (selectedBackground && attrChoiceMode) {
       if (attrChoiceMode === 'triple') {
@@ -906,13 +953,34 @@ function App() {
       }
     }
 
-    const choices: CharacterChoices = {
+    // Normalizar escolhas de espécie: chaves flat → objeto tipado
+    const speciesId = character.species?.id ?? null;
+    let speciesChoicesNormalized: Record<string, string> | undefined;
+    if (speciesId) {
+      const result: Record<string, string> = {};
+      const prefix = speciesId + '-';
+      for (const [key, value] of Object.entries(character.choices)) {
+        if (key.startsWith(prefix)) {
+          result[key.slice(prefix.length)] = value;
+        }
+      }
+      if (Object.keys(result).length > 0) speciesChoicesNormalized = result;
+    }
+
+    return {
       classId: character.characterClass?.id ?? null,
       backgroundId: selectedBackground?.id ?? null,
-      speciesId: character.species?.id ?? null,
+      speciesId,
+      speciesLineage: speciesId ? character.choices[speciesId] ?? undefined : undefined,
+      speciesChoices: speciesChoicesNormalized,
       attributeMethod: character.attributes.method,
       baseAttributes: character.attributes.base as CharacterChoices['baseAttributes'],
       backgroundBonusDistribution,
+      equippedArmorId: character.equipment.equippedArmorId ?? undefined,
+      hasShield: character.equipment.hasShieldEquipped,
+      backgroundChoices: {
+        toolProficiency: character.choices["toolProficiency"] || undefined,
+      },
       equipmentChoices: {
         classOption: character.equipment.classOption,
         backgroundOption: character.equipment.backgroundOption,
@@ -928,8 +996,6 @@ function App() {
       characterDetails: { name: character.name, portrait: character.portrait },
       level: characterLevel,
     };
-
-    return deriveSheet(choices);
   }, [
     character.characterClass,
     character.species,
@@ -948,10 +1014,35 @@ function App() {
     characterLevel,
   ]);
 
+  const derivedSheet = React.useMemo(() => deriveSheet(choices), [choices]);
+  const validationResult = React.useMemo(() => validateChoices(choices), [choices]);
+
   // Persist playState to localStorage
   useEffect(() => {
     localStorage.setItem('dnd_play_state', JSON.stringify(playState));
   }, [playState]);
+
+  const handleResetCharacter = () => {
+    setCharacter(DEFAULT_CHARACTER);
+    setCurrentStep(0);
+    setSelectedBackground(null);
+    setAttrChoiceMode('');
+    setAttrPlus1('');
+    setAttrPlus2('');
+    setPlayState(DEFAULT_PLAY_STATE);
+    localStorage.removeItem(CREATION_STORAGE_KEY);
+    localStorage.removeItem('dnd_play_state');
+  };
+
+  // Persist character creation state to localStorage
+  useEffect(() => {
+    localStorage.setItem(CREATION_STORAGE_KEY, JSON.stringify({
+      version: CREATION_STATE_VERSION,
+      character,
+      currentStep,
+      auxiliaryState: { selectedBackground, attrChoiceMode, attrPlus1, attrPlus2 },
+    }));
+  }, [character, currentStep, selectedBackground, attrChoiceMode, attrPlus1, attrPlus2]);
 
   // Initialize currentHp to maxHP when first entering the sheet (step 5)
   useEffect(() => {
@@ -1079,13 +1170,7 @@ function App() {
                     setCharacter(prev => ({ ...prev, choices: {} }));
                   }}
                   onNext={() => setCurrentStep(1)}
-                  canAdvance={(() => {
-                    const classId = character.characterClass.id;
-                    const details = (classDetailsData as any)[classId];
-                    if (!details) return true;
-                    const hasMandatoryOptions = details.options && details.options.some((opt: any) => !character.choices[opt.id]);
-                    return !hasMandatoryOptions;
-                  })()}
+                  canAdvance={validationResult.byStep.class.length === 0}
                   activeStep={1}
                   onStepClick={setCurrentStep}
                   characterName={character.name}
@@ -1109,15 +1194,8 @@ function App() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{ color: '#cbd5e1', fontSize: '1.2rem', fontWeight: 'bold' }}>Nível</span>
-                        <select 
-                          className="premium-select"
-                          value={characterLevel} 
-                          onChange={(e) => setCharacterLevel(Number(e.target.value))}
-                        >
-                          {Array.from({ length: 20 }, (_, i) => i + 1).map(n => (
-                            <option key={n} value={n}>{n}</option>
-                          ))}
-                        </select>
+                        {/* Escopo atual: criação nível 1 */}
+                        <span className="premium-select" style={{ opacity: 0.6, pointerEvents: 'none' }}>1</span>
                       </div>
 
                       {/* Stats Box */}
@@ -1232,6 +1310,21 @@ function App() {
                     </div>
                   ))}
                 </div>
+                <button
+                  onClick={handleResetCharacter}
+                  style={{
+                    marginTop: '24px',
+                    padding: '8px 20px',
+                    background: 'transparent',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    borderRadius: '8px',
+                    color: '#94a3b8',
+                    fontSize: '0.82rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Novo Personagem
+                </button>
               </div>
             )}
 
@@ -1385,13 +1478,7 @@ function App() {
             <StepHeader 
               onPrev={() => setCurrentStep(0)}
               onNext={() => setCurrentStep(2)}
-              canAdvance={(() => {
-                const isTalentChoicesComplete = selectedBackground ? checkTalentComplete(selectedBackground.talent, character.talentSelections[selectedBackground.talent]) : false;
-                const isAttrComplete = !!(attrChoiceMode && (attrChoiceMode === 'triple' || (attrPlus1 && attrPlus2)));
-                const toolSelector = BACKGROUND_TOOL_SELECTORS[selectedBackground?.id];
-                const isToolComplete = !toolSelector || !!character.choices["toolProficiency"];
-                return !!selectedBackground && isTalentChoicesComplete && isAttrComplete && isToolComplete;
-              })()}
+              canAdvance={validationResult.byStep.background.length === 0}
               activeStep={2}
               onStepClick={setCurrentStep}
               characterName={character.name}
@@ -1696,32 +1783,7 @@ function App() {
             <StepHeader 
               onPrev={() => setCurrentStep(1)}
               onNext={() => setCurrentStep(3)}
-              canAdvance={(() => {
-                if (!character.species) return false;
-                const id = character.species.id;
-                const manualLangsCount = character.languages.filter(l => !['thieves-cant', 'druidic', 'common'].includes(l)).length;
-                if (manualLangsCount < 2) return false;
-                if (['draconato', 'elfo', 'gnomo', 'golias', 'tiferino'].includes(id)) {
-                  if (!character.choices[id]) return false;
-                }
-                if (id === 'aasimar' && !character.choices['aasimar-size']) return false;
-                if (id === 'elfo') {
-                  if (!character.choices['elfo-skill']) return false;
-                  if (!character.choices['elfo-attr']) return false;
-                  if (character.choices['elfo'] === 'alto-elfo' && !character.choices['elfo-cantrip']) return false;
-                }
-                if (id === 'gnomo' && !character.choices['gnomo-attr']) return false;
-                if (id === 'humano') {
-                  if (!character.choices['humano-size']) return false;
-                  if (!character.choices['humano-skill']) return false;
-                  if (!character.choices['humano-talent']) return false;
-                }
-                if (id === 'tiferino') {
-                  if (!character.choices['tiferino-size']) return false;
-                  if (!character.choices['tiferino-attr']) return false;
-                }
-                return true;
-              })()}
+              canAdvance={validationResult.byStep.species.length === 0}
               activeStep={3}
               onStepClick={setCurrentStep}
               characterName={character.name}
@@ -1813,7 +1875,7 @@ function App() {
               <StepHeader 
                 onPrev={() => setCurrentStep(2)}
                 onNext={() => setCurrentStep(4)}
-                canAdvance={isAttributesStepComplete(character.attributes)}
+                canAdvance={validationResult.byStep.attributes.length === 0}
                 activeStep={4}
                 onStepClick={setCurrentStep}
                 characterName={character.name}
@@ -1848,7 +1910,7 @@ function App() {
             <StepHeader 
               onPrev={() => setCurrentStep(3)}
               onNext={() => setCurrentStep(5)}
-              canAdvance={true} // As per requirements: only viewing is required to consider it complete ("Só permitir avançar se o usuário visualizou a aba")
+              canAdvance={validationResult.byStep.equipment.length === 0}
               activeStep={5}
               onStepClick={setCurrentStep}
               characterName={character.name}
@@ -1860,6 +1922,7 @@ function App() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
             
             <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingRight: '12px', paddingBottom: '40px' }}>
+              <ValidationBanner errors={validationResult.byStep.equipment} />
               <div style={{ marginBottom: '24px' }}>
                 <h2 style={{ fontSize: '1.4rem', color: '#f1f5f9', margin: '0 0 8px 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ color: '#f97316' }}>✦</span> Equipamento Inicial
@@ -1912,6 +1975,7 @@ function App() {
                 selections={stepSelections}
               />
               <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
+              <ValidationBanner errors={validationResult.errors} />
               <CharacterSheetPage
                 characterName={character.name}
                 portrait={character.portrait}
@@ -1936,6 +2000,10 @@ function App() {
                 backgroundSkills={bgSkills}
                 backgroundTool={selectedBackground?.toolProficiency}
                 backgroundEquipment={selectedBackground?.equipment}
+                equippedArmorId={character.equipment.equippedArmorId}
+                hasShieldEquipped={character.equipment.hasShieldEquipped}
+                onEquipArmor={(armorId) => setCharacter(prev => ({ ...prev, equipment: { ...prev.equipment, equippedArmorId: armorId } }))}
+                onEquipShield={(equipped) => setCharacter(prev => ({ ...prev, equipment: { ...prev.equipment, hasShieldEquipped: equipped } }))}
               />
             </div>
           );

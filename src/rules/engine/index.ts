@@ -42,8 +42,6 @@ import {
   deriveUnarmedAttack,
 } from '../calculators/sheet';
 
-import { validateChoices } from './validation';
-
 // ---------------------------------------------------------------------------
 // deriveSheet — função principal do engine
 // ---------------------------------------------------------------------------
@@ -51,9 +49,10 @@ import { validateChoices } from './validation';
 /**
  * Recebe todas as escolhas do personagem e retorna a ficha derivada completa.
  * Determinística: mesma entrada → mesma saída.
+ *
+ * Nota: validação agora é separada — use validateChoices() independentemente.
  */
 export function deriveSheet(choices: CharacterChoices): DerivedSheet {
-  const validationResult = validateChoices(choices);
 
   // Atributos
   const finalAttributes = getFinalAttributes(
@@ -102,9 +101,37 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     }
   }
 
+  // Substituir ferramenta genérica do antecedente pela escolha real
+  if (choices.backgroundChoices?.toolProficiency) {
+    const chosenTool = choices.backgroundChoices.toolProficiency;
+    const bgDefaultTool = bgProfs.tools[0];
+    const idx = merged.tools.indexOf(bgDefaultTool);
+    if (idx >= 0) {
+      merged.tools[idx] = chosenTool;
+    } else if (!merged.tools.includes(chosenTool)) {
+      merged.tools.push(chosenTool);
+    }
+  }
+
   // Velocidade e sentidos (da espécie)
   const speed = speciesId ? getSpeciesSpeed(speciesId) : '9 metros';
   const specialSenses = speciesId ? getSpecialSenses(speciesId) : [];
+
+  // Efeitos de espécie (apenas efeitos sustentados pelos dados e exibidos na ficha)
+  const racialCantrips: string[] = [];
+  if (speciesId && choices.speciesChoices) {
+    // Humano: perícia extra
+    if (speciesId === 'humano' && choices.speciesChoices['skill']) {
+      const extraSkill = choices.speciesChoices['skill'];
+      if (!merged.skills.includes(extraSkill)) {
+        merged.skills.push(extraSkill);
+      }
+    }
+    // Elfo alto-elfo: truque racial (não conta no limite de classe)
+    if (speciesId === 'elfo' && choices.speciesLineage === 'alto-elfo' && choices.speciesChoices['cantrip']) {
+      racialCantrips.push(choices.speciesChoices['cantrip']);
+    }
+  }
 
   // Perícias derivadas tipadas
   const skills = deriveSkills(modifiers, profBonus, merged.skills);
@@ -186,8 +213,8 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     spellSlots,
     preparedSpellCount,
     cantripsKnown,
+    racialCantrips,
     originTalent,
-    validationErrors: validationResult.errors,
   };
 }
 

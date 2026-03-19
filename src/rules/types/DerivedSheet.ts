@@ -82,9 +82,9 @@ export interface DerivedSheet {
   preparedSpellCount?: number;
   cantripsKnown?: number;
 
+  // Truques raciais (não contam no limite de classe)
+  racialCantrips: string[];
+
   // Talento de origem (do antecedente)
   originTalent?: string;
-
-  // Validação
-  validationErrors: string[];
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { tagPill, btnSmall } from './equipmentStyles';
+import { getArmorByName } from '../../rules/data/armorRules';
 
 interface InventoryItem {
   id: string;
@@ -14,6 +15,10 @@ interface InventorySectionProps {
   inventory: InventoryItem[];
   onRemoveItem: (id: string) => void;
   onChangeQuantity: (id: string, delta: number) => void;
+  equippedArmorId?: string | null;
+  hasShieldEquipped?: boolean;
+  onEquipArmor?: (armorId: string | null) => void;
+  onEquipShield?: (equipped: boolean) => void;
 }
 
 const separator: React.CSSProperties = {
@@ -69,7 +74,7 @@ const tagColor = (tag: string): { bg: string; color: string } => {
   return map[tag] || { bg: 'rgba(255,255,255,0.08)', color: '#94a3b8' };
 };
 
-export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, onRemoveItem, onChangeQuantity }) => {
+export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, onRemoveItem, onChangeQuantity, equippedArmorId, hasShieldEquipped, onEquipArmor, onEquipShield }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   if (inventory.length === 0) {
@@ -86,6 +91,12 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
         const isOpen = expandedId === item.id;
         const base = item.itemBase;
         const tags = inferTags(item);
+        const armorEntry = getArmorByName(item.name);
+        const isArmorItem = armorEntry && armorEntry.type !== 'shield';
+        const isShieldItem = armorEntry && armorEntry.type === 'shield';
+        const isEquippedArmor = isArmorItem && equippedArmorId === armorEntry.id;
+        const isEquippedShield = isShieldItem && hasShieldEquipped;
+        const isEquipped = isEquippedArmor || isEquippedShield;
         return (
           <div key={item.id} style={{
             background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent',
@@ -114,6 +125,29 @@ export const InventorySection: React.FC<InventorySectionProps> = ({ inventory, o
                 <button onClick={() => onChangeQuantity(item.id, -1)} style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', cursor: 'pointer', fontSize: '0.8rem' }}>-</button>
                 <span style={{ color: '#f1f5f9', fontWeight: 600, fontSize: '0.85rem', minWidth: '20px', textAlign: 'center' }}>{item.quantity}</span>
                 <button onClick={() => onChangeQuantity(item.id, 1)} style={{ width: '24px', height: '24px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', color: '#cbd5e1', cursor: 'pointer', fontSize: '0.8rem' }}>+</button>
+                {(isArmorItem || isShieldItem) && onEquipArmor && onEquipShield && (
+                  <button
+                    onClick={() => {
+                      if (isArmorItem) {
+                        onEquipArmor(isEquippedArmor ? null : armorEntry.id);
+                      } else if (isShieldItem) {
+                        onEquipShield(!hasShieldEquipped);
+                      }
+                    }}
+                    style={{
+                      background: isEquipped ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
+                      border: `1px solid ${isEquipped ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                      borderRadius: '5px',
+                      color: isEquipped ? '#a78bfa' : '#64748b',
+                      padding: '3px 8px',
+                      fontSize: '0.72rem',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {isEquipped ? 'Equipado' : 'Equipar'}
+                  </button>
+                )}
               </div>
             </div>
 

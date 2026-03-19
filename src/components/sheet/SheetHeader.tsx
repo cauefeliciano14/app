@@ -7,15 +7,7 @@ interface SheetHeaderProps {
   level: number;
 }
 
-const PORTRAITS: Record<string, string> = {
-  warrior: '⚔️', mage: '🧙', rogue: '🗡️', cleric: '✨', ranger: '🏹',
-  paladin: '🛡️', druid: '🌿', bard: '🎵', monk: '👊', sorcerer: '🔮',
-  warlock: '👁️', barbarian: '🪓', fighter: '⚔️', wizard: '📚',
-};
-
 export function SheetHeader({ name, portrait, speciesName, className, level }: SheetHeaderProps) {
-  const avatarEmoji = portrait ? (PORTRAITS[portrait] ?? '🧙') : '🧙';
-
   return (
     <div style={{
       display: 'flex',
@@ -37,8 +29,17 @@ export function SheetHeader({ name, portrait, speciesName, className, level }: S
         justifyContent: 'center',
         fontSize: '2rem',
         flexShrink: 0,
+        overflow: 'hidden',
       }}>
-        {avatarEmoji}
+        {portrait ? (
+          <img
+            src={`/imgs/portrait_caracter/${portrait}`}
+            alt={name || 'Retrato'}
+            style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+          />
+        ) : (
+          '🧙'
+        )}
       </div>
       <div>
         <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f1f5f9', lineHeight: 1.2 }}>

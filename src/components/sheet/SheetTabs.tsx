@@ -38,6 +38,11 @@ interface SheetTabsProps {
   learnedCantrips: string[];
   preparedSpells: string[];
   characterLevel: number;
+  // Armor/shield equip state
+  equippedArmorId?: string | null;
+  hasShieldEquipped?: boolean;
+  onEquipArmor?: (armorId: string | null) => void;
+  onEquipShield?: (equipped: boolean) => void;
   backgroundName?: string;
   backgroundDescription?: string;
   backgroundSkills?: string[];
@@ -62,6 +67,10 @@ export function SheetTabs({
   backgroundSkills,
   backgroundTool,
   backgroundEquipment,
+  equippedArmorId,
+  hasShieldEquipped,
+  onEquipArmor,
+  onEquipShield,
 }: SheetTabsProps) {
   const [activeTab, setActiveTab] = useState<TabId>('actions');
 
@@ -122,6 +131,10 @@ export function SheetTabs({
           playState={playState}
           onUpdatePlayState={onUpdatePlayState}
           onManageEquipment={onGoToEquipment}
+          equippedArmorId={equippedArmorId}
+          hasShieldEquipped={hasShieldEquipped}
+          onEquipArmor={onEquipArmor}
+          onEquipShield={onEquipShield}
         />
       )}
       {activeTab === 'features' && (

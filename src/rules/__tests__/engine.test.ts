@@ -257,3 +257,137 @@ describe('Golden Test 5 — Clérigo Tieferino (Eremita)', () => {
   });
   it('Tem escudo de proficiência', () => expect(sheet.armorProficiencies).toContain('Escudo'));
 });
+
+// ===========================================================================
+// Testes de CA com armadura equipada / escudo / defesa sem armadura
+// ===========================================================================
+
+describe('CA com armadura equipada', () => {
+  it('sem armadura equipada → CA = 10 + DEX', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      baseAttributes: { forca: 10, destreza: 14, constituicao: 10, inteligencia: 10, sabedoria: 10, carisma: 10 },
+    }));
+    expect(sheet.armorClass).toBe(12); // 10 + 2
+  });
+
+  it('com couro equipado (leve) → CA = 11 + DEX', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      baseAttributes: { forca: 10, destreza: 14, constituicao: 10, inteligencia: 10, sabedoria: 10, carisma: 10 },
+      equippedArmorId: 'couro',
+    }));
+    expect(sheet.armorClass).toBe(13); // 11 + 2
+  });
+
+  it('com cota_de_placas equipada (pesada) → CA fixa 16, ignora DEX', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      baseAttributes: { forca: 10, destreza: 16, constituicao: 10, inteligencia: 10, sabedoria: 10, carisma: 10 },
+      equippedArmorId: 'cota_de_placas',
+    }));
+    expect(sheet.armorClass).toBe(16); // CA fixa 16
+  });
+
+  it('com escudo → CA +2', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      baseAttributes: { forca: 10, destreza: 10, constituicao: 10, inteligencia: 10, sabedoria: 10, carisma: 10 },
+      hasShield: true,
+    }));
+    expect(sheet.armorClass).toBe(12); // 10 + 0 + 2
+  });
+
+  it('com armadura pesada + escudo → CA fixa + 2', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      baseAttributes: { forca: 10, destreza: 10, constituicao: 10, inteligencia: 10, sabedoria: 10, carisma: 10 },
+      equippedArmorId: 'cota_de_placas',
+      hasShield: true,
+    }));
+    expect(sheet.armorClass).toBe(18); // 16 + 2
+  });
+});
+
+describe('Defesa sem armadura — Bárbaro', () => {
+  it('sem armadura → 10 + DEX + CON', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'barbaro',
+      baseAttributes: { forca: 16, destreza: 14, constituicao: 16, inteligencia: 8, sabedoria: 10, carisma: 8 },
+    }));
+    expect(sheet.armorClass).toBe(15); // 10 + 2(DEX) + 3(CON)
+  });
+
+  it('com escudo → 10 + DEX + CON + 2', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'barbaro',
+      baseAttributes: { forca: 16, destreza: 14, constituicao: 16, inteligencia: 8, sabedoria: 10, carisma: 8 },
+      hasShield: true,
+    }));
+    expect(sheet.armorClass).toBe(17); // 10 + 2 + 3 + 2
+  });
+});
+
+describe('Defesa sem armadura — Monge', () => {
+  it('sem armadura → 10 + DEX + WIS', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'monge',
+      baseAttributes: { forca: 10, destreza: 16, constituicao: 10, inteligencia: 10, sabedoria: 16, carisma: 8 },
+    }));
+    expect(sheet.armorClass).toBe(16); // 10 + 3(DEX) + 3(WIS)
+  });
+});
+
+// ===========================================================================
+// Escolha de ferramenta do antecedente reflete na ficha
+// ===========================================================================
+describe('Ferramenta do antecedente escolhida', () => {
+  it('soldado com ferramenta escolhida → reflete em toolProficiencies', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      backgroundId: 'soldado',
+      backgroundChoices: {
+        toolProficiency: 'Kit de Jogos de Baralho',
+      },
+    }));
+    expect(sheet.toolProficiencies).toContain('Kit de Jogos de Baralho');
+  });
+});
+
+// ===========================================================================
+// Escolhas de espécie — humano perícia extra, elfo truque racial
+// ===========================================================================
+describe('Escolhas de espécie no engine', () => {
+  it('humano com perícia extra → aparece em skillProficiencies', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      backgroundId: 'soldado',
+      speciesId: 'humano',
+      speciesChoices: { skill: 'Percepção' },
+      featureChoices: {
+        'guerreiro-skill-1': 'Atletismo',
+        'guerreiro-skill-2': 'Intimidação',
+      },
+    }));
+    expect(sheet.skillProficiencies.some(s => s.includes('Percepção'))).toBe(true);
+  });
+
+  it('elfo alto-elfo com cantrip → aparece em racialCantrips', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'mago',
+      speciesId: 'elfo',
+      speciesLineage: 'alto-elfo',
+      speciesChoices: { cantrip: 'Prestidigitação' },
+    }));
+    expect(sheet.racialCantrips).toContain('Prestidigitação');
+  });
+
+  it('elfo da floresta → racialCantrips vazio', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guardiao',
+      speciesId: 'elfo',
+      speciesLineage: 'elfo-da-floresta',
+    }));
+    expect(sheet.racialCantrips).toHaveLength(0);
+  });
+});

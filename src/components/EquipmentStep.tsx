@@ -3,6 +3,7 @@ import { classStartingSpells } from '../data/spellsData';
 import { isCaster as engineIsCaster } from '../rules/calculators/spells';
 import type { DerivedSheet } from '../rules/types/DerivedSheet';
 import { getEquipmentForClass, getEquipmentForBackground } from '../data/equipmentData';
+import { getArmorByName } from '../rules/data/armorRules';
 import { Accordion } from './equipment/Accordion';
 import { TabBar } from './equipment/TabBar';
 import { StartingEquipment } from './equipment/StartingEquipment';
@@ -111,6 +112,25 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
       draft.classOption = classOption;
       draft.backgroundOption = bgOption;
       draft.startingEquipmentAdded = true;
+
+      // Auto-equip: if the starting package contains exactly one armor, equip it.
+      // If it contains a shield, equip that too.
+      const armors: { id: string; name: string }[] = [];
+      let hasShield = false;
+      for (const item of draft.inventory) {
+        const armor = getArmorByName(item.name);
+        if (armor) {
+          if (armor.type === 'shield') {
+            hasShield = true;
+          } else {
+            armors.push({ id: armor.id, name: item.name });
+          }
+        }
+      }
+      if (armors.length === 1) {
+        draft.equippedArmorId = armors[0].id;
+      }
+      draft.hasShieldEquipped = hasShield;
 
       return draft;
     });
@@ -236,6 +256,10 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
               inventory={equipmentState.inventory}
               onRemoveItem={handleRemoveItem}
               onChangeQuantity={handleChangeQuantity}
+              equippedArmorId={equipmentState.equippedArmorId}
+              hasShieldEquipped={equipmentState.hasShieldEquipped}
+              onEquipArmor={(armorId) => updateEquipment((prev: any) => ({ ...prev, equippedArmorId: armorId }))}
+              onEquipShield={(equipped) => updateEquipment((prev: any) => ({ ...prev, hasShieldEquipped: equipped }))}
             />
           </Accordion>
 
