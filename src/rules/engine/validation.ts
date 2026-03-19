@@ -332,7 +332,7 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
           const verb = spellData.preparedSpellsByLevel ? 'Prepare' : 'Escolha';
           byStep.equipment.push(`${verb} mais ${requiredSpells - current} magia(s) para completar a seleção (${current}/${requiredSpells}).`);
         }
-      const requiredSpells = getRequiredSpellSelections(choices.classId, level);
+      }
       const validCantrips = getValidSpellNames(choices.classId, 'cantrip');
       const validLevel1Spells = getValidSpellNames(choices.classId, 1);
 
