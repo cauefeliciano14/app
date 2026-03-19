@@ -1,12 +1,18 @@
-import type { CharacterChoices } from '../types/CharacterChoices';
+import type { CharacterChoices, ValidationInventoryItem } from '../types/CharacterChoices';
 import { isValidClass, getClassDetails, getClassSpellcastingData } from '../data/classRules';
 import { isValidBackground, getAllowedBonusAttributes, getBackgroundTalent } from '../data/backgroundRules';
 import { isAttributesStepComplete, validateBonusDistribution } from '../calculators/attributes';
 import { checkTalentComplete } from '../../components/TalentChoices';
-
-// ---------------------------------------------------------------------------
-// Tipos
-// ---------------------------------------------------------------------------
+import { getArmorById, getArmorByName } from '../data/armorRules';
+import { getEquipmentForBackground, getEquipmentForClass, itemSubChoices } from '../../data/equipmentData';
+import bardoSpells from '../../data/spells/bardo_spells.json';
+import bruxoSpells from '../../data/spells/bruxo_spells.json';
+import clerigoSpells from '../../data/spells/clerigo_spells.json';
+import druidaSpells from '../../data/spells/druida_spells.json';
+import feiticeiroSpells from '../../data/spells/feiticeiro_spells.json';
+import guardiaoSpells from '../../data/spells/guardiao_spells.json';
+import magoSpells from '../../data/spells/mago_spells.json';
+import paladinoSpells from '../../data/spells/paladino_spells.json';
 
 export interface StepValidation {
   class: string[];
@@ -22,10 +28,6 @@ export interface ValidationResult {
   warnings: string[];
   byStep: StepValidation;
 }
-
-// ---------------------------------------------------------------------------
-// Antecedentes que exigem escolha de ferramenta
-// ---------------------------------------------------------------------------
 
 const BACKGROUNDS_WITH_TOOL_SELECTOR = new Set([
   'artesao', 'artista', 'guarda', 'nobre', 'soldado',
@@ -47,6 +49,17 @@ const STEP_CHOICE_LABELS: Record<string, string> = {
   'humano-size': 'o porte do humano',
   'humano-skill': 'a perícia extra do humano',
   'humano-talent': 'o talento do humano',
+};
+
+const CLASS_SPELLS_BY_ID: Record<string, Array<{ name: string; level: string | number }>> = {
+  bardo: bardoSpells,
+  bruxo: bruxoSpells,
+  clerigo: clerigoSpells,
+  druida: druidaSpells,
+  feiticeiro: feiticeiroSpells,
+  guardiao: guardiaoSpells,
+  mago: magoSpells,
+  paladino: paladinoSpells,
 };
 
 function describeChoice(choiceKey: string): string {
@@ -81,10 +94,6 @@ function makeActionableBonusErrors(errors: string[]): string[] {
   });
 }
 
-// ---------------------------------------------------------------------------
-// Escolhas obrigatórias de espécie (condicional)
-// ---------------------------------------------------------------------------
-
 function getRequiredSpeciesChoices(
   speciesId: string,
   currentChoices: Record<string, string>
@@ -112,18 +121,6 @@ function getRequiredSpeciesChoices(
   }
 }
 
-// ---------------------------------------------------------------------------
-// Adapter: número de magias obrigatórias por classe no nível dado
-// ---------------------------------------------------------------------------
-
-/**
- * Retorna o número de magias (não truques) que o jogador precisa selecionar.
- * Usa preparedSpellsByLevel para classes que preparam, ou
- * spellSlotsKnownByLevel para classes que conhecem.
- *
- * TODO: Renomear spellSlotsKnownByLevel para spellsKnownByLevel no futuro
- * para evitar confusão semântica entre "spell slots" e "spells known".
- */
 function getRequiredSpellSelections(classId: string, level: number): number {
   const data = getClassSpellcastingData(classId);
   if (!data?.isCaster) return 0;
@@ -133,14 +130,59 @@ function getRequiredSpellSelections(classId: string, level: number): number {
     ?? 0;
 }
 
-// ---------------------------------------------------------------------------
-// Validação principal
-// ---------------------------------------------------------------------------
+function countOccurrences(values: string[]): Map<string, number> {
+  return values.reduce((map, value) => map.set(value, (map.get(value) ?? 0) + 1), new Map<string, number>());
+}
 
-/**
- * Valida todas as escolhas do personagem e retorna erros por etapa.
- * Esta função é pura e determinística — mesma entrada, mesma saída.
- */
+function findDuplicates(values: string[]): string[] {
+  return [...countOccurrences(values).entries()]
+    .filter(([, count]) => count > 1)
+    .map(([value]) => value);
+}
+
+function getValidSpellNames(classId: string, level: 'cantrip' | 1): Set<string> {
+  const spells = CLASS_SPELLS_BY_ID[classId] ?? [];
+  return new Set(
+    spells
+      .filter((spell) => {
+        if (level === 'cantrip') return spell.level === 'Truque' || spell.level === 0;
+        return spell.level === 1 || spell.level === '1' || spell.level === '1º Círculo';
+      })
+      .map((spell) => spell.name)
+  );
+}
+
+function getInventoryCounts(inventory: ValidationInventoryItem[]): Map<string, number> {
+  const counts = new Map<string, number>();
+  for (const item of inventory) {
+    counts.set(item.name, (counts.get(item.name) ?? 0) + 1);
+  }
+  return counts;
+}
+
+function hasMinimumInventoryForItems(inventory: ValidationInventoryItem[], requiredItems: string[]): boolean {
+  const remaining = getInventoryCounts(inventory);
+
+  for (const requiredItem of requiredItems) {
+    const directCount = remaining.get(requiredItem) ?? 0;
+    if (directCount > 0) {
+      remaining.set(requiredItem, directCount - 1);
+      continue;
+    }
+
+    const subChoices = itemSubChoices[requiredItem] ?? [];
+    const matchedSubChoice = subChoices.find((choice) => (remaining.get(choice) ?? 0) > 0);
+    if (matchedSubChoice) {
+      remaining.set(matchedSubChoice, (remaining.get(matchedSubChoice) ?? 1) - 1);
+      continue;
+    }
+
+    return false;
+  }
+
+  return true;
+}
+
 export function validateChoices(choices: CharacterChoices): ValidationResult {
   const byStep: StepValidation = {
     class: [],
@@ -151,17 +193,13 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
   };
 
   const level = choices.level ?? 1;
-
-  // =========================================================================
-  // Etapa 0 — Classe
-  // =========================================================================
+  const inventory = choices.inventory ?? [];
 
   if (!choices.classId) {
     byStep.class.push('Escolha uma classe para começar a criação do personagem.');
   } else if (!isValidClass(choices.classId)) {
     byStep.class.push('Selecione novamente a classe: a opção salva não é mais válida.');
   } else {
-    // Opções obrigatórias da classe (ex: Estilo de Combate)
     const details = getClassDetails(choices.classId) as Record<string, any> | null;
     if (details?.options) {
       for (const opt of details.options as Array<{ id: string; name: string }>) {
@@ -172,16 +210,11 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     }
   }
 
-  // =========================================================================
-  // Etapa 1 — Antecedente (Origem)
-  // =========================================================================
-
   if (!choices.backgroundId) {
     byStep.background.push('Escolha um antecedente para liberar os benefícios de origem.');
   } else if (!isValidBackground(choices.backgroundId)) {
     byStep.background.push('Selecione novamente o antecedente: a opção salva não é mais válida.');
   } else {
-    // Bônus de atributo
     if (choices.backgroundBonusDistribution) {
       const allowed = getAllowedBonusAttributes(choices.backgroundId);
       const result = validateBonusDistribution(choices.backgroundBonusDistribution, allowed);
@@ -190,14 +223,12 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
       byStep.background.push('Distribua os bônus de atributo do antecedente antes de avançar.');
     }
 
-    // Ferramenta (se aplicável)
     if (BACKGROUNDS_WITH_TOOL_SELECTOR.has(choices.backgroundId)) {
       if (!choices.featureChoices['toolProficiency']) {
         byStep.background.push('Escolha a proficiência de ferramenta concedida pelo antecedente.');
       }
     }
 
-    // Talento de origem completo
     const talentName = getBackgroundTalent(choices.backgroundId);
     if (talentName) {
       const talentSel = choices.talentSelections[talentName];
@@ -207,14 +238,9 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     }
   }
 
-  // =========================================================================
-  // Etapa 2 — Espécie
-  // =========================================================================
-
   if (!choices.speciesId) {
     byStep.species.push('Escolha uma espécie para definir os traços do personagem.');
   } else {
-    // Idiomas: precisa de pelo menos 2 manuais (excluindo common, thieves-cant, druidic)
     const manualLangs = (choices.languageSelections ?? []).filter(
       l => !['thieves-cant', 'druidic', 'common'].includes(l)
     );
@@ -222,7 +248,6 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
       byStep.species.push(`Selecione ${2 - manualLangs.length} idioma(s) adicional(is).`);
     }
 
-    // Escolhas obrigatórias da espécie (condicionais)
     const required = getRequiredSpeciesChoices(choices.speciesId, choices.featureChoices);
     for (const key of required) {
       if (!choices.featureChoices[key]) {
@@ -230,10 +255,6 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
       }
     }
   }
-
-  // =========================================================================
-  // Etapa 3 — Atributos
-  // =========================================================================
 
   if (!choices.attributeMethod) {
     byStep.attributes.push('Escolha um método para definir os atributos do personagem.');
@@ -247,10 +268,6 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     }
   }
 
-  // =========================================================================
-  // Etapa 4 — Equipamento e Magias
-  // =========================================================================
-
   if (choices.equipmentChoices.classOption === null) {
     byStep.equipment.push('Escolha o pacote de equipamento da classe.');
   }
@@ -258,34 +275,84 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     byStep.equipment.push('Escolha o pacote de equipamento do antecedente.');
   }
 
-  // Validação de magia por classe
-  if (choices.classId) {
-    const spellData = getClassSpellcastingData(choices.classId);
-    if (spellData?.isCaster) {
-      // Truques
-      const requiredCantrips = spellData.cantripsKnownByLevel[Math.min(level - 1, 19)] ?? 0;
-      if (requiredCantrips > 0) {
-        const current = choices.spellSelections.cantrips.length;
-        if (current < requiredCantrips) {
-          byStep.equipment.push(`Escolha mais ${requiredCantrips - current} truque(s) para completar a seleção (${current}/${requiredCantrips}).`);
-        }
-      }
-
-      // Magias preparadas/conhecidas
-      const requiredSpells = getRequiredSpellSelections(choices.classId, level);
-      if (requiredSpells > 0) {
-        const current = choices.spellSelections.prepared.length;
-        if (current < requiredSpells) {
-          const verb = spellData.preparedSpellsByLevel ? 'Prepare' : 'Escolha';
-          byStep.equipment.push(`${verb} mais ${requiredSpells - current} magia(s) para completar a seleção (${current}/${requiredSpells}).`);
-        }
-      }
+  if (choices.classId && choices.equipmentChoices.classOption === 'A') {
+    const classPackage = getEquipmentForClass(choices.classId);
+    if (!hasMinimumInventoryForItems(inventory, classPackage.optionA.items)) {
+      byStep.equipment.push('O inventário não corresponde ao pacote de equipamento de classe selecionado.');
     }
   }
 
-  // =========================================================================
-  // Consolidação
-  // =========================================================================
+  if (choices.backgroundId && choices.equipmentChoices.backgroundOption === 'A') {
+    const backgroundPackage = getEquipmentForBackground(choices.backgroundId);
+    if (!hasMinimumInventoryForItems(inventory, backgroundPackage.optionA.items)) {
+      byStep.equipment.push('O inventário não corresponde ao pacote de equipamento de antecedente selecionado.');
+    }
+  }
+
+  const equippedArmor = choices.equippedArmorId ? getArmorById(choices.equippedArmorId) : null;
+  if (choices.equippedArmorId) {
+    const hasArmorInInventory = inventory.some((item) => {
+      const armor = getArmorByName(item.name);
+      return Boolean(armor && armor.type !== 'shield' && armor.id === choices.equippedArmorId);
+    });
+    if (!equippedArmor || equippedArmor.type === 'shield' || !hasArmorInInventory) {
+      byStep.equipment.push('A armadura equipada precisa existir no inventário atual.');
+    }
+  }
+
+  if (choices.hasShield) {
+    const hasShieldInInventory = inventory.some((item) => getArmorByName(item.name)?.type === 'shield');
+    if (!hasShieldInInventory) {
+      byStep.equipment.push('O escudo só pode ser equipado quando existir um escudo no inventário.');
+    }
+  }
+
+  if (choices.classId) {
+    const spellData = getClassSpellcastingData(choices.classId);
+    if (spellData?.isCaster) {
+      const selectedCantrips = choices.spellSelections.cantrips;
+      const preparedSpells = choices.spellSelections.prepared;
+      const requiredCantrips = spellData.cantripsKnownByLevel[Math.min(level - 1, 19)] ?? 0;
+      const requiredSpells = getRequiredSpellSelections(choices.classId, level);
+      const validCantrips = getValidSpellNames(choices.classId, 'cantrip');
+      const validLevel1Spells = getValidSpellNames(choices.classId, 1);
+
+      const duplicateCantrips = findDuplicates(selectedCantrips);
+      if (duplicateCantrips.length > 0) {
+        byStep.equipment.push(`Há truques duplicados na seleção: ${duplicateCantrips.join(', ')}.`);
+      }
+
+      const duplicatePrepared = findDuplicates(preparedSpells);
+      if (duplicatePrepared.length > 0) {
+        byStep.equipment.push(`Há magias duplicadas na seleção: ${duplicatePrepared.join(', ')}.`);
+      }
+
+      if (selectedCantrips.length > requiredCantrips) {
+        byStep.equipment.push(`Selecione no máximo ${requiredCantrips} truque(s) para esta classe no nível ${level}.`);
+      } else if (requiredCantrips > 0 && selectedCantrips.length < requiredCantrips) {
+        const current = selectedCantrips.length;
+        byStep.equipment.push(`Escolha mais ${requiredCantrips - current} truque(s) para completar a seleção (${current}/${requiredCantrips}).`);
+      }
+
+      if (preparedSpells.length > requiredSpells) {
+        byStep.equipment.push(`Selecione no máximo ${requiredSpells} magia(s) de 1º nível para esta classe no nível ${level}.`);
+      } else if (requiredSpells > 0 && preparedSpells.length < requiredSpells) {
+        const current = preparedSpells.length;
+        const verb = spellData.preparedSpellsByLevel ? 'Prepare' : 'Escolha';
+        byStep.equipment.push(`${verb} mais ${requiredSpells - current} magia(s) para completar a seleção (${current}/${requiredSpells}).`);
+      }
+
+      const invalidCantrips = selectedCantrips.filter((spell) => !validCantrips.has(spell));
+      if (invalidCantrips.length > 0) {
+        byStep.equipment.push(`Os truques selecionados precisam pertencer à lista válida da classe no nível 1: ${invalidCantrips.join(', ')}.`);
+      }
+
+      const invalidPrepared = preparedSpells.filter((spell) => !validLevel1Spells.has(spell));
+      if (invalidPrepared.length > 0) {
+        byStep.equipment.push(`As magias selecionadas precisam pertencer à lista válida da classe no nível 1: ${invalidPrepared.join(', ')}.`);
+      }
+    }
+  }
 
   const allErrors = [
     ...byStep.class,
