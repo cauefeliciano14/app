@@ -52,6 +52,19 @@ import {
  *
  * Nota: validação agora é separada — use validateChoices() independentemente.
  */
+const DRACONIC_RESISTANCE_BY_LINEAGE: Record<string, string> = {
+  azul: 'Resistência a Elétrico',
+  branco: 'Resistência a Gélido',
+  bronze: 'Resistência a Elétrico',
+  cobre: 'Resistência a Ácido',
+  latas: 'Resistência a Ígneo',
+  negro: 'Resistência a Ácido',
+  ouro: 'Resistência a Ígneo',
+  prata: 'Resistência a Gélido',
+  verde: 'Resistência a Venenoso',
+  vermelho: 'Resistência a Ígneo',
+};
+
 export function deriveSheet(choices: CharacterChoices): DerivedSheet {
 
   // Atributos
@@ -119,6 +132,7 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
 
   // Efeitos de espécie (apenas efeitos sustentados pelos dados e exibidos na ficha)
   const racialCantrips: string[] = [];
+  const derivedDefenses: string[] = [];
   if (speciesId && choices.speciesChoices) {
     // Humano: perícia extra
     if (speciesId === 'humano' && choices.speciesChoices['skill']) {
@@ -130,6 +144,15 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     // Elfo alto-elfo: truque racial (não conta no limite de classe)
     if (speciesId === 'elfo' && choices.speciesLineage === 'alto-elfo' && choices.speciesChoices['cantrip']) {
       racialCantrips.push(choices.speciesChoices['cantrip']);
+    }
+
+    // Draconato: resistência permanente conforme a herança dracônica escolhida
+    if (speciesId === 'draconato') {
+      const draconicLineage = choices.speciesChoices['draconato'];
+      const derivedResistance = draconicLineage ? DRACONIC_RESISTANCE_BY_LINEAGE[draconicLineage] : undefined;
+      if (derivedResistance) {
+        derivedDefenses.push(derivedResistance);
+      }
     }
   }
 
@@ -214,6 +237,7 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     preparedSpellCount,
     cantripsKnown,
     racialCantrips,
+    derivedDefenses,
     originTalent,
   };
 }

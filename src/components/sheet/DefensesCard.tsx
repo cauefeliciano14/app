@@ -8,12 +8,13 @@ const COMMON_DEFENSES = [
 ];
 
 interface DefensesCardProps {
+  derivedDefenses?: string[];
   activeDefenses: string[];
   onAdd: (defense: string) => void;
   onRemove: (defense: string) => void;
 }
 
-export function DefensesCard({ activeDefenses, onAdd, onRemove }: DefensesCardProps) {
+export function DefensesCard({ derivedDefenses = [], activeDefenses, onAdd, onRemove }: DefensesCardProps) {
   const [selected, setSelected] = useState('');
   const [custom, setCustom] = useState('');
 
@@ -39,7 +40,27 @@ export function DefensesCard({ activeDefenses, onAdd, onRemove }: DefensesCardPr
         DEFESAS E RESISTÊNCIAS
       </div>
 
-      {activeDefenses.length === 0 && (
+      {derivedDefenses.length > 0 && (
+        <div style={{ marginBottom: '8px' }}>
+          <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '4px' }}>
+            DERIVADAS
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {derivedDefenses.map(d => (
+              <div key={d} style={{
+                background: 'rgba(74,222,128,0.12)',
+                border: '1px solid rgba(74,222,128,0.3)',
+                borderRadius: '6px',
+                padding: '2px 8px',
+              }}>
+                <span style={{ fontSize: '0.8rem', color: '#4ade80' }}>{d}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeDefenses.length === 0 && derivedDefenses.length === 0 && (
         <div style={{ fontSize: '0.8rem', color: '#475569', marginBottom: '8px' }}>Nenhuma</div>
       )}
 

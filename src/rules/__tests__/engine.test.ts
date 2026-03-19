@@ -390,4 +390,13 @@ describe('Escolhas de espécie no engine', () => {
     }));
     expect(sheet.racialCantrips).toHaveLength(0);
   });
+
+  it('draconato vermelho → resistência derivada aparece em derivedDefenses', () => {
+    const sheet = deriveSheet(makeChoices({
+      classId: 'guerreiro',
+      speciesId: 'draconato',
+      speciesChoices: { draconato: 'vermelho' },
+    }));
+    expect(sheet.derivedDefenses).toContain('Resistência a Ígneo');
+  });
 });
