@@ -1,0 +1,2445 @@
+[
+  {
+    "name": "Amigos",
+    "level": "Truque",
+    "school": "Encantamento",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "3 metros",
+    "components": "S, M (um pouco de maquiagem)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você emana magicamente um sentimento de amizade em relação a uma criatura à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. O alvo é bem-sucedido automaticamente se não for um Humanoide, se você estiver lutando contra ele ou se tiver conjurado esta magia nele nas últimas 24 horas.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Bolha Ácida",
+    "level": "Truque",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você cria uma bolha ácida em um ponto no alcance da magia, onde ela explode em uma Esfera de 1,5 metro de raio. Cada criatura nessa Esfera deve ser bem-sucedida em uma salvaguarda de Destreza ou sofre 1d6 pontos de dano Ácido.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Elementalismo",
+    "level": "Truque",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você exerce controle sobre os elementos, criando um dos seguintes efeitos no alcance da magia.\nConvocar Água. Você cria um jato de névoa fria que umedece levemente criaturas e objetos em um Cubo de 1,5 metro de lado. Como alternativa, você cria 1 xícara de água limpa em um recipiente aberto ou em uma superfície, e a água evapora em 1 minuto.\nConvocar Brisa. Você cria uma brisa forte o suficiente para ondular um tecido, mexer poeira, farfalhar folhas e fechar portas e persianas abertas, tudo em um Cubo de 1,5 metro de lado. Portas e persianas que estiverem sendo mantidas abertas por alguém ou alguma força não são afetadas.\nConvocar Fogo. Você cria uma fina nuvem de brasas inofensivas e fumaça colorida e perfumada em um Cubo de 1,5 metro de lados. Você escolhe a cor e o perfume, e as brasas podem acender velas, tochas ou lâmpadas nessa área. O cheiro da fumaça permanece por 1 minuto.\nConvocar Terra. Você cria uma fina camada de poeira ou areia que cobre superfícies em uma área quadrada de 1,5 metro de lado, ou faz com que uma única palavra apareça em sua caligrafia em um pedaço de terra ou areia.\nEsculpir Elemento. Você faz com que terra, areia, fogo, fumaça, névoa ou água que caiba em um Cubo de 30 centímetros de lado assuma uma forma rudimentar (como a de uma criatura) por 1 hora.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Explosão Elemental",
+    "level": "Truque",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "",
+    "duration": "Instantânea",
+    "description": "Você dispara energia arcana contra uma criatura ou objeto no alcance da magia. Realize uma jogada de ataque à distância contra o alvo. Em caso de acerto, o alvo sofre 1d8 pontos de dano de um tipo à sua escolha: Ácido, Elétrico, Gélido, Ígneo, Psíquico, Trovejante ou Venenoso.\nSe você tirar um 8 no d8 para esta magia, pode jogar outro d8 e adicionar ao dano. Ao conjurar essa magia, o número máximo de d8 adicionais que você pode somar ao dano da magia é igual ao seu modificador de atributo de conjuração.",
+    "classes": [
+      "Feiticeiro"
+    ]
+  },
+  {
+    "name": "Golpe Certeiro",
+    "level": "Truque",
+    "school": "Adivinhação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "S, M (uma arma com a qual você tem proficiência e que vale 1 ou mais PP)",
+    "duration": "Instantânea",
+    "description": "Guiado pelo lampejo de uma intuição mágica, você realiza um ataque com a arma usada na conjuração da magia. O ataque usa seu atributo de conjuração para as jogadas de ataque e dano em vez de usar Força ou Destreza. Se o ataque causar dano, ele pode ser Radiante ou do tipo de dano normal da arma (à sua escolha).",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Ilusão Menor",
+    "level": "Truque",
+    "school": "Ilusão",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "S, M (um pouco de lã)",
+    "duration": "1 minuto",
+    "description": "Você cria um som ou uma imagem de um objeto no alcance da magia que permanece pela duração da magia. Veja as descrições abaixo para os efeitos de cada um. A ilusão encerra se você conjurar essa magia novamente.\nSe uma criatura executar uma ação Analisar para examinar o som ou a imagem, ela pode determinar que é uma ilusão com um teste bem-sucedido de Inteligência (Investigação) contra a CD para evitar sua magia. Se a criatura perceber a ilusão pelo que ela realmente é, a ilusão se torna tênue para essa criatura.\nSom. Se você criar um som, o volume pode variar de um sussurro a um grito. Pode ser sua voz, a voz de outra pessoa, o rugido de um leão, o bater de tambores ou qualquer outro som que você escolher. O som continua ininterrupto pela duração da magia, ou você pode criar sons distintos em diferentes momentos antes que a magia termine.\nImagem. Se você criar a imagem de um objeto — como uma cadeira, pegadas enlameadas ou um pequeno baú — ela não pode ter dimensões superiores a um cubo de 1,5 metro de lados. A imagem não pode gerar som, luz, cheiro ou qualquer outro efeito sensorial. A interação física com a imagem demonstra que se trata de uma ilusão, pois os objetos podem atravessá-la.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Luz",
+    "level": "Truque",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, M (um vaga-lume ou musgo fosforescente)",
+    "duration": "1 hora",
+    "description": "Você toca em um objeto Grande ou menor que não está sendo usado ou carregado por outra pessoa. Até que a magia termine, o objeto emite Luz Plena em um raio de 6 metros e Meia-luz por mais 6 metros. A luz pode ter a cor que você desejar.\nCobrir o objeto com algo opaco bloqueia a luz. A magia se encerra se você a conjurar novamente.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Luzes Dançantes",
+    "level": "Truque",
+    "school": "Ilusão",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (um pouco de fósforo)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você cria até quatro luzes do tamanho de tochas no alcance da magia, fazendo com que elas pareçam tochas, lanternas ou esferas brilhantes que pairam pela duração da magia. Como alternativa, você combina as quatro luzes em uma forma Média, brilhante, a qual é vagamente humanoide. Seja qual for a forma que você escolher, cada luz emite Meia-luz em um raio de 3 metros.\nComo uma Ação Bônus, você pode mover as luzes até 18 metros para um espaço no alcance da magia. Uma luz deve estar a até 6 metros de outra luz criada por esta magia, e uma luz desaparece se ultrapassar o alcance da magia.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mensagem",
+    "level": "Truque",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "S, M (um fio de cobre)",
+    "duration": "1 rodada",
+    "description": "Você aponta para uma criatura no alcance da magia e sussurra uma mensagem. Somente o alvo ouve a mensagem e pode responder em um sussurro que apenas você consegue ouvir.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mãos Mágicas",
+    "level": "Truque",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "1 minuto",
+    "description": "Uma mão espectral flutuante aparece em um ponto que você escolher no alcance da magia. A mão permanece pela duração. A mão desaparece se estiver a mais de 9 metros de você ou se você conjurar esta magia novamente.\nAo conjurar a magia, você pode usar a mão para manipular um objeto, abrir uma porta ou um recipiente destrancado, guardar ou recolher itens de recipientes abertos, ou despejar o conteúdo de um frasco.\nComo uma ação Usar Magia em seus próximos turnos, você pode controlar a mão novamente. Como parte dessa ação, você pode mover a mão até 9 metros.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Prestidigitação Arcana",
+    "level": "Truque",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "3 metros",
+    "components": "V, S",
+    "duration": "Até 1 hora",
+    "description": "Você cria um efeito mágico no alcance da magia. Escolha o efeito entre as opções abaixo. Se conjurar esta magia várias vezes, você pode ter até três de seus efeitos não instantâneos ativos ao mesmo tempo.\nBrincar com Fogo. Você instantaneamente acende ou apaga uma vela, uma tocha ou uma pequena fogueira.\nCriação Menor. Você cria uma bugiganga não mágica, sem valor monetário e incapaz de causar dano, ou uma imagem ilusória, sendo que ambas devem caber na sua mão.\nEfeito Sensorial. Você cria um efeito sensorial instantâneo e inofensivo, como uma chuva de faíscas, um sopro de vento, notas musicais suaves ou um odor estranho.\nLimpar ou Sujar. Você limpa ou suja instantaneamente um objeto com menos de 30 centímetros cúbicos.\nMarca Mágica. Você faz aparecer uma cor, uma pequena marca ou um símbolo em um objeto ou superfície por 1 hora.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Proteção Contra Lâminas",
+    "level": "Truque",
+    "school": "Abjuração",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Raio de Fogo",
+    "level": "Truque",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você arremessa uma partícula de fogo em uma criatura ou objeto no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, o alvo sofre 1d10 pontos de dano Ígneo.\nUm objeto inflamável atingido por esta magia entra em combustão se não estiver sendo usado ou carregado.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Raio de Gelo",
+    "level": "Truque",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Um feixe congelante de luz azul-esbranquiçada parte em direção a uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Se acertar, a criatura sofre 1d8 pontos de dano Gélido e seu Deslocamento é reduzido em 3 metros até o início do seu próximo turno.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Rajada de Veneno",
+    "level": "Truque",
+    "school": "Necromancia",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você projeta uma névoa tóxica em uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, o alvo sofre 1d12 pontos de dano Venenoso.\nAprimoramento de Truque. O dano aumenta em 1d12 quando você atinge os níveis 5 (2d12), 11 (3d12) e 17 (4d12).",
+    "classes": [
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Reparar",
+    "level": "Truque",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "1 minuto",
+    "range": "Toque",
+    "components": "V, S, M (duas pedras-ímã)",
+    "duration": "Instantânea",
+    "description": "Essa magia repara uma única ruptura ou rasgo em um objeto que você tocar, como um elo de corrente quebrado, partes de uma chave partida, uma capa rasgada ou um odre furado. Se a ruptura ou rasgo não ultrapassar 30 centímetros em qualquer dimensão, ela é reparada sem deixar vestígios do dano anterior.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Talho Mental",
+    "level": "Truque",
+    "school": "Encantamento",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V",
+    "duration": "1 rodada",
+    "description": "Você tenta fragmentar temporariamente a mente de uma criatura à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Inteligência ou sofre 1d6 pontos de dano Psíquico e subtrai 1d4 da próxima salvaguarda que realizar antes do final do seu próximo turno.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Toque Chocante",
+    "level": "Truque",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Raios saltam de você em direção a uma criatura que você tenta tocar. Realize uma jogada de ataque mágico corpo a corpo contra o alvo. Em caso de acerto, o alvo sofre 1d8 pontos de dano Elétrico e não pode realizar Ataques de Oportunidade até o início do próximo turno dele.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Toque Necrótico",
+    "level": "Truque",
+    "school": "Necromancia",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Canalizando o frio da sepultura, realize um ataque mágico corpo a corpo contra um alvo no alcance da magia. Em caso de acerto, o alvo sofre 1d10 pontos de dano Necrótico e não pode recuperar Pontos de Vida até o final do seu próximo turno.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Trovão",
+    "level": "Truque",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "S",
+    "duration": "Instantânea",
+    "description": "Cada criatura em uma Emanação de 1,5 metro originada em você deve ser bem-sucedida em uma salvaguarda de Constituição ou sofre 1d6 pontos de dano Trovejante. O som estrondoso da magia pode ser ouvido a até 30 metros de distância.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Armadura Arcana",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (um pedaço de couro curtido)",
+    "duration": "8 horas",
+    "description": "Você toca uma criatura voluntária que não está usando armadura. Até que a magia termine, a CA base do alvo se torna 13 mais o modificador de Destreza dele. A magia se encerra se o alvo vestir uma armadura.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Compreender Idiomas",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "especial": "R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S, M (uma pitada de fuligem e sal)",
+    "duration": "1 hora",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Detectar Magia",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, R",
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a presença de efeitos mágicos a até 9 metros de você. Se você sentir tais efeitos, pode executar a ação Usar Magia para ver uma aura fraca ao redor de qualquer criatura ou objeto visível na área que contém a magia, e se um efeito foi criado por uma magia, você descobre a escola dessa magia.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Disfarçar-se",
+    "level": "1º Círculo",
+    "school": "Ilusão",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Você faz com que você mesmo — incluindo suas roupas, armaduras, armas e outros pertences — pareça diferente até que a magia termine. Você pode parecer 30 centímetros mais baixo ou mais alto e pode parecer mais pesado ou mais leve. Você deve adotar uma forma que tenha a mesma disposição básica de membros que você. Caso contrário, a extensão da ilusão depende de você.\nAs mudanças causadas por esta magia falham em uma inspeção física. Por exemplo, se você usar esta magia para adicionar um chapéu ao seu traje, objetos passarão através do chapéu, e qualquer um que o tocar não sentirá nada.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Enfeitiçar Pessoa",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Um Humanoide à sua vista e no alcance da magia realiza uma salvaguarda de Sabedoria. Ele tem Vantagem se você ou seus aliados estiverem lutando contra ele. Se falhar, o alvo tem a condição Enfeitiçado até que a magia termine ou até que você ou seus aliados causem dano a ele. A criatura Enfeitiçada é Amigável a você. Quando a magia termina, o alvo sabe que foi Enfeitiçado por você.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Escudo Arcano",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Reação, que você executa quando é atingido por uma jogada de ataque ou é alvo da magia Mísseis Mágicos",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "1 rodada",
+    "description": "",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Faca de Gelo",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "S, M (uma gota de água ou um pedaço de gelo)",
+    "duration": "Instantânea",
+    "description": "Você cria um fragmento de gelo e o arremessa em uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Se o ataque for bem-sucedido, o alvo sofre 1d10 pontos de dano Perfurante. Independentemente de ter acertado ou não, o fragmento explode. O alvo e cada criatura a até 1,5 metro dele devem ser bem-sucedidos em uma salvaguarda de Destreza ou sofrem 2d6 pontos de dano Gélido.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Graxa",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um pouco de banha de porco ou manteiga)",
+    "duration": "1 minuto",
+    "description": "Uma graxa não inflamável cobre o solo em um quadrado de 3 metros de lados centrado em um ponto no alcance da magia e o transforma em Terreno Difícil pela duração da magia.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Imagem Silenciosa",
+    "level": "1º Círculo",
+    "school": "Ilusão",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um pouco de lã)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você cria a imagem de um objeto, uma criatura ou algum outro fenômeno visível que não seja maior do que um Cubo de 4,5 metros de lado. A imagem aparece em um local pela duração e no alcance da magia. A imagem é puramente visual; não é acompanhada por som, cheiro ou outros efeitos sensoriais.\nComo uma ação Usar Magia, você pode mover a imagem para qualquer ponto no alcance da magia. À medida que a imagem muda de local, você pode alterar a aparência da imagem para que os movimentos dela pareçam naturais para a imagem. Por exemplo, se você criar a imagem de uma criatura e movê-la, pode alterá-la para que pareça estar andando.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Leque Cromático",
+    "level": "1º Círculo",
+    "school": "Ilusão",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (uma pitada de areia colorida)",
+    "duration": "Instantânea",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mãos Flamejantes",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Uma fina camada de chamas parte de você. Cada criatura em um Cone de 4,5 metros realiza uma salvaguarda de Destreza, sofrendo 3d6 pontos de dano Ígneo se falhar, ou metade desse dano em caso de sucesso.\nObjetos inflamáveis no Cone que não estão sendo usados ou carregados entram em combustão.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mísseis Mágicos",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você cria três dardos brilhantes feitos de pura energia mágica. Cada dardo acerta uma criatura à sua escolha, à sua vista e no alcance da magia. Um dardo causa 1d4 + 1 pontos de dano Energético ao alvo. Os dardos acertam ao mesmo tempo, e você pode direcioná-los para uma mesma criatura ou várias.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Névoa Obscurecente",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você cria uma Esfera de névoa de 6 metros de raio centrada em um ponto no alcance da magia. A Esfera é Totalmente Obscurecida. Ela permanece pela duração da magia ou até que um vento forte (como um criado por Lufada de Vento) a disperse.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Onda Trovejante",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você libera uma onda de energia estrondosa. Cada criatura em um Cubo de 4,5 metros originado em você realiza uma salvaguarda de Constituição. Se falhar, uma criatura sofre 2d8 pontos de dano Trovejante e é empurrada a 3 metros de distância de você. Em caso de sucesso, uma criatura sofre apenas metade do dano.\nAlém disso, objetos soltos que estão totalmente dentro do Cubo são empurrados 3 metros para longe de você, e um estrondo trovejante é audível a até 90 metros.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Orbe Cromático",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S, M (um diamante no valor de 50 ou mais PO)",
+    "duration": "Instantânea",
+    "description": "Você arremessa um orbe de energia em um alvo no alcance da magia. Escolha Ácido, Elétrico, Gélido, Ígneo, Trovejante ou Venenoso para o tipo de orbe que você criar e, em seguida, realize um ataque mágico à distância contra o alvo. Em caso de acerto, o alvo sofre 3d8 pontos de dano do tipo escolhido.\nSe você jogar o mesmo número em dois ou mais dos dados d8, o orbe salta para outro alvo à sua escolha dentro de 9 metros do alvo. Realize uma jogada de ataque contra o novo alvo e realize uma nova jogada de dano. A esfera não pode saltar novamente, a menos que você conjure a magia usando um espaço de magia de 2º círculo ou superior.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Queda Suave",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "Reação, que você executa quando você ou uma criatura à sua vista a até 18 metros de você entra em queda",
+    "range": "18 metros",
+    "components": "V, M (uma pequena pena ou pedaço de penugem)",
+    "duration": "1 minuto",
+    "description": "Escolha até cinco criaturas em queda no alcance da magia. A taxa de queda de cada uma diminui para 18 metros por rodada até que a magia termine. Se uma criatura pousar antes do fim da magia, não sofre dano da queda e a magia se encerra para ela.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Raio de Bruxa",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um galho atingido por um raio)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Um feixe de energia crepitante é lançado em direção a uma criatura no alcance da magia, formando um arco sustentado de relâmpago entre você e o alvo. Realize um ataque mágico à distância contra ele. Em caso de acerto, o alvo sofre 2d12 pontos de dano Elétrico.\nEm cada um dos seus turnos posteriores, você pode executar uma ação Bônus para causar 1d12 pontos de dano Elétrico automaticamente ao alvo, mesmo que o primeiro ataque tenha falhado.\nA magia encerra se o alvo estiver fora do alcance da magia ou se tiver Cobertura Total em relação a você.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Raio Nauseante",
+    "level": "1º Círculo",
+    "school": "Necromancia",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você dispara um raio esverdeado em uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, o alvo sofre 2d8 pontos de dano Venenoso e tem a condição Envenenado até o final do seu próximo turno.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Retirada Acelerada",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "especial": "C",
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você executa a ação Correr e, até que a magia termine, pode executar essa ação novamente como uma Ação Bônus.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Salto",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "",
+    "duration": "1 minuto",
+    "description": "Você toca uma criatura voluntária. Uma vez em cada um dos turnos dela até que a magia encerre, essa criatura pode saltar até 9 metros gastando 3 metros de movimento.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Sono",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (uma pitada de areia ou pétalas de rosa)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Cada criatura à sua escolha em uma Esfera de 1,5 metro de raio centrada em um ponto no alcance da magia deve ser bem-sucedida em uma salvaguarda de Sabedoria ou tem a condição Incapacitado até o final do próximo turno dela, quando deve repetir a salvaguarda. Se o alvo falhar na segunda salvaguarda, ele tem a condição Inconsciente pela duração da magia. A magia encerra em um alvo se ele sofrer dano ou se alguém a até 1,5 metro dele executar uma ação para sacudi-lo, liberando-o do efeito da magia.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Vitalidade Vazia",
+    "level": "1º Círculo",
+    "school": "Necromancia",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (uma gota de álcool)",
+    "duration": "Instantânea",
+    "description": "Você obtém 2d4 + 4 Pontos de Vida Temporários.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Alterar-se",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você altera sua forma física. Escolha uma das seguintes opções. Seus efeitos permanecem pela duração da magia, durante a qual você pode executar uma ação Usar Magia para substituir a opção escolhida por uma diferente.\nAdaptação Aquática. Você cria guelras e membranas entre os dedos. Você pode respirar debaixo d'água e recebe um Deslocamento de Natação igual ao seu Deslocamento.\nArmas Naturais. Você cria garras (Cortante), presas (Perfurante), chifres (Perfurante) ou cascos (Contundente). Ao usar seu Ataque Desarmado para causar dano com essa nova forma, ele causa 1d6 pontos de dano do tipo entre parênteses em vez de causar o dano normal para seu Ataque Desarmado, e você usa seu modificador de atributo de conjuração para as jogadas de ataque e dano em vez de usar Força.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Aprimorar Atributo",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (pelo ou uma pena)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você toca uma criatura e escolhe Força, Destreza, Inteligência, Sabedoria ou Carisma. Pela duração da magia, o alvo tem Vantagem nos testes de atributo usando o atributo escolhido.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Arma Mágica",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Você toca uma arma não-mágica. Até que a magia encerre, essa arma se torna uma arma mágica com bônus de +1 para jogadas de ataque e dano. A magia encerra se você a conjurar novamente.\nUsando um Espaço de Magia de Círculo Superior. O bônus aumenta para +2 com um espaço de magia de 3º–5º círculo. O bônus aumenta para +3 com um espaço de magia de 6º círculo ou superior.",
+    "classes": [
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Arrombar",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Escolha um objeto à sua vista e no alcance da magia. O objeto pode ser uma porta, uma caixa, um baú, um conjunto de grilhões, um cadeado ou outro objeto que contenha um meio mundano ou mágico que impeça o acesso.\nUm alvo mantido fechado por uma fechadura mundana ou que está preso ou barrado fica destrancado, desemperrado ou desobstruído. Se o objeto tiver várias fechaduras, apenas uma delas é destrancada.\nSe o alvo for mantido fechado por Tranca Arcana, essa magia é suprimida por 10 minutos, durante os quais o alvo pode ser aberto e fechado.\nAo conjurar a magia, um estrondo, audível a até 90 metros de distância, emana do alvo.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Aumentar/Reduzir",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (uma pitada de ferro em pó)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Pela duração da magia, você amplia ou reduz uma criatura, ou objeto, à sua vista e no alcance da magia (veja o efeito escolhido abaixo). Um objeto à vista não deve ser usado nem transportado. Se o alvo for uma criatura involuntária, ele pode realizar uma salvaguarda de Constituição. Em caso de sucesso, a magia não surte efeito.\nTudo o que uma criatura estiver usando e carregando muda de tamanho com ela. Qualquer item que cair retorna ao tamanho normal de uma só vez. Uma arma ou munição arremessada retorna ao tamanho normal imediatamente após atingir ou errar um alvo.\nAumentar. O tamanho do alvo aumenta em uma categoria — de Médio para Grande, por exemplo. O alvo também tem Vantagem em testes de Força e salvaguardas de Força. Os ataques do alvo com suas armas ampliadas ou Ataques Desarmados causam 1d4 pontos de dano adicionais em caso de acerto.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Cegueira/Surdez",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V",
+    "duration": "1 minuto",
+    "description": "Uma criatura à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Constituição, ou ela tem a condição Cego ou Surdo (à sua escolha) pela duração da magia. O alvo repete a salvaguarda no final de cada um dos turnos dele, encerrando a magia em caso de sucesso.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Coroa da Loucura",
+    "level": "2º Círculo",
+    "school": "Encantamento",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma criatura à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. A criatura é bem-sucedida automaticamente se não for Humanoide.\nUma coroa espectral aparece na cabeça do alvo Enfeitiçado, e ele deve executar uma ação antes de se mover em cada um de seus turnos para realizar um ataque corpo a corpo contra uma criatura diferente dela própria que você escolher mentalmente. O alvo pode agir normalmente no turno dele se você não escolher nenhuma criatura ou se nenhuma criatura estiver ao alcance dele. O alvo repete a salvaguarda no final de cada um dos turnos dele, encerrando a magia em caso de sucesso.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Despedaçar",
+    "level": "2º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (uma lasca de mica)",
+    "duration": "Instantânea",
+    "description": "Um barulho alto irrompe de um ponto à sua escolha no alcance da magia. Cada criatura em uma esfera com raio de 3 metros centrada nesse ponto realiza uma salvaguarda de Constituição, sofrendo 3d8 pontos de dano Trovejante se falhar, ou metade desse dano em caso de sucesso. Um Constructo tem Desvantagem na salvaguarda.\nUm objeto não mágico que não esteja sendo usado ou carregado também sofre o dano se estiver na área da magia.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Detectar Pensamentos",
+    "level": "2º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (1 Peça de Cobre)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você ativa um dos efeitos abaixo. Até que a magia termine, você pode ativar qualquer um dos efeitos como uma ação Usar Magia em seus turnos posteriores.\nSentir Pensamentos. Você sente a presença de pensamentos a até 9 metros de você que pertencem a criaturas que conhecem idiomas ou são telepáticas. Você não lê os pensamentos, mas sabe o que uma criatura presente está pensando.\nA magia é bloqueada por 30 centímetros de pedra, terra ou madeira, 2,5 centímetros de metal ou uma folha fina de chumbo.\nLer Pensamentos. Escolha uma criatura à sua vista a até 9 metros de você ou uma criatura a até 9 metros de você que você tenha detectado com a opção Sentir Pensamentos. Você agora descobre o que mais se destaca no pensamento do alvo. Se o alvo não souber nenhum idioma e não for telepático, você não descobre nada.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Escalada de Aranha",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma gota de betume e uma aranha)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Até que a magia termine, uma criatura voluntária que você tocar adquire a capacidade de se mover por superfícies verticais e ao longo de tetos, deixando as mãos livres. O alvo também adquire um Deslocamento de Escalada igual ao Deslocamento dele.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Escuridão",
+    "level": "2º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, M (pelo de morcego e um pedaço de carvão)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, uma Escuridão mágica se espalha a partir de um ponto no alcance da magia e preenche uma Esfera de 4,5 metros de raio. Visão no escuro não pode ver através dela, e luz não mágica não pode iluminá-la.\nComo alternativa, você conjura a magia em um objeto que não esteja sendo usado ou carregado, fazendo com que a Escuridão preencha uma Emanação de 4,5 metros originada desse objeto. Cobrir esse objeto com algo opaco, como uma tigela ou elmo, bloqueia a Escuridão.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Esfera Flamejante",
+    "level": "2º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (uma bola de cera)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você cria uma esfera de fogo de 1,5 metro de diâmetro em um espaço desocupado no chão no alcance e pela duração da magia. Qualquer criatura que termine o turno a até 1,5 metro da esfera realiza uma salvaguarda de Destreza, sofrendo 2d6 pontos de dano Ígneo se falhar, ou metade desse dano em caso de sucesso.\nComo uma Ação Bônus, você pode mover a esfera até 9 metros, rolando-a pelo chão. Se você mover a esfera para o espaço de uma criatura, essa criatura realiza a salvaguarda contra a esfera, e a esfera para de se mover durante o turno.\nAo mover a esfera, você pode direcioná-la sobre barreiras de até 1,5 metro de altura e saltar sobre poços de até 3 metros de largura. Objetos inflamáveis que não estão sendo usados ou carregados entram em combustão se tocados pela esfera, e ela emite Luz Plena em um raio de 6 metros e Meia-luz por mais 6 metros.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Espinho Mental",
+    "level": "2º Círculo",
+    "school": "Adivinhação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "S",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você crava um espinho de energia psíquica na mente de uma criatura à sua vista e no alcance da magia. O alvo realiza uma salvaguarda de Sabedoria, sofrendo 3d8 pontos de dano Psíquico se falhar ou metade desse dano em caso de sucesso. Se falhar na salvaguarda, você também sempre sabe a localização do alvo até que a magia termine, mas apenas enquanto ambos estiverem no mesmo plano de existência. Enquanto você tiver essa informação, o alvo não pode se esconder de você, e se tem a condição Invisível, não obtém nenhum benefício dela contra você.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Força Espectral",
+    "level": "2º Círculo",
+    "school": "Ilusão",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um pouco de lã)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você tenta criar uma ilusão na mente de uma criatura à sua vista e no alcance da magia. O alvo realiza uma salvaguarda de Inteligência. Se falhar, você cria um objeto, criatura ou outro fenômeno espectral que não seja maior do que um cubo de 3 metros de lado e que seja perceptível apenas para o alvo pela duração da magia. O espectro inclui som, temperatura e outros estímulos.\nO alvo pode executar uma ação Analisar para examinar o espectro com um teste de Inteligência (Investigação) contra a CD para evitar sua magia. Em caso de sucesso, o alvo percebe que o espectro é uma ilusão e a magia se encerra.\nEnquanto afetado pela magia, o alvo trata o espectro como se fosse real e racionaliza quaisquer resultados ilógicos da interação com ele. Por exemplo, um alvo que esteja tentando atravessar uma ponte espectral e sobreviva à queda acredita na existência da ponte e tenta achar alguma explicação para a própria queda.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Invisibilidade",
+    "level": "2º Círculo",
+    "school": "Ilusão",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (um cílio envolto em goma arábica)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Uma criatura que você toca tem a condição Invisível até que a magia termine. A magia se encerra antes se o alvo realizar uma jogada de ataque, causar dano ou conjurar uma magia.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Levitação",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (uma mola de metal)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Uma criatura ou objeto solto à sua escolha, à sua vista e no alcance da magia sobe verticalmente até 6 metros e permanece suspenso pela duração. A magia pode levitar um objeto que pesa até 200 quilos. Uma criatura involuntária que seja bem-sucedida em uma salvaguarda de Constituição não é afetada.\nO alvo pode se mover apenas empurrando ou puxando um objeto ou superfície fixa ao alcance dele (como uma parede ou um teto), o que permite que ele se mova como se estivesse escalando. No seu turno, você pode mudar a altitude do alvo em até 6 metros em qualquer direção. Se você for o alvo, pode se mover para cima ou para baixo como parte de seu movimento. Caso contrário, você pode executar uma ação Usar Magia para mover o alvo, que deve permanecer no alcance da magia.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Lufada de Vento",
+    "level": "2º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (a semente de um legume)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você sopra uma Linha com um vento forte de 18 metros de comprimento e 3 metros de largura em uma direção à sua escolha pela duração da magia. Cada criatura na Linha deve ser bem-sucedida em uma salvaguarda de Força ou é empurrada 4,5 metros para longe de você em uma direção seguindo a Linha. Uma criatura que termine o turno na Linha deve realizar a mesma salvaguarda.\nQualquer criatura na Linha deve gastar 3 metros de movimento para cada 1,5 metro que se move ao se aproximar de você.\nA lufada dispersa gás ou vapor e extingue velas e chamas desprotegidas similares na área. Isso faz com que as chamas protegidas, como as de lanternas, dancem descontroladamente e possuam 50% de chance de serem extinguidas.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Lâmina Flamejante",
+    "level": "2º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": "V, S, M (uma folha de sumagre)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você evoca uma lâmina flamejante em sua mão livre. A lâmina é semelhante em tamanho e forma a uma cimitarra e permanece pela duração da magia. Se você soltar a lâmina, ela desaparece, mas você pode evocá-la novamente como uma Ação Bônus.\nComo uma ação Usar Magia, você pode realizar um ataque mágico corpo a corpo com a lâmina flamejante. Em caso de acerto, o alvo sofre 3d6 pontos de dano Ígneo mais o seu modificador de atributo de conjuração.\nA lâmina flamejante emite Luz Plena em um raio de 3 metros e Meia-luz por mais 3 metros.",
+    "classes": [
+      "Druida",
+      "Feiticeiro"
+    ]
+  },
+  {
+    "name": "Nuvem de Adagas",
+    "level": "2º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um caco de vidro)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você conjura adagas rodopiantes em um Cubo de 1,5 metro de lado centrado em um ponto no alcance da magia. Cada criatura nessa área sofre 4d4 pontos de dano Cortante. Uma criatura também sofre esse dano se entrar no Cubo, terminar o turno nele ou se o Cubo se mover para o espaço dela. Uma criatura sofre esse dano apenas uma vez por turno.\nNos seus turnos subsequentes, você pode executar uma ação Usar Magia para teleportar o Cubo até 9 metros.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Paralisar Pessoa",
+    "level": "2º Círculo",
+    "school": "Encantamento",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um pedaço reto de ferro)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Escolha um Humanoide à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Paralisado pela duração da magia. No final de cada um dos turnos dele, o alvo realiza uma nova salvaguarda, encerrando a magia em caso de sucesso.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Passo Nebuloso",
+    "level": "2º Círculo",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Raio Ardente",
+    "level": "2º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você dispara três raios flamejantes. Você pode dispará-los em um ou vários alvos no alcance da magia. Realize um ataque mágico à distância para cada raio. Em caso de acerto, o alvo sofre 2d6 pontos de dano Ígneo.\nUsando um Espaço de Magia de Círculo Superior. Você cria um raio adicional para cada círculo de espaço de magia acima de 2.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Reflexos",
+    "level": "2º Círculo",
+    "school": "Ilusão",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "1 minuto",
+    "description": "Três cópias ilusórias suas aparecem em seu espaço. Até que a magia termine, as cópias se movem com você e imitam suas ações, mudando de posição de forma que seja impossível rastrear qual imagem é a verdadeira.\nCada vez que uma criatura atinge você com uma jogada de ataque pela duração da magia, jogue um d6 para cada uma das cópias restantes. Se qualquer um dos d6s resultar em 3 ou mais, uma das cópias é atingida em seu lugar e é destruída. As cópias ignoram todos os outros danos e efeitos. A magia se encerra quando as três cópias são destruídas.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Sopro de Dragão",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "V, S, M (uma pimenta)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você toca uma criatura voluntária e escolhe Ácido, Elétrico, Gélido, Ígneo ou Venenoso. Até que a magia termine, o alvo pode executar uma ação Usar Magia para exalar um Cone de 4,5 metros. Cada criatura nessa área realiza uma salvaguarda de Destreza, sofrendo 3d6 pontos de dano do tipo escolhido se falhar, ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Sugestão",
+    "level": "2º Círculo",
+    "school": "Encantamento",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, M (uma gota de mel)",
+    "duration": "Concentração, até 8 horas",
+    "description": "Você sugere um curso de ação — descrito em no máximo 25 palavras — para uma criatura à sua vista e no alcance da magia e que possa ouvi-lo e entendê-lo. A sugestão deve parecer razoável e não envolver nada que obviamente cause dano ao alvo ou aos aliados dele. Por exemplo, você poderia dizer: “Pegue a chave do cofre do tesouro do culto e a traga para mim” ou “Pare de lutar, saia desta biblioteca em paz e não volte”.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Teia",
+    "level": "2º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um pouco de teia de aranha)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você conjura uma massa de teias pegajosas em um ponto no alcance da magia. As teias enchem um Cubo de 6 metros de lado pela duração da magia, são Terreno Difícil e a área dentro delas é Parcialmente Obscurecida.\nSe as teias não estiverem sustentadas entre duas massas sólidas (como paredes ou árvores) ou em camadas no chão, parede ou teto, a teia colapsa sobre si mesma e a magia se encerra no início do seu próximo turno. As teias em camadas sobre uma superfície plana têm uma profundidade de 1,5 metro.\nA primeira vez que uma criatura entra nas teias em um turno ou começa o turno nelas, deve ser bem-sucedida em uma salvaguarda de Destreza ou tem a condição Contido enquanto está nas teias ou até se libertar.\nUma criatura Contida pelas teias pode executar uma ação para realizar um teste de Força (Atletismo) contra a CD para evitar sua magia. Em caso de sucesso, a criatura não está mais Contida.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Turvar",
+    "level": "2º Círculo",
+    "school": "Ilusão",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Seu corpo fica desfocado. Pela duração da magia, qualquer criatura tem Desvantagem em jogadas de ataque contra você. Um atacante é imune a esse efeito se perceber você com Visão às Cegas ou Visão Verdadeira.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Ver o Invisível",
+    "level": "2º Círculo",
+    "school": "Adivinhação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (uma pitada de talco)",
+    "duration": "1 hora",
+    "description": "Pela duração da magia, você vê criaturas e objetos que têm a condição Invisível como se estivessem visíveis e pode ver o Plano Etéreo. Criaturas e objetos nele tem aparência fantasmagórica..",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Vigor Arcano",
+    "level": "2º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": "",
+    "duration": "Instantânea",
+    "description": "Você usa sua energia vital para se curar. Jogue um ou dois de seus Dados de Pontos de Vida não gastos e recupera um número de Pontos de Vida igual ao total do teste mais seu modificador de atributo de conjuração. Esses dados são, então, gastos.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Visão no Escuro",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma cenoura seca)",
+    "duration": "8 horas",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Bola de Fogo",
+    "level": "3º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (uma bola de guano de morcego e enxofre)",
+    "duration": "Instantânea",
+    "description": "Uma faixa brilhante emerge de você até um ponto à sua escolha no alcance da magia e, em seguida, desabrocha com um estrondo baixo em uma explosão de fogo. Cada criatura em uma Esfera de 6 metros de raio centrada nesse ponto realiza uma salvaguarda de Destreza, sofrendo 8d6 pontos de dano Ígneo se falhar, ou metade desse dano em caso de sucesso.\nObjetos inflamáveis na área que não estão sendo usados ou carregados entram em combustão.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Caminhar Sobre as Águas",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "9 metros",
+    "components": "V, S, M (um pedaço de cortiça)",
+    "duration": "1 hora",
+    "description": "Esta magia concede a capacidade de se mover através de qualquer superfície líquida — como ácido, água, areia movediça, lama, lava ou neve — como se fosse um solo sólido inofensivo (criaturas que cruzam a lava derretida ainda podem sofrer dano devido ao calor). Até dez criaturas voluntárias à sua escolha no alcance da magia recebem essa habilidade pela duração da magia.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Celeridade",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (uma lasca de raiz de alcaçuz)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Escolha uma criatura voluntária à sua vista e no alcance da magia. Até que a magia termine, o deslocamento do alvo é dobrado, e ele recebe um bônus de +2 na Classe de Armadura, tem Vantagem em salvaguardas de Destreza e recebe uma ação adicional em cada um de seus turnos. Essa ação pode ser utilizada apenas para executar a ação Atacar (apenas um ataque), Correr, Desengajar, Esconder ou Usar Objeto.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Clarividência",
+    "level": "3º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, M",
+    "castingTime": "10 minutos",
+    "range": "1,5 km",
+    "components": "V, S, M (um foco no valor de 100 ou mais PO, seja um chifre adornado com joias e usado para escutar, ou um olho de vidro usado para enxergar)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você cria um sensor Invisível no alcance da magia em um local que lhe seja familiar (um lugar que você já viu ou visitou antes) ou em um local óbvio que não lhe seja familiar (como atrás de uma porta, em uma esquina ou em um bosque). O sensor não pode ser atacado e permanece no lugar pela duração da magia.\nAo conjurar a magia, escolha ver ou ouvir. Você pode usar o sentido escolhido através do sensor como se estivesse em seu espaço. Como uma Ação Bônus, você pode alternar entre ver e ouvir.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Contramagia",
+    "level": "3º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Reação, que você executa quando vê uma criatura a até 18 metros de você conjurando uma magia com componentes Verbais, Somáticos ou Materiais",
+    "range": "18 metros",
+    "components": "S",
+    "duration": "Instantânea",
+    "description": "",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Dissipar Magia",
+    "level": "3º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Escolha uma criatura, objeto ou efeito mágico no alcance da magia. Qualquer magia ativa de 3º círculo ou inferior no alvo é encerrada. Para cada magia ativa de 4º círculo ou superior no alvo, realize um teste de atributo usando seu atributo de conjuração (CD 10 mais o círculo da magia alvo). Em caso de sucesso, a magia se encerra.\nUsando um Espaço de Magia de Círculo Superior. Você encerra automaticamente uma magia no alvo se o círculo da magia for igual ou inferior ao círculo do espaço de magia que você usa.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Forma Gasosa",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (um pouco de gaze)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Uma criatura voluntária que você toca multimorfa-se, junto com tudo o que está vestindo e carregando, em uma nuvem de neblina durante a duração da magia. A magia se encerra no alvo se ele for reduzido a 0 Pontos de Vida ou se executar uma ação Usar Magia para encerrá-la.\nEnquanto estiver nesta forma, o único método de movimento do alvo é um Deslocamento de Voo de 3 metros, e ele pode pairar. O alvo pode entrar e ocupar o espaço de outra criatura. O alvo tem Resistência a dano Contundente, Cortante e Perfurante; tem Imunidade à condição Caído; e tem Vantagem em salvaguardas de Força, Destreza e Constituição. O alvo pode passar por aberturas estreitas, mas considera líquidos como se fossem superfícies sólidas.\nO alvo não pode falar ou manipular objetos, e qualquer objeto que ele estava carregando ou segurando não pode ser derrubado, usado ou interagido de outra forma. Por fim, o alvo não pode atacar ou conjurar magias.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Imagem Maior",
+    "level": "3º Círculo",
+    "school": "Ilusão",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (um pouco de lã)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você cria a imagem de um objeto, uma criatura ou algum outro fenômeno visível que não seja maior do que um Cubo de 6 metros. A imagem aparece em um local à sua vista e no alcance da magia e permanece pela duração. A imagem parece real, incluindo sons, cheiros e temperatura apropriados para a coisa representada, mas não pode causar danos ou condições.\nSe você estiver dentro do alcance da imagem, pode usar a ação Usar Magia para movê-la para outro ponto no alcance da magia. Durante essa movimentação, você pode alterar sua aparência para que os movimentos pareçam naturais. Por exemplo, ao mover a imagem de uma criatura, pode fazê-la parecer que está andando. Além disso, você pode fazer com que a imagem emita sons diferentes em momentos distintos, como continuar uma conversa.\nA interação física com a imagem revela que ela é uma ilusão, pois as coisas podem passar por ela. Uma criatura que executa uma ação Analisar para examinar a imagem pode determinar que ela é uma ilusão com um teste bem-sucedido de Inteligência (Investigação) contra a CD para evitar sua magia. Se uma criatura perceber a ilusão pelo que ela é, ela pode ver através da imagem, e suas outras qualidades sensoriais tornam-se fracas para a criatura.\nUsando um Espaço de Magia de Círculo Superior. A magia dura até ser dissipada, sem exigir Concentração, se conjurada com um espaço de magia de 4º círculo ou superior.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Lentidão",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (uma gota de melaço)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você altera a passagem do tempo em torno de até seis criaturas à sua escolha em um Cubo de 12 metros de lado no alcance da magia. Cada alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou é afetado por esta magia pela sua duração.\nO Deslocamento de um alvo afetado é reduzido pela metade, sofre uma penalidade de -2 em salvaguardas de Destreza e na CA e não pode executar Reações. Nos turnos do alvo, ele pode executar uma ação ou uma Ação Bônus, não ambas, e pode realizar apenas um ataque se executar a ação Atacar. Se conjurar uma magia com um componente Somático, há uma chance de 25% da magia falhar como resultado do alvo fazer os gestos da magia muito lentamente.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Luz do Dia",
+    "level": "3º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Pela duração da magia, a luz do sol se espalha de um ponto no alcance da magia e preenche uma Esfera de 18 metros de raio. A área da luz do sol é Luz Plena e emite Meia-luz por mais 18 metros.\nComo alternativa, você conjura a magia em um objeto que não esteja sendo usado ou carregado, fazendo com que a luz do sol preencha uma Emanação de 18 metros originada desse objeto. Cobrir esse objeto com algo opaco, como uma tigela ou elmo, bloqueia a luz do sol.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Línguas",
+    "level": "3º Círculo",
+    "school": "Adivinhação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, M (um zigurate em miniatura)",
+    "duration": "1 hora",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Medo",
+    "level": "3º Círculo",
+    "school": "Ilusão",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (uma pena branca)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Cada criatura em um Cone de 9 metros deve ser bem-sucedida em uma salvaguarda de Sabedoria ou larga o que estiver segurando e tem a condição Amedrontado pela duração da magia.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Nevasca",
+    "level": "3º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (um guarda-chuva em miniatura)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Até que a magia termine, granizo cai em um Cilindro de 12 metros de altura e 6 metros de raio centrado em um ponto à sua escolha no alcance da magia. A área está Totalmente Obscurecida e as chamas expostas na área são apagadas.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Nuvem Fétida",
+    "level": "3º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S, M (um ovo podre)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você cria uma Esfera de 6 metros de raio de gás amarelo nauseante centrada em um ponto no alcance da magia. A nuvem é Totalmente Obscurecida. A nuvem permanece no ar pela duração da magia ou até que um vento forte (como o criado por Lufada de Vento) a disperse.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Padrão Hipnótico",
+    "level": "3º Círculo",
+    "school": "Ilusão",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "S, M (uma pitada de confete)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você cria um padrão distorcido de cores em um cubo de 9 metros de lado no alcance da magia. O padrão aparece por um momento e desaparece. Cada criatura na área, que pode ver o padrão, deve ser bem-sucedida em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração. Enquanto Enfeitiçado, a criatura tem a condição Incapacitado e Deslocamento 0.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Piscar",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "1 minuto",
+    "description": "Jogue 1d6 no final de cada um dos seus turnos pela duração da magia. Em um resultado de 4-6, você desaparece do seu plano de existência atual e aparece no Plano Etéreo (a magia termina instantaneamente se você já estiver nesse plano). Enquanto estiver no Plano Etéreo, você pode ver o plano que você deixou, que aparece em tons de cinza, mas você não pode ver nada nele a mais de 18 metros de distância. Você só pode afetar e ser afetado por criaturas que estejam no Plano Etéreo, e criaturas no outro plano não podem percebê-lo, a menos que tenham uma habilidade específica que lhes permita perceber coisas no Plano Etéreo.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Proteção Contra Energia",
+    "level": "3º Círculo",
+    "school": "Abjuração",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Relâmpago",
+    "level": "3º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (um pouco de pelo e um cajado de cristal)",
+    "duration": "Instantânea",
+    "description": "Um relâmpago formando uma Linha de 30 metros de comprimento e 1,5 metro de largura dispara a partir de você em uma direção à sua escolha. Cada criatura na Linha realiza uma salvaguarda de Destreza, sofrendo 8d6 pontos de dano Elétrico se falhar ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Respirar na Água",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "9 metros",
+    "components": "V, S, M (um pedaço de junco)",
+    "duration": "24 horas",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Toque Vampírico",
+    "level": "3º Círculo",
+    "school": "Necromancia",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "O toque da sua mão envolta em sombras pode sugar a força vital dos outros para curar suas feridas. Realize um ataque mágico corpo a corpo contra uma criatura no alcance da magia. Em caso de acerto, o alvo sofre 3d6 pontos de dano Necrótico e você recupera Pontos de Vida iguais à metade da quantidade do dano Necrótico causado.\nAté que a magia termine, você pode realizar o ataque novamente em cada um dos seus turnos como uma ação Usar Magia, atingindo a mesma criatura ou uma diferente.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Voo",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma pena)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você toca uma criatura voluntária. Pela duração da magia, o alvo ganha um Deslocamento de Voo de 18 metros e pode pairar. Quando a magia termina, o alvo entra em queda se ainda estiver no alto, a menos que possa impedir a queda.\nUsando um Espaço de Magia de Círculo Superior. Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 3.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Banimento",
+    "level": "4º Círculo",
+    "school": "Abjuração",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (um pentagrama)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma criatura à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Carisma ou é transportada para um semiplano inofensivo pela duração da magia. Enquanto estiver lá, o alvo tem a condição Incapacitado. Quando a magia encerra, o alvo reaparece no espaço que deixou ou no espaço desocupado mais próximo, se o primeiro espaço estiver ocupado.\nSe o alvo for uma Aberração, Celestial, Elemental, Feérico ou Ínfero, o alvo não retorna se a magia durar 1 minuto. Em vez disso, o alvo é transportado para um local aleatório em um plano (à escolha do Mestre) associado ao tipo da criatura.\nUsando um Espaço de Magia de Círculo Superior. Você pode escolher uma criatura adicional para cada círculo de espaço de magia acima de 4.",
+    "classes": [
+      "Bruxo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Confusão",
+    "level": "4º Círculo",
+    "school": "Encantamento",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S, M (três cascas de nozes)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Cada criatura em uma Esfera de 3 metros de raio centrada em um ponto à sua escolha no alcance da magia deve ser bem-sucedida em uma salvaguarda de Sabedoria, ou esse alvo não pode executar Ações Bônus ou Reações, e deve jogar 1d10 no início de cada um dos turnos dele para determinar o comportamento nesse turno, consultando a tabela abaixo.\n1d10\nComportamento para o Turno\n1\nO alvo não executa uma ação e usa todo o deslocamento para se mover. Jogue 1d4 para a direção: 1, norte; 2, leste; 3, sul; ou 4, oeste.\n2-6\nO alvo não se move ou executa ações.\n7-8\nO alvo não se move e executa a ação Atacar para realizar um ataque corpo a corpo contra uma criatura aleatória ao alcance. Se nenhuma estiver ao alcance, o alvo não executa nenhuma ação.\n9-10\nO alvo escolhe o comportamento dele.\nAo final de cada um dos turnos dele, um alvo afetado repete a salvaguarda, encerrando a magia em caso de sucesso.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Dominar Fera",
+    "level": "4º Círculo",
+    "school": "Encantamento",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma Fera à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. O alvo tem Vantagem na salvaguarda se você ou seus aliados estiverem lutando contra ele. Sempre que o alvo sofre dano, ele repete a salvaguarda, encerrando a magia em caso de sucesso.\nVocê tem um vínculo telepático com o alvo Enfeitiçado enquanto vocês dois estão no mesmo plano de existência. No seu turno, você pode usar este vínculo para emitir comandos para o alvo (nenhuma ação é necessária), como “Ataque essa criatura”, “Mova-se para lá” ou “Busque aquele objeto”. O alvo faz o possível para obedecer no turno dele. Se ele concluir um pedido e não receber mais instruções de você, ele age e se move como quiser, concentrando-se em se proteger.\nVocê pode ordenar o alvo a executar uma Reação, mas deve executar sua própria Reação para tanto.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Enfeitiçar Monstro",
+    "level": "4º Círculo",
+    "school": "Encantamento",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Uma criatura à sua vista e no alcance da magia realiza uma salvaguarda de Sabedoria. Ela tem Vantagem se você ou seus aliados estiverem lutando contra ela. Se falhar, o alvo tem a condição Enfeitiçado até que a magia termine ou até que você ou seus aliados causem dano a ele. A criatura Enfeitiçada é Amigável a você. Quando a magia termina, o alvo sabe que foi Enfeitiçado por você.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Escudo Ardente",
+    "level": "4º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (um pouco de fósforo ou um vaga-lume)",
+    "duration": "10 minutos",
+    "description": "Chamas finas envolvem seu corpo pela duração da magia, emitindo Luz Plena em um raio de 3 metros e Meia-luz por mais 3 metros.\nAs chamas fornecem um escudo quente ou frio, como você escolher. O escudo quente concede a você Resistência a dano Gélido, e o escudo frio concede a você Resistência a dano Ígneo.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Esfera Vitriólica",
+    "level": "4º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (uma gota de bile)",
+    "duration": "Instantânea",
+    "description": "Você aponta para um local no alcance da magia, e uma bola de ácido brilhante de 30 centímetros de diâmetro se espalha lá e explode em uma Esfera de 6 metros de raio. Cada criatura nessa área realiza uma salvaguarda de Destreza. Se falhar, uma criatura sofre 10d4 pontos de dano Ácido e outros 5d4 pontos de dano Ácido no final do próximo turno dela. Em caso de sucesso, uma criatura recebe apenas metade do dano inicial.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Invisibilidade Maior",
+    "level": "4º Círculo",
+    "school": "Ilusão",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Malogro",
+    "level": "4º Círculo",
+    "school": "Necromancia",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Uma criatura à sua vista e no alcance da magia realiza uma salvaguarda de Constituição, sofrendo 8d8 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso. Uma criatura do tipo Planta falha automaticamente na salvaguarda.\nComo alternativa, escolha como alvo uma planta não mágica que não seja uma criatura, como uma árvore ou um arbusto. Ela não realiza uma salvaguarda; ela simplesmente murcha e morre.\nUsando um Espaço de Magia de Círculo Superior. O dano aumenta em 1d8 para cada círculo de espaço de magia acima de 4.",
+    "classes": [
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Muralha de Fogo",
+    "level": "4º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (um pedaço de carvão)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você cria uma muralha de fogo em uma superfície sólida no alcance da magia. Você pode construir uma parede de até 18 metros de comprimento, 6 metros de altura e 30 centímetros de espessura, ou uma parede circular de até 6 metros de diâmetro, 6 metros de altura e 30 metros de espessura. A parede é opaca e permanece pela duração da magia\nQuando a muralha aparece, cada criatura na área dela realiza uma salvaguarda de Destreza, sofrendo 5d8 pontos de dano Ígneo se falhar, ou metade desse dano em caso de sucesso.\nUm lado da muralha, escolhido por você quando conjura esta magia, causa 5d8 pontos de dano Ígneo a cada criatura que termina o turno a até de 3 metros desse lado ou dentro da muralha. Uma criatura sofre o mesmo dano quando entra na muralha pela primeira vez em termina o turno nela. O outro lado da parede não causa dano.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Pele-Rocha",
+    "level": "4º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (poeira de diamante no valor de 100 ou mais PO, que a magia consome)",
+    "duration": "Concentração, até 1 hora",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Polimorfia",
+    "level": "4º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um casulo de lagarta)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você tenta transformar uma criatura à sua vista e no alcance da magia em uma Fera. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou se multimorfa em uma Fera pela duração da magia. Essa forma pode ser qualquer Fera com Nível de Desafio igual ou menor que o do alvo (ou igual ao seu nível se não tiver Nível de Desafio). As estatísticas do alvo são substituídas pelas da Fera escolhida, mas o alvo mantém seu alinhamento, personalidade, tipo de criatura, Pontos de Vida e Dados de Pontos de Vida. Veja também o apêndice B para amostras dos blocos de estatísticas das Feras.\nO alvo recebe um número de Pontos de Vida Temporários igual aos Pontos de Vida da forma de Fera. A magia se encerra no alvo se ele não tiver Pontos de Vida Temporários restantes.\nO alvo é limitado às ações que pode realizar pela anatomia de sua nova forma, e não pode falar ou conjurar magias.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Porta Dimensional",
+    "level": "4º Círculo",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "150 metros",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Você se teleporta para um local no alcance da magia. Você chega exatamente ao local desejado. Pode ser um lugar que você pode ver, um que você pode visualizar ou um que você pode descrever indicando distância e direção, como “60 metros para baixo” ou “90 metros para cima em direção ao noroeste em um ângulo de 45 graus”.\nVocê também pode teleportar uma criatura voluntária. A criatura deve estar a até 1,5 metro de você quando você se teleporta, e ela se teleporta para um espaço a até 1,5 metro do seu espaço de destino.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Tempestade Glacial",
+    "level": "4º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "90 metros",
+    "components": "V, S, M (uma luva)",
+    "duration": "Instantânea",
+    "description": "Granizo cai em um Cilindro de 6 metros de raio e 12 metros de altura, centrado em um ponto no alcance da magia. Cada criatura no Cilindro realiza uma salvaguarda de Destreza. Se falhar, uma criatura sofre 2d10 pontos de dano Contundente e 4d6 pontos de dano Gélido, ou metade desse dano em caso de sucesso.\nPedras de granizo transformam o solo no Cilindro em Terreno Difícil até o final do seu próximo turno.\nUsando um Espaço de Magia de Círculo Superior. O dano Contundente aumenta em 1d10 para cada círculo de espaço de magia acima de 4.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Cone de Frio",
+    "level": "5º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (um pequeno cone de cristal ou vidro)",
+    "duration": "Instantânea",
+    "description": "Você libera uma rajada de ar frio. Cada criatura em um Cone de 18 metros originado em você realiza uma salvaguarda de Constituição, sofrendo 8d8 pontos de dano Gélido se falhar, ou metade desse dano em caso de sucesso. Uma criatura morta por esta magia se torna uma estátua congelada até descongelar.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Criação",
+    "level": "5º Círculo",
+    "school": "Ilusão",
+    "especial": "M",
+    "castingTime": "1 minuto",
+    "range": "9 metros",
+    "components": "V, S, M (um pincel)",
+    "duration": "Especial",
+    "description": "Você puxa mechas de material obscuro do Sombral para criar um objeto no alcance da magia. É um objeto de matéria vegetal (tecido, corda, madeira e algo similar) ou matéria mineral (pedra, cristal, metal e algo similar). O objeto não deve ser maior que um Cubo de 1,5 metro de lado, e deve ter a forma e ser de um material que você já viu.\nA duração da magia depende do material do objeto, conforme mostrado na tabela Materiais. Se o objeto for composto por vários materiais, use a duração mais curta. Usar qualquer objeto criado por esta magia como componente Material de outra magia faz com que a outra magia falhe.\nMateriais\nMateriais\nDuração\nMatéria vegetal\n24 horas\nRocha ou cristal\n12 horas\nMetais preciosos\n1 hora\nPedras preciosas\n10 minutos\nAdamantina ou mitral\n1 minuto",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Círculo de Teleporte",
+    "level": "5º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "1 minuto",
+    "range": "3 metros",
+    "components": "V, M (tintas raras no valor de 50 ou mais PO, que a magia consome)",
+    "duration": "1 rodada",
+    "description": "Ao conjurar a magia, você desenha um círculo de 1,5 metro de raio no chão inscrito com símbolos que ligam sua localização a um círculo de teleporte permanente à sua escolha, cuja sequência de símbolos você conhece e que está no mesmo plano de existência que você. Um portal cintilante se abre dentro do círculo que você desenhou e permanece aberto até o final do seu próximo turno. Qualquer criatura que entre no portal aparece instantaneamente a 1,5 metro do círculo de destino ou no espaço desocupado mais próximo, se esse espaço estiver ocupado.\nMuitos dos principais templos, guildas e outros lugares importantes têm círculos de teleporte permanentes. Cada círculo inclui uma sequência de símbolos única — uma sequência de runas dispostas em um determinado padrão.\nAo adquirir a capacidade de conjurar essa magia pela primeira vez, você aprende as sequências de símbolos para dois destinos no Plano Material, escolhidos pelo Mestre. Durante suas aventuras, é possível aprender sequências adicionais. Você pode memorizar um novo símbolo após estudá-lo por 1 minuto.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Dominar Pessoa",
+    "level": "5º Círculo",
+    "school": "Encantamento",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Um humanoide à sua vista e no alcance da magia deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. O alvo tem Vantagem na salvaguarda se você ou seus aliados estiverem lutando contra ele. Sempre que o alvo sofre dano, ele repete a salvaguarda, encerrando a magia em caso de sucesso.\nVocê tem um vínculo telepático com o alvo Enfeitiçado enquanto vocês dois estão no mesmo plano de existência. No seu turno, você pode usar este vínculo para emitir comandos para o alvo (nenhuma ação é necessária), como “Ataque essa criatura”, “Mova-se para lá” ou “Busque aquele objeto”. O alvo faz o possível para obedecer no turno dele. Se ele concluir um pedido e não receber mais instruções de você, ele age e se move como quiser, concentrando-se em se proteger.\nVocê pode ordenar o alvo a executar uma Reação, mas deve executar sua própria Reação para tanto.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Estática Sináptica",
+    "level": "5º Círculo",
+    "school": "Encantamento",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você faz com que a energia psíquica entre em erupção em um ponto no alcance da magia. Cada criatura em uma Esfera de 6 metros de raio centrada nesse ponto realiza uma salvaguarda de Inteligência, sofrendo 8d6 pontos de dano Psíquico se falhar, ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Muralha de Pedra",
+    "level": "5º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (um cubo de granito)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Uma muralha não-mágica, constituída de pedra maciça, surge em um ponto à sua vista e no alcance da magia. Ela tem 15 centímetros de espessura e é composta de 10 painéis de 3 metros de lados. Cada painel deve ser contíguo ao outro. Se preferir, você pode criar painéis de 3 por 6 metros que têm apenas 7,5 centímetros de espessura.\nAo surgir, se a muralha passar por um espaço ocupado por uma criatura, esta última é empurrada para um dos lados da muralha (à sua escolha). Se uma criatura estiver cercada por todos os lados pela muralha (ou pela muralha e outra superfície sólida), essa criatura realiza uma salvaguarda de Destreza. Em caso de sucesso, ela pode usar a Reação dela para mover-se até o máximo do Deslocamento, de modo que não esteja mais cercada pela muralha.\nA muralha pode ter qualquer forma que você desejar, apesar de não poder ocupar o mesmo espaço que uma criatura ou objeto. Ela não precisa ser vertical ou se apoiar inteiramente em uma fundação sólida. Entretanto, necessita se fundir e ser solidamente suportada por rochas já existentes. Assim, é possível usar esta magia para criar uma ponte sobre um abismo ou criar uma rampa. Se for criado algo de amplitude superior a 6 metros de comprimento, é necessário dividir pela metade o tamanho de cada painel, para criar suportes. É possível fazer com que a muralha tenha, de forma bruta, ameias, parapeitos etc.\nA muralha é um objeto de pedra que pode ser danificado e rompido. Cada painel tem CA 15 e 30 Pontos de Vida para cada 2,5 centímetros de espessura e tem Imunidade dano Gélido, Psíquico e Venenoso. Reduzir um painel a 0 Ponto de Vida o destrói e pode fazer com que painéis conectados entrem em colapso, a critério do Mestre.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mão de Bigby",
+    "level": "5º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (uma casca de ovo e uma luva)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você cria uma mão Grande de energia mágica cintilante em um espaço desocupado à sua vista e no alcance da magia. A mão permanece pela duração da magia e se move ao seu comando, imitando os movimentos da sua própria mão.\nA mão é um objeto que tem CA 20 e Pontos de Vida iguais aos seus Pontos de Vida máximos. Se a mão é reduzida a 0 Pontos de Vida, a magia encerra. A mão não ocupa um espaço.\nAo conjurar a magia e como uma Ação Bônus em seus turnos posteriores, você pode mover a mão até 18 metros e causar um dos seguintes efeitos:\nMão Esmagadora. A mão tenta imobilizar uma criatura Enorme ou menor a até 1,5 metro dela. O alvo deve ser bem-sucedido em uma salvaguarda de Destreza ou tem a condição Imobilizado, com uma CD para escapar igual à CD para evitar sua magia. Enquanto a mão imobiliza o alvo, você pode executar uma ação Bônus para fazer com que a mão o esmague, causando ao alvo 4d6 pontos de dano Contundente mais seu modificador de atributo de conjuração.\nMão Interposta. A mão concede a você Cobertura Parcial contra ataques e outros efeitos originados do espaço da mão ou que passem por ele. Além disso, o espaço da mão conta como Terreno Difícil para seus inimigos.\nMão Vigorosa. A mão tenta empurrar uma criatura Enorme ou menor a até 1,5 metro dela. O alvo deve ser bem-sucedido em uma salvaguarda de Força, ou a mão empurra o alvo até 1,5 metro mais 1,5 metro multiplicado pelo valor de seu modificador de atributo de conjuração. A mão se move com o alvo, permanecendo a até 1,5 metro dele.\nPunho Cerrado. A mão atinge um alvo a até 1,5 metro dela. Realize um ataque mágico corpo a corpo. Em caso de acerto, o alvo sofre 5d8 pontos de dano Energético.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Névoa Mortal",
+    "level": "5º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você cria uma Esfera de 6 metros de raio constituída de uma névoa amarelo esverdeada centrada em um ponto no alcance da magia. A névoa permanece pela duração da magia ou até que um vento forte (como o criado pela magia Lufada de Vento) a disperse, encerrando a magia. A área da névoa é Totalmente Obscurecida.\nCada criatura na Esfera realiza uma salvaguarda de Constituição, sofrendo 5d8 pontos de dano Venenoso se falhar, ou metade desse dano em caso de sucesso. Uma criatura deve realizar essa salvaguarda quando a Esfera se mover para seu espaço e quando entrar na Esfera ou terminar o turno nela. Uma criatura realiza essa salvaguarda apenas uma vez por turno.\nA Esfera se afasta 3 metros de você no início de cada um dos seus turnos.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Paralisar Monstro",
+    "level": "5º Círculo",
+    "school": "Encantamento",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S, M (um pedaço reto de ferro)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Escolha uma criatura à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Paralisado pela duração da magia. No final de cada um dos turnos do alvo, ele realiza uma nova salvaguarda, encerrando a magia em caso de sucesso.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Praga de Insetos",
+    "level": "5º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "90 metros",
+    "components": "V, S, M (um gafanhoto)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Um enxame de gafanhotos preenche uma Esfera de 6 metros de raio centrada em um ponto à sua escolha no alcance da magia. A Esfera permanece pela duração, e sua área é Parcialmente Obscurecida e Terreno Difícil.\nQuando o enxame aparece, cada criatura dentro dele realiza uma salvaguarda de Constituição, sofrendo 4d10 pontos de dano Perfurante se falhar, ou metade desse dano em caso de sucesso. Uma criatura também realiza essa salvaguarda quando entra na área da magia pela primeira vez em um turno ou encerra o turno nela. Uma criatura realiza essa salvaguarda apenas uma vez por turno.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro"
+    ]
+  },
+  {
+    "name": "Similaridade",
+    "level": "5º Círculo",
+    "school": "Ilusão",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "8 horas",
+    "description": "Você dá uma aparência ilusória a cada criatura à sua escolha à sua vista e no alcance da magia. Um alvo involuntário pode realizar uma salvaguarda de Carisma e, se for bem-sucedido, não é afetado por esta magia.\nVocê pode dar a mesma aparência ou aparências diferentes aos alvos. A magia pode alterar a aparência dos corpos e equipamentos dos alvos, fazendo com que cada criatura pareça até 30 centímetros mais alta ou mais baixa e mais pesada ou mais leve. A nova aparência deve manter os aspectos básicos de membros do corpo do alvo, mas o restante da ilusão fica a seu critério. Os efeitos permanecem pela duração da magia.\nAs mudanças causadas por esta magia falham mediante uma inspeção física. Por exemplo, se você usar a magia para adicionar um chapéu ao traje de uma criatura, objetos passam através do chapéu.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Telecinese",
+    "level": "5º Círculo",
+    "school": "Transmutação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você adquire a capacidade de mover ou manipular criaturas ou objetos através do pensamento. Ao conjurar a magia e como uma ação Usar Magia em seus turnos posteriores antes que a magia termine, você pode exercer sua vontade sobre uma criatura ou objeto à sua vista e no alcance da magia, causando o efeito apropriado abaixo. Você pode afetar o mesmo alvo rodada após rodada ou escolher um novo a qualquer momento. Se você trocar de alvo, o alvo anterior não é mais afetado pela magia.\nCriatura. Você pode tentar mover uma criatura Enorme ou menor. O alvo deve ser bem-sucedido em uma salvaguarda de Força, ou você move o alvo até 9 metros em qualquer direção no alcance da magia. Até o final do seu próximo turno, a criatura tem a condição Contido e, se você a levantar no ar, ela fica suspensa, entra em queda no final do seu próximo turno, a menos que você use essa opção novamente e ela falhe na salvaguarda.\nObjeto. Você pode tentar mover um objeto Enorme ou menor. Se o objeto não estiver sendo usado ou carregado, você o move automaticamente até 9 metros em qualquer direção no alcance da magia.\nSe o objeto estiver sendo usado ou carregado por uma criatura, essa criatura deve ser bem-sucedida em uma salvaguarda de Força, ou você empurra o objeto para longe e o move até 9 metros em qualquer direção no alcance da magia.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Um Braseiro Afetado pela Magia Animar Objetos",
+    "level": "5º Círculo",
+    "school": "Transmutação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Objetos são animados ao seu comando. Escolha uma série de objetos não mágicos no alcance da magia que não estejam sendo usados ou carregados, não estejam fixados a uma superfície e não sejam Colossais. O número máximo de objetos é igual ao seu modificador de atributo de conjuração. Para este número, um tamanho Médio ou menor conta como um objeto, um alvo Grande conta como dois e um alvo Enorme conta como três.\nCada alvo se anima, faz brotar pernas e se torna um Constructo que usa o bloco de estatísticas do Objeto Animado; esta criatura está sob seu controle até que a magia termine ou até que ela seja reduzida a 0 Pontos de Vida. Cada criatura que você anima com esta magia é uma aliada sua e de seus aliados. Em combate, ele compartilha a contagem de Iniciativa com você e tem o turno dela imediatamente após o seu.\nAté que a magia encerre, você pode executar uma Ação Bônus para comandar mentalmente qualquer criatura que tenha animado com essa magia se a criatura estiver a até 150 metros de você (se você controlar várias criaturas, pode comandar quaisquer delas ao mesmo tempo, emitindo o mesmo comando para cada uma). Se você não der nenhum comando, a criatura executa a ação Esquivar e se move apenas para evitar danos. Quando a criatura é reduzida a 0 Pontos de Vida, ela reverte para sua forma de objeto, e qualquer dano restante é transferido para essa forma.\nUsando um Espaço de Magia de Círculo Superior. O dano de Pancada da criatura aumenta em 1d4 (Médio ou menor), 1d6 (Grande) ou 1d12 (Enorme) para cada círculo de espaço de magia acima de 5.\nObjetos Animados\nConstruto Grande ou Menor, Sem Alinhamento\nCA 15\nPV 10 (Médio ou menor), 20 (Grande), 40 (Enorme)\nDeslocamento 9 m\nMod\nSG\nMod\nSG\nMod\nSG\nFor\n16\n+3\n+3\nDes\n10\n+0\n+0\nCon\n10\n+0\n+0\nInt\n3\n-4\n-4\nSab\n3\n-4\n-4\nCar\n1\n-5\n-5\nImunidades Psíquico, Venenoso; Amedrontado, Enfeitiçado, Envenenado, Exaustão, Paralisado\nSentidos Visão às Cegas 9 m, Percepção Passiva 6\nIdiomas Compreende os idiomas que você conhece\nND Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)\nAções",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Corrente de Relâmpagos",
+    "level": "6º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (três alfinetes de prata)",
+    "duration": "Instantânea",
+    "description": "Você lança um relâmpago em direção a um alvo à sua vista e no alcance da magia. Três relâmpagos então saltam desse alvo para até três outros alvos à sua escolha, cada um dos quais deve estar a até 9 metros do primeiro alvo. Um alvo pode ser uma criatura ou um objeto, e pode ser alvo de apenas um dos relâmpagos.\nCada alvo realiza uma salvaguarda de Destreza, sofrendo 10d8 pontos de dano Elétrico se falhar, ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Círculo da Morte",
+    "level": "6º Círculo",
+    "school": "Necromancia",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (o pó de uma pérola negra esmagada no valor de 500 ou mais PO)",
+    "duration": "Instantânea",
+    "description": "Uma Esfera de 18 metros de raio de energia negativa parte de um ponto à sua escolha no alcance da magia. Cada criatura nessa área realiza uma salvaguarda de Constituição, sofrendo 8d8 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "De Carne para Pedra",
+    "level": "6º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (uma pena de cocatriz)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você tenta transformar uma criatura à sua vista e no alcance da magia em pedra. O alvo realiza uma salvaguarda de Constituição. Se falhar, ele tem a condição Contido pela duração da magia. Em uma salvaguarda bem-sucedida, o Deslocamento dele é 0 até o início do seu próximo turno. Constructos são bem-sucedidos automaticamente na salvaguarda.\nUm alvo Contido realiza outra salvaguarda de Constituição no final de cada um dos turnos dele. Em caso de sucesso por três vezes contra esta magia, ela se encerra. Se falhar por três vezes, ele é transformado em pedra e tem a condição Petrificado pela duração da magia. Os sucessos e fracassos não precisam ser consecutivos; acompanhe ambos até que o alvo alcance três de um tipo.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Desintegrar",
+    "level": "6º Círculo",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (uma pedra-ímã e poeira)",
+    "duration": "Instantânea",
+    "description": "Você dispara um raio verde em um alvo à sua vista e no alcance da magia. O alvo pode ser uma criatura, um objeto não mágico ou uma criação de energia mágica, como a muralha criada por Muralha de Energia.\nUma criatura alvo desta magia realiza uma salvaguarda de Destreza. Se falhar, o alvo sofre 10d6 + 40 pontos de dano Energético. Se esse dano reduz o alvo a 0 Pontos de Vida, ele e tudo o que não é mágico que está usando e carregando são desintegrados em pó cinza. O alvo só pode ser revivido por uma magia Desejo ou Ressurreição Verdadeira.\nEsta magia desintegra automaticamente um objeto não mágico Grande ou menor, ou uma criação de energia mágica. Se tal alvo for Enorme ou maior, esta magia desintegra uma porção de um Cubo de 3 metros de lado dele.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Esfera Congelante de Otiluke",
+    "level": "6º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "90 metros",
+    "components": "V, S, M (uma esfera de cristal em miniatura)",
+    "duration": "Instantânea",
+    "description": "Um globo gelado se estende de você até um ponto à sua escolha no alcance da magia, onde explode em uma Esfera de 18 metros de raio. Cada criatura nessa área realiza uma salvaguarda de Constituição, sofrendo 10d6 pontos de dano Gélido se falhar ou metade desse dano em caso de sucesso.\nSe o globo atingir um corpo d'água, ele congela a água a uma profundidade de 15 centímetros sobre uma área de 9 metros quadrados. Esse gelo dura 1 minuto. Criaturas que estavam nadando na superfície da água congelada estão presas no gelo e têm a condição Contido. Uma criatura presa pode executar uma ação para realizar um teste de Força (Atletismo) contra a CD para evitar sua magia para se libertar.\nVocê pode escolher não disparar o globo após completar a conjuração da magia. Se você fizer isso, um globo do tamanho de uma bala de funda, gelado ao toque, aparece em sua mão. A qualquer momento, você ou uma criatura a quem você dá o globo pode arremessá-lo (até um alcance de 12 metros) ou arremessá-lo com uma funda (até o alcance normal da funda). Ele se estilhaça com o impacto, com o mesmo efeito que uma conjuração normal da magia. Você também pode baixar o globo sem quebrá-lo. Após 1 minuto, se o globo ainda não se estilhaçou, ele explode.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Globo de Invulnerabilidade",
+    "level": "6º Círculo",
+    "school": "Abjuração",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (uma conta de vidro)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma barreira imóvel e cintilante aparece em uma Emanação de 3 metros ao seu redor e permanece pela duração da magia.\nQualquer magia de 5º círculo ou inferior conjurada de fora da barreira não pode afetar nada dentro dela. Tal magia pode ter como alvo criaturas e objetos dentro da barreira, mas a magia não tem efeito sobre eles. Da mesma forma, a área dentro da barreira é excluída das áreas de efeito criadas por tais magias.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mau Olhado",
+    "level": "6º Círculo",
+    "school": "Necromancia",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Pela duração da magia, seus olhos se tornam um vazio escuro. Uma criatura à sua escolha à sua vista e a até 18 metros de você deve ser bem-sucedida em uma salvaguarda de Sabedoria ou é afetada por um dos seguintes efeitos à sua escolha pela duração da magia.\nEm cada um dos seus turnos até que a magia termine, você pode executar uma ação Usar Magia para atingir outra criatura, mas não pode atingir uma criatura novamente se ela tiver sido bem-sucedida em uma salvaguarda contra a conjuração desta magia.\nAdoecer. O alvo tem a condição Envenenado.\nAdormecer. O alvo tem a condição Inconsciente. Ele acorda se sofrer algum dano ou se outra criatura executar uma ação para sacudi-la.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mover Terra",
+    "level": "6º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (uma pá em miniatura)",
+    "duration": "Concentração, até 2 horas",
+    "description": "Escolha uma área de terreno no alcance da magia, com até 12 metros de lados. Você pode remodelar terra, areia ou argila na área da maneira que desejar pela duração. Você pode aumentar ou diminuir a elevação da área, criar ou preencher uma trincheira, erguer ou aplanar uma parede, ou formar um pilar. A extensão dessas mudanças não pode exceder metade da maior dimensão da área. Por exemplo, se você afetar um quadrado de 12 metros, pode criar um pilar de até 6 metros de altura, aumentar ou diminuir a elevação do quadrado em até 6 metros, cavar uma trincheira de até 6 metros de profundidade, e assim por diante. Essas mudanças demoram 10 minutos para serem concluídas. Como a transformação do terreno ocorre lentamente, criaturas na área geralmente não ficam presas ou feridas pelo movimento do solo.\nAo final de cada 10 minutos que gastar se concentrando na magia, você pode escolher uma nova área de terreno para afetar.\nEssa magia não pode manipular pedra natural ou construção de pedra. Rochas e estruturas se ajustam para acomodar o novo terreno. Se a forma que você moldar o terreno tornar uma estrutura instável, ela pode desmoronar.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Portais Arcanos",
+    "level": "6º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "150 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você cria portais de teleporte vinculados. Escolha dois espaços grandes e desocupados no chão à sua vista, um espaço no alcance da magia e o outro a até 3 metros de você. Um portal circular se abre em cada um desses espaços e permanece pela duração da magia.\nOs portais são anéis brilhantes bidimensionais cheios de névoa que bloqueiam a visão. Eles pairam a centímetros do chão e são perpendiculares a ele.\nUm portal fica aberto apenas de um lado (à sua escolha). Qualquer coisa que entre no lado aberto de um portal sai do lado aberto do outro portal como se os dois fossem adjacentes um ao outro. Como uma Ação Bônus, você pode alterar a face dos lados abertos.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Raio Solar",
+    "level": "6º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (uma lupa)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você lança um feixe de luz em uma linha de 1,5 metro de largura e 18 metros de comprimento. Cada criatura na Linha realiza uma salvaguarda de Constituição. Se falhar, uma criatura sofre 6d8 pontos de dano Radiante e tem a condição Cego até o início do seu próximo turno. Em caso de sucesso, ela sofre apenas metade do dano.\nAté que a magia termine, você pode executar uma ação Usar Magia para criar uma nova Linha de radiância.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Sugestão em Massa",
+    "level": "6º Círculo",
+    "school": "Encantamento",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, M (a língua de uma cobra)",
+    "duration": "24 horas",
+    "description": "Você sugere um curso de ação — descrito em não mais de 25 palavras — para até doze criaturas à sua vista e no alcance da magia que possam ouvi-lo e entendê-lo. A sugestão deve parecer acessível e não envolver nada que obviamente cause dano a qualquer um dos alvos ou seus aliados. Por exemplo, você poderia dizer: “Caminhe até a aldeia por essa estrada e auxilie os aldeões a realizar a colheita até o pôr do sol” ou dizer: “Agora não é hora para violência. Larguem as armas e dancem! Parem em uma hora”.\nCada alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia ou até que você ou seus aliados causem dano ao alvo. Cada alvo Enfeitiçado cumpre a sugestão com o melhor de sua capacidade. A atividade sugerida pode continuar por toda a duração da magia, mas se a atividade sugerida puder ser concluída em um tempo mais curto, a magia encerra para um alvo que a complete.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Visão da Verdade",
+    "level": "6º Círculo",
+    "school": "Adivinhação",
+    "especial": "M",
+    "castingTime": "1 ação",
+    "range": "Toque",
+    "components": "V, S, M (cogumelo em pó no valor de 25 ou mais PO, que a magia consome)",
+    "duration": "1 hora",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Bola de Fogo Adiável",
+    "level": "7º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (uma bola de guano de morcego e enxofre)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Um feixe de luz amarela dispara de você, depois se condensa em um ponto escolhido no alcance da magia como um grânulo brilhante pela duração da magia. Quando a magia termina, o grânulo explode, e cada criatura em uma Esfera de 6 metros de raio centrada nesse ponto realiza uma salvaguarda de Destreza. Se falhar, uma criatura sofre dano Ígneo igual ao dano total acumulado, ou metade desse dano em caso de sucesso.\nO dano base da magia é 12d6, e o dano aumenta em 1d6 sempre que seu turno termina e a magia não se encerra.\nSe uma criatura tocar o grânulo brilhante antes da magia terminar, ela realiza uma salvaguarda de Destreza. Se falhar, a magia se encerra, fazendo com que o grânulo exploda. Em caso de sucesso, a criatura pode arremessar o grânulo até 12 metros. Se o arremesso atingir o espaço de uma criatura ou colidir com um objeto sólido, a magia se encerra e o grânulo explode.\nQuando o grânulo explode, objetos inflamáveis na explosão que não estão sendo usados ou carregados entram em combustão.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Dedo da Morte",
+    "level": "7º Círculo",
+    "school": "Necromancia",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você libera energia negativa através de uma criatura à sua vista e no alcance da magia. O alvo realiza uma salvaguarda de Constituição, sofrendo 7d8 + 30 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso.\nUm Humanoide morto por esta magia levanta-se no início do seu próximo turno como um Zumbi (veja o apêndice B) que segue suas ordens verbais.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Forma Etérea",
+    "level": "7º Círculo",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Até 8 horas",
+    "description": "Você entra nas regiões de fronteira do Plano Etéreo, onde ele se sobrepõe ao seu plano atual.\nVocê permanece na Fronteira Etérea pela duração da magia. Durante esse período, você pode se mover em qualquer direção. Se você se mover para cima ou para baixo, cada metro de movimento custa um metro adicional. Você pode ver o plano que você deixou, que parece cinza, e você não pode ver nada lá a mais de 18 metros de distância.\nEnquanto estiver no Plano Etéreo, você pode afetar e ser afetado apenas por criaturas, objetos e efeitos nesse plano. Criaturas que não estão no Plano Etéreo não podem perceber ou interagir com você, a menos que uma característica lhes dê a capacidade de fazê-lo.\nQuando a magia termina, você retorna ao plano que deixou no local que corresponde ao seu espaço na Fronteira Etérea. Se você aparecer em um espaço ocupado, você é direcionado para o espaço desocupado mais próximo e sofre dano Energético igual a 10 pontos para cada 1,5 metro que é movido.\nEsta magia se encerra instantaneamente se você a conjurar enquanto estiver no Plano Etéreo ou em um plano que não faz fronteira com ele, como um dos Planos Externos.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Inverter a Gravidade",
+    "level": "7º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "30 metros",
+    "components": "V, S, M (uma pedra-ímã e raspas de ferro)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Esta magia inverte a gravidade em um Cilindro de 15 metros de raio e 30 metros de altura, centrado em um ponto ao alcance da magia. Todas as criaturas e objetos na área que não estão fixos ao chão são levados para cima até o topo do Cilindro. Uma criatura pode realizar uma salvaguarda de Destreza para agarrar um objeto fixo que possa alcançar, evitando assim a queda ascendente.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Rajada Prismática",
+    "level": "7º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Oito raios luminosos partem de você em um Cone de 18 metros. Cada criatura no Cone realiza uma salvaguarda de Destreza. Para cada alvo, jogue 1d8 para determinar qual raio colorido o afeta, consultando a tabela Raios Prismáticos.\nRaios Prismáticos\n1d8\nRaio\n1\nVermelho. Se falhar: 12d6 pontos de dano Ígneo. Em caso de sucesso: metade do dano.\n2\nLaranja. Se falhar: 12d6 pontos de dano Ácido. Em caso de sucesso: metade do dano.\n3\nAmarelo. Se falhar: 12d6 pontos de dano Elétrico. Em caso de sucesso: metade do dano.\n4\nVerde. Se falhar: 12d6 pontos de dano Venenoso. Em caso de sucesso: metade do dano.\n5\nAzul. Se falhar: 12d6 pontos de dano Gélido. Em caso de sucesso: metade do dano.\n6\nAnil. Se falhar: O alvo tem a condição Contido e realiza uma salvaguarda de Constituição no final de cada um dos turnos dele. Se bem-sucedido três vezes, a condição se encerra. Se falhar três vezes, ele tem a condição Petrificado até ser liberado por um efeito como a magia Restauração Maior. Os sucessos e fracassos não precisam ser consecutivos; acompanhe ambos até que o alvo alcance três de um tipo.\n7\nVioleta. Se falhar: O alvo tem a condição Cego e realiza uma salvaguarda de Sabedoria no início do seu próximo turno. Em uma salvaguarda bem-sucedida, a condição se encerra. Se falhar, a condição se encerra e a criatura se teleporta para outro plano de existência (à escolha do Mestre).\n8",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Teleporte",
+    "level": "7º Círculo",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "3 metros",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Esta magia transporta instantaneamente você e até oito criaturas voluntárias ou um único objeto à sua vista e no alcance da magia, para um destino à sua escolha. Se você escolher um objeto, ele deve ser Grande ou menor e não pode estar sendo segurado ou carregado por uma criatura involuntária.\nO destino que você escolheu deve ser de seu conhecimento e deve estar no mesmo plano de existência que você. Sua familiaridade com o destino determina se você chega lá com sucesso. O Mestre joga 1d100 e consulta a tabela Resultado do Teleporte e as explicações posteriores.\nResultado do Teleporte\nFamiliaridade\nAzar\nÁrea Similar\nFora do Alvo\nNo Alvo\nCírculo permanente\n—\n—\n—\n01–100\nObjeto associado\n—\n—\n—\n01–100\nMuito familiar\n01–05\n06–13\n14–24\n25–100\nVisto casualmente\n01–33\n34–43\n44–53\n54–100\nVisto uma vez\n01–43\n44–53\n54–73\n74–100\nDescrição\n01–43\n44–53\n54–74\n75–100\nDestino falso\n01–50\n51–100\n—\n—\nFamiliaridade. Aqui estão os significados dos termos na coluna Familiaridade da tabela:\n“Círculo permanente” significa um círculo de teleporte permanente cuja sequência de símbolos você conhece.\n“Objeto associado” significa que você possui um objeto retirado do destino desejado nos últimos seis meses, como um livro da biblioteca de um mago.\n“Muito familiar” é um lugar que você visitou com frequência, um lugar que você estudou cuidadosamente ou um lugar à sua vista ao conjurar a magia.\n“Visto casualmente” é um lugar que você já viu mais de uma vez, mas com o qual não está muito familiarizado.\n“Visto uma vez ou descrito” é um lugar que você já viu uma vez, possivelmente usando magia, ou um lugar que você conhece através da descrição de outra pessoa, talvez através de um mapa.\n“Destino falso” é um lugar que não existe. Talvez você tenha tentado visualizar o santuário de um inimigo, mas em vez disso viu uma ilusão, ou está tentando se teleportar para um local que não existe mais.\nAzar. A natureza imprevisível da magia resulta em uma jornada difícil. Cada criatura se teleportando (ou o objeto alvo) sofre 3d10 pontos de dano Energético, e o Mestre joga novamente a tabela para ver onde você parou (mais de um azar pode acontecer, causando dano a cada vez).\nÁrea Similar. Você e seu grupo (ou o objeto de destino) aparecem em uma área diferente que é visual ou tematicamente semelhante à área de destino. Você aparece no lugar semelhante mais próximo. Se você estiver indo para seu laboratório, por exemplo, pode aparecer no laboratório de outra pessoa na mesma cidade.\nFora do Alvo. Você e seu grupo (ou o objeto alvo) aparecem a 2d12 x 1,5 quilômetros da distância do destino em uma direção aleatória. Jogue 1d8 para a direção: 1, leste; 2, sudeste; 3, sul; 4, sudoeste; 5, oeste; 6, noroeste; 7, norte; ou 8, nordeste.",
+    "classes": [
+      "Bardo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Tempestade de Fogo",
+    "level": "7º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Uma tempestade de fogo aparece no alcance da magia. A área da tempestade consiste em até dez cubos de 3 metros, que você organiza como preferir. Cada Cubo deve ser contíguo a pelo menos um outro Cubo. Cada criatura na área realiza uma salvaguarda de Destreza, sofrendo 7d10 pontos de dano Ígneo se falhar, ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro"
+    ]
+  },
+  {
+    "name": "Transição Planar",
+    "level": "7º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma haste de metal bifurcada no valor de 250 ou mais PO e sintonizada a um plano de existência)",
+    "duration": "Instantânea",
+    "description": "Você e até oito criaturas voluntárias que dão as mãos em um círculo são transportadas para um plano de existência diferente. Você pode especificar um destino-alvo em termos gerais, como a Cidade de Latão no Plano Elemental do Fogo ou o palácio de Dispater no segundo nível dos Nove Infernos, e você aparece dentro ou perto desse destino, conforme determinado pelo Mestre.\nComo alternativa, se você souber a sequência de símbolos de um círculo de teleporte em outro plano de existência, esta magia pode levá-lo a esse círculo. Se o círculo de teleporte for pequeno demais para caber todas as criaturas que você transportou, elas aparecem nos espaços desocupados mais próximos ao círculo.",
+    "classes": [
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Dominar Monstro",
+    "level": "8º Círculo",
+    "school": "Encantamento",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "Uma criatura à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. O alvo tem Vantagem na salvaguarda se você ou seus aliados estiverem lutando contra ele. Sempre que o alvo sofre dano, ele repete a salvaguarda, encerrando a magia em caso de sucesso.\nVocê tem um vínculo telepático com o alvo Enfeitiçado enquanto vocês dois estão no mesmo plano de existência. No seu turno, você pode usar este vínculo para emitir comandos para o alvo (nenhuma ação é necessária), como “Ataque essa criatura”, “Mova-se para lá” ou “Busque aquele objeto”. O alvo faz o possível para obedecer no turno dele. Se ele concluir um pedido e não receber mais instruções de você, ele age e se move como quiser, concentrando-se em se proteger.\nVocê pode ordenar o alvo a executar uma Reação, mas deve executar sua própria Reação para tanto.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Explosão Solar",
+    "level": "8º Círculo",
+    "school": "Evocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (um pedaço de pedra solar)",
+    "duration": "Instantânea",
+    "description": "Luz solar brilhante lampeja em uma Esfera de 18 metros de raio centrada em um ponto à sua escolha no alcance da magia. Cada criatura na Esfera realiza uma salvaguarda de Constituição. Se falhar, uma criatura sofre 12d6 pontos de dano Radiante e tem a condição Cego por 1 minuto. Em caso de sucesso, ela sofre apenas metade do dano.\nUma criatura Cega por esta magia realiza outra salvaguarda de Constituição no final de cada um dos turnos dela, encerrando o efeito em caso de sucesso.\nEsta magia dissipa Escuridão criada por qualquer magia em sua área.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Nuvem Incendiária",
+    "level": "8º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma nuvem rodopiante de brasas e fumaça preenche uma Esfera de 6 metros de raio centrada em um ponto no alcance da magia. A área da nuvem é Totalmente Obscurecida. Ela permanece pela duração ou até que um vento forte (como o criado pela Lufada de Vento) a disperse.\nQuando a nuvem aparece, cada criatura dentro dela realiza uma salvaguarda de Destreza e, se falhar, sofre 10d8 pontos de dano Ígneo, ou metade desse dano em caso de sucesso. Uma criatura também deve realizar essa salvaguarda quando a Esfera se mover para seu espaço e quando terminar seu turno nela. Uma criatura realiza essa salvaguarda apenas uma vez por turno.\nA nuvem se afasta 3 metros de você na direção que você escolher no início de cada um dos seus turnos.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Palavra de Poder: Atordoar",
+    "level": "8º Círculo",
+    "school": "Encantamento",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "",
+    "duration": "Instantânea",
+    "description": "Você domina a mente de uma criatura à sua vista e no alcance da magia. Se o alvo tiver 150 Pontos de Vida ou menos, ele tem a condição Atordoado. Caso contrário, o Deslocamento dele é 0 até o início do seu próximo turno.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Semiplano",
+    "level": "8º Círculo",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "S",
+    "duration": "1 hora",
+    "description": "Você cria uma porta Média de sombras em uma superfície sólida e plana à sua vista e no alcance da magia. Essa porta pode ser aberta e fechada, levando a uma sala vazia de 9 metros em cada dimensão, feita de madeira ou pedra à sua escolha, em semiplano.\nQuando a magia termina, a porta desaparece e os objetos dentro do semiplano permanecem nele. Qualquer criatura dentro dele também permanece nele, a menos que escolha passar pela porta enquanto ela desaparece, saindo com a condição Caído e nos espaços desocupados mais próximos do espaço que a porta ocupava anteriormente.",
+    "classes": [
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Terremoto",
+    "level": "8º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "150 metros",
+    "components": "V, S, M (uma rocha rachada)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Escolha um ponto no chão à sua vista e no alcance da magia. Pela duração da magia, um tremor intenso rasga o chão em um círculo de 30 metros de raio centrado neste ponto. O terreno é Terreno Difícil.\nAo conjurar esta magia e no final de cada um dos seus turnos pela duração da magia, cada criatura no chão na área realiza uma salvaguarda de Destreza. Se falhar, uma criatura tem a condição Caído e a Concentração dela é quebrada.\nVocê também pode causar os efeitos abaixo.\nEstruturas. O tremor causa 50 pontos de dano Contundente em qualquer estrutura em contato com o chão na área quando você conjura a magia e no final de cada um dos seus turnos até que a magia termine. Se uma estrutura é reduzida a 0 Pontos de Vida, ela desaba.\nUma criatura a uma distância de uma estrutura desabando igual à metade da altura da estrutura realiza uma salvaguarda de Destreza. Se falhar, a criatura sofre 12d6 pontos de dano Contundente, tem a condição Caído e é soterrada pelos escombros, exigindo um teste de Força (Atletismo) CD 20 como uma ação para escapar. Em caso de sucesso, a criatura recebe apenas metade do dano.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro"
+    ]
+  },
+  {
+    "name": "Chuva de Meteoros",
+    "level": "9º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "1,5 km",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Orbes flamejantes caem do céu em quatro pontos distintos à sua vista e no alcance da magia. Cada criatura em uma Esfera de 12 metros de raio centrada em cada um desses pontos realiza uma salvaguarda de Destreza. Uma criatura sofre 20d6 pontos de dano Ígneo e 20d6 pontos de dano Contundente se falhar, ou metade desse dano em caso de sucesso. Uma criatura na área de mais de uma esfera de fogo é afetada apenas uma vez.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Desejo",
+    "level": "9º Círculo",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Desejo é a magia mais poderosa que um mortal pode conjurar. Ao simplesmente falar em voz alta, você pode alterar a própria realidade.\nO uso básico dessa magia é duplicar qualquer outra magia de 8º círculo ou inferior. Ao usá-la dessa forma, você não precisa atender a nenhum requisito para conjurar essa magia, incluindo Componentes caros. A magia simplesmente surte efeito.\nComo alternativa, você pode criar um dos seguintes efeitos à sua escolha:\nAprendizado Repentino. Você substitui um dos seus talentos por outro talento para o qual seja elegível. Você perde todos os benefícios do talento antigo e obtém os benefícios do novo. Não é possível substituir um talento que seja pré-requisito para qualquer um dos seus outros talentos ou características.\nCriação de Objeto. Você cria um objeto no valor de até 25.000 PO que não seja um item mágico. O objeto pode ter no máximo 90 metros em qualquer dimensão e aparece em um espaço desocupado à sua vista, no chão.\nImunidade à Magia. Você concede a até dez criaturas à sua vista imunidade a uma única magia ou outro efeito mágico por 8 horas.\nRefazer Jogada. Você desfaz um único evento recente, forçando uma nova jogada de qualquer jogada de dado realizada no último turno (incluindo o seu último turno). A realidade se remodela para acomodar o novo resultado. Por exemplo, uma magia Desejo pode desfazer uma falha na salvaguarda de um aliado ou um Acerto Crítico de um inimigo. Você pode forçar refazer a jogada com Vantagem ou Desvantagem, e escolher se usa o novo resultado ou a jogada original.\nReformar a Realidade. Você pode expressar um desejo que não se encaixe nos outros efeitos. Para isso, declare seu desejo ao Mestre da maneira mais clara possível. O Mestre possui total liberdade para decidir o que acontece; quanto maior o desejo, maior a chance de algo dar errado. A magia pode falhar, o efeito desejado pode ser apenas parcialmente alcançado ou você pode enfrentar consequências inesperadas devido à forma como formulou seu desejo. Por exemplo, desejar que um vilão esteja morto pode levá-lo a um futuro em que o vilão já não está vivo, removendo o seu personagem do jogo. Desejar um item mágico Lendário ou um Artefato pode transportá-lo imediatamente ao local do atual proprietário. Se o desejo concedido afetar uma comunidade, região ou o mundo, é provável que você atraia inimigos poderosos. Se o desejo impactar uma divindade, os servos dela podem intervir rapidamente para impedir ou encorajar você a formular o desejo de uma determinada maneira. Se o desejo ameaçar o multiverso, a Cidade de Sigil ou a Senhora da Dor, você terá uma visão dela por um instante; ela balança a cabeça e o desejo falha.\nResistência. Você concede a até dez criaturas à sua vista Resistência a um tipo de dano à sua escolha. Essa Resistência é permanente.\nSaúde Instantânea. Você permite a si mesmo e a até vinte criaturas à sua vista recuperar todos os Pontos de Vida, além de encerrar todos os efeitos sobre elas listados na magia Restauração Maior.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Palavra de Poder: Matar",
+    "level": "9º Círculo",
+    "school": "Encantamento",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "",
+    "duration": "Instantânea",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Parar o Tempo",
+    "level": "9º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Você interrompe brevemente o fluxo do tempo para todos, menos para si. O tempo não passa para outras criaturas, enquanto você faz 1d4 +1 turnos consecutivos, durante os quais você pode usar ações e se mover normalmente.",
+    "classes": [
+      "Feiticeiro",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Portal",
+    "level": "9º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S, M (um diamante no valor de 5.000 ou mais PO)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você conjura um portal que liga um espaço desocupado à sua vista e no alcance da magia a um local preciso em um plano de existência diferente. O portal é uma abertura circular, que você pode criar com 1,5 a 6 metros de diâmetro. Você pode orientar o portal em qualquer direção que escolher. O portal permanece pela duração da magia e o destino para o qual ele leva é visível através dele.\nO portal tem uma frente e um verso em cada plano onde aparece. Se deslocar pelo portal só é possível movendo-se pela frente. Qualquer coisa que o faça é instantaneamente transportada para o outro plano, aparecendo no espaço desocupado mais próximo do portal.\nDivindades e outros governantes dos planos podem impedir que portais criados por esta magia se abram em sua presença ou em qualquer lugar dentro de seus domínios.",
+    "classes": [
+      "Bruxo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ]
+  }
+]

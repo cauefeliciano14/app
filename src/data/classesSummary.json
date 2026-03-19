@@ -1,0 +1,62 @@
+[
+  {
+    "id": "barbaro",
+    "name": "Bárbaro",
+    "description": "Combatente corpo a corpo movido por uma Fúria primitiva. Sua fúria amplia força, reflexos e sentidos. Atua como protetor e líder, enfrentando perigos diretamente para defender sua comunidade."
+  },
+  {
+    "id": "bardo",
+    "name": "Bardo",
+    "description": "Conjurador que usa música, arte e palavras como fonte de magia. Inspira aliados, cura, cria ilusões e enfraquece inimigos. Viajante e colecionador de conhecimento, une versatilidade e poder arcano."
+  },
+  {
+    "id": "bruxo",
+    "name": "Bruxo",
+    "description": "Ocultista que obtém poder por meio de pactos sobrenaturais. Sua magia vem de forças além do mundo comum, concedendo habilidades únicas derivadas de conhecimento proibido."
+  },
+  {
+    "id": "clerigo",
+    "name": "Clérigo",
+    "description": "Sacerdote que canaliza poder divino para curar, fortalecer e punir. Recebe magia de uma divindade ou entidade imortal e atua como intermediário entre o mundo mortal e os planos divinos."
+  },
+  {
+    "id": "druida",
+    "name": "Druida",
+    "description": "Guardião da natureza que utiliza magia primal. Controla elementos, transforma-se em animais e protege o equilíbrio natural. Atua como defensor de regiões selvagens e locais sagrados."
+  },
+  {
+    "id": "feiticeiro",
+    "name": "Feiticeiro",
+    "description": "Conjurador com magia inata, parte de sua própria essência. Seu poder pode ter origem sobrenatural, hereditária ou planar. Aprende a moldar essa energia interna de forma única."
+  },
+  {
+    "id": "guardiao",
+    "name": "Guardião",
+    "description": "Combatente dos ermos com habilidades marciais e magia primal. Especialista em rastreamento e sobrevivência, protege o mundo natural contra monstros e tiranos."
+  },
+  {
+    "id": "guerreiro",
+    "name": "Guerreiro",
+    "description": "Mestre em armas e armaduras. Versátil e altamente treinado, domina diversos estilos de combate e pode se especializar em técnicas específicas."
+  },
+  {
+    "id": "ladino",
+    "name": "Ladino",
+    "description": "Especialista em furtividade e precisão. Utiliza astúcia, ataques furtivos e habilidades técnicas para superar obstáculos e inimigos com eficiência."
+  },
+  {
+    "id": "mago",
+    "name": "Mago",
+    "description": "Estudioso da magia arcana. Aprende e categoriza magias em escolas, dominando feitiços de amplo alcance e grande poder por meio de estudo disciplinado."
+  },
+  {
+    "id": "monge",
+    "name": "Monge",
+    "description": "Artista marcial que canaliza energia interior. Combina disciplina mental e treinamento físico para realizar feitos extraordinários com velocidade e precisão."
+  },
+  {
+    "id": "paladino",
+    "name": "Paladino",
+    "description": "Guerreiro sagrado que realiza um juramento poderoso. Une combate marcial e magia divina para proteger aliados e combater forças da corrupção."
+  }
+]

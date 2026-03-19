@@ -1,0 +1,356 @@
+[
+  {
+    "name": "Acudir os Moribundos",
+    "level": "Truque",
+    "school": "Necromancia",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "4,5 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Escolha uma criatura no alcance da magia que tenha 0 Pontos de Vida e não esteja morta. A criatura fica Estável."
+  },
+  {
+    "name": "Badalar Fúnebre",
+    "level": "Truque",
+    "school": "Necromancia",
+    "classes": [
+      "Clérigo",
+      "Bruxo",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você aponta para uma criatura à sua vista e no alcance da magia, então um único toque de um badalar doloroso é audível a até 3 metros do alvo. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou sofre 1d8 pontos de dano Necrótico. Caso o alvo tenha perdido algum de seus Pontos de Vida, em vez de 1d8, ele sofre 1d12 pontos de dano Necrótico."
+  },
+  {
+    "name": "Bênção",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "classes": [
+      "Clérigo",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (um Símbolo Sagrado no valor de 5 ou mais PO)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você abençoa até três criaturas no alcance da magia. Sempre que um alvo realiza uma jogada de ataque ou uma salvaguarda antes que a magia termine, o alvo adiciona 1d4 à jogada de ataque ou salvaguarda."
+  },
+  {
+    "name": "Chama Sagrada",
+    "level": "Truque",
+    "school": "Evocação",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Um brilho semelhante a uma chama desce sobre uma criatura à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Destreza ou sofre 1d8 pontos de dano Radiante. O alvo não recebe nenhum benefício de Cobertura Parcial ou Cobertura de Três Quartos para esta salvaguarda."
+  },
+  {
+    "name": "Comando",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Você profere uma palavra única de comando para uma criatura à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou segue o comando no próximo turno dele. Escolha o comando a partir destas opções:\nAbaixar. O alvo tem a condição Caído e, em seguida, termina o turno.\nAproximar. O alvo se move em sua direção pela rota mais curta e direta, terminando o turno dele se ele se mover a até 1,5 metro de você.\nFugir. O alvo usa o próprio turno se afastando de você pelos meios mais rápidos disponíveis.\nLargar. O alvo solta o que estiver segurando e, em seguida, termina o turno.\nParar. No turno do alvo, ele não se move e não executa nenhuma ação ou Ação Bônus."
+  },
+  {
+    "name": "Criar ou Destruir Água",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (uma mistura de água e areia)",
+    "duration": "Instantânea",
+    "description": "Você faz uma das seguintes coisas:\nCriar Água. Você cria até 40 litros de água limpa no alcance da magia em um recipiente aberto. Como alternativa, a água cai como chuva em um Cubo de 9 metros de lado no alcance da magia, extinguindo chamas expostas na área.\nDestruir Água. Você destrói até 40 litros de água em um recipiente aberto no alcance da magia. Como alternativa, você dispersa uma névoa em um Cubo de 9 metros de lado no alcance da magia."
+  },
+  {
+    "name": "Curar Ferimentos",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Uma criatura que você toca recupera um número de Pontos de Vida igual a 2d8 mais seu modificador de atributo de conjuração."
+  },
+  {
+    "name": "Detectar Magia",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a presença de efeitos mágicos a até 9 metros de você. Se você sentir tais efeitos, pode executar a ação Usar Magia para ver uma aura fraca ao redor de qualquer criatura ou objeto visível na área que contém a magia, e se um efeito foi criado por uma magia, você descobre a escola dessa magia."
+  },
+  {
+    "name": "Detectar o Bem e o Mal",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "classes": [
+      "Clérigo",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a localização de qualquer Aberração, Celestial, Elemental, Feérico, Ínfero ou Morto-Vivo a até 9 metros de você. Você também sente se a magia Consagrar está ativa lá e, em caso afirmativo, onde."
+  },
+  {
+    "name": "Detectar Veneno e Doença",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S, M (uma folha de teixo)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a localização de venenos, criaturas venenosas ou peçonhentas e contágios mágicos a até 9 metros de você. Você sente o tipo de veneno, criatura ou contágio em cada caso.\nA magia é bloqueada por 30 centímetros de pedra, terra ou madeira, 2,5 centímetros de metal ou uma folha fina de chumbo."
+  },
+  {
+    "name": "Escudo da Fé",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Paladino"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "18 metros",
+    "components": "V, S, M (um pergaminho de oração)",
+    "duration": "Concentração, até 10 minutos",
+    "description": ""
+  },
+  {
+    "name": "Infligir Ferimentos",
+    "level": "1º Círculo",
+    "school": "Necromancia",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Uma criatura que você tocar realiza uma salvaguarda de Constituição, sofrendo 2d10 pontos de dano Necrótico se falhar ou metade desse dano em caso de sucesso."
+  },
+  {
+    "name": "Luz",
+    "level": "Truque",
+    "school": "Evocação",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, M (um vaga-lume ou musgo fosforescente)",
+    "duration": "1 hora",
+    "description": "Você toca em um objeto Grande ou menor que não está sendo usado ou carregado por outra pessoa. Até que a magia termine, o objeto emite Luz Plena em um raio de 6 metros e Meia-luz por mais 6 metros. A luz pode ter a cor que você desejar.\nCobrir o objeto com algo opaco bloqueia a luz. A magia se encerra se você a conjurar novamente."
+  },
+  {
+    "name": "Orientação",
+    "level": "Truque",
+    "school": "Adivinhação",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você toca uma criatura voluntária e escolhe uma perícia. Até que a magia termine, a criatura adiciona 1d4 a qualquer teste de atributo usando a perícia escolhida."
+  },
+  {
+    "name": "Palavra Curativa",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "18 metros",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Uma criatura à sua escolha, à sua vista e no alcance da magia recupera Pontos de Vida iguais a 2d4 mais seu modificador de atributo de conjuração."
+  },
+  {
+    "name": "Palavra de Radiância",
+    "level": "Truque",
+    "school": "Evocação",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, M (um símbolo com um raio de sol)",
+    "duration": "Instantânea",
+    "description": "Uma radiância ardente irrompe de você em uma Emanação de 1,5 metro. Cada criatura à sua escolha à sua vista nela deve ser bem-sucedida em uma salvaguarda de Constituição ou sofre 1d6 pontos de dano Radiante."
+  },
+  {
+    "name": "Perdição",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (uma gota de sangue)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Até três criaturas à sua escolha à sua vista e no alcance da magia devem realizar uma salvaguarda de Carisma. Sempre que um alvo que falhar nesta salvaguarda realizar uma jogada de ataque ou uma salvaguarda antes da magia terminar, o alvo deve subtrair 1d4 da jogada de ataque ou salvaguarda."
+  },
+  {
+    "name": "Proteção Contra o Bem e o Mal",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Bruxo",
+      "Druida",
+      "Mago",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (um pote de Água Benta no valor de 25 ou mais PO, que a magia consome)",
+    "duration": "Concentração, até 10 minutos",
+    "description": ""
+  },
+  {
+    "name": "Purificar Alimentos e Bebidas",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Paladino"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "3 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você remove veneno e podridão de alimentos e bebidas não mágicos em uma Esfera de 1,5 metro de raio centrada em um ponto no alcance da magia."
+  },
+  {
+    "name": "Raio Guia",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "1 rodada",
+    "description": "Você lança um raio de luz em direção a uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, ele sofre 4d6 pontos de dano Radiante, e a próxima jogada de ataque realizado contra ele antes do final do seu próximo turno tem Vantagem."
+  },
+  {
+    "name": "Reparar",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "1 minuto",
+    "range": "Toque",
+    "components": "V, S, M (duas pedras-ímã)",
+    "duration": "Instantânea",
+    "description": "Essa magia repara uma única ruptura ou rasgo em um objeto que você tocar, como um elo de corrente quebrado, partes de uma chave partida, uma capa rasgada ou um odre furado. Se a ruptura ou rasgo não ultrapassar 30 centímetros em qualquer dimensão, ela é reparada sem deixar vestígios do dano anterior."
+  },
+  {
+    "name": "Resistência",
+    "level": "Truque",
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você toca uma criatura voluntária e escolhe um tipo de dano: Ácido, Contundente, Cortante, Elétrico, Gélido, Ígneo, Necrótico, Perfurante, Radiante, Trovejante ou Venenoso. Quando a criatura sofre dano do tipo escolhido antes que a magia termine, a criatura reduz o dano total sofrido em 1d4 pontos. Uma criatura pode se beneficiar desta magia apenas uma vez por turno."
+  },
+  {
+    "name": "Santuário",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "9 metros",
+    "components": "V, S, M (o caco de um espelho)",
+    "duration": "1 minuto",
+    "description": ""
+  },
+  {
+    "name": "Taumaturgia",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Clérigo"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V",
+    "duration": "Até 1 minuto",
+    "description": "Você conjura uma pequena maravilha mágica no alcance da magia, criando um dos efeitos abaixo. Se usar esta magia várias vezes, pode ter até três efeitos de 1 minuto ativos simultaneamente.\nManipular Fogo. Você faz com que as chamas pisquem, iluminem, escureçam ou mudem de cor por 1 minuto.\nMão Invisível. Você faz instantaneamente com que uma porta ou janela destrancada se abra ou se feche.\nOlhos Alterados. Você altera a aparência dos seus olhos por 1 minuto.\nSom Fantasmagórico. Você cria um som instantâneo que se origina em um ponto à sua escolha no alcance da magia, como um estrondo de trovão, o grito de um corvo ou sussurros sinistros.\nVoz Retumbante. Sua voz aumenta até três vezes mais do que o normal por 1 minuto. Pela duração da magia, você tem Vantagem em testes de Carisma (Intimidação)."
+  }
+]

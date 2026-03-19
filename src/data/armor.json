@@ -1,0 +1,120 @@
+{
+  "lightArmor": [
+    {
+      "name": "Acolchoada",
+      "ac": "11 + modificador de Des",
+      "strength": "—",
+      "stealth": "Desvantagem",
+      "weight": "4 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Couro",
+      "ac": "11 + modificador de Des",
+      "strength": "—",
+      "stealth": "—",
+      "weight": "5 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Couro Batido",
+      "ac": "12 + modificador de Des",
+      "strength": "—",
+      "stealth": "—",
+      "weight": "6,5 kg",
+      "cost": "45 PO"
+    }
+  ],
+  "mediumArmor": [
+    {
+      "name": "Gibão de Peles",
+      "ac": "12 + modificador de Des (máx. 2)",
+      "strength": "—",
+      "stealth": "—",
+      "weight": "6 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Cota de Malha Parcial",
+      "ac": "13 + modificador de Des (máx. 2)",
+      "strength": "—",
+      "stealth": "—",
+      "weight": "10 kg",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Loriga de Escamas",
+      "ac": "14 + modificador de Des (máx. 2)",
+      "strength": "—",
+      "stealth": "Desvantagem",
+      "weight": "22 kg",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Couraça Peitoral",
+      "ac": "14 + modificador de Des (máx. 2)",
+      "strength": "—",
+      "stealth": "—",
+      "weight": "10 kg",
+      "cost": "400 PO"
+    },
+    {
+      "name": "Placas Parcial",
+      "ac": "15 + modificador de Des (máx. 2)",
+      "strength": "—",
+      "stealth": "Desvantagem",
+      "weight": "20 kg",
+      "cost": "750 PO"
+    }
+  ],
+  "heavyArmor": [
+    {
+      "name": "Cota de Anéis",
+      "ac": "14",
+      "strength": "—",
+      "stealth": "Desvantagem",
+      "weight": "20 kg",
+      "cost": "30 PO"
+    },
+    {
+      "name": "Cota de Malha",
+      "ac": "16",
+      "strength": "For 13",
+      "stealth": "Desvantagem",
+      "weight": "27 kg",
+      "cost": "75 PO"
+    },
+    {
+      "name": "Armadura de Talas",
+      "ac": "17",
+      "strength": "For 15",
+      "stealth": "Desvantagem",
+      "weight": "30 kg",
+      "cost": "200 PO"
+    },
+    {
+      "name": "Placas",
+      "ac": "18",
+      "strength": "For 15",
+      "stealth": "Desvantagem",
+      "weight": "32 kg",
+      "cost": "1.500 PO"
+    }
+  ],
+  "shield": [
+    {
+      "name": "Escudo",
+      "ac": "+2",
+      "strength": "—",
+      "stealth": "—",
+      "weight": "3 kg",
+      "cost": "10 PO"
+    }
+  ],
+  "rules": {
+    "Armadura Leve, Média ou Pesada": "Se você usar armadura Leve, Média ou Pesada e não tiver treinamento com ela, você tem Desvantagem em qualquer Teste de d20 que envolva Força ou Destreza, e não pode conjurar magias.",
+    "Escudo": "Você adquire o benefício de Classe de Armadura de um Escudo somente se tiver treinamento com ele.",
+    "Um de Cada Vez": "Uma criatura pode usar apenas uma armadura e empunhar apenas um Escudo de cada vez.",
+    "Variante: Tamanhos de Equipamento": "Na maioria das campanhas... O custo do ajuste é de 1d4 x 10 por cento do preço de mercado do item."
+  }
+}

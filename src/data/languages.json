@@ -1,0 +1,102 @@
+{
+  "common": [
+    {
+      "id": "common",
+      "name": "Comum",
+      "origin": "Sigil"
+    },
+    {
+      "id": "sign-language",
+      "name": "Linguagem de Sinais Comum",
+      "origin": "Sigil"
+    },
+    {
+      "id": "draconic",
+      "name": "Dracônico",
+      "origin": "Dragões"
+    },
+    {
+      "id": "dwarvish",
+      "name": "Anão",
+      "origin": "Anões"
+    },
+    {
+      "id": "elvish",
+      "name": "Élfico",
+      "origin": "Elfos"
+    },
+    {
+      "id": "giant",
+      "name": "Gigante",
+      "origin": "Gigantes"
+    },
+    {
+      "id": "gnomish",
+      "name": "Gnômico",
+      "origin": "Gnomos"
+    },
+    {
+      "id": "goblin",
+      "name": "Goblin",
+      "origin": "Goblinoides"
+    },
+    {
+      "id": "halfling",
+      "name": "Pequenino",
+      "origin": "Pequeninos"
+    },
+    {
+      "id": "orc",
+      "name": "Orc",
+      "origin": "Orcs"
+    }
+  ],
+  "rare": [
+    {
+      "id": "abyssal",
+      "name": "Abissal",
+      "origin": "Demônios do Abismo"
+    },
+    {
+      "id": "celestial",
+      "name": "Celestial",
+      "origin": "Celestiais"
+    },
+    {
+      "id": "deep-speech",
+      "name": "Dialeto Obscuro",
+      "origin": "Aberrações"
+    },
+    {
+      "id": "druidic",
+      "name": "Druídico",
+      "origin": "Círculos druídicos"
+    },
+    {
+      "id": "thieves-cant",
+      "name": "Gíria dos Ladrões",
+      "origin": "Várias guildas criminosas"
+    },
+    {
+      "id": "infernal",
+      "name": "Infernal",
+      "origin": "Diabos dos Nove Infernos"
+    },
+    {
+      "id": "primordial",
+      "name": "Primordial",
+      "origin": "Elementais",
+      "note": "Inclui os dialetos Aquan, Auran, Ignan e Terran."
+    },
+    {
+      "id": "sylvan",
+      "name": "Silvestre",
+      "origin": "A Faéria"
+    },
+    {
+      "id": "undercommon",
+      "name": "Subcomum",
+      "origin": "A Umbraeterna"
+    }
+  ]
+}

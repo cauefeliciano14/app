@@ -1,0 +1,388 @@
+{
+  "species": [
+    {
+      "id": "aasimar",
+      "name": "Aasimar",
+      "description": "Aasimar (pronuncia-se AH-sih-mar) são mortais que carregam uma centelha dos Planos Superiores dentro de suas almas. Sejam descendentes de um ser angelical ou infundido com poder celestial, eles podem impulsionar essa centelha para trazer luz, cura e fúria celestial.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (1,2-2,1m) ou Pequeno (0,60-1,2m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Resistência Celestial",
+          "description": "Você tem Resistência a dano Necrótico e Radiante."
+        },
+        {
+          "title": "Visão no Escuro",
+          "description": "Você tem Visão no Escuro com um alcance de 18 metros."
+        },
+        {
+          "title": "Mãos Curativas",
+          "description": "Você executa uma ação Usar Magia, toca uma criatura e joga um número de d4s igual ao seu Bônus de Proficiência. A criatura restaura número de Pontos de Vida igual ao total jogado. Após usar esse traço, você não pode usá-lo novamente até completar um Descanso Longo."
+        },
+        {
+          "title": "Portador da Luz",
+          "description": "Você conhece o truque da Luz. Carisma é seu atributo de conjuração para isso."
+        }
+      ],
+      "lineage": {
+        "title": "Revelação Celestial",
+        "description": "No nível 3 de personagem, você pode se transformar como uma Ação Bônus usando uma das opções abaixo (escolha a opção cada vez que você se transformar). A transformação se mantém por 1 minuto ou até você a encerrar (nenhuma ação é necessária). Uma vez que você se transforma, não pode fazê-lo novamente até completar um Descanso Longo.\n\nUma vez em cada um dos seus turnos, até que a transformação termine, você pode infligir dano adicional a um alvo ao causar dano a ele com um ataque ou uma magia. O dano adicional é igual ao seu Bônus de Proficiência, e o tipo de dano adicional é Necrótico para Manto Necrótico ou Radiante para Asas Celestiais e Transfiguração Radiante.\n\nAqui estão as opções de transformação:",
+        "choices": [
+          {
+            "id": "asas-celestiais",
+            "name": "Asas Celestiais",
+            "description": "Duas asas espectrais brotam em suas costas temporariamente. Até que a transformação se encerre, você tem um Deslocamento de Voo igual ao seu Deslocamento.",
+            "mechanics": "Voo, Dano Radiante"
+          },
+          {
+            "id": "manto-necrotico",
+            "name": "Manto Necrótico",
+            "description": "Seus olhos se tornam brevemente poças de escuridão, e asas que não voam brotam em suas costas temporariamente. Criaturas que não sejam seus aliados a até 3 metros de você devem ser bem-sucedidas em uma salvaguarda de Carisma (CD 8 + seu modificador de Carisma e seu Bônus de Proficiência) ou têm a condição Amedrontado até o final do seu próximo turno.",
+            "mechanics": "Amedrontar, Dano Necrótico"
+          },
+          {
+            "id": "transfiguracao-radiante",
+            "name": "Transfiguração Radiante",
+            "description": "Luz abrasadora irradia temporariamente de seus olhos e boca. Pela duração da transformação, você emite Luz Plena em um raio de 3 metros e Meia-luz por mais 3 metros, e no fim de cada um de seus turnos, cada criatura a até 3 metros de você sofre dano Radiante igual ao seu Bônus de Proficiência.",
+            "mechanics": "Luz, Dano Radiante de Área"
+          }
+        ]
+      }
+    },
+    {
+      "id": "anao",
+      "name": "Anão",
+      "description": "Anões foram criados da terra nos tempos antigos por uma divindade da forja, conhecida por diversos nomes como Moradin e Reorx. Esse deus conferiu aos anões uma afinidade por pedra, metal e pela vida subterrânea, além de torná-los resilientes como as montanhas, com uma expectativa de vida de cerca de 350 anos.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (1,20-1,50m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Visão no Escuro",
+          "description": "Você tem Visão no Escuro com um alcance de 36 metros."
+        },
+        {
+          "title": "Resistência a Toxinas",
+          "description": "Você tem Resistência a Dano Venenoso e Vantagem nas salvaguardas para evitar ou encerrar a condição Envenenado."
+        },
+        {
+          "title": "Tenacidade Anã",
+          "description": "Seus Pontos de Vida máximos aumentam em 1, e novamente em 1 sempre que você atinge um nível de personagem."
+        },
+        {
+          "title": "Conhecimento de Pedras",
+          "description": "Como uma Ação Bônus, você adquire Sismiconsciência (18m) por 10 minutos se estiver tocando uma superfície de pedra."
+        }
+      ]
+    },
+    {
+      "id": "draconato",
+      "name": "Draconato",
+      "description": "Os ancestrais dos draconatos nasceram dos ovos de dragões cromáticos e metálicos. Uma narrativa diz que esses ovos foram abençoados pelos deuses dracônicos Bahamut e Tiamat, que desejavam criar seres à sua imagem no multiverso. Independentemente da origem, os draconatos estabeleceram lares no Plano Material.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (1,50-2,10m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Ataque de Sopro",
+          "description": "Substitua um de seus ataques por uma emissão de energia (Cone de 4,5m ou Linha de 9m). Dano: 1d10 (escala com nível). Salvaguarda de Destreza (metade do dano)."
+        },
+        {
+          "title": "Resistência a Dano",
+          "description": "Você tem Resistência ao tipo de dano determinado por sua Herança Dracônica."
+        },
+        {
+          "title": "Visão no Escuro",
+          "description": "Você tem Visão no Escuro com um alcance de 18 metros."
+        },
+        {
+          "title": "Voo Dracônico",
+          "description": "No nível 5, como uma Ação Bônus, você cria asas espectrais por 10 minutos, ganhando Deslocamento de Voo."
+        }
+      ],
+      "lineage": {
+        "title": "Herança Dracônica",
+        "description": "Sua linhagem deriva de um progenitor dracônico. Escolha o tipo de dragão da tabela Herança Dracônica. Sua escolha afeta suas características de Ataque de Sopro e Resistência a Dano, bem como sua aparência.",
+        "choices": [
+          { "id": "azul", "name": "Azul (Elétrico)", "description": "Linhagem de dragão azul.", "mechanics": "Dano Elétrico" },
+          { "id": "branco", "name": "Branco (Gélido)", "description": "Linhagem de dragão branco.", "mechanics": "Dano Gélido" },
+          { "id": "bronze", "name": "Bronze (Elétrico)", "description": "Linhagem de dragão de bronze.", "mechanics": "Dano Elétrico" },
+          { "id": "cobre", "name": "Cobre (Ácido)", "description": "Linhagem de dragão de cobre.", "mechanics": "Dano Ácido" },
+          { "id": "latas", "name": "Latão (Ígneo)", "description": "Linhagem de dragão de latão.", "mechanics": "Dano Ígneo" },
+          { "id": "negro", "name": "Negro (Ácido)", "description": "Linhagem de dragão negro.", "mechanics": "Dano Ácido" },
+          { "id": "ouro", "name": "Ouro (Ígneo)", "description": "Linhagem de dragão de ouro.", "mechanics": "Dano Ígneo" },
+          { "id": "prata", "name": "Prata (Gélido)", "description": "Linhagem de dragão de prata.", "mechanics": "Dano Gélido" },
+          { "id": "verde", "name": "Verde (Venenoso)", "description": "Linhagem de dragão verde.", "mechanics": "Dano Venenoso" },
+          { "id": "vermelho", "name": "Vermelho (Ígneo)", "description": "Linhagem de dragão vermelho.", "mechanics": "Dano Ígneo" }
+        ]
+      }
+    },
+    {
+      "id": "elfo",
+      "name": "Elfo",
+      "description": "Criados por Corellon, os primeiros elfos podiam mudar de forma à vontade. Essa habilidade foi perdida quando Corellon os amaldiçoou por conspirarem com Lolth. Elfos possuem orelhas pontudas e não têm pelos faciais ou corporais. Vivem cerca de 750 anos e não dormem, mas entram em transe para descansar.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (1,50-1,80m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Visão no Escuro",
+          "description": "Você tem Visão no Escuro com um alcance de 18 metros."
+        },
+        {
+          "title": "Ancestralidade Feérica",
+          "description": "Você tem Vantagem ao realizar salvaguardas para evitar ou encerrar a condição Enfeitiçado."
+        },
+        {
+          "title": "Sentidos Aguçados",
+          "description": "Você tem proficiência na perícia Intuição, Percepção ou Sobrevivência (escolha no app)."
+        },
+        {
+          "title": "Transe",
+          "description": "Você completa um Descanso Longo em 4 horas ao meditar, sem a necessidade de dormir."
+        }
+      ],
+      "lineage": {
+        "title": "Linhagem Élfica",
+        "description": "Você é de uma linhagem que lhe concede habilidades sobrenaturais. Escolha uma linhagem da tabela Linhagem Élfica. Você adquire o benefício de nível 1 dessa linhagem.\n\nAo atingir os níveis 3 e 5, você aprende uma magia de círculo superior, conforme indicado na tabela. Essa magia está sempre preparada e pode ser conjurada uma vez sem usar um espaço de magia, restaurando essa capacidade ao completar um Descanso Longo. Além disso, você pode conjurá-la usando qualquer espaço de magia apropriado que possua.\n\nInteligência, Sabedoria ou Carisma é seu atributo de conjuração para as magias que você conjura com este traço (escolha o atributo quando selecionar a linhagem).",
+        "choices": [
+          {
+            "id": "alto-elfo",
+            "name": "Alto Elfo",
+            "description": "Altos elfos receberam magia das encruzilhadas entre Faéria e o Plano Material. Em alguns mundos, esses elfos são conhecidos por outros nomes, como elfos solares ou lunares em Reinos Esquecidos, Silvanesti e Qualinesti em Dragonlance, e Aereni em Eberron.",
+            "mechanics": "Prestidigitação Arcana, Detectar Magia, Passo Nebuloso",
+            "nv1": "Você conhece o truque Prestidigitação Arcana. Sempre que completar um Descanso Longo, você pode substituir este truque por um truque diferente da lista de magias de Mago.",
+            "nv3": "Detectar Magia",
+            "nv5": "Passo Nebuloso"
+          },
+          {
+            "id": "drow",
+            "name": "Drow",
+            "description": "Os drow normalmente residem em Umbraeterna, que os moldou. Embora alguns indivíduos e sociedades drow evitem essa região, eles ainda carregam sua magia. No cenário de Eberron, os drow habitam florestas tropicais e ruínas ciclópicas no continente de Xen'drik.",
+            "mechanics": "Visão no Escuro 36m, Luzes Dançantes, Fogo das Fadas, Escuridão",
+            "nv1": "O alcance da sua Visão no Escuro aumenta para 36 metros. Você também conhece o truque Luzes Dançantes.",
+            "nv3": "Fogo das Fadas",
+            "nv5": "Escuridão"
+          },
+          {
+            "id": "elfo-silvestre",
+            "name": "Elfo Silvestre",
+            "description": "Elfos silvestres, também conhecidos como elfos selvagens, elfos verdes e elfos dos bosques, carregam a magia das florestas primitivas. Grugach são elfos silvestres reclusos de Greyhawk, enquanto Kagonesti e Tairnadal são elfos silvestres de Dragonlance e Eberron, respectivamente.",
+            "mechanics": "Deslocamento 10,5m, Arte Druídica, Passos Largos, Passos Sem Rastro",
+            "nv1": "Seu Deslocamento aumenta para 10,5 metros. Você também conhece o truque Arte Druídica.",
+            "nv3": "Passos Largos",
+            "nv5": "Passos Sem Rastro"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gnomo",
+      "name": "Gnomo",
+      "description": "Gnomos são seres mágicos criados por deuses da invenção, ilusões e vida subterrânea. Raramente vistos por outros, devido à sua natureza reservada, os gnomos compensaram sua estatura com inteligência. São um povo pequeno com olhos grandes e orelhas pontudas, que vivem cerca de 425 anos.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Pequeno (0,90-1,20m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Visão no Escuro",
+          "description": "Você tem Visão no Escuro com um alcance de 18 metros."
+        },
+        {
+          "title": "Astúcia de Gnomo",
+          "description": "Você tem Vantagem em salvaguardas de Inteligência, Sabedoria e Carisma."
+        }
+      ],
+      "lineage": {
+        "title": "Linhagem Gnômica",
+        "description": "Você pertence a uma linhagem que lhe confere habilidades sobrenaturais. Escolha uma das seguintes opções; sua escolha determina se Inteligência, Sabedoria ou Carisma é seu atributo de conjuração para as magias desse traço (escolha o atributo quando selecionar a linhagem):",
+        "choices": [
+          {
+            "id": "gnomo-do-bosque",
+            "name": "Gnomo do Bosque",
+            "description": "Você conhece o truque Ilusão Menor. Você também sempre tem a magia Falar com Animais preparada. É possível conjurá-la sem um espaço de magia um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo. Você também pode usar qualquer espaço de magia que tiver para conjurá-la.",
+            "mechanics": "Ilusão Menor, Falar com Animais"
+          },
+          {
+            "id": "gnomo-das-rochas",
+            "name": "Gnomo das Rochas",
+            "description": "Você conhece os truques Prestidigitação Arcana e Reparar. Além disso, você pode gastar 10 minutos conjurando Prestidigitação Arcana para fabricar um dispositivo mecânico minúsculo (CA 5, 1 PV), como um brinquedo, isqueiro mecânico ou caixa de música. Ao fabricar o dispositivo, você determina a função dele escolhendo um efeito de Prestidigitação Arcana; o dispositivo produz esse efeito sempre que você ou outra criatura executa uma Ação Bônus para ativá-lo com um toque. Se o efeito escolhido tiver opções possíveis, você escolhe uma dessas opções para o dispositivo ao fabricá-lo. Por exemplo, se você escolher o efeito de Brincar com Fogo da magia, você determina se o dispositivo acende ou extingue fogo; o dispositivo não faz ambas as coisas. Você pode ter três desses dispositivos ao mesmo tempo, e cada um se desfaz 8 horas após ser fabricado ou quando você o desmonta com um toque como uma ação Usar Objeto.",
+            "mechanics": "Prestidigitação, Reparar, Dispositivos Mecânicos"
+          }
+        ]
+      }
+    },
+    {
+      "id": "golias",
+      "name": "Golias",
+      "description": "Os golias, que se destacam pela altura, são descendentes distantes de gigantes. Cada um deles possui as bênçãos dos antigos gigantes, manifestadas em diversos dons sobrenaturais, como o crescimento rápido e a habilidade de alcançar temporariamente a estatura de seus parentes gigantes.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (2,10-2,40m)",
+        "speed": "10,5 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Forma Grande",
+          "description": "No nível 5, mude seu tamanho para Grande por 10 min. Vantagem em Testes de Força e +3m de Deslocamento."
+        },
+        {
+          "title": "Porte Poderoso",
+          "description": "Vantagem em testes para encerrar a condição Imobilizado. Conta como um tamanho maior para capacidade de carga."
+        }
+      ],
+      "lineage": {
+        "title": "Ancestralidade Gigante",
+        "description": "Você é descendente de Gigantes. Escolha um dos seguintes benefícios — um benefício sobrenatural de sua ancestralidade; você pode usar o benefício escolhido um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo:",
+        "choices": [
+          { "id": "gelo", "name": "Arrepio do Gelo (Gigante do Gelo)", "description": "Ao atingir um alvo com uma jogada de ataque e causar dano a ele, você também pode infligir 1d6 pontos de dano Gélido a esse alvo e reduzir o Deslocamento dele em 3 metros até o início do seu próximo turno.", "mechanics": "+1d6 Gélido, -3m Deslocamento" },
+          { "id": "fogo", "name": "Queimadura de Fogo (Gigante de Fogo)", "description": "Ao atingir um alvo com uma jogada de ataque e causar dano a ele, você também pode causar 1d10 pontos de dano Ígneo a esse alvo.", "mechanics": "+1d10 Ígneo" },
+          { "id": "pedra", "name": "Resistência da Pedra (Gigante da Pedra)", "description": "Ao sofrer dano, pode executar uma Reação para jogar 1d12. Adicione seu modificador de Constituição ao número obtido e reduza o dano desse total.", "mechanics": "Redução de Dano" },
+          { "id": "nuvens", "name": "Salto da Nuvem (Gigante das Nuvens)", "description": "Como uma Ação Bônus, você se teleporta magicamente até 9 metros para um espaço desocupado à sua vista.", "mechanics": "Teleporte 9m" },
+          { "id": "colina", "name": "Tombo da Colina (Gigante da Colina)", "description": "Ao atingir uma criatura Grande ou menor com uma jogada de ataque e causar dano a ela, você pode impor a esse alvo a condição Caído.", "mechanics": "Condição Caído" },
+          { "id": "tempestade", "name": "Trovão da Tempestade (Gigante da Tempestade)", "description": "Ao sofrer dano de uma criatura a até 18 metros de você, você pode executar uma Reação para causar 1d8 pontos de dano Trovejante a essa criatura.", "mechanics": "Reação: 1d8 Trovejante" }
+        ]
+      }
+    },
+    {
+      "id": "humano",
+      "name": "Humano",
+      "description": "Presentes em todo o multiverso, os humanos são variados e numerosos, buscando alcançar o máximo em seus anos de vida. Sua ambição e habilidade são admiradas, respeitadas e temidas em muitos mundos.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (1,2-2,1m) ou Pequeno (0,6-1,2m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Eficiente",
+          "description": "Você adquire Inspiração Heroica sempre que completar um Descanso Longo."
+        },
+        {
+          "title": "Hábil",
+          "description": "Você adquire proficiência em uma perícia à sua escolha."
+        },
+        {
+          "title": "Versátil",
+          "description": "Você adquire um talento de Origem à sua escolha (veja o capítulo 5). Habilidoso é recomendado."
+        }
+      ]
+    },
+    {
+      "id": "orc",
+      "name": "Orc",
+      "description": "Os orcs atribuem sua origem a Gruumsh, um poderoso deus que percorria os vastos espaços do Plano Material. Ele dotou seus filhos com habilidades para explorar planícies, cavernas e mares agitados. Mesmo ao se devotar a outros deuses, os orcs mantêm os dons de Gruumsh: resistência, determinação e a habilidade de enxergar na escuridão.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (1,80-2,10m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Pico de Adrenalina",
+          "description": "Corra como Ação Bônus e ganhe Pontos de Vida Temporários (Bônus de Proficiência)."
+        },
+        {
+          "title": "Visão no Escuro",
+          "description": "Você tem Visão no Escuro com um alcance de 36 metros."
+        },
+        {
+          "title": "Vigor Implacável",
+          "description": "Ao cair a 0 PV, fica com 1 PV (uma vez por Descanso Longo)."
+        }
+      ]
+    },
+    {
+      "id": "pequenino",
+      "name": "Pequenino",
+      "description": "Guiados por deuses que valorizam a vida, o lar e a lareira, os pequeninos buscam paraísos bucólicos onde família e comunidade moldam suas vidas. Apesar disso, muitos têm um espírito aventureiro, embarcando em jornadas de descoberta. Sua longevidade é de cerca de 150 anos.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Pequeno (0,60-0,90m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Corajoso",
+          "description": "Vantagem nas salvaguardas para evitar ou encerrar a condição Amedrontado."
+        },
+        {
+          "title": "Agilidade Pequenina",
+          "description": "Mova-se pelo espaço de criaturas maiores que você."
+        },
+        {
+          "title": "Sorte",
+          "description": "Ao tirar 1 no D20 de um Teste, pode jogar novamente o dado."
+        },
+        {
+          "title": "Furtividade Natural",
+          "description": "Esconda-se mesmo encoberto apenas por uma criatura maior."
+        }
+      ]
+    },
+    {
+      "id": "tiferino",
+      "name": "Tiferino",
+      "description": "Os tiferinos nascem nos Planos Inferiores ou têm ancestrais que se originaram lá. Estão ligados por sangue a um diabo, demônio ou outro Ínfero. Essa conexão representa o legado ínfero do tiferino, prometendo poder, mas não influi em sua perspectiva moral.",
+      "vitalInfo": {
+        "type": "Humanoide",
+        "size": "Médio (1,20-2,10m) ou Pequeno (0,90-1,20m)",
+        "speed": "9 metros"
+      },
+      "racialTraits": [
+        {
+          "title": "Visão no Escuro",
+          "description": "Você tem Visão no Escuro com um alcance de 18 metros."
+        },
+        {
+          "title": "Presença Sobrenatural",
+          "description": "Você conhece o truque Taumaturgia."
+        }
+      ],
+      "lineage": {
+        "title": "Legado Ínfero",
+        "description": "Você é o portador de um legado que lhe confere poderes sobrenaturais. Escolha um legado da tabela Legados Ínferos. Você adquire o benefício de nível 1 do legado escolhido.\n\nAo atingir os níveis de personagem 3 e 5, você aprende magias de círculo superior, conforme indicado na tabela. Essas magias estão sempre preparadas e podem ser conjuradas uma vez sem usar um espaço de magia, sendo restauradas quando completa um Descanso Longo. Além disso, você pode conjurá-las utilizando qualquer espaço de magia que possua do círculo correspondente. Atributos como Inteligência, Sabedoria ou Carisma servem como seu atributo de conjuração para essas magias (escolha um atributo ao selecionar o legado).",
+        "choices": [
+          {
+            "id": "abissal",
+            "name": "Abissal",
+            "description": "A entropia do Abismo, o caos do Pandemônio e o desespero do Cárceri atraem os tiferinos com legado abissal. Chifres, pelos, presas e aromas peculiares são características comuns desses tiferinos, que em sua maioria possuem sangue demoníaco correndo em suas veias.",
+            "mechanics": "Resistência Veneno, Rajada de Veneno, Raio Nauseante, Paralisar Pessoa",
+            "nv1": "Você tem Resistência a dano Venenoso. Você também conhece o truque Rajada de Veneno.",
+            "nv3": "Raio Nauseante",
+            "nv5": "Paralisar Pessoa"
+          },
+          {
+            "id": "ctonico",
+            "name": "Ctônico",
+            "description": "Os tiferinos com o legado ctônico sentem não apenas o puxão de Cárceri, mas também a ganância de Gehenna e a escuridão do Hades. Alguns aparentam ser cadavéricos, enquanto outros possuem a beleza sobrenatural de um súcubo ou características físicas comuns a uma megera da noite, um yugoloth ou outro ancestral ínfero Neutro e Mau.",
+            "mechanics": "Resistência Necrótico, Toque Necrótico, Vitalidade Vazia, Raio do Enfraquecimento",
+            "nv1": "Você tem Resistência a dano Necrótico. Você também conhece o truque Toque Necrótico.",
+            "nv3": "Vitalidade Vazia",
+            "nv5": "Raio do Enfraquecimento"
+          },
+          {
+            "id": "infernal",
+            "name": "Infernal",
+            "description": "O legado infernal liga os tiferinos não apenas à Gehenna, mas também aos Nove Infernos e aos intensos campos de batalha de Aqueronte. Características físicas comuns incluem chifres, espinhos, caudas, olhos dourados e um leve odor de enxofre ou fumaça.",
+            "mechanics": "Resistência Fogo, Raio de Fogo, Repreensão Diabólica, Escuridão",
+            "nv1": "Você tem Resistência a dano Ígneo. Você também conhece o truque Raio de Fogo.",
+            "nv3": "Repreensão Diabólica",
+            "nv5": "Escuridão"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,336 @@
+{
+  "simpleMelee": [
+    {
+      "name": "Adaga",
+      "damage": "1d4 Perfurante",
+      "properties": "Acuidade, Arremesso (Alcance 6/18), Leve",
+      "mastery": "Ágil",
+      "weight": "0,5 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Azagaia",
+      "damage": "1d6 Perfurante",
+      "properties": "Arremesso (Alcance 9/36)",
+      "mastery": "Lentidão",
+      "weight": "1 kg",
+      "cost": "5 PP"
+    },
+    {
+      "name": "Cajado",
+      "damage": "1d6 Contundente",
+      "properties": "Versátil (1d8)",
+      "mastery": "Derrubar",
+      "weight": "2 kg",
+      "cost": "2 PP"
+    },
+    {
+      "name": "Clava",
+      "damage": "1d4 Contundente",
+      "properties": "Leve",
+      "mastery": "Lentidão",
+      "weight": "1 kg",
+      "cost": "1 PP"
+    },
+    {
+      "name": "Clava Grande",
+      "damage": "1d8 Contundente",
+      "properties": "Duas Mãos",
+      "mastery": "Empurrar",
+      "weight": "5 kg",
+      "cost": "2 PP"
+    },
+    {
+      "name": "Foice",
+      "damage": "1d4 Cortante",
+      "properties": "Leve",
+      "mastery": "Ágil",
+      "weight": "1 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Lança",
+      "damage": "1d6 Perfurante",
+      "properties": "Arremesso (Alcance 6/18), Versátil (1d8)",
+      "mastery": "Drenar",
+      "weight": "1,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Maça",
+      "damage": "1d6 Contundente",
+      "properties": "—",
+      "mastery": "Drenar",
+      "weight": "2 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Machadinha",
+      "damage": "1d6 Cortante",
+      "properties": "Arremesso (Alcance 6/18), Leve",
+      "mastery": "Afligir",
+      "weight": "1 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Martelo Leve",
+      "damage": "1d4 Contundente",
+      "properties": "Arremesso (Alcance 6/18), Leve",
+      "mastery": "Ágil",
+      "weight": "1 kg",
+      "cost": "2 PO"
+    }
+  ],
+  "simpleRanged": [
+    {
+      "name": "Arco Curto",
+      "damage": "1d6 Perfurante",
+      "properties": "Duas Mãos, Munição (Alcance 24/96; Flecha)",
+      "mastery": "Afligir",
+      "weight": "1 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Besta Leve",
+      "damage": "1d8 Perfurante",
+      "properties": "Duas Mãos, Munição (Alcance 24/96; Virote), Recarga",
+      "mastery": "Lentidão",
+      "weight": "2,5 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Dardo",
+      "damage": "1d4 Perfurante",
+      "properties": "Acuidade, Arremesso (Alcance 6/18)",
+      "mastery": "Afligir",
+      "weight": "150 g",
+      "cost": "5 PC"
+    },
+    {
+      "name": "Funda",
+      "damage": "1d4 Contundente",
+      "properties": "Munição (Alcance 9/36; Bala)",
+      "mastery": "Lentidão",
+      "weight": "—",
+      "cost": "1 PP"
+    }
+  ],
+  "martialMelee": [
+    {
+      "name": "Alabarda",
+      "damage": "1d10 Cortante",
+      "properties": "Duas Mãos, Extensão, Pesada",
+      "mastery": "Trespassar",
+      "weight": "3 kg",
+      "cost": "20 PO"
+    },
+    {
+      "name": "Chicote",
+      "damage": "1d4 Cortante",
+      "properties": "Acuidade, Extensão",
+      "mastery": "Lentidão",
+      "weight": "1,5 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Cimitarra",
+      "damage": "1d6 Cortante",
+      "properties": "Acuidade, Leve",
+      "mastery": "Ágil",
+      "weight": "1,5 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Espada Curta",
+      "damage": "1d6 Perfurante",
+      "properties": "Acuidade, Leve",
+      "mastery": "Afligir",
+      "weight": "1 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Espada Grande",
+      "damage": "2d6 Cortante",
+      "properties": "Duas Mãos, Pesada",
+      "mastery": "Garantido",
+      "weight": "3 kg",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Espada Longa",
+      "damage": "1d8 Cortante",
+      "properties": "Versátil (1d10)",
+      "mastery": "Drenar",
+      "weight": "1,5 kg",
+      "cost": "15 PO"
+    },
+    {
+      "name": "Glaive",
+      "damage": "1d10 Cortante",
+      "properties": "Duas Mãos, Extensão, Pesada",
+      "mastery": "Garantido",
+      "weight": "3 kg",
+      "cost": "20 PO"
+    },
+    {
+      "name": "Lança de Montaria",
+      "damage": "1d10 Perfurante",
+      "properties": "Duas Mãos (a menos que montado), Extensão, Pesada",
+      "mastery": "Derrubar",
+      "weight": "3 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Lança Longa",
+      "damage": "1d10 Perfurante",
+      "properties": "Duas Mãos, Extensão, Pesada",
+      "mastery": "Empurrar",
+      "weight": "9 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Maça Estrela",
+      "damage": "1d8 Perfurante",
+      "properties": "—",
+      "mastery": "Drenar",
+      "weight": "2 kg",
+      "cost": "15 PO"
+    },
+    {
+      "name": "Machado de Batalha",
+      "damage": "1d8 Cortante",
+      "properties": "Versátil (1d10)",
+      "mastery": "Derrubar",
+      "weight": "2,5 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Machado Grande",
+      "damage": "1d12 Cortante",
+      "properties": "Duas Mãos, Pesada",
+      "mastery": "Trespassar",
+      "weight": "3,5 kg",
+      "cost": "30 PO"
+    },
+    {
+      "name": "Malho",
+      "damage": "2d6 Contundente",
+      "properties": "Duas Mãos, Pesada",
+      "mastery": "Derrubar",
+      "weight": "5 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Mangual",
+      "damage": "1d8 Contundente",
+      "properties": "—",
+      "mastery": "Drenar",
+      "weight": "1 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Martelo de Guerra",
+      "damage": "1d8 Contundente",
+      "properties": "Versátil (1d10)",
+      "mastery": "Empurrar",
+      "weight": "1 kg",
+      "cost": "15 PO"
+    },
+    {
+      "name": "Picareta de Guerra",
+      "damage": "1d8 Perfurante",
+      "properties": "Versátil (1d10)",
+      "mastery": "Drenar",
+      "weight": "1 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Rapieira",
+      "damage": "1d8 Perfurante",
+      "properties": "Acuidade",
+      "mastery": "Afligir",
+      "weight": "1 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Tridente",
+      "damage": "1d8 Perfurante",
+      "properties": "Arremesso (Alcance 6/18), Versátil (1d10)",
+      "mastery": "Derrubar",
+      "weight": "2 kg",
+      "cost": "5 PO"
+    }
+  ],
+  "martialRanged": [
+    {
+      "name": "Arco Longo",
+      "damage": "1d8 Perfurante",
+      "properties": "Duas Mãos, Munição (Alcance 45/180; Flecha), Pesada",
+      "mastery": "Lentidão",
+      "weight": "1 kg",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Besta de Mão",
+      "damage": "1d6 Perfurante",
+      "properties": "Leve, Munição (Alcance 9/36; Virote), Recarga",
+      "mastery": "Afligir",
+      "weight": "1,5 kg",
+      "cost": "75 PO"
+    },
+    {
+      "name": "Besta Pesada",
+      "damage": "1d10 Perfurante",
+      "properties": "Duas Mãos, Munição (Alcance 30/120; Virote), Pesada, Recarga",
+      "mastery": "Empurrar",
+      "weight": "9 kg",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Mosquete",
+      "damage": "1d12 Perfurante",
+      "properties": "Duas Mãos, Munição (Alcance 12/36; Bala), Recarga",
+      "mastery": "Lentidão",
+      "weight": "5 kg",
+      "cost": "500 PO"
+    },
+    {
+      "name": "Pistola",
+      "damage": "1d10 Perfurante",
+      "properties": "Munição (Alcance 9/27; Bala), Recarga",
+      "mastery": "Afligir",
+      "weight": "1,5 kg",
+      "cost": "250 PO"
+    },
+    {
+      "name": "Zarabatana",
+      "damage": "1 Perfurante",
+      "properties": "Munição (Alcance 7,5/30; Agulha), Recarga",
+      "mastery": "Afligir",
+      "weight": "0,5 kg",
+      "cost": "10 PO"
+    }
+  ],
+  "properties": {
+    "Acuidade": "Ao realizar um ataque com uma arma que possui Acuidade, utilize seu modificador de Força ou Destreza, à sua escolha, para as jogadas de ataque e dano.",
+    "Alcance": "Ao atacar um alvo além do alcance normal, você tem Desvantagem na jogada de ataque. Não é possível atacar um alvo além do alcance máximo.",
+    "Arremesso": "Você pode arremessá-la para realizar um ataque à distância. Se a arma for corpo a corpo, utilize o mesmo modificador de atributo para as jogadas de ataque e dano.",
+    "Duas Mãos": "Exige o uso de duas mãos ao atacar com ela.",
+    "Extensão": "Adiciona 1,5 metro ao seu alcance ao atacar com ela.",
+    "Leve": "Ao executar a ação Atacar... pode realizar um ataque adicional como uma Ação Bônus... sem adicionar o modificador de atributo ao dano.",
+    "Munição": "Você só pode usar uma arma com a propriedade Munição... se tiver munição disponível. Sacar a munição é parte do ataque.",
+    "Pesada": "Você tem Desvantagem em jogadas de ataque com uma arma Pesada se... (Corpo a Corpo/Força < 13 ou à Distância/Destreza < 13).",
+    "Recarga": "Você pode disparar apenas uma única peça de munição... ao executar uma ação, Ação Bônus ou Reação.",
+    "Versátil": "Uma arma Versátil pode ser usada com uma ou duas mãos... A arma causa esse dano [entre parênteses] quando usada com as duas mãos."
+  },
+  "masteries": {
+    "Afligir": "Se você atingir uma criatura... Vantagem em sua próxima jogada de ataque contra essa criatura antes do final do seu próximo turno.",
+    "Ágil": "Ao realizar o ataque adicional da propriedade Leve, você pode fazê-lo como parte da ação Atacar.",
+    "Derrubar": "Se você atingir... forçar a criatura a realizar uma salvaguarda de Constituição (CD 8 + mod + BP). Se falhar, fica Caído.",
+    "Drenar": "Se você atingir... essa criatura tem Desvantagem na próxima jogada de ataque dela antes do início do seu próximo turno.",
+    "Empurrar": "Se atingir... pode empurrá-la até 3 metros para longe de você se a criatura for Grande ou menor.",
+    "Garantido": "Se sua jogada de ataque com esta arma errar... você pode causar dano... igual ao modificador de atributo.",
+    "Lentidão": "Se você atingir... reduzir o Deslocamento da criatura atingida em 3 metros até o início do seu próximo turno.",
+    "Trespassar": "Se atingir com ataque corpo a corpo... realizar ataque contra segunda criatura a até 1,5 metro da primeira. Não adiciona modificador de dano."
+  }
+}

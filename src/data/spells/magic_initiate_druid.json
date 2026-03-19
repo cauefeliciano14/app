@@ -1,0 +1,474 @@
+[
+  {
+    "name": "Acudir os Moribundos",
+    "level": "Truque",
+    "school": "Necromancia",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "4,5 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Escolha uma criatura no alcance da magia que tenha 0 Pontos de Vida e não esteja morta. A criatura fica Estável."
+  },
+  {
+    "name": "Amizade Animal",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (um bocado de comida)",
+    "duration": "24 horas",
+    "description": "Escolha como alvo uma Fera à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. Se você ou um de seus aliados causar dano ao alvo, a magia encerra."
+  },
+  {
+    "name": "Arte Druídica",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Sussurrando para os espíritos da natureza, você cria um dos seguintes efeitos no alcance da magia.\nBrincar com Fogo. Você acende ou apaga uma vela, uma tocha ou uma fogueira.\nEfeito Sensorial. Você cria um efeito sensorial inofensivo, como folhas caindo, fadas dançantes espectrais, uma brisa suave, o som de um animal ou o leve odor de gambá. O efeito deve caber em um Cubo de 1,5 metro de lado.\nFlorescimento. Você instantaneamente faz uma flor desabrochar, uma vagem se abrir ou um botão de folha se abrir."
+  },
+  {
+    "name": "Bom Fruto",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (um ramo de visco)",
+    "duration": "24 horas",
+    "description": ""
+  },
+  {
+    "name": "Bordão Místico",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": "V, S, M (um ramo de visco)",
+    "duration": "1 minuto",
+    "description": "Um Cajado ou Clava que você está segurando é imbuído com o poder da natureza. Pela duração da magia, você pode usar seu atributo de conjuração em vez de Força para as jogadas de ataque e dano de ataques corpo a corpo com essa arma, e o dado de dano da arma se torna um d8. Se o ataque causar dano, ele pode ser de dano Energético ou do tipo de dano normal da arma (à sua escolha).\nA magia encerra se você a conjurar novamente ou se soltar a arma."
+  },
+  {
+    "name": "Chicote de Espinhos",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (o caule de uma planta espinhosa)",
+    "duration": "Instantânea",
+    "description": "Você cria um chicote semelhante a uma videira coberto de espinhos que ataca ao seu comando em direção a uma criatura no alcance da magia. Realize um ataque mágico corpo a corpo contra o alvo. Em caso de acerto, o alvo sofre 1d6 pontos de dano Perfurante e, se for Grande ou menor, você pode puxá-lo até 3 metros mais perto de você."
+  },
+  {
+    "name": "Criar Chamas",
+    "level": "Truque",
+    "school": "Invocação",
+    "classes": [
+      "Druida"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "10 minutos",
+    "description": "Uma chama bruxuleante surge em sua mão e permanece lá pela duração da magia. Enquanto estiver lá, a chama não emite calor, não queima nada, e emite Luz Plena em um raio de 6 metros e Meia-luz por mais 6 metros. A magia se encerra se você a conjurar novamente.\nAté que a magia termine, você pode executar uma ação Usar Magia para arremessar a chama em uma criatura ou objeto a até 18 metros de você. Realize um ataque mágico à distância. Em caso de acerto, o alvo sofre 1d8 pontos de dano Ígneo."
+  },
+  {
+    "name": "Criar ou Destruir Água",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (uma mistura de água e areia)",
+    "duration": "Instantânea",
+    "description": "Você faz uma das seguintes coisas:\nCriar Água. Você cria até 40 litros de água limpa no alcance da magia em um recipiente aberto. Como alternativa, a água cai como chuva em um Cubo de 9 metros de lado no alcance da magia, extinguindo chamas expostas na área.\nDestruir Água. Você destrói até 40 litros de água em um recipiente aberto no alcance da magia. Como alternativa, você dispersa uma névoa em um Cubo de 9 metros de lado no alcance da magia."
+  },
+  {
+    "name": "Curar Ferimentos",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Uma criatura que você toca recupera um número de Pontos de Vida igual a 2d8 mais seu modificador de atributo de conjuração."
+  },
+  {
+    "name": "Detectar Magia",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a presença de efeitos mágicos a até 9 metros de você. Se você sentir tais efeitos, pode executar a ação Usar Magia para ver uma aura fraca ao redor de qualquer criatura ou objeto visível na área que contém a magia, e se um efeito foi criado por uma magia, você descobre a escola dessa magia."
+  },
+  {
+    "name": "Detectar Veneno e Doença",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S, M (uma folha de teixo)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a localização de venenos, criaturas venenosas ou peçonhentas e contágios mágicos a até 9 metros de você. Você sente o tipo de veneno, criatura ou contágio em cada caso.\nA magia é bloqueada por 30 centímetros de pedra, terra ou madeira, 2,5 centímetros de metal ou uma folha fina de chumbo."
+  },
+  {
+    "name": "Elementalismo",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você exerce controle sobre os elementos, criando um dos seguintes efeitos no alcance da magia.\nConvocar Água. Você cria um jato de névoa fria que umedece levemente criaturas e objetos em um Cubo de 1,5 metro de lado. Como alternativa, você cria 1 xícara de água limpa em um recipiente aberto ou em uma superfície, e a água evapora em 1 minuto.\nConvocar Brisa. Você cria uma brisa forte o suficiente para ondular um tecido, mexer poeira, farfalhar folhas e fechar portas e persianas abertas, tudo em um Cubo de 1,5 metro de lado. Portas e persianas que estiverem sendo mantidas abertas por alguém ou alguma força não são afetadas.\nConvocar Fogo. Você cria uma fina nuvem de brasas inofensivas e fumaça colorida e perfumada em um Cubo de 1,5 metro de lados. Você escolhe a cor e o perfume, e as brasas podem acender velas, tochas ou lâmpadas nessa área. O cheiro da fumaça permanece por 1 minuto.\nConvocar Terra. Você cria uma fina camada de poeira ou areia que cobre superfícies em uma área quadrada de 1,5 metro de lado, ou faz com que uma única palavra apareça em sua caligrafia em um pedaço de terra ou areia.\nEsculpir Elemento. Você faz com que terra, areia, fogo, fumaça, névoa ou água que caiba em um Cubo de 30 centímetros de lado assuma uma forma rudimentar (como a de uma criatura) por 1 hora."
+  },
+  {
+    "name": "Emaranhar",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ],
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Plantas agarradoras brotam do chão em um quadrado de 6 metros de lado no alcance da magia. Pela duração da magia, essas plantas transformam o terreno em Terreno Difícil. Elas desaparecem quando a magia termina."
+  },
+  {
+    "name": "Enfeitiçar Pessoa",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Um Humanoide à sua vista e no alcance da magia realiza uma salvaguarda de Sabedoria. Ele tem Vantagem se você ou seus aliados estiverem lutando contra ele. Se falhar, o alvo tem a condição Enfeitiçado até que a magia termine ou até que você ou seus aliados causem dano a ele. A criatura Enfeitiçada é Amigável a você. Quando a magia termina, o alvo sabe que foi Enfeitiçado por você."
+  },
+  {
+    "name": "Faca de Gelo",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "S, M (uma gota de água ou um pedaço de gelo)",
+    "duration": "Instantânea",
+    "description": "Você cria um fragmento de gelo e o arremessa em uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Se o ataque for bem-sucedido, o alvo sofre 1d10 pontos de dano Perfurante. Independentemente de ter acertado ou não, o fragmento explode. O alvo e cada criatura a até 1,5 metro dele devem ser bem-sucedidos em uma salvaguarda de Destreza ou sofrem 2d6 pontos de dano Gélido."
+  },
+  {
+    "name": "Fagulha Estelar",
+    "level": "Truque",
+    "school": "Evocação",
+    "classes": [
+      "Bardo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você lança uma faísca de luz em uma criatura ou objeto no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, o alvo sofre 1d8 pontos de dano Radiante e, até o final do seu próximo turno, emite Meia-luz em um raio de 3 metros e não pode se beneficiar da condição Invisível.\nAprimoramento de Truque. O dano aumenta em 1d8 quando você atinge os níveis 5 (2d8), 11 (3d8) e 17 (4d8)."
+  },
+  {
+    "name": "Falar com Animais",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Druida",
+      "Guardião"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "10 minutos",
+    "description": "Pela duração da magia, você pode compreender e se comunicar verbalmente com Feras, e pode usar com elas qualquer uma das opções de perícia da ação Influenciar."
+  },
+  {
+    "name": "Fogo das Fadas",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "classes": [
+      "Bardo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Objetos em um Cubo de 6 metros de lado no alcance da magia são delineados por luz azul, verde ou violeta (à sua escolha). Cada criatura no Cubo também é delineada se falhar em uma salvaguarda de Destreza. Pela duração da magia, objetos e criaturas afetadas emitem Meia-Luz em um raio de 3 metros e não podem se beneficiar da condição Invisível.\nJogadas de ataque contra uma criatura ou objeto afetado têm Vantagem se o atacante puder vê-la."
+  },
+  {
+    "name": "Mensagem",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "S, M (um fio de cobre)",
+    "duration": "1 rodada",
+    "description": "Você aponta para uma criatura no alcance da magia e sussurra uma mensagem. Somente o alvo ouve a mensagem e pode responder em um sussurro que apenas você consegue ouvir."
+  },
+  {
+    "name": "Névoa Obscurecente",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você cria uma Esfera de névoa de 6 metros de raio centrada em um ponto no alcance da magia. A Esfera é Totalmente Obscurecida. Ela permanece pela duração da magia ou até que um vento forte (como um criado por Lufada de Vento) a disperse."
+  },
+  {
+    "name": "Onda Trovejante",
+    "level": "1º Círculo",
+    "school": "Evocação",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você libera uma onda de energia estrondosa. Cada criatura em um Cubo de 4,5 metros originado em você realiza uma salvaguarda de Constituição. Se falhar, uma criatura sofre 2d8 pontos de dano Trovejante e é empurrada a 3 metros de distância de você. Em caso de sucesso, uma criatura sofre apenas metade do dano.\nAlém disso, objetos soltos que estão totalmente dentro do Cubo são empurrados 3 metros para longe de você, e um estrondo trovejante é audível a até 90 metros."
+  },
+  {
+    "name": "Orientação",
+    "level": "Truque",
+    "school": "Adivinhação",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você toca uma criatura voluntária e escolhe uma perícia. Até que a magia termine, a criatura adiciona 1d4 a qualquer teste de atributo usando a perícia escolhida."
+  },
+  {
+    "name": "Palavra Curativa",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "18 metros",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Uma criatura à sua escolha, à sua vista e no alcance da magia recupera Pontos de Vida iguais a 2d4 mais seu modificador de atributo de conjuração."
+  },
+  {
+    "name": "Passos Largos",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma pitada de poeira)",
+    "duration": "1 hora",
+    "description": "Você toca uma criatura. O Deslocamento do alvo aumenta em 3 metros até que a magia termine."
+  },
+  {
+    "name": "Proteção Contra o Bem e o Mal",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Bruxo",
+      "Druida",
+      "Mago",
+      "Paladino"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (um pote de Água Benta no valor de 25 ou mais PO, que a magia consome)",
+    "duration": "Concentração, até 10 minutos",
+    "description": ""
+  },
+  {
+    "name": "Purificar Alimentos e Bebidas",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Paladino"
+    ],
+    "castingTime": "Ação ou Ritual",
+    "range": "3 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você remove veneno e podridão de alimentos e bebidas não mágicos em uma Esfera de 1,5 metro de raio centrada em um ponto no alcance da magia."
+  },
+  {
+    "name": "Rajada de Veneno",
+    "level": "Truque",
+    "school": "Necromancia",
+    "classes": [
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você projeta uma névoa tóxica em uma criatura no alcance da magia. Realize um ataque mágico à distância contra o alvo. Em caso de acerto, o alvo sofre 1d12 pontos de dano Venenoso.\nAprimoramento de Truque. O dano aumenta em 1d12 quando você atinge os níveis 5 (2d12), 11 (3d12) e 17 (4d12)."
+  },
+  {
+    "name": "Reparar",
+    "level": "Truque",
+    "school": "Transmutação",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "1 minuto",
+    "range": "Toque",
+    "components": "V, S, M (duas pedras-ímã)",
+    "duration": "Instantânea",
+    "description": "Essa magia repara uma única ruptura ou rasgo em um objeto que você tocar, como um elo de corrente quebrado, partes de uma chave partida, uma capa rasgada ou um odre furado. Se a ruptura ou rasgo não ultrapassar 30 centímetros em qualquer dimensão, ela é reparada sem deixar vestígios do dano anterior."
+  },
+  {
+    "name": "Resistência",
+    "level": "Truque",
+    "school": "Abjuração",
+    "classes": [
+      "Clérigo",
+      "Druida"
+    ],
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você toca uma criatura voluntária e escolhe um tipo de dano: Ácido, Contundente, Cortante, Elétrico, Gélido, Ígneo, Necrótico, Perfurante, Radiante, Trovejante ou Venenoso. Quando a criatura sofre dano do tipo escolhido antes que a magia termine, a criatura reduz o dano total sofrido em 1d4 pontos. Uma criatura pode se beneficiar desta magia apenas uma vez por turno."
+  },
+  {
+    "name": "Salto",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ],
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "",
+    "duration": "1 minuto",
+    "description": "Você toca uma criatura voluntária. Uma vez em cada um dos turnos dela até que a magia encerre, essa criatura pode saltar até 9 metros gastando 3 metros de movimento."
+  },
+  {
+    "name": "Trovão",
+    "level": "Truque",
+    "school": "Evocação",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Druida",
+      "Feiticeiro",
+      "Mago"
+    ],
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "S",
+    "duration": "Instantânea",
+    "description": "Cada criatura em uma Emanação de 1,5 metro originada em você deve ser bem-sucedida em uma salvaguarda de Constituição ou sofre 1d6 pontos de dano Trovejante. O som estrondoso da magia pode ser ouvido a até 30 metros de distância."
+  }
+]

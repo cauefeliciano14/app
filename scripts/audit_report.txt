@@ -1,0 +1,35 @@
+RELATÓRIO DE AUDITORIA DE MAGIAS
+Fonte: player_handbook_2024.docx vs JSONs extraídos
+Data: 2026-03-10
+
+
+======================================================================
+A) Magias nos JSONs não encontradas no docx
+======================================================================
+  - Imagem Silenciosa
+
+======================================================================
+B) Magias identificadas no docx mas ausentes do spells_all.json
+======================================================================
+  - Imagem Silenciosa pode criar ilusões mundanas e excêntricas
+  - Treinamento com Armadura
+
+======================================================================
+C) Escola divergente (JSON vs docx)
+======================================================================
+  Nenhuma divergência detectada.
+
+======================================================================
+D) Nível divergente (JSON vs docx)
+======================================================================
+  Nenhuma divergência detectada.
+
+======================================================================
+E) Nomes duplicados em spells_all.json
+======================================================================
+  Nenhum duplicado.
+
+======================================================================
+F) Completude das listas de Iniciado em Magia
+======================================================================
+  Todas as listas estão completas e corretas.

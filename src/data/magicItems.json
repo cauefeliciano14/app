@@ -1,0 +1,410 @@
+[
+  {
+    "name": "Poção de Cura",
+    "category": "Poção",
+    "rarity": "comum",
+    "attunement": null,
+    "description": "Você recupera 2d4 + 2 Pontos de Vida quando bebe esta poção. Beber ou administrar uma poção requer uma Ação Bônus.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Cura Superior",
+    "category": "Poção",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Você recupera 4d4 + 4 Pontos de Vida quando bebe esta poção.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Cura Maior",
+    "category": "Poção",
+    "rarity": "raro",
+    "attunement": null,
+    "description": "Você recupera 8d4 + 8 Pontos de Vida quando bebe esta poção.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Cura Suprema",
+    "category": "Poção",
+    "rarity": "muito raro",
+    "attunement": null,
+    "description": "Você recupera 10d4 + 20 Pontos de Vida quando bebe esta poção.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Heroísmo",
+    "category": "Poção",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Por 1 hora após beber esta poção, você ganha 10 Pontos de Vida temporários que persistem pela duração. Durante esse tempo, você está sob o efeito da magia Abençoar.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Resistência",
+    "category": "Poção",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Quando você bebe esta poção, ganha resistência a um tipo de dano por 1 hora. O tipo de dano é determinado pelo DJ.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Escalada",
+    "category": "Poção",
+    "rarity": "comum",
+    "attunement": null,
+    "description": "Quando você bebe esta poção, ganha uma Velocidade de Escalada igual à sua Velocidade por 1 hora.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Respiração Aquática",
+    "category": "Poção",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Você pode respirar debaixo d'água por 1 hora após beber esta poção.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Velocidade",
+    "category": "Poção",
+    "rarity": "muito raro",
+    "attunement": null,
+    "description": "Quando você bebe esta poção, fica sob o efeito da magia Rapidez por 1 minuto (sem necessidade de Concentração).",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Invisibilidade",
+    "category": "Poção",
+    "rarity": "muito raro",
+    "attunement": null,
+    "description": "Esta poção torna você Invisível por 1 hora. Qualquer coisa que você estiver usando ou carregando fica Invisível enquanto estiver em sua posse.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Voar",
+    "category": "Poção",
+    "rarity": "muito raro",
+    "attunement": null,
+    "description": "Quando você bebe esta poção, ganha uma Velocidade de Voo de 18 metros por 1 hora.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Vitalidade",
+    "category": "Poção",
+    "rarity": "muito raro",
+    "attunement": null,
+    "description": "Quando você bebe esta poção, seus Pontos de Vida atuais e máximos aumentam em 2d6 + 4 por 24 horas.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Força de Gigante da Colina",
+    "category": "Poção",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Quando você bebe esta poção, sua Força passa a ser 21 por 1 hora. Não tem efeito se sua Força já for igual ou maior.",
+    "baseItem": null
+  },
+  {
+    "name": "Poção de Crescimento",
+    "category": "Poção",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Quando você bebe esta poção, fica sob o efeito do componente de aumento da magia Ampliar/Reduzir por 1d4 horas.",
+    "baseItem": null
+  },
+  {
+    "name": "Anel de Proteção",
+    "category": "Anel",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Você ganha +1 de bônus à CA e salvaguardas enquanto usa este anel.",
+    "baseItem": null
+  },
+  {
+    "name": "Anel de Resistência",
+    "category": "Anel",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Você tem resistência a um tipo de dano enquanto usa este anel. O tipo é determinado pelo DJ.",
+    "baseItem": null
+  },
+  {
+    "name": "Anel de Escudamento de Mente",
+    "category": "Anel",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Você está imune ao efeito Enfeitiçado e a qualquer magia que permita a outra criatura ler seus pensamentos, determinar se você está mentindo ou saber seu tipo de criatura.",
+    "baseItem": null
+  },
+  {
+    "name": "Anel de Salto",
+    "category": "Anel",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa este anel, você pode conjurar a magia Salto sobre si mesmo como uma Ação Bônus, sem necessidade de componentes de magia.",
+    "baseItem": null
+  },
+  {
+    "name": "Anel de Nado",
+    "category": "Anel",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Você tem uma Velocidade de Natação de 12 metros enquanto usa este anel.",
+    "baseItem": null
+  },
+  {
+    "name": "Anel de Queda de Pena",
+    "category": "Anel",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Quando você cai enquanto usa este anel, você desce 18 metros por rodada e não sofre dano por queda.",
+    "baseItem": null
+  },
+  {
+    "name": "Anel de Influência Animal",
+    "category": "Anel",
+    "rarity": "raro",
+    "attunement": "Requer sintonização",
+    "description": "Este anel tem 3 cargas. Você pode usar uma ação e gastar 1 carga para conjurar Amizade Animal, Falar com Animais ou Medo (apenas afetando Bestas). O anel recupera 1d3 cargas gastas diariamente ao amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Bastão de Encantamento",
+    "category": "Bastão",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um conjurador arcano",
+    "description": "Este bastão pode ser usado como foco arcano. Ele tem 10 cargas para as seguintes propriedades: Absorver Magias e conjurar magias usando cargas. Recupera 1d6 + 4 cargas gastas diariamente ao amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Bastão de Força",
+    "category": "Bastão",
+    "rarity": "raro",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto segura este bastão, sua Força passa a ser 24. O bastão pode ser usado como bastão mágico com +3 de bônus nas jogadas de ataque e de dano.",
+    "baseItem": null
+  },
+  {
+    "name": "Bastão de Defesa",
+    "category": "Bastão",
+    "rarity": "raro",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto segura este bastão, você tem +1 de bônus à CA e salvaguardas. O bastão tem 10 cargas para propriedades de defesa como Escudo e Disco Flutuante.",
+    "baseItem": null
+  },
+  {
+    "name": "Pergaminho de Magia",
+    "category": "Pergaminho",
+    "rarity": "varia",
+    "attunement": null,
+    "description": "Um pergaminho de magia contém as palavras de uma única magia. Um conjurador que tiver a magia em sua lista pode ler o pergaminho e conjurar a magia sem precisar gastar um espaço de magia. A raridade depende do nível da magia (Truque = comum, 1º = comum, 2º–3º = incomum, 4º–5º = raro, 6º–8º = muito raro, 9º = lendário).",
+    "baseItem": null
+  },
+  {
+    "name": "Cajado de Cura",
+    "category": "Cajado",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um Bardo, Clérigo ou Druida",
+    "description": "Este cajado tem 10 cargas. Enquanto o segura, você pode usar uma ação e gastar 1 ou mais cargas para conjurar uma das seguintes magias: Curar Ferimentos (1 carga por nível de magia, máximo 4), Palavra Curativa (2 cargas), Oração de Cura em Massa (5 cargas). O cajado recupera 1d6 + 4 cargas diariamente ao amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Cajado do Poder",
+    "category": "Cajado",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um conjurador arcano",
+    "description": "Este cajado pode ser usado como foco arcano. Ele concede +2 de bônus às jogadas de ataque de magia, à CD de salvaguarda de magia e à CA. O cajado tem 20 cargas para diversas magias.",
+    "baseItem": null
+  },
+  {
+    "name": "Cajado da Floresta",
+    "category": "Cajado",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um Druida",
+    "description": "Este cajado pode ser fincado na terra para tornar-se uma árvore viva. Tem 10 cargas para conjurar magias como Animar Plantas, Falar com Plantas e Caminhar pelas Árvores.",
+    "baseItem": null
+  },
+  {
+    "name": "Cajado do Trovão e do Relâmpago",
+    "category": "Cajado",
+    "rarity": "muito raro",
+    "attunement": "Requer sintonização",
+    "description": "Este cajado pode ser usado como cajado mágico com +2 de bônus. Tem as propriedades: Trovão, Relâmpago, Trovão e Relâmpago, Atroar e Controlar o Tempo. Cada propriedade pode ser usada uma vez por amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Varinha de Mísseis Mágicos",
+    "category": "Varinha",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Esta varinha tem 7 cargas. Você pode usar uma ação e gastar 1 a 3 cargas para conjurar Mísseis Mágicos. Usar 1 carga cria 3 mísseis, usando 2 cria 5 mísseis, usando 3 cria 7 mísseis. A varinha recupera 1d6 + 1 cargas gastas diariamente ao amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Varinha de Bolas de Fogo",
+    "category": "Varinha",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um conjurador arcano",
+    "description": "Esta varinha tem 7 cargas. Você pode usar uma ação e gastar 1 a 3 cargas para conjurar Bola de Fogo (CD 15). Usar 1 carga equivale a 3º nível, 2 cargas = 4º, 3 cargas = 5º. Recupera 1d6 + 1 cargas diariamente ao amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Varinha de Detecção de Magia",
+    "category": "Varinha",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Esta varinha tem 3 cargas. Enquanto a segura, você pode gastar 1 carga para conjurar Detectar Magia. A varinha recupera 1d3 cargas gastas diariamente ao amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Varinha de Paralisia",
+    "category": "Varinha",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um conjurador arcano",
+    "description": "Esta varinha tem 7 cargas. Você pode usar uma ação e gastar 1 carga para apontar a varinha a uma criatura visível em até 18 metros. O alvo deve ser bem-sucedido em uma salvaguarda de Constituição CD 15 ou ficará Paralisado por 1 minuto.",
+    "baseItem": null
+  },
+  {
+    "name": "Varinha de Raios",
+    "category": "Varinha",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um conjurador arcano",
+    "description": "Esta varinha tem 7 cargas. Você pode usar uma ação e gastar 1 a 3 cargas para conjurar Raio (CD 15). Cada carga adicional adiciona um raio extra ao feitiço. Recupera 1d6 + 1 cargas diariamente ao amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Varinha de Gelo",
+    "category": "Varinha",
+    "rarity": "raro",
+    "attunement": "Requer sintonização por um conjurador arcano",
+    "description": "Esta varinha tem 7 cargas. Você pode usar uma ação e gastar 1 carga para criar um raio de frio congelante em direção a uma criatura visível em até 18 metros (CD 15 Constituição ou Paralisado por 1 minuto).",
+    "baseItem": null
+  },
+  {
+    "name": "Botas de Velocidade",
+    "category": "Maravilhoso",
+    "rarity": "raro",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa estas botas, você pode usar uma Ação Bônus para clicar os saltos, dobrando sua Velocidade e não provocando ataques de oportunidade por 10 minutos. Funciona uma vez por amanhecer.",
+    "baseItem": null
+  },
+  {
+    "name": "Botas Élficas",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Seus passos não fazem barulho enquanto você usa estas botas. Você tem vantagem em testes de Destreza (Furtividade) que envolvam se mover silenciosamente.",
+    "baseItem": null
+  },
+  {
+    "name": "Capa Élfica",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa esta capa com o capuz levantado, testes de Sabedoria (Percepção) para ver você têm desvantagem e você tem vantagem em testes de Destreza (Furtividade).",
+    "baseItem": null
+  },
+  {
+    "name": "Capa de Resistência",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Você tem vantagem em salvaguardas enquanto usa esta capa.",
+    "baseItem": null
+  },
+  {
+    "name": "Mochila de Guardar",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Esta bolsa tem um espaço interno maior do que sua aparência externa sugere. A bolsa pode conter até 500 quilos sem exceder 15 kg. Retirar um item da bolsa requer uma ação.",
+    "baseItem": null
+  },
+  {
+    "name": "Manto de Proteção",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Você ganha +1 de bônus à CA e salvaguardas enquanto usa este manto.",
+    "baseItem": null
+  },
+  {
+    "name": "Amuleto de Saúde",
+    "category": "Maravilhoso",
+    "rarity": "raro",
+    "attunement": "Requer sintonização",
+    "description": "Sua Constituição passa a ser 19 enquanto usa este amuleto. Não tem efeito se sua Constituição já for 19 ou maior.",
+    "baseItem": null
+  },
+  {
+    "name": "Cinto de Força de Gigante da Colina",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa este cinto, sua Força passa a ser 21. Não tem efeito se sua Força já for igual ou maior.",
+    "baseItem": null
+  },
+  {
+    "name": "Luvas de Natação e Escalada",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa estas luvas, você tem Velocidade de Natação e de Escalada iguais à sua Velocidade de caminhada.",
+    "baseItem": null
+  },
+  {
+    "name": "Luvas de Ogro",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa estas luvas, sua Força passa a ser 19. Não tem efeito se sua Força já for igual ou maior.",
+    "baseItem": null
+  },
+  {
+    "name": "Chapéu de Disfarce",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa este chapéu, você pode usar uma ação para conjurar Disfarçar-se à vontade. A magia termina se você retirar o chapéu.",
+    "baseItem": null
+  },
+  {
+    "name": "Óculos de Noite",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Enquanto usa estes óculos, você tem visão no escuro com alcance de 18 metros. Se você já tem visão no escuro, o alcance aumenta em 18 metros.",
+    "baseItem": null
+  },
+  {
+    "name": "Headband de Intelecto",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": "Requer sintonização",
+    "description": "Sua Inteligência passa a ser 19 enquanto usa esta faixa de cabeça. Não tem efeito se sua Inteligência já for 19 ou maior.",
+    "baseItem": null
+  },
+  {
+    "name": "Penas Iridescentes",
+    "category": "Maravilhoso",
+    "rarity": "incomum",
+    "attunement": null,
+    "description": "Esta pequena pena pode ser usada para conjurar Voar sobre si mesmo uma vez. Após ser usada, a pena se desfaz.",
+    "baseItem": null
+  },
+  {
+    "name": "Bracelete de Defesa",
+    "category": "Maravilhoso",
+    "rarity": "raro",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto usa este bracelete, você tem +2 de bônus à CA se não estiver usando armadura nem escudo.",
+    "baseItem": null
+  },
+  {
+    "name": "Pedra Ioun de Absorção",
+    "category": "Maravilhoso",
+    "rarity": "muito raro",
+    "attunement": "Requer sintonização",
+    "description": "Enquanto esta pedra orbita sua cabeça, ela pode absorver magias de 4º nível ou menor lançadas por outras criaturas (como Absorver Magias). Uma vez que absorveu 20 níveis de magia, perde seu poder.",
+    "baseItem": null
+  }
+]

@@ -1,0 +1,993 @@
+[
+  {
+    "name": "Alarme",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "especial": "R, M",
+    "castingTime": "1 minuto ou Ritual",
+    "range": "9 metros",
+    "components": "V, S, M (um sino e um fio de prata)",
+    "duration": "8 horas",
+    "description": "Você define um alarme contra intrusão. Escolha uma porta, uma janela ou uma área no alcance da magia que não seja maior do que um Cubo de 6 metros de lados. Até que a magia termine, um alarme o avisa sempre que uma criatura tocar ou entrar na área protegida. Ao conjurar a magia, você pode designar criaturas que não disparam o alarme. Você também escolhe se o alarme é audível ou mental:\nAlarme Mental. Você é alertado por um bipe mental se estiver a menos de 1,5 quilômetro da área protegida. Este bipe o acorda se você estiver dormindo.",
+    "classes": [
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Amizade Animal",
+    "level": "1º Círculo",
+    "school": "Encantamento",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (um bocado de comida)",
+    "duration": "24 horas",
+    "description": "Escolha como alvo uma Fera à sua vista e no alcance da magia. O alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. Se você ou um de seus aliados causar dano ao alvo, a magia encerra.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Bom Fruto",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (um ramo de visco)",
+    "duration": "24 horas",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Curar Ferimentos",
+    "level": "1º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Uma criatura que você toca recupera um número de Pontos de Vida igual a 2d8 mais seu modificador de atributo de conjuração.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Detectar Magia",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, R",
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a presença de efeitos mágicos a até 9 metros de você. Se você sentir tais efeitos, pode executar a ação Usar Magia para ver uma aura fraca ao redor de qualquer criatura ou objeto visível na área que contém a magia, e se um efeito foi criado por uma magia, você descobre a escola dessa magia.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Detectar Veneno e Doença",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S, M (uma folha de teixo)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Pela duração da magia, você sente a localização de venenos, criaturas venenosas ou peçonhentas e contágios mágicos a até 9 metros de você. Você sente o tipo de veneno, criatura ou contágio em cada caso.\nA magia é bloqueada por 30 centímetros de pedra, terra ou madeira, 2,5 centímetros de metal ou uma folha fina de chumbo.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Emaranhar",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Plantas agarradoras brotam do chão em um quadrado de 6 metros de lado no alcance da magia. Pela duração da magia, essas plantas transformam o terreno em Terreno Difícil. Elas desaparecem quando a magia termina.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Falar com Animais",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "especial": "R",
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "10 minutos",
+    "description": "Pela duração da magia, você pode compreender e se comunicar verbalmente com Feras, e pode usar com elas qualquer uma das opções de perícia da ação Influenciar.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Golpe Constritor",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação Bônus, que você realiza imediatamente após atingir uma criatura com uma arma",
+    "range": "Pessoal",
+    "components": "V",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Ao acertar o alvo, vinhas agarradoras aparecem nele e ele realiza uma salvaguarda de Força. Uma criatura Grande ou maior tem Vantagem nesta salvaguarda. Se falhar, o alvo está com a condição Contido até que a magia termine. Em caso de sucesso, as videiras murcham e a magia se encerra.\nEnquanto Contido desse modo, o alvo sofre 1d6 pontos de dano Perfurante no início de cada um dos turnos dele. O alvo ou uma criatura ao alcance dele pode executar uma ação para realizar um teste de Força (Atletismo) contra a CD para evitar sua magia. Em caso de sucesso, as videiras desaparecem.",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Marca do Predador",
+    "level": "1º Círculo",
+    "school": "Adivinhação",
+    "especial": "C",
+    "castingTime": "Ação Bônus",
+    "range": "27 metros",
+    "components": "V",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você marca magicamente como sua presa uma criatura à sua vista e no alcance da magia. Até que a magia termine, você causa 1d6 pontos de dano Energético adicionais ao alvo sempre que o acertar com uma jogada de ataque. Você também tem Vantagem em qualquer teste de Sabedoria (Percepção ou Sobrevivência) que realizar para encontrá-lo.\nSe o alvo é reduzido a 0 Pontos de Vida antes que esta magia termine, você pode executar uma ação Bônus para mover a marca para uma nova criatura à sua vista e no alcance da magia.",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Névoa Obscurecente",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você cria uma Esfera de névoa de 6 metros de raio centrada em um ponto no alcance da magia. A Esfera é Totalmente Obscurecida. Ela permanece pela duração da magia ou até que um vento forte (como um criado por Lufada de Vento) a disperse.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Passos Largos",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma pitada de poeira)",
+    "duration": "1 hora",
+    "description": "Você toca uma criatura. O Deslocamento do alvo aumenta em 3 metros até que a magia termine.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Salto",
+    "level": "1º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "",
+    "duration": "1 minuto",
+    "description": "Você toca uma criatura voluntária. Uma vez em cada um dos turnos dela até que a magia encerre, essa criatura pode saltar até 9 metros gastando 3 metros de movimento.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Saraivada de Espinhos",
+    "level": "1º Círculo",
+    "school": "Invocação",
+    "especial": "—",
+    "castingTime": "Ação Bônus, que você realiza imediatamente após atingir uma criatura com um ataque com arma à Distância",
+    "range": "Pessoal",
+    "components": "V",
+    "duration": "Instantânea",
+    "description": "Ao atingir uma criatura, essa magia faz surgir uma chuva de espinhos a partir da sua arma à distância ou munição. O alvo e cada criatura em um raio de 1,5 metro devem realizar uma salvaguarda de Destreza, sofrendo 1d10 pontos de dano perfurante se falharem ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Aprimorar Atributo",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (pelo ou uma pena)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você toca uma criatura e escolhe Força, Destreza, Inteligência, Sabedoria ou Carisma. Pela duração da magia, o alvo tem Vantagem nos testes de atributo usando o atributo escolhido.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Arma Mágica",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Você toca uma arma não-mágica. Até que a magia encerre, essa arma se torna uma arma mágica com bônus de +1 para jogadas de ataque e dano. A magia encerra se você a conjurar novamente.\nUsando um Espaço de Magia de Círculo Superior. O bônus aumenta para +2 com um espaço de magia de 3º–5º círculo. O bônus aumenta para +3 com um espaço de magia de 6º círculo ou superior.",
+    "classes": [
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Auxílio",
+    "level": "2º Círculo",
+    "school": "Abjuração",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "V, S, M (uma tira de pano branco)",
+    "duration": "8 horas",
+    "description": "Escolha até três criaturas no alcance da magia. Os Pontos de Vida máximos e os Pontos de Vida atuais de cada alvo aumentam em 5 pela duração da magia.\nUsando um Espaço de Magia de Círculo Superior. Os Pontos de Vida de cada alvo aumentam em 5 para cada círculo de espaço de magia acima de 2.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Cordão de Flechas",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma trança ornamental)",
+    "duration": "8 horas",
+    "description": "Toque até quatro Flechas ou Virotes não mágicas e finque-os no chão em seu espaço. Até que a magia termine, a munição não pode ser retirada fisicamente. Sempre que uma criatura que não seja você entrar em um espaço a até 9 metros da munição pela primeira vez ou terminar o turno dela lá, uma das peças de munição voa para atingi-la. A criatura deve ser bem-sucedida em uma salvaguarda de Destreza ou sofre 2d4 pontos de dano Perfurante. A munição é então destruída. A magia termina quando nenhuma munição permanecer fincada no chão.\nAo conjurar esta magia, você pode designar quaisquer criaturas que escolher, e a magia as ignora.",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Crescer Espinhos",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (sete espinhos)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Do solo, em uma Esfera de 6 metros de raio centrada em um ponto no alcance da magia, brotam estacas e espinhos duros. A área se torna Terreno Difícil pela duração da magia. Quando uma criatura se move para dentro ou na área da magia, ela sofre 2d4 pontos de dano Perfurante por cada 1,5 metro que percorre.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Encontrar Armadilhas",
+    "level": "2º Círculo",
+    "school": "Adivinhação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você sente qualquer armadilha à sua vista e no alcance da magia. Uma armadilha, para o propósito desta magia, inclui qualquer objeto ou mecanismo que tenha sido criado para causar dano ou outro perigo. Assim, a magia sentiria a magia Alarme ou Glifo de Proteção ou uma armadilha mecânica, mas não revelaria uma fraqueza natural no chão, um teto instável ou um sumidouro escondido.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Invocar Fera",
+    "level": "2º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S, M (uma pluma, tufo de pele e rabo de peixe dentro de uma bolota dourada no valor de 200 ou mais PO)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você invoca um Espírito Bestial. Ele se manifesta em um espaço desocupado à sua vista e no alcance da magia e usa o bloco de estatísticas do Espírito Bestial. Ao conjurar a magia, escolha um ambiente: Água, Ar ou Terra. A criatura se assemelha a um animal à sua escolha que é nativo do ambiente escolhido, o que determina certos detalhes no bloco de estatísticas da criatura. A criatura desaparece ao ser reduzida a 0 Pontos de Vida ou quando a magia termina.\nA criatura é uma aliada sua e de seus aliados. Em combate, ela compartilha sua contagem de Iniciativa, mas o turno dela é imediatamente após o seu. Ele obedece aos seus comandos verbais (nenhuma ação é necessária). Se você não emitir nenhum, ela executa a ação Esquivar e usa o movimento dela para evitar o perigo.\nUsando um Espaço de Magia de Círculo Superior. Use o círculo do espaço de magia para o círculo da magia no bloco de estatísticas.\nEspírito Bestial\nFera Pequena, Neutra\nCA 11 + o círculo da magia\nPV 20 (apenas Ar) ou 30 (apenas Água e Terra) + 5 para cada círculo de magia acima de 2\nDeslocamento 9 m; Escalada 9 m (Apenas Terra); Natação 9 m (Apenas água); Voo 18 m (Apenas Ar)\nMod\nSG\nMod\nSG\nMod\nSG\nFor\n18\n+4\n+4\nDes\n11\n+0\n+0\nCon\n16\n+3\n+3\nInt\n4\n-3\n-3\nSab\n14\n+2\n+2\nCar\n5\n-3\n-3\nSentidos: Visão no Escuro 18 m, Percepção Passiva 12\nIdiomas: Compreende os idiomas que você fala\nND Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)\nTraços\nRespirar na Água (Apenas Água). O espírito só pode respirar debaixo d'água.\nSobrevoo (Apenas Ar). O espírito não provoca Ataques de Oportunidade quando voa para fora do alcance de um inimigo.\nTáticas de Grupo (Apenas Água e Terra). O espírito tem Vantagem em uma jogada de ataque contra uma criatura se pelo menos um dos aliados do espírito estiver a até 1,5 metro da criatura e o aliado não tem a condição Incapacitado.\nAções\nAtaques Múltiplos. O espírito realiza um número de ataques de Dilacerar igual à metade do círculo da magia (arredondado para baixo).",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Localizar Animais ou Plantas",
+    "level": "2º Círculo",
+    "school": "Adivinhação",
+    "especial": "R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S, M (pelo de um cão de caça)",
+    "duration": "Instantânea",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Localizar Objeto",
+    "level": "2º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (um galho bifurcado)",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Descreva ou nomeie um objeto que você conheça bem. Você descobre a direção e a localização do objeto se ele estiver a até 300 metros de você. Se o objeto estiver se movendo, você sabe em que direção.\nA magia pode localizar um objeto específico que você conheça se você o tiver visto de perto — a até 9 metros — ao menos uma vez. Se preferir, a magia pode localizar o objeto mais próximo de um tipo específico, como um certo tipo de traje, joias, mobília, ferramentas ou armas.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Lufada de Vento",
+    "level": "2º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (a semente de um legume)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você sopra uma Linha com um vento forte de 18 metros de comprimento e 3 metros de largura em uma direção à sua escolha pela duração da magia. Cada criatura na Linha deve ser bem-sucedida em uma salvaguarda de Força ou é empurrada 4,5 metros para longe de você em uma direção seguindo a Linha. Uma criatura que termine o turno na Linha deve realizar a mesma salvaguarda.\nQualquer criatura na Linha deve gastar 3 metros de movimento para cada 1,5 metro que se move ao se aproximar de você.\nA lufada dispersa gás ou vapor e extingue velas e chamas desprotegidas similares na área. Isso faz com que as chamas protegidas, como as de lanternas, dancem descontroladamente e possuam 50% de chance de serem extinguidas.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Mensageiro Animal",
+    "level": "2º Círculo",
+    "school": "Encantamento",
+    "especial": "R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "9 metros",
+    "components": "V, S, M (um bocado de comida)",
+    "duration": "24 horas",
+    "description": "Uma Besta Minúscula à sua escolha à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Carisma, ou ela tenta entregar uma mensagem por você (se o Nível de Desafio do alvo não for 0, ele é automaticamente bem-sucedido). Você especifica um local que visitou e um destinatário que corresponda a uma descrição geral, como \"uma pessoa vestida com o uniforme da guarda da cidade\" ou \"um anão ruivo usando um chapéu pontudo\". Você também comunica uma mensagem de até vinte e cinco palavras. A Fera viaja pela duração da magia em direção ao local especificado, cobrindo cerca de 40 quilômetros a cada 24 horas ou 80 quilômetros se a Fera puder voar.\nQuando a Fera chega, ela entrega sua mensagem à criatura que você descreveu, imitando sua comunicação. Se a Fera não chegar ao seu destino antes que a magia termine, a mensagem é perdida e a Besta retorna para onde você conjurou a magia.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Passo Sem Rastro",
+    "level": "2º Círculo",
+    "school": "Abjuração",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (cinzas de ramo de visco queimado)",
+    "duration": "Concentração, até 1 hora",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Pele-Casca",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "",
+    "duration": "1 hora",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Proteção Contra Veneno",
+    "level": "2º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Restauração Menor",
+    "level": "2º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Ação Bônus",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Sentido Feral",
+    "level": "2º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, R",
+    "castingTime": "Ação ou Ritual",
+    "range": "Toque",
+    "components": "S",
+    "duration": "Concentração, até 1 hora",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Silêncio",
+    "level": "2º Círculo",
+    "school": "Ilusão",
+    "especial": "C, R",
+    "castingTime": "Ação ou Ritual",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Visão no Escuro",
+    "level": "2º Círculo",
+    "school": "Transmutação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma cenoura seca)",
+    "duration": "8 horas",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Arma Elemental",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "Uma arma não-mágica que você toca se torna uma arma mágica. Escolha um dos seguintes tipos de dano: Ácido, Elétrico, Gélido, Ígneo ou Trovejante. Pela duração da magia, a arma tem um bônus de +1 para jogadas de ataque e causa 1d4 pontos de dano adicional do tipo escolhido quando atinge.\nUsando um Espaço de Magia de Círculo Superior. Se você usar um espaço de magia de 5º ou 6º círculo, o bônus nas jogadas de ataque aumenta para +2, e o dano adicional aumenta para 2d4. Se você usar um espaço de magia de 7º círculo ou superior, o bônus aumenta para +3 e o dano adicional aumenta para 3d4.",
+    "classes": [
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Caminhar Sobre as Águas",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "9 metros",
+    "components": "V, S, M (um pedaço de cortiça)",
+    "duration": "1 hora",
+    "description": "Esta magia concede a capacidade de se mover através de qualquer superfície líquida — como ácido, água, areia movediça, lama, lava ou neve — como se fosse um solo sólido inofensivo (criaturas que cruzam a lava derretida ainda podem sofrer dano devido ao calor). Até dez criaturas voluntárias à sua escolha no alcance da magia recebem essa habilidade pela duração da magia.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Convocar Feérico",
+    "level": "3º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "ama Ação",
+    "range": "27 metros",
+    "components": "V, S, M (uma flor dourada no valor de 300 ou mais PO)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você invoca um Espírito Feérico. Ele se manifesta em um espaço desocupado à sua vista e no alcance da magia e usa o bloco de estatísticas do Espírito Feérico. Ao conjurar a magia, escolha um humor: Alegre, Enfurecido ou Malandro. A criatura se assemelha a uma criatura Feérica à sua escolha definida pelo humor escolhido, o que determina certos detalhes no bloco de estatísticas da criatura. A criatura desaparece se reduzida a 0 Pontos de Vida ou quando a magia termina.\nA criatura é uma aliada sua e de seus aliados. Em combate, ela compartilha sua contagem de Iniciativa, mas o turno dela é imediatamente após o seu. Ela obedece aos seus comandos verbais (nenhuma ação é necessária). Se você não emitir nenhum, ela executa a ação Esquivar e usa o movimento dela para evitar o perigo.\nUsando um Espaço de Magia de Círculo Superior. Use o círculo do espaço de magia para o círculo da magia no bloco de estatísticas.\nEspírito Feérico\nFeérico Pequeno, Neutro\nCA 12 + o círculo da magia\nPV 30 + 10 para cada círculo de magia acima de 3\nDeslocamento 9 m, Voo 9 m\nMod\nSG\nMod\nSG\nMod\nSG\nFor\n13\n+1\n+1\nDes\n16\n+3\n+3\nCon\n14\n+2\n+2\nInt\n14\n+2\n+2\nSab\n11\n+0\n+0\nCar\n16\n+3\n+3\nImunidades Enfeitiçado\nSentidos Visão no Escuro 18 m, Percepção Passiva 10\nIdiomas Silvestre, compreende os idiomas que você fala\nND Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)\nAções\nAtaques Múltiplos. O espírito realiza um número de ataques com Lâmina Feérica igual à metade do círculo da magia (arredondado para baixo).\nLâmina Feérica. Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 3d6 + 3 + o círculo da magia pontos de dano Energético.\nAções Bônus\nPasso Feérico. O espírito se teleporta magicamente até 9 metros para um espaço desocupado à vista dele. Em seguida, ocorre um dos seguintes efeitos, com base no humor escolhido para o espírito:\nAlegre. Salvaguarda de Sabedoria: CD é igual a CD para evitar sua magia, uma criatura à vista do espírito e a até 3 metros dele. Falha: O alvo fica Enfeitiçado por você e pelo espírito por 1 minuto ou até que o alvo sofra qualquer dano.\nEnfurecido. O espírito tem Vantagem na próxima jogada de ataque que realizar antes do final deste turno.",
+    "classes": [
+      "Bruxo",
+      "Druida",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Crescimento de Plantas",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação (Crescimento Excessivo) ou 8 horas (Fertilização)",
+    "range": "45 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Esta magia canaliza vitalidade para as plantas. O tempo de conjuração que você usa determina se a magia tem o efeito Crescimento Excessivo ou Fertilização, apresentados a seguir.\nCrescimento Excessivo. Escolha um ponto no alcance da magia. Todas as plantas normais em uma Esfera de 30 metros de raio centrada nesse ponto tornam-se espessas e crescem. Uma criatura que se move por essa área deve gastar 4 metros de deslocamento para cada 1 metro que se move. Você pode anular o efeito em uma ou mais áreas de qualquer tamanho dentro da área da magia.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Dissipar Magia",
+    "level": "3º Círculo",
+    "school": "Abjuração",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Escolha uma criatura, objeto ou efeito mágico no alcance da magia. Qualquer magia ativa de 3º círculo ou inferior no alvo é encerrada. Para cada magia ativa de 4º círculo ou superior no alvo, realize um teste de atributo usando seu atributo de conjuração (CD 10 mais o círculo da magia alvo). Em caso de sucesso, a magia se encerra.\nUsando um Espaço de Magia de Círculo Superior. Você encerra automaticamente uma magia no alvo se o círculo da magia for igual ou inferior ao círculo do espaço de magia que você usa.",
+    "classes": [
+      "Bardo",
+      "Bruxo",
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Falar com Plantas",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "10 minutos",
+    "description": "Você imbuí plantas em uma Emanação imóvel de 9 metros com razão e intelecto limitado, permitindo que elas se comuniquem com você e sigam seus comandos simples. Você pode questionar as plantas sobre eventos na área da magia nas últimas 24 horas, obtendo informações sobre criaturas que passaram, clima e outras circunstâncias.\nAlém disso, você pode transformar Terreno Difícil causado pelo crescimento vegetal (como moitas e vegetação densa) em terreno comum pela duração da magia. Como alternativa, você pode transformar terreno comum onde há plantas em Terreno Difícil, também pela duração da magia.\nA magia não permite que as plantas se desloquem, mas elas podem mover seus galhos, cipós e caules para você.",
+    "classes": [
+      "Bardo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Flecha Relâmpago",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "—",
+    "castingTime": "Ação Bônus, que você realiza imediatamente após atingir ou errar um alvo com um ataque à distância usando uma arma",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Quando seu ataque atinge ou erra o alvo, a arma ou munição que você está usando se transforma em um relâmpago. Em vez de sofrer qualquer dano ou outros efeitos do ataque, o alvo sofre 4d8 pontos de dano Elétrico em um acerto ou metade desse dano em um erro. Cada criatura em um raio de 3 metros do alvo deve então realizar uma salvaguarda de Destreza, sofrendo 2d8 pontos de dano Elétrico se falhar ou metade desse dano em caso de sucesso.\nA arma ou munição retorna então à sua forma normal.",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Indetectável",
+    "level": "3º Círculo",
+    "school": "Abjuração",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma pitada de poeira de diamante no valor de 25 ou mais PO, que a magia consome)",
+    "duration": "8 horas",
+    "description": "",
+    "classes": [
+      "Bardo",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Invocar Animais",
+    "level": "3º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você conjura espíritos da natureza que aparecem como um grande bando de animais espectrais e intangíveis em um espaço desocupado à sua vista e no alcance da magia. O bando permanece pela duração da magia e você escolhe a forma animal dos espíritos, como lobos, serpentes ou pássaros.\nVocê tem Vantagem em salvaguardas de Força enquanto estiver a até 1,5 metro do bando e, quando se mover no seu turno, também pode mover o bando até 9 metros para um espaço desocupado à sua vista.\nSempre que o bando se mover até 3 metros de uma criatura à sua vista ou quando uma criatura à sua vista entrar ou terminar seu turno a até 3 metros do bando, você pode forçá-la a realizar uma salvaguarda de Destreza. Se falhar, a criatura sofre 3d10 pontos de dano Cortante. Cada criatura só realiza essa salvaguarda uma vez por turno.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Invocar Barragem",
+    "level": "3º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (uma arma Corpo a Corpo ou à Distância que vale pelo menos 1 PP)",
+    "duration": "Instantânea",
+    "description": "Você brande a arma usada para conjurar a magia e invoca armas espectrais semelhantes (ou munição apropriada para a arma) que são lançadas adiante e depois desaparecem. Cada criatura à sua escolha à sua vista em um Cone de 18 metros realiza uma salvaguarda de Destreza, sofrendo 5d8 pontos de dano Energético se falhar, ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Luz do Dia",
+    "level": "3º Círculo",
+    "school": "Evocação",
+    "especial": "—",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "1 hora",
+    "description": "Pela duração da magia, a luz do sol se espalha de um ponto no alcance da magia e preenche uma Esfera de 18 metros de raio. A área da luz do sol é Luz Plena e emite Meia-luz por mais 18 metros.\nComo alternativa, você conjura a magia em um objeto que não esteja sendo usado ou carregado, fazendo com que a luz do sol preencha uma Emanação de 18 metros originada desse objeto. Cobrir esse objeto com algo opaco, como uma tigela ou elmo, bloqueia a luz do sol.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Mesclar-se às Rochas",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "R",
+    "castingTime": "Ação ou Ritual",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "8 horas",
+    "description": "Você adentra em um objeto ou superfície rochosa grande o suficiente para caber completamente seu corpo, fundindo a si e seu equipamento com a pedra pela duração. Você deve tocar a pedra para fazer isso. Nada da sua presença permanece visível ou detectável por sentidos não mágicos.\nEnquanto estiver fundido com a rocha, você não pode ver o que ocorre fora dela, e quaisquer testes de Sabedoria (Percepção) que você realize para ouvir sons fora dela são realizados com Desvantagem. Você permanece ciente da passagem do tempo e pode conjurar magias em si mesmo enquanto está fundido à pedra. Você pode usar 1,5 metro de movimento para sair da rocha onde entrou, o que encerra a magia. Caso contrário, você não pode se mover.\nDanos físicos menores à rocha não o afetam, mas a destruição parcial ou mudança na forma dela (a ponto de você não caber mais nela) o expulsa e causa 6d6 pontos de dano Energético a você. A destruição completa da rocha (ou a transmutação dela em outra substância) o expulsa e causa 50 pontos de dano Energético.\nSe expulso, você é movido para o espaço desocupado mais próximo de onde entrou e tem a condição Caído.",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Muralha de Vento",
+    "level": "3º Círculo",
+    "school": "Evocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "36 metros",
+    "components": "V, S, M (um leque e uma pena)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma muralha de vento forte sobe do chão em um ponto à sua escolha no alcance da magia. Você pode realizar uma parede de até 15 metros de comprimento, 4,5 metros de altura e 30 centímetros de espessura. Você pode moldar a parede da maneira que quiser, desde que ela faça um caminho contínuo ao longo do chão. A muralha permanece pela duração da magia.\nQuando a muralha surge, cada criatura na área dela realiza uma salvaguarda de Força, sofrendo 4d8 pontos de dano Contundente se falhar, ou metade desse dano em caso de sucesso.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Proteção Contra Energia",
+    "level": "3º Círculo",
+    "school": "Abjuração",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S",
+    "duration": "Concentração, até 1 hora",
+    "description": "",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Respirar na Água",
+    "level": "3º Círculo",
+    "school": "Transmutação",
+    "especial": "R, M",
+    "castingTime": "Ação ou Ritual",
+    "range": "9 metros",
+    "components": "V, S, M (um pedaço de junco)",
+    "duration": "24 horas",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Revivificar",
+    "level": "3º Círculo",
+    "school": "Necromancia",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (um diamante no valor de 300 ou mais PO, que a magia consome)",
+    "duration": "Instantânea",
+    "description": "",
+    "classes": [
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Convocar Elemental",
+    "level": "4º Círculo",
+    "school": "Invocação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "27 metros",
+    "components": "V, S, M (ar, uma pedra, cinzas e água dentro de um frasco incrustado de ouro no valor de 400 ou mais PO)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Você invoca um Espírito Elemental. Ele se manifesta em um espaço desocupado à sua vista e no alcance da magia e usa o bloco de estatísticas do Espírito Elemental. Ao conjurar a magia, escolha um elemento: Água, Ar, Fogo ou Terra. A criatura se assemelha a uma forma bípede envolta no elemento escolhido, o que determina certas características no bloco de estatísticas da criatura. A criatura desaparece ao ser reduzida a 0 Pontos de Vida ou quando a magia termina.\nA criatura é uma aliada sua e de seus aliados. Em combate, ela compartilha sua contagem de Iniciativa, mas o turno dela é imediatamente após o seu. Ela obedece aos seus comandos verbais (nenhuma ação é necessária). Se você não emitir nenhum, ela executa a ação Esquivar e usa o movimento dela para evitar o perigo.\nUsando um Espaço de Magia de Círculo Superior. Use o círculo do espaço de magia para o círculo da magia no bloco de estatísticas.\nEspírito Elemental\nElemental Médio, Neutro\nCA 11 + o círculo da magia\nPV 50 + 10 para cada círculo de magia acima de 4\nDeslocamento 12 m; Escavação 12 m (apenas Terra); Natação 12 m (apenas Água); Voo 12 m (pairar; apenas Ar)\nMod\nSG\nMod\nSG\nMod\nSG\nFor\n18\n+4\n+4\nDes\n15\n+2\n+2\nCon\n17\n+3\n+3\nInt\n4\n-3\n-3\nSab\n10\n+0\n+0\nCar\n16\n+3\n+3\nResistências Ácido (apenas Água), Cortante e Perfurante (apenas Terra), Elétrico e Trovejante (apenas Ar)\nImunidades Ígneo (somente Fogo), Venenoso; Envenenado, Exaustão, Paralisado, Petrificado\nSentidos Visão no Escuro 18 m, Percepção Passiva 10\nIdiomas Primordial, compreende os idiomas que você fala\nND Nenhum (XP 0; BP é igual ao seu Bônus de Proficiência)\nTraços\nEstado Amorfo (Apenas Água, Ar e Fogo). O espírito pode se mover por um espaço tão estreito quanto 2,5 centímetros de largura sem contá-lo como Terreno Difícil.\nAções\nAtaques Múltiplos. O espírito realiza um número de ataques de Pancada igual à metade do círculo da magia (arredondado para baixo).\nPancada. Jogada de Ataque Corpo a Corpo: Bônus é igual ao seu modificador de ataque mágico, alcance 1,5 m. Dano: 1d10 + 4 + o círculo da magia pontos de dano Contundente (apenas Terra), Elétrico (apenas Ar), Gélido (apenas Água) ou Ígneo (apenas Fogo).",
+    "classes": [
+      "Druida",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Dominar Fera",
+    "level": "4º Círculo",
+    "school": "Encantamento",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Uma Fera à sua vista e no alcance da magia deve ser bem-sucedida em uma salvaguarda de Sabedoria ou tem a condição Enfeitiçado pela duração da magia. O alvo tem Vantagem na salvaguarda se você ou seus aliados estiverem lutando contra ele. Sempre que o alvo sofre dano, ele repete a salvaguarda, encerrando a magia em caso de sucesso.\nVocê tem um vínculo telepático com o alvo Enfeitiçado enquanto vocês dois estão no mesmo plano de existência. No seu turno, você pode usar este vínculo para emitir comandos para o alvo (nenhuma ação é necessária), como “Ataque essa criatura”, “Mova-se para lá” ou “Busque aquele objeto”. O alvo faz o possível para obedecer no turno dele. Se ele concluir um pedido e não receber mais instruções de você, ele age e se move como quiser, concentrando-se em se proteger.\nVocê pode ordenar o alvo a executar uma Reação, mas deve executar sua própria Reação para tanto.",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Invocar Seres da Floresta",
+    "level": "4º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 10 minutos",
+    "description": "Você conjura espíritos da natureza que voam ao seu redor em uma Emanação de 3 metros pela duração da magia. Quando a Emanação invade o espaço de uma criatura à sua vista, ou quando uma criatura à sua vista entra ou termina o turno na Emanação, você pode forçá-la a realizar uma salvaguarda de Sabedoria. Se falhar, a criatura sofre 5d8 pontos de dano Energético ou metade desse dano se tiver sucesso. A criatura realiza essa salvaguarda apenas uma vez por turno.\nAlém disso, você pode executar a ação Desengajar como uma Ação Bônus pela duração da magia.\nUsando um Espaço de Magia de Círculo Superior. O dano aumenta em 1d8 para cada círculo de espaço de magia acima de 4.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Localizar Criatura",
+    "level": "4º Círculo",
+    "school": "Adivinhação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S, M (pelo de um cão de caça)",
+    "duration": "Concentração, até 1 hora",
+    "description": "Descreva ou nomeie uma criatura que você conheça bem. Você descobre a direção e a localização da criatura se ela estiver a até 300 metros de distância. Se a criatura estiver se movendo, você sabe em que direção.\nA magia pode localizar uma criatura específica que você conheça ou a criatura mais próxima de um tipo específico (como um humano ou um unicórnio) se você tiver visto tal criatura de perto — a até 9 metros — ao menos uma vez. Se a criatura que você descreveu ou nomeou estiver em uma forma diferente, como sob os efeitos de uma magia De Carne para Pedra ou Polimorfia, esta magia não localiza a criatura.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Mago",
+      "Paladino"
+    ]
+  },
+  {
+    "name": "Movimentação Livre",
+    "level": "4º Círculo",
+    "school": "Abjuração",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (uma alça de couro)",
+    "duration": "1 hora",
+    "description": "Você toca uma criatura voluntária. Pela duração da magia, o movimento do alvo não é afetado por Terreno Difícil, e magias e outros efeitos mágicos não podem reduzir o Deslocamento do alvo nem fazer com que ele tenha as condições Contido ou Paralisado. O alvo também tem um Deslocamento de Natação igual ao Deslocamento de caminhada.\nAlém disso, o alvo pode gastar 1,5 metro de movimento para escapar automaticamente de restrições não mágicas, como grilhões ou uma criatura impondo a condição Imobilizado.",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Pele-Rocha",
+    "level": "4º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (poeira de diamante no valor de 100 ou mais PO, que a magia consome)",
+    "duration": "Concentração, até 1 hora",
+    "description": "",
+    "classes": [
+      "Druida",
+      "Feiticeiro",
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Vinha Agarradora",
+    "level": "4º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação Bônus",
+    "range": "18 metros",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você conjura uma vinha que brota de uma superfície em um espaço desocupado à sua vista e no alcance da magia. A vinha permanece pela duração da magia.\nRealize um ataque mágico corpo a corpo contra uma criatura a até 9 metros da vinha. Em caso de acerto, o alvo sofre 4d8 pontos de dano Contundente e é puxado até 9 metros em direção à vinha; se o alvo for Enorme ou menor, ele tem a condição Imobilizado (CD para escapar é igual à sua CD para evitar sua magia). A vinha pode imobilizar apenas uma criatura de cada vez, e você pode fazer com que a vinha libere uma criatura Imobilizada (nenhuma ação é necessária).\nComo uma Ação Bônus em seus turnos posteriores, você pode repetir o ataque contra uma criatura a até 9 metros da vinha.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Aljava Veloz",
+    "level": "5º Círculo",
+    "school": "Transmutação",
+    "especial": "C, M",
+    "castingTime": "Ação Bônus",
+    "range": "Pessoal",
+    "components": "V, S, M (uma Aljava no valor de 1 ou mais PO)",
+    "duration": "Concentração, até 1 minuto",
+    "description": "",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Comunhão com a Natureza",
+    "level": "5º Círculo",
+    "school": "Adivinhação",
+    "especial": "R",
+    "castingTime": "1 minuto ou Ritual",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Instantânea",
+    "description": "Você comunga com os espíritos da natureza adquirindo conhecimento da área circundante. Ao ar livre, a magia lhe dá conhecimento da área a até 5 quilômetros de você. Em cavernas e outros ambientes subterrâneos naturais, o raio é limitado a 90 metros. A magia não funciona onde a natureza foi substituída por construções, como em castelos e povoados.\nEscolha três dos seguintes fatos; você aprende esses fatos no que se refere à área da magia:\nLocalização de povoados\nLocalização de portais para outros planos de existência\nLocalização de uma criatura de Nível de Desafio 10 ou maior (à escolha do Mestre) que seja Celestial, Elemental, Feérico, Ínfero ou Morto-vivo\nO tipo mais predominante de planta, mineral ou Fera (você escolhe sobre qual aprender)\nLocalização de corpos d'água\nPor exemplo, você pode determinar a localização de um monstro poderoso na área, os locais dos corpos d’água e os locais de quaisquer povoados.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Golpe de Arço",
+    "level": "5º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "9 metros",
+    "components": "S, M (uma arma Corpo a Corpo que vale 1 ou mais PP)",
+    "duration": "Instantânea",
+    "description": "Você brande a arma usada na conjuração e então desaparece para atacar com rapidez. Escolha até cinco criaturas à sua vista e no alcance da magia. Realize um ataque mágico corpo a corpo contra cada alvo. Em caso de acerto, o alvo sofre 6d10 pontos de dano Energético.",
+    "classes": [
+      "Guardião",
+      "Mago"
+    ]
+  },
+  {
+    "name": "Invocar Saraivada",
+    "level": "5º Círculo",
+    "school": "Invocação",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "45 metros",
+    "components": "V, S, M (uma arma Corpo a Corpo ou à Distância no valor de 1 ou mais PP)",
+    "duration": "Instantânea",
+    "description": "Você brande a arma usada para conjurar a magia e escolhe um ponto no alcance da magia. Centenas de armas espectrais similares (ou munição apropriada para a arma) caem em uma saraivada e depois desaparecem.",
+    "classes": [
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Passo Arbóreo",
+    "level": "5º Círculo",
+    "school": "Invocação",
+    "especial": "C",
+    "castingTime": "Ação",
+    "range": "Pessoal",
+    "components": "V, S",
+    "duration": "Concentração, até 1 minuto",
+    "description": "Você adquire a capacidade de entrar em uma árvore e se mover de dentro dela para dentro de outra árvore do mesmo tipo a até 150 metros. Ambas as árvores devem ser vivas e pelo menos do mesmo tamanho que você. Você deve usar 1,5 metro de movimento para entrar em uma árvore. Você sabe instantaneamente a localização de todas as outras árvores do mesmo tipo a até 150 metros e, como parte do movimento usado para entrar na árvore, pode tanto passar por uma dessas árvores quanto sair da árvore em que você está. Você aparece em um local à sua escolha a até 1,5 metro da árvore-destino, usando outro 1,5 metro de movimento. Se você não tiver mais nenhum movimento, aparece a menos de 1,5 metro da árvore em que entrou.",
+    "classes": [
+      "Druida",
+      "Guardião"
+    ]
+  },
+  {
+    "name": "Restauração Maior",
+    "level": "5º Círculo",
+    "school": "Abjuração",
+    "especial": "M",
+    "castingTime": "Ação",
+    "range": "Toque",
+    "components": "V, S, M (poeira de diamante no valor de 100 ou mais PO, que a magia consome)",
+    "duration": "Instantânea",
+    "description": "Você toca uma criatura e magicamente remove um dos seguintes efeitos:\n1 nível de Exaustão\nA condição Enfeitiçado ou Petrificado\nUma maldição, incluindo a Sintonização do alvo com um item mágico amaldiçoado\nQualquer redução em um dos valores de atributo do alvo\nQualquer redução nos Pontos de Vida máximos do alvo",
+    "classes": [
+      "Bardo",
+      "Clérigo",
+      "Druida",
+      "Guardião",
+      "Paladino"
+    ]
+  }
+]

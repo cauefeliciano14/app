@@ -1,0 +1,2060 @@
+{
+  "barbaro": {
+    "subtitle": "Bárbaro. Um combatente feroz da fúria primitiva.",
+    "basicTraits": {
+      "Atributo Primário": "Força",
+      "Dado de Ponto de Vida": "d12 por nível de Bárbaro",
+      "Proficiência em Salvaguardas": "Força e Constituição",
+      "Proficiência em Perícias": "Escolha 2: Atletismo, Intimidação, Lidar com Animais, Natureza, Percepção ou Sobrevivência",
+      "Proficiências com Armas": "Armas Simples e Marciais",
+      "Treinamento com Armadura": "Armaduras Leve e Média e Escudos",
+      "Equipamento Inicial": "Escolha A ou B: (A) 4 Machadinhas, Machado Grande, Kit de Aventureiro e 15 PO; ou (B) 75 PO"
+    },
+    "options": [
+      {
+        "id": "barbaro-skill-1",
+        "name": "Escolha uma Perícia de Bárbaro",
+        "choices": [
+          "Atletismo",
+          "Intimidação",
+          "Lidar com Animais",
+          "Natureza",
+          "Percepção",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "barbaro-skill-2",
+        "name": "Escolha uma Perícia de Bárbaro",
+        "choices": [
+          "Atletismo",
+          "Intimidação",
+          "Lidar com Animais",
+          "Natureza",
+          "Percepção",
+          "Sobrevivência"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Fúria",
+        "level": 1,
+        "description": "<p>Você pode se imbuir com um poder primitivo chamado <strong>Fúria</strong>, uma força que lhe concede <em>força e resiliência extraordinárias</em>. Você pode entrar em Fúria como uma <strong>Ação Bônus</strong>, desde que <em>não esteja vestindo armadura Pesada</em>.</p><p>Você pode entrar em Fúria o número de vezes indicado na coluna <em>Fúrias</em> da tabela <strong>Características de Bárbaro</strong> para seu nível de Bárbaro. Você recupera <strong>um uso gasto</strong> ao completar um <em>Descanso Curto</em>, e restaura <strong>todos os usos gastos</strong> ao completar um <em>Descanso Longo</em>.</p><p>Enquanto ativa, sua Fúria segue as regras abaixo:</p><p><strong>Resistência a Dano.</strong> Você tem <em>Resistência</em> a dano <strong>Contundente</strong>, <strong>Cortante</strong> e <strong>Perfurante</strong>.</p><p><strong>Dano da Fúria.</strong> Quando você realiza um ataque com <em>Força</em> — seja com uma arma ou um <em>Ataque Desarmado</em> — e causar dano ao alvo, você recebe um <strong>bônus no dano</strong>, que aumenta conforme você adquire níveis como Bárbaro, conforme mostrado na coluna <em>Dano da Fúria</em> da tabela Características de Bárbaro.</p><p><strong>Vantagem com Força.</strong> Você tem <em>Vantagem</em> em testes de <strong>Força</strong> e salvaguardas de <strong>Força</strong>.</p><p><strong>Sem Concentração ou Magias.</strong> Você <em>não pode</em> manter a <strong>Concentração</strong> e <em>não pode</em> conjurar magias.</p><p><strong>Duração.</strong> A Fúria dura até o <em>final do seu próximo turno</em>, e encerra se você vestir <strong>armadura Pesada</strong> ou ter a condição <strong>Incapacitado</strong>. Se sua Fúria ainda estiver ativa no próximo turno, você pode estendê-la por mais um turno ao realizar uma das seguintes ações:</p><ul><li style=\"margin-left:20px;list-style-type:disc\">Realizar uma <strong>jogada de ataque</strong> contra um inimigo.</li><li style=\"margin-left:20px;list-style-type:disc\">Forçar um inimigo a realizar uma <strong>salvaguarda</strong>.</li><li style=\"margin-left:20px;list-style-type:disc\">Executar uma <strong>Ação Bônus</strong> para estender sua Fúria.</li></ul><p>Cada vez que a Fúria é estendida, ela permanece até o final do seu próximo turno. Você pode manter uma Fúria por até <strong>10 minutos</strong>.</p>"
+      },
+      {
+        "name": "Defesa sem Armadura",
+        "level": 1,
+        "description": "<p>Enquanto você <em>não estiver vestindo nenhuma armadura</em>, sua <strong>Classe de Armadura</strong> base é igual a <strong>10</strong> mais seus modificadores de <strong>Destreza</strong> e <strong>Constituição</strong>. Você pode usar um <em>Escudo</em> e ainda receber este benefício.</p>"
+      },
+      {
+        "name": "Maestria em Arma",
+        "level": 1,
+        "description": "<p>Seu treinamento com armas permite que você utilize as propriedades de maestria com dois tipos de armas Corpo a Corpo Simples ou Marciais à sua escolha, como Machados Grandes e Machadinhas. Sempre que completar um Descanso Longo, você pode praticar movimentos com armas e alterar uma dessas escolhas de armas.</p><p>Ao alcançar certos níveis de Bárbaro, você adquire a habilidade de usar as propriedades de maestria de mais tipos de armas, conforme mostrado na coluna Maestria em Armas da tabela Características de Bárbaro.</p>",
+        "options": [
+          {
+            "id": "barbaro-weapon-mastery-1",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente"
+            ],
+            "group": "Armas Sem Categoria"
+          },
+          {
+            "id": "barbaro-weapon-mastery-2",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente"
+            ],
+            "group": "Armas Sem Categoria"
+          }
+        ]
+      },
+      {
+        "name": "Ataque Imprudente",
+        "level": 2,
+        "description": "<p>Você pode descartar toda preocupação com a defesa para <em>atacar com ferocidade intensificada</em>. Ao realizar sua <strong>primeira jogada de ataque</strong> no seu turno, você pode decidir atacar de forma imprudente. Fazer isso lhe concede <strong>Vantagem</strong> em jogadas de ataque usando <strong>Força</strong> até o início do seu próximo turno, mas <em>jogadas de ataque contra você também têm Vantagem</em> durante esse tempo.</p>"
+      },
+      {
+        "name": "Sentido de Perigo",
+        "level": 2,
+        "description": "<p>Você adquire uma <em>sensibilidade extraordinária</em> de quando as coisas não estão como deveriam, o que lhe dá um benefício ao desviar de perigos. Você tem <strong>Vantagem</strong> em salvaguardas de <strong>Destreza</strong>, a menos que tenha a condição <em>Incapacitado</em>.</p>"
+      },
+      {
+        "name": "Conhecimento Primordial",
+        "level": 3,
+        "description": "<p>Você adquire <strong>proficiência</strong> em <em>outra perícia</em> à sua escolha da lista de perícias disponíveis para Bárbaros no nível 1.</p><p>Além disso, enquanto sua <strong>Fúria</strong> estiver ativa, você pode canalizar poder primitivo ao tentar realizar certas tarefas. Sempre que realizar um <em>teste de atributo</em> usando uma das seguintes perícias, pode realizá-lo como um <strong>teste de Força</strong>, mesmo que normalmente utilize outro atributo: <strong>Acrobacia, Furtividade, Intimidação, Percepção ou Sobrevivência</strong>. Ao usar essa habilidade, sua <em>Força</em> representa o poder primitivo fluindo em você, refinando sua agilidade, postura e sentidos.</p>"
+      },
+      {
+        "name": "Subclasse de Bárbaro",
+        "level": 3,
+        "description": "<p>Você adquire uma <strong>subclasse de Bárbaro</strong> à sua escolha. As subclasses <em>Trilha da Árvore do Mundo, Trilha do Berserker, Trilha do Coração Selvagem</em> e <em>Trilha do Fanático</em> estão detalhadas após a descrição desta classe. Uma subclasse é uma especialização que lhe concede características em determinados níveis de Bárbaro. Durante toda sua jornada, você adquire cada característica da sua subclasse que corresponda ao seu nível de Bárbaro ou inferior.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento <strong>Aumento no Valor de Atributo</strong> ou <em>outro talento</em> à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis <strong>8, 12 e 16</strong> de Bárbaro.</p>"
+      },
+      {
+        "name": "Ataque Extra",
+        "level": 5,
+        "description": "<p>Você pode atacar <strong>duas vezes</strong>, em vez de uma, sempre que executar a ação <strong>Atacar</strong> no seu turno.</p>"
+      },
+      {
+        "name": "Movimento Rápido",
+        "level": 5,
+        "description": "<p>Seu <strong>Deslocamento aumenta em 3 metros</strong> enquanto você <em>não estiver usando Armadura Pesada</em>.</p>"
+      },
+      {
+        "name": "Bote Instintivo",
+        "level": 7,
+        "description": "<p>Como parte da <strong>Ação Bônus</strong> que você realiza para entrar em <em>Fúria</em>, você pode se <strong>mover até metade do seu Deslocamento</strong>.</p>"
+      },
+      {
+        "name": "Instintos Primitivos",
+        "level": 7,
+        "description": "<p>Seus instintos estão tão apurados que você tem <strong>Vantagem</strong> nas jogadas de <strong>Iniciativa</strong>.</p>"
+      },
+      {
+        "name": "Golpe Brutal",
+        "level": 9,
+        "description": "<p>Se você usar <strong>Ataque Imprudente</strong>, pode renunciar à <em>Vantagem</em> em uma jogada de ataque com <strong>Força</strong> à sua escolha no seu turno. A jogada de ataque escolhida <em>não deve ter Desvantagem</em>. Se a jogada de ataque atingir o alvo, este sofre <strong>1d10 pontos de dano adicional</strong> do mesmo tipo causado pela arma ou Ataque Desarmado, e você pode causar um efeito de <strong>Golpe Brutal</strong> à sua escolha.</p><p>Você tem as seguintes opções de efeito.</p><ul><li style=\"margin-left:20px;list-style-type:disc\"><strong>Golpe Debilitador.</strong> O Deslocamento do alvo é <em>reduzido em 4,5 metros</em> até o início do seu próximo turno. Um alvo pode ser afetado por apenas um Golpe Debilitador de cada vez — o mais recente.</li><li style=\"margin-left:20px;list-style-type:disc\"><strong>Golpe Poderoso.</strong> O alvo é <em>empurrado 4,5 metros</em> diretamente para longe de você. Em seguida, você pode <strong>se mover até metade do seu Deslocamento</strong> diretamente em direção ao alvo sem provocar <em>Ataques de Oportunidade</em>.</li></ul>"
+      },
+      {
+        "name": "Fúria Implacável",
+        "level": 11,
+        "description": "<p>Sua Fúria pode mantê-lo lutando, apesar de ferimentos graves. Se você é reduzido a <strong>0 Pontos de Vida</strong> enquanto sua <em>Fúria</em> estiver ativa e não morrer imediatamente, você pode realizar uma <strong>salvaguarda de Constituição CD 10</strong>. Em caso de sucesso, seus Pontos de Vida mudam para um número <strong>igual a duas vezes seu nível de Bárbaro</strong>.</p><p>A cada vez que usar essa característica após a primeira, a <strong>CD aumenta em 5</strong>. Ao completar um <em>Descanso Curto ou Longo</em>, a CD volta para 10.</p>"
+      },
+      {
+        "name": "Golpe Brutal Fortalecido",
+        "level": 13,
+        "description": "<p>Você aperfeiçoou novas formas de atacar com ferocidade. Os seguintes efeitos agora estão entre suas opções de <strong>Golpe Brutal</strong>.</p><ul><li style=\"margin-left:20px;list-style-type:disc\"><strong>Golpe Atordoante.</strong> O alvo tem <em>Desvantagem</em> na próxima salvaguarda que realizar e <em>não pode realizar Ataques de Oportunidade</em> até o início do seu próximo turno.</li><li style=\"margin-left:20px;list-style-type:disc\"><strong>Golpe Destruidor.</strong> Antes do início do seu próximo turno, a <strong>próxima jogada de ataque</strong> realizada por <em>outra criatura</em> contra o alvo recebe um <strong>bônus de +5</strong>. Uma jogada de ataque só pode receber um bônus de Golpe Destruidor por vez.</li></ul>"
+      },
+      {
+        "name": "Fúria Persistente",
+        "level": 15,
+        "description": "<p>Ao jogar <strong>Iniciativa</strong>, você pode <strong>recuperar todos os usos gastos de Fúria</strong>. Após recuperar a Fúria deste modo, você não pode fazê-lo novamente até completar um <em>Descanso Longo</em>.</p><p>Além disso, sua Fúria é tão feroz que agora <strong>dura 10 minutos</strong> <em>sem a necessidade de estender a duração</em> de rodada em rodada. Sua Fúria encerra se você estiver com a condição <strong>Inconsciente</strong> (não apenas Incapacitado) ou vestir <strong>armadura Pesada</strong>.</p>"
+      },
+      {
+        "name": "Golpe Brutal Fortalecido",
+        "level": 17,
+        "description": "<p>O dano adicional de seu <strong>Golpe Brutal</strong> aumenta para <strong>2d10 pontos</strong>. Além disso, você pode usar <strong>dois efeitos diferentes</strong> de Golpe Brutal sempre que utilizar esta característica.</p>"
+      },
+      {
+        "name": "Força Indomável",
+        "level": 18,
+        "description": "<p>Se o total de seu teste de <strong>Força</strong> ou de sua salvaguarda de <strong>Força</strong> for <em>menor que seu valor de Força</em>, você pode <strong>usar esse valor no lugar</strong> do resultado total.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire um talento <strong>Dádiva Épica</strong> ou <em>outro talento</em> à sua escolha para o qual atenda os pré-requisitos. A <em>Dádiva do Ataque Irresistível</em> é recomendada.</p>"
+      },
+      {
+        "name": "Campeão Primitivo",
+        "level": 20,
+        "description": "<p>Você incorpora o poder primitivo. Seus valores de <strong>Força e Constituição</strong> <em>aumentam em 4</em>, até um máximo de <strong>25</strong>.</p>"
+      }
+    ]
+  },
+  "bardo": {
+    "subtitle": "Bardo. Um inspirador performista de musica, dança e magia.",
+    "basicTraits": {
+      "Atributo Primário": "Carisma",
+      "Dado de Ponto de Vida": "d8 por nível de Bardo",
+      "Proficiência em Salvaguardas": "Destreza e Carisma",
+      "Proficiência em Perícias": "Escolha quaisquer 3 perícias",
+      "Proficiências com Armas": "Armas Simples",
+      "Proficiências com Ferramentas": "Escolha 3 Instrumentos Musicais",
+      "Treinamento com Armadura": "Armadura Leve",
+      "Equipamento Inicial": "Escolha A ou B: (A) Armadura de Couro, 2 Adagas, Instrumento Musical à sua escolha, Kit de Artista e 19 PO; ou (B) 90 PO"
+    },
+    "options": [
+      {
+        "id": "bardo-skill-1",
+        "name": "Escolha uma Perícia de Bardo",
+        "choices": [
+          "Acrobacia",
+          "Arcanismo",
+          "Atletismo",
+          "Enganação",
+          "Furtividade",
+          "História",
+          "Intimidação",
+          "Intuição",
+          "Investigação",
+          "Lidar com Animais",
+          "Medicina",
+          "Natureza",
+          "Percepção",
+          "Persuasão",
+          "Prestidigitação",
+          "Religião",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "bardo-skill-2",
+        "name": "Escolha uma Perícia de Bardo",
+        "choices": [
+          "Acrobacia",
+          "Arcanismo",
+          "Atletismo",
+          "Enganação",
+          "Furtividade",
+          "História",
+          "Intimidação",
+          "Intuição",
+          "Investigação",
+          "Lidar com Animais",
+          "Medicina",
+          "Natureza",
+          "Percepção",
+          "Persuasão",
+          "Prestidigitação",
+          "Religião",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "bardo-skill-3",
+        "name": "Escolha uma Perícia de Bardo",
+        "choices": [
+          "Acrobacia",
+          "Arcanismo",
+          "Atletismo",
+          "Enganação",
+          "Furtividade",
+          "História",
+          "Intimidação",
+          "Intuição",
+          "Investigação",
+          "Lidar com Animais",
+          "Medicina",
+          "Natureza",
+          "Percepção",
+          "Persuasão",
+          "Prestidigitação",
+          "Religião",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "bardo-instrumento-1",
+        "name": "Escolha um Instrumento Musical",
+        "choices": ["Alaúde", "Charamela", "Flauta", "Flauta de Pã", "Lira", "Tambor", "Trombeta", "Violino", "Xilofone"]
+      },
+      {
+        "id": "bardo-instrumento-2",
+        "name": "Escolha um Instrumento Musical",
+        "choices": ["Alaúde", "Charamela", "Flauta", "Flauta de Pã", "Lira", "Tambor", "Trombeta", "Violino", "Xilofone"]
+      },
+      {
+        "id": "bardo-instrumento-3",
+        "name": "Escolha um Instrumento Musical",
+        "choices": ["Alaúde", "Charamela", "Flauta", "Flauta de Pã", "Lira", "Tambor", "Trombeta", "Violino", "Xilofone"]
+      }
+    ],
+    "features": [
+      {
+        "name": "Inspiração de Bardo",
+        "level": 1,
+        "description": "<p>Você pode inspirar outros sobrenaturalmente por meio de palavras, música ou dança. Essa inspiração é representada pelo seu dado de Inspiração de Bardo, que é um d6.</p><p><strong>Usando Inspiração de Bardo.</strong> Como uma Ação Bônus, você pode inspirar outra criatura a até 18 metros de você que possa vê-lo ou ouvi-lo. Essa criatura recebe um de seus dados de Inspiração de Bardo. Uma criatura pode ter apenas um dado de Inspiração de Bardo de cada vez.</p><p>Uma vez, dentro da próxima uma hora, após a criatura falhar em um Teste de d20, ela pode jogar o dado de Inspiração de Bardo e adicionar o resultado ao d20, transformando potencialmente a falha em sucesso. O dado de Inspiração de Bardo é gasto quando for jogado.</p><p><strong>Quantidade de Usos.</strong> Você pode conceder um dado de Inspiração de Bardo um número de vezes igual ao seu modificador de Carisma (mínimo de uma vez), e você restaura todos os usos gastos ao completar um Descanso Longo.</p><p><strong>Em Níveis Superiores.</strong> Seu dado de Inspiração de Bardo muda ao atingir certos níveis de Bardo, conforme mostrado na coluna Dados de Inspiração da tabela Características de Bardo. O dado se torna um d8 no nível 5, um d10 no nível 10 e um d12 no nível 15.</p>"
+      },
+      {
+        "name": "Conjuração",
+        "level": 1,
+        "description": "<p>Você aprendeu a conjurar magias através de suas artes bárdicas. Veja o capítulo 7 para as regras sobre conjuração de magias. As informações abaixo detalham como você utiliza essas regras com as magias de Bardo, explicadas na lista de magias de Bardo mais adiante na descrição da classe.</p><p><strong>Truques.</strong> Você conhece dois truques à sua escolha da lista de magias de Bardo. Luzes Dançantes e Zombaria Perversa são recomendadas.</p><p>Sempre que você atinge um nível de Bardo, pode substituir um dos seus truques por outro truque à sua escolha da lista de magias de Bardo.</p><p>Ao atingir os níveis 4 e 10, você aprende mais um truque à sua escolha da lista de magias de Bardo, conforme mostrado na coluna Truques da tabela Características de Bardo.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Bardo mostra quantos espaços de magia você tem para conjurar suas magias de 1º círculo ou superior. Você restaura todos os espaços gastos ao completar um Descanso Longo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de 1º círculo ou superior que estão disponíveis para você conjurar com esta característica. Para começar, escolha quatro magias de 1º círculo da lista de magias de Bardo. Enfeitiçar Pessoa, Leque Cromático, Palavra Curativa e Sussurros Dissonantes são recomendadas.</p><p>O número de magias em sua lista aumenta à medida que você alcança níveis de Bardo, conforme mostrado na coluna Magias Preparadas da tabela Características de Bardo. Sempre que esse número aumentar, escolha magias adicionais da lista de magias de Bardo até que o número de magias em sua lista corresponda ao número da tabela. As magias escolhidas devem ser de um círculo para o qual você possui espaços de magia. Por exemplo, se você é um Bardo de nível 3, sua lista de magias preparadas pode incluir seis magias de 1º ou 2º círculo em qualquer combinação.</p><p>Se outra característica de Bardo lhe der magias que você sempre tem preparadas, essas magias não contam para o número de magias que você pode preparar com esta característica, mas essas magias, de outra forma, contam como magias de Bardo para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Sempre que você atinge um nível de Bardo, pode substituir uma magia em sua lista por outra magia de Bardo para a qual você tem espaços de magia.</p><p><strong>Atributo de Conjuração.</strong> Carisma é seu atributo de conjuração para suas magias de Bardo.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Instrumento Musical como Foco de Conjuração para suas magias de Bardo.</p>"
+      },
+      {
+        "name": "Especialista",
+        "level": 2,
+        "description": "<p>Você adquire Especialização em duas de suas perícias, à sua escolha, nas quais já seja proficiente. Atuação e Persuasão são recomendadas se você tiver proficiência nelas.</p><p>No nível 9 de Bardo, você adquire Especialização em mais duas perícias nas quais já seja proficiente à sua escolha.</p>"
+      },
+      {
+        "name": "Pau pra Toda Obra",
+        "level": 2,
+        "description": "<p>Você pode adicionar metade do seu Bônus de Proficiência (arredondado para baixo) a qualquer teste de atributo que realizar que use uma perícia à qual não possua proficiência e que não use seu Bônus de Proficiência.</p><p>Por exemplo, se você realizar um teste de Força (Atletismo) e não tiver proficiência em Atletismo, pode adicionar metade do seu Bônus de Proficiência ao teste.</p>"
+      },
+      {
+        "name": "Subclasse de Bardo",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Bardo à sua escolha. As subclasses Colégio da Bravura, Colégio da Dança, Colégio do Conhecimento e Colégio do Glamour são detalhadas após a descrição desta classe. Uma subclasse é uma especialização que lhe concede características em determinados níveis de Bardo. Durante toda sua jornada, você adquire cada característica de sua subclasse que corresponda ao seu nível de Bardo ou inferior.</p><p>O Repertório do Bardo</p><p>Seu Bardo bate um tambor enquanto entoa os feitos de heróis antigos? Dedilha um alaúde enquanto canta canções românticas? Realiza árias de poder comovente? Recita monólogos dramáticos de tragédias clássicas? Usa o ritmo de uma dança folclórica para coordenar o movimento dos aliados em batalha? Compõe poemas curtos e ousados?</p><p>Ao interpretar um Bardo, considere o estilo de apresentação artística que você prefere, os humores que pode evocar e os temas que inspiram suas próprias criações. Seus poemas são inspirados por momentos de beleza natural ou são reflexões sombrias sobre o luto? Você prefere hinos elevados ou canções animadas de taberna? É atraído por lamentos pelos que pereceram ou por celebrações de alegria? Dança baladas alegres ou realiza coreografias interpretativas elaboradas? Foca em um estilo de apresentação ou busca dominar todos?</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Bardo.</p>"
+      },
+      {
+        "name": "Fonte de Inspiração",
+        "level": 5,
+        "description": "<p>Você agora restaura todos os seus usos gastos de Inspiração de Bardo ao completar um Descanso Curto ou Longo.</p><p>Além disso, você pode gastar um espaço de magia (nenhuma ação necessária) para recuperar um uso gasto de Inspiração de Bardo.</p>"
+      },
+      {
+        "name": "Contra-Encantamento",
+        "level": 7,
+        "description": "<p>Você pode usar notas musicais ou palavras de poder para interromper efeitos que influenciam a mente. Se você ou uma criatura a até 9 metros de você falhar em uma salvaguarda contra um efeito que aplica as condições Amedrontado ou Encantado, você pode executar uma Reação para jogar novamente a salvaguarda, e a nova jogada tem Vantagem.</p>"
+      },
+      {
+        "name": "Segredos Mágicos",
+        "level": 10,
+        "description": "<p>Você aprendeu segredos de várias tradições mágicas. Sempre que você alcançar um nível de Bardo (incluindo este nível) e o número de Magias Preparadas na tabela Características de Bardo aumentar, você pode escolher qualquer uma das novas magias preparadas da lista de magias de Bardo, Clérigo, Druida e Mago, e as magias escolhidas contam como magias de Bardo para você. Além disso, sempre que você substituir uma magia preparada para esta classe, pode trocá-la por uma magia dessas listas.</p>"
+      },
+      {
+        "name": "Inspiração Superior",
+        "level": 18,
+        "description": "<p>Ao jogar Iniciativa, recupera usos gastos de Inspiração de Bardo até ter dois, se tiver menos do que isso.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire um talento Dádiva Épica ou outro talento à sua escolha para o qual atenda os pré-requisitos. A Dádiva da Recordação de Magia é recomendada.</p>"
+      },
+      {
+        "name": "Palavras de Criação",
+        "level": 20,
+        "description": "<p>Você dominou duas das Palavras de Criação: as palavras de vida e morte. Portanto, você sempre tem as magias Palavra de Poder: Matar e Palavra de Poder: Salvar preparadas. Ao conjurar qualquer uma dessas magias, pode escolher uma segunda criatura que está a até 3 metros do primeiro alvo.</p><p>Um Bardo Molda Inspiração e Imaginação em Magia.</p>"
+      }
+    ]
+  },
+  "bruxo": {
+    "subtitle": "Bruxo. Um ocultista fortalecido com pactos sobrenaturais.",
+    "basicTraits": {
+      "Atributo Primário": "Carisma",
+      "Dado de Ponto de Vida": "d8 por nível de Bruxo",
+      "Proficiência em Salvaguardas": "Sabedoria e Carisma",
+      "Proficiência em Perícias": "Escolha 2: Arcanismo, Enganação, História, Intimidação, Investigação, Natureza ou Religião.",
+      "Proficiências com Armas": "Armas Simples",
+      "Treinamento com Armadura": "Armadura Leve",
+      "Equipamento Inicial": "Escolha A ou B: (A) Armadura de Couro, Foice, 2 Adagas, Foco Arcano (orbe), Livro (conhecimento oculto), Kit de Erudito e 15 PO; ou (B) 100 PO"
+    },
+    "options": [
+      {
+        "id": "bruxo-skill-1",
+        "name": "Escolha uma Perícia de Bruxo",
+        "choices": [
+          "Arcanismo",
+          "Enganação",
+          "História",
+          "Intimidação",
+          "Investigação",
+          "Natureza",
+          "Religião"
+        ]
+      },
+      {
+        "id": "bruxo-skill-2",
+        "name": "Escolha uma Perícia de Bruxo",
+        "choices": [
+          "Arcanismo",
+          "Enganação",
+          "História",
+          "Intimidação",
+          "Investigação",
+          "Natureza",
+          "Religião"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Invocações Místicas",
+        "level": 1,
+        "description": "<p>Você descobriu Invocações Místicas, fragmentos de conhecimento proibido que lhe conferem uma habilidade mágica permanente ou outros ensinamentos. Você recebe uma invocação à sua escolha, como Pacto do Tomo. As invocações são descritas na seção \"Opções de Invocações Místicas\" mais adiante na descrição desta classe.</p><p><strong>Pré-requisitos.</strong> Se uma invocação tiver um pré-requisito, você deve atendê-lo para aprender essa invocação. Por exemplo, se uma invocação exigir que você seja um Bruxo de nível 5 ou superior, você pode selecionar a invocação quando alcançar o nível 5 de Bruxo.</p><p>Substituindo e Recebendo outras Invocações. Ao alcançar um nível de Bruxo, você pode substituir uma de suas invocações por outra para a qual se qualifica. Você não pode substituir uma invocação se ela for um pré-requisito para outra invocação que você tenha.</p><p>Ao alcançar certos níveis de Bruxo, você adquire mais invocações à sua escolha, conforme mostrado na coluna Invocações da tabela Características de Bruxo.</p><p>Você não pode escolher a mesma invocação mais de uma vez, a menos que a descrição da invocação indique o contrário.</p>",
+        "options": [
+          {
+            "id": "bruxo-invocacao-1",
+            "name": "Escolha uma Invocação Mística",
+            "choices": [
+              "Armadura de Sombras",
+              "Mente Mística",
+              "Pacto da Corrente",
+              "Pacto da Lâmina",
+              "Pacto do Tomo"
+            ],
+            "choiceDetails": {
+              "Armadura de Sombras": "Você pode conjurar <em>Armadura Arcana</em> em si sem gastar um espaço de magia.",
+              "Mente Mística": "Você tem Vantagem em salvaguardas de Constituição que realiza para manter a Concentração.",
+              "Pacto da Corrente": "Você aprende a magia <em>Convocar Familiar</em> e pode conjurá-la como uma ação Usar Magia sem gastar um espaço de magia.<br><br>Ao conjurar a magia, você escolhe uma das formas normais para o seu familiar ou uma das seguintes formas especiais: Cobra Peçonhenta, Diabrete, Esfinge Maravilhosa, Esqueleto, Pseudodragão, Quasit, Slaad Girino, Sprite.<br><br>Além disso, ao executar ação Atacar, você pode renunciar a um de seus próprios ataques para permitir que seu familiar realize um ataque próprio como uma Reação dele.",
+              "Pacto da Lâmina": "Como uma Ação Bônus, você pode conjurar uma arma de pacto em sua mão — uma arma Corpo a Corpo Simples ou Marcial à sua escolha com a qual você se vincula — ou cria um vínculo com uma arma mágica que você toca.<br><br>Até que o vínculo encerre, você tem proficiência com a arma e pode usá-la como Foco de Conjuração. Ao atacar com a arma vinculada, você pode usar seu modificador de Carisma para as jogadas de ataque e dano em vez de usar Força ou Destreza; e você pode causar dano Necrótico, Psíquico ou Radiante ou o tipo de dano normal da arma.<br><br>Seu vínculo com a arma encerra se você executar a Ação Bônus desta característica novamente, se a arma estiver a mais de 1,5 metro de você por 1 minuto ou mais, ou se você morrer. Uma arma conjurada desaparece quando o vínculo encerra.",
+              "Pacto do Tomo": "Ao costurar fios de sombra, você conjura um livro em sua mão ao final de um Descanso Curto ou Longo. Este <em>Livro das Sombras</em> contém magia mística que só você pode acessar. O livro desaparece se você conjurar outro livro com essa característica ou se você morrer.<br><br><strong>Truques e Rituais.</strong> Quando o livro surgir, escolha três truques e duas magias de 1º círculo que tenham o marcador Ritual. As magias podem ser da lista de magias de qualquer classe e devem ser magias que você ainda não tem preparadas. Enquanto o livro estiver com você, você tem as magias escolhidas preparadas e elas funcionam como magias de Bruxo para você.<br><br><strong>Foco de Conjuração.</strong> Você pode usar o livro como um Foco de Conjuração."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Magia de Pacto",
+        "level": 1,
+        "description": "<p>Por meio de uma cerimônia oculta, você realizou um pacto com uma entidade misteriosa para obter poderes mágicos. Essa voz nas sombras é enigmática, mas a dádiva concedida por ela é clara: a habilidade de conjurar magias. Veja o capítulo 7 para as regras de conjuração. As informações a seguir explicam como aplicar essas regras às magias de Bruxo, que estão listadas mais adiante na descrição da classe.</p><p><strong>Truques.</strong> Você conhece dois truques de Bruxo à sua escolha. Prestidigitação Arcana e Raio Místico são recomendados. Ao alcançar um nível de Bruxo, você pode substituir um dos seus truques dessa característica por outro truque de Bruxo à sua escolha.</p><p>Ao atingir os níveis 4 e 10 de Bruxo, você aprende mais um truque de Bruxo à sua escolha, conforme detalhado na coluna Truques da tabela Características de Bruxo.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Bruxo mostra quantos espaços de magia você tem para conjurar suas magias de Bruxo de 1º a 5º círculo. A tabela também mostra o círculo desses espaços, todos do mesmo círculo. Você restaura todos os espaços de Magia de Pacto gastos ao completar um Descanso Curto ou Longo.</p><p>Por exemplo, quando você é um Bruxo de nível 5, você tem dois espaços de magia de 3º círculo. Para conjurar a magia Raio de Bruxa de 1º círculo, você deve gastar um desses espaços e conjurá-la como uma magia de 3º círculo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de 1º círculo ou superior que estão disponíveis para você conjurar com essa característica. Para começar, escolha duas magias de Bruxo de 1º círculo. Danação e Enfeitiçar Pessoa são recomendadas.</p><p>O número de magias em sua lista aumenta à medida que você alcança níveis de Bruxo, conforme mostrado na coluna Magias Preparadas da tabela Características de Bruxo. Quando esse número aumentar, escolha magias adicionais de Bruxo até que o número de magias em sua lista corresponda ao número da tabela. As magias escolhidas devem ser de um círculo não superior mostrado na coluna círculo do Espaço da tabela para o seu nível. Quando você atinge o nível 6, por exemplo, você aprende uma nova magia de Bruxo, que pode ser de 1º a 3º círculo.</p><p>Se outra característica de Bruxo lhe concede magias sempre preparadas, elas não contam para o número de magias que você pode preparar com essa característica, mas ainda são consideradas magias de Bruxo para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Sempre que você ganha um nível de Bruxo, pode substituir uma magia da sua lista por outra magia de Bruxo de um nível elegível.</p><p><strong>Atributo de Conjuração.</strong> Carisma é o atributo de conjuração para suas magias de Bruxo.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Foco Arcano como um Foco de Conjuração para suas magias de Bruxo.</p>"
+      },
+      {
+        "name": "Astúcia Mágica",
+        "level": 2,
+        "description": "<p>Ao final de um rito esotérico que você pode realizar por 1 minuto, você recupera os espaços de magia das Magias de Pacto gastos em um número igual à metade da sua quantidade máxima (arredondado para cima). Você pode usar esta característica novamente após completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Subclasse de Bruxo",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Bruxo à sua escolha. As subclasses Patrono Arquifada, Patrono Celestial, Patrono Grande Antigo e Patrono Ínfero estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Bruxo. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Bruxo ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Bruxo.</p>"
+      },
+      {
+        "name": "Contatar Patrono",
+        "level": 9,
+        "description": "<p>No passado, você entrava em contato com seu patrono por meio de intermediários. Agora, você pode se comunicar diretamente com ele. Você sempre tem a magia Contato Extraplanar preparada. Com esta característica, você pode conjurar a magia sem gastar um espaço de magia para entrar em contato com seu patrono, e você é bem-sucedido automaticamente na salvaguarda da magia.</p><p>Você pode conjurar a magia com esta característica novamente após completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Arcana Mística",
+        "level": 11,
+        "description": "<p>Seu patrono lhe concede um segredo mágico chamado arcanum. Escolha uma magia de Bruxo de 6º círculo com este arcanum.</p><p>Você pode conjurar sua magia arcanum uma vez sem gastar um espaço de magia, e novamente desta forma após completar um Descanso Longo</p><p>Conforme mostrado na tabela Características de Bruxo, você recebe outra magia de Bruxo à sua escolha que pode ser conjurada deste modo ao atingir os níveis de Bruxo 13 (magia de 7º círculo), 15 (magia de 8º círculo) e 17 (magia de 9º círculo). Você restaura todos os usos da sua Arcana Mística ao completar um Descanso Longo.</p><p>Ao alcançar um nível de Bruxo, você pode substituir uma de suas magias de arcanum por outra magia de Bruxo do mesmo círculo.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. O talento Dádiva do Destino é recomendado.</p>"
+      },
+      {
+        "name": "Mestre Místico",
+        "level": 20,
+        "description": "<p>Ao usar sua característica Astúcia Mágica, você restaura todos os seus espaços de magia gastos das suas Magias de Pacto.</p>"
+      }
+    ]
+  },
+  "clerigo": {
+    "subtitle": "Clérigo. Um sacerdote milagroso de poder divino.",
+    "basicTraits": {
+      "Atributo Primário": "Sabedoria",
+      "Dado de Ponto de Vida": "d8 por nível de Clérigo",
+      "Proficiência em Salvaguarda": "Sabedoria e Carisma",
+      "Proficiência em Perícias": "Escolha 2: História, Intuição, Medicina, Persuasão ou Religião.",
+      "Proficiências com Armas": "Armas Simples",
+      "Treinamento com Armadura": "Armaduras Leve e Média e Escudos",
+      "Equipamento Inicial": "Escolha A ou B: (A) Cota de Malha Parcial, Escudo, Maça, Símbolo Sagrado, Kit de Sacerdote e 7 PO; ou (B) 110 PO"
+    },
+    "options": [
+      {
+        "id": "clerigo-skill-1",
+        "name": "Escolha uma Perícia de Clérigo",
+        "choices": [
+          "História",
+          "Intuição",
+          "Medicina",
+          "Persuasão",
+          "Religião"
+        ]
+      },
+      {
+        "id": "clerigo-skill-2",
+        "name": "Escolha uma Perícia de Clérigo",
+        "choices": [
+          "História",
+          "Intuição",
+          "Medicina",
+          "Persuasão",
+          "Religião"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Conjuração",
+        "level": 1,
+        "description": "<p>Você aprendeu a conjurar magias por meio de oração e meditação. Veja o capítulo 7 para as regras sobre conjuração de magias. As informações abaixo detalham como você usa essas regras com as magias de Clérigo, explicadas na lista de magias de Clérigo mais adiante na descrição da classe.</p><p><strong>Truques.</strong> Você conhece três truques à sua escolha da lista de magias de Clérigo. Chama Sagrada, Orientação e Taumaturgia são recomendados.</p><p>Sempre que você alcança um nível de Clérigo, pode substituir um dos seus truques por outro truque à sua escolha da lista de magias de Clérigo.</p><p>Quando alcançar os níveis 4 e 10 de Clérigo, você aprende mais um truque à sua escolha da lista de magias de Clérigo, conforme mostrado na coluna Truques da tabela Características de Clérigo.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Clérigo mostra quantos espaços de magia você tem para conjurar suas magias de 1º círculo ou superior. Você recupera todos os espaços gastos quando completa um Descanso Longo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de nível 1º circulo ou superior que estão disponíveis para você conjurar com essa característica. Para começar, escolha quatro magias de 1º círculo da lista de magias de Clérigo. Bênção, Curar Ferimentos, Escudo da Fé e Raio Guia são recomendadas.</p><p>O número de magias em sua lista aumenta à medida que você alcança níveis de Clérigo, conforme mostrado na coluna Magias Preparadas da tabela Características de Clérigo. Sempre que esse número aumentar, escolha magias adicionais da lista de magias de Clérigo até que o número de magias em sua lista seja o mesmo do número da tabela. As magias escolhidas devem ser de um círculo para o qual você possui espaços de magia. Por exemplo, se você é um Clérigo de nível 3, sua lista de magias preparadas pode incluir seis magias de 1º ou 2º círculo em qualquer combinação.</p><p>Se outra característica de Clérigo lhe der magias que você sempre tem preparadas, essas magias não contam para o número de magias que você pode preparar com esta característica, mas que contam como magias de Clérigo para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Sempre que completar um Descanso Longo, você pode definir sua lista de magias preparadas, substituindo qualquer uma das magias por outras magias de Clérigo para as quais você tem espaços de magia.</p><p><strong>Atributo de Conjuração.</strong> Sabedoria é seu atributo de conjuração para suas magias de Clérigo.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Símbolo Sagrado como um Foco de Conjuração para suas magias de Clérigo.</p>"
+      },
+      {
+        "name": "Ordem Divina",
+        "level": 1,
+        "description": "<p>Você se dedicou a um dos seguintes papéis sagrados à sua escolha.</p>",
+        "options": [
+          {
+            "id": "clerigo-ordem-divina",
+            "name": "Escolha uma Ordem Divina",
+            "choices": ["Protetor", "Taumaturgo"],
+            "choiceDetails": {
+              "Protetor": "Treinado para a batalha, você adquire <strong>proficiência com armas Marciais</strong> e <strong>treinamento com Armadura Pesada</strong>.",
+              "Taumaturgo": "Você conhece um <strong>truque adicional</strong> da lista de magias de Clérigo. Além disso, sua conexão mística com o divino lhe dá um <strong>bônus em testes de Inteligência (Arcanismo ou Religião)</strong> igual ao modificador de Sabedoria (mínimo +1)."
+            }
+          },
+          {
+            "id": "clerigo-ordem-divina-cantrip",
+            "name": "Escolha um Truque de Clérigo",
+            "showWhen": { "id": "clerigo-ordem-divina", "value": "Taumaturgo" },
+            "spellSource": "clerigo",
+            "isSpell": true,
+            "choices": []
+          }
+        ]
+      },
+      {
+        "name": "Canalizar Divindade",
+        "level": 2,
+        "description": "<p>Você pode canalizar energia divina diretamente dos Planos Externos para alimentar efeitos mágicos. Você começa com dois desses efeitos: Centelha Divina e Expulsar Mortos-Vivos, cada um descrito a seguir. Cada vez que você usar o Canalizar Divindade desta classe, escolha qual efeito de Canalizar Divindade deseja realizar. Você obtém opções adicionais de efeitos em níveis mais altos de Clérigo.</p><p>Você pode usar o Canalizar Divindade desta classe duas vezes. Você recupera um uso gasto ao completar um Descanso Curto e todos os usos gastos ao completar um Descanso Longo. Você adquire usos adicionais ao atingir certos níveis de Clérigo, conforme mostrado na coluna Canalizar Divindade da tabela Características de Clérigo.</p><p>Se um efeito de Canalizar Divindade exigir uma salvaguarda, a CD é igual a CD para evitar magia da característica Conjuração desta classe.</p><p><strong>Centelha Divina.</strong> Como uma ação Usar Magia, você expõe seu Símbolo Sagrado para outra criatura à sua vista a até 9 metros e canaliza energia divina nela. Jogue 1d8 e adicione seu modificador de Sabedoria. Você pode restaurar Pontos de Vida da criatura igual ao resultado total ou forçar a criatura a realizar uma salvaguarda de Constituição. Se falhar, a criatura sofre dano Necrótico ou Radiante (à sua escolha) igual ao total. Em caso de sucesso, a criatura recebe metade do dano (arredondado para baixo).</p><p>Você joga um d8 adicional quando atinge os níveis de 7 (2d8), 13 (3d8) e 18 (4d8) de Clérigo.</p><p><strong>Expulsar Mortos-Vivos.</strong> Como uma ação Usar Magia, você mostra seu Símbolo Sagrado e repreende criaturas Mortas-Vivas. Cada Morto-Vivo à sua escolha a até 9 metros de você deve realizar uma salvaguarda de Sabedoria. Se a criatura falhar, ela está com as condições Amedrontado e Incapacitado por 1 minuto. Pela duração da canalização, ela tenta se mover o mais longe possível de você nos turnos dela. Este efeito se encerra na criatura se ela sofrer algum dano, se você está com a condição Incapacitado ou se você morrer.</p>"
+      },
+      {
+        "name": "Subclasse de Clérigo",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Clérigo à sua escolha. Uma subclasse é uma especialização que lhe concede características em determinados níveis de Clérigo. As subclasses Domínio da Guerra, Domínio da Luz, Domínio da Trapaça e Domínio da Vida estão detalhadas após a descrição desta classe. Para o resto de sua jornada, você recebe cada uma das características de sua subclasse que são de seu nível de Clérigo ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Clérigo.</p>"
+      },
+      {
+        "name": "Fulminar Mortos-Vivos",
+        "level": 5,
+        "description": "<p>Ao usar Expulsar Mortos-Vivos, você pode jogar uma quantidade de d8s igual ao seu modificador de Sabedoria (mínimo de 1d8) e somar os resultados jogados. Cada Morto-Vivo que falhar na salvaguarda sofre dano Radiante igual ao resultado da soma dos dados jogados. Esse dano não encerra o efeito de Expulsar Mortos-Vivos.</p>"
+      },
+      {
+        "name": "Golpes Abençoados",
+        "level": 7,
+        "description": "<p>Você se infunde de poder divino em combate. Você adquire uma das seguintes opções à sua escolha (se você já tiver qualquer uma dessas opções de uma subclasse de Clérigo em um livro antigo de D&D, use apenas a opção escolhida para esta característica).</p><p><strong>Conjuração Poderosa.</strong> Adicione seu modificador de Sabedoria ao dano causado com qualquer truque de Clérigo.</p><p><strong>Golpe Divino.</strong> Uma vez em cada um dos seus turnos, quando você atinge uma criatura com uma jogada de ataque usando uma arma, você pode causar ao alvo 1d8 pontos de dano Necrótico ou Radiante (à sua escolha) adicionais.</p>"
+      },
+      {
+        "name": "Intervenção Divina",
+        "level": 10,
+        "description": "<p>Você pode convocar sua divindade ou panteão para intervir em seu nome. Como uma ação Usar Magia, escolha qualquer magia de Clérigo de 5º círculo ou inferior que não exija uma Reação para ser conjurada. Como parte da mesma ação, você conjura essa magia sem gastar espaço de magia ou precisar de componentes Materiais. Você não pode usar essa característica novamente até completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Golpes Abençoados Aprimorados",
+        "level": 14,
+        "description": "<p>A opção que você escolheu para Golpes Abençoados fica mais poderosa.</p><p><strong>Conjuração Poderosa.</strong> Quando conjurar um truque de Clérigo e causar dano a uma criatura com ele, você pode conferir vitalidade a si ou a outra criatura a até 18 metros de você, concedendo um número de Pontos de Vida Temporários igual ao dobro do seu modificador de Sabedoria.</p><p><strong>Golpe Divino.</strong> O dano adicional de seu Golpe Divino aumenta para 2d8.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva do Destino é recomendada.</p>"
+      },
+      {
+        "name": "Intervenção Divina Maior",
+        "level": 20,
+        "description": "<p>Você pode convocar uma intervenção divina ainda mais poderosa. Quando usar sua característica Intervenção Divina, você pode escolher Desejo como opção de magia. Se fizer isso, não pode usar Intervenção Divina novamente até completar 2d4 Descansos Longos.</p>"
+      }
+    ]
+  },
+  "druida": {
+    "subtitle": "Druida. Um sacerdote da natureza de poder primal.",
+    "basicTraits": {
+      "Atributo Primário": "Sabedoria",
+      "Dado de Ponto de Vida": "d8 por nível de Druida",
+      "Proficiência em Salvaguarda": "Inteligência e Sabedoria",
+      "Proficiência em Perícias": "Escolha 2: Arcanismo, Lidar com Animais, Intuição, Medicina, Natureza, Percepção, Religião ou Sobrevivência.",
+      "Proficiências com Armas": "Armas Simples",
+      "Proficiências com Ferramentas": "Kit de Herbalismo",
+      "Treinamento com Armadura": "Armadura Leve e Escudos",
+      "Equipamento Inicial": "Escolha A ou B: (A) Armadura de Couro, Escudo, Foice, Foco Druídico (Cajado), Kit de Explorador, Kit de Herbalismo, 9 PO; ou (B) 50 PO"
+    },
+    "options": [
+      {
+        "id": "druida-skill-1",
+        "name": "Escolha uma Perícia de Druida",
+        "choices": [
+          "Arcanismo",
+          "Lidar com Animais",
+          "Intuição",
+          "Medicina",
+          "Natureza",
+          "Percepção",
+          "Religião",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "druida-skill-2",
+        "name": "Escolha uma Perícia de Druida",
+        "choices": [
+          "Arcanismo",
+          "Lidar com Animais",
+          "Intuição",
+          "Medicina",
+          "Natureza",
+          "Percepção",
+          "Religião",
+          "Sobrevivência"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Conjuração",
+        "level": 1,
+        "description": "<p>Você aprendeu a conjurar magias através do estudo das forças místicas da natureza. Veja o capítulo 7 para as regras de conjuração. As informações abaixo detalham como você usa essas regras com magias de Druida, que aparecem na lista de magias de Druida mais adiante na descrição da classe.</p><p><strong>Truques.</strong> Você conhece dois truques à sua escolha da lista de magias de Druida. Arte Druídica e Criar Chamas são recomendadas.</p><p>Sempre que você alcança um nível de Druida, pode substituir um de seus truques por outro truque à sua escolha da lista de magias de Druida.</p><p>Ao atingir os níveis 4 e 10 de Druida, você aprende mais um truque à sua escolha da lista de magias de Druida, conforme mostrado na coluna Truques da tabela Características de Druida.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Druida mostra quantos espaços de magia você tem para conjurar suas magias de 1º círculo ou superior. Você restaura todos os espaços gastos ao completar um Descanso Longo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de 1º círculo ou superior que estão disponíveis para você conjurar com esta característica. Para começar, escolha quatro magias de 1º círculo da lista de magias de Druida. Amizade Animal, Curar Ferimentos, Fogo das Fadas e Onda Trovejante são recomendadas.</p><p>O número de magias em sua lista aumenta à medida que você alcança níveis de Druida, conforme mostrado na coluna Magias Preparadas da tabela Características de Druida. Sempre que esse número aumentar, escolha magias adicionais da lista de magias de Druida até que o número de magias em sua lista corresponda ao número da tabela. As magias escolhidas devem ser de um círculo para o qual você possui espaços de magia. Por exemplo, se você é um Druida de nível 3, sua lista de magias preparadas pode incluir seis magias de 1º ou 2º círculo em qualquer combinação.</p><p>Se outra característica de Druida lhe der magias que você sempre tem preparadas, essas magias não contam para o número de magias que você pode preparar com esta característica, mas essas magias, de outra forma, contam como magias de Druida para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Sempre que completar um Descanso Longo, você pode mudar sua lista de magias preparadas, substituindo qualquer uma das magias por outras magias de Druida para as quais você tem espaços de magia.</p><p><strong>Atributo de Conjuração.</strong> Sabedoria é seu atributo de conjuração para suas magias de Druida.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Foco Druídico como um Foco de Conjuração para suas magias de Druida.</p>"
+      },
+      {
+        "name": "Idioma Druídico",
+        "level": 1,
+        "description": "<p>Você domina Druídico, o idioma secreto dos Druidas. Ao aprender esse idioma antigo, você também adquiriu a habilidade mágica de se comunicar com animais; você sempre tem a magia Falar com Animais preparada.</p><p>Você pode usar Druídico para deixar mensagens ocultas. Você e outros que conhecem Druídico identificam automaticamente tal mensagem. Outros podem perceber a presença da mensagem com um teste de Inteligência (Investigação) CD 15, mas não podem decifrá-la sem magia.</p>"
+      },
+      {
+        "name": "Ordem Primal",
+        "level": 1,
+        "description": "<p>Você se dedicou a uma das seguintes funções sagradas à sua escolha.</p>",
+        "options": [
+          {
+            "id": "druida-ordem-primal",
+            "name": "Escolha uma Ordem Primal",
+            "choices": ["Protetor", "Xamã"],
+            "choiceDetails": {
+              "Protetor": "Treinado para a batalha, você adquire <strong>proficiência com armas Marciais</strong> e <strong>treinamento com armadura Média</strong>.",
+              "Xamã": "Você conhece um <strong>truque adicional</strong> da lista de magias de Druida. Além disso, sua conexão mística com a natureza lhe concede um <strong>bônus em testes de Inteligência (Arcanismo ou Natureza)</strong> igual ao modificador de Sabedoria (mínimo +1)."
+            }
+          },
+          {
+            "id": "druida-ordem-primal-cantrip",
+            "name": "Escolha um Truque de Druida",
+            "showWhen": { "id": "druida-ordem-primal", "value": "Xamã" },
+            "spellSource": "druida",
+            "isSpell": true,
+            "choices": []
+          }
+        ]
+      },
+      {
+        "name": "Companheiro Selvagem",
+        "level": 2,
+        "description": "<p>Você pode invocar um espírito da natureza que assume a forma de um animal para auxiliá-lo. Como uma ação Usar Magia, você pode gastar um espaço de magia ou um uso de Forma Selvagem para conjurar a magia Convocar Familiar sem componentes Materiais.</p><p>Ao conjurar a magia deste modo, o familiar é uma criatura Feérica e desaparece ao completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Forma Selvagem",
+        "level": 2,
+        "description": "<p>O poder da natureza permite que você assuma a forma de um animal. Como uma Ação Bônus, você multimorfa para uma forma Animal que você aprendeu com esta característica. Você fica nessa forma por um número de horas igual à metade do seu nível de Druida, até usar Forma Selvagem novamente, ter a condição Incapacitado ou morrer. Você também pode sair da forma antes como uma Ação Bônus.</p><p><strong>Quantidade de Usos.</strong> Você pode usar Forma Selvagem duas vezes. Você recupera um uso gasto ao completar um Descanso Curto e restaura todos os usos gastos ao completar um Descanso Longo.</p><p>Você adquire usos adicionais ao atingir determinados níveis de Druida, conforme mostrado na coluna Forma Selvagem da tabela Características de Druida.</p><p><strong>Formas Conhecidas.</strong> Você conhece quatro formas Animais com esta característica, escolhidas entre os blocos de estatísticas de Fera com um Nível de Desafio máximo de 1/4 e que não possuem um Deslocamento de Voo. Aranha, Cavalo de Montaria, Lobo e Rato são recomendadas. Sempre que completar um Descanso Longo, você pode substituir uma de suas formas conhecidas por outra forma permitida.</p><p>Ao atingir certos níveis de Druida, o número de formas conhecidas e o Nível de Desafio máximo dessas formas aumenta, conforme mostrado na tabela Formas de Feras. Além disso, a partir do nível 8, você pode adotar uma forma com Deslocamento de Voo.</p><p>Ao escolher formas conhecidas, você pode procurar no Livro dos Monstros ou em outro lugar por Feras elegíveis se o Mestre permitir.</p><p>Formas de Feras</p><table border=\"1\" cellpadding=\"5\" cellspacing=\"0\"><tr><th>Nível de Druida</th><th>Formas Conhecidas</th><th>ND Máximo</th><th>Deslocamento de Voo</th></tr><tr><td>2</td><td>4</td><td>1/4</td><td>Não</td></tr><tr><td>4</td><td>6</td><td>1/2</td><td>Não</td></tr><tr><td>8</td><td>8</td><td>1</td><td>Sim</td></tr></table><p><strong>Regras Enquanto Multimorfado.</strong> Enquanto estiver em uma forma, você mantém sua personalidade, memórias e capacidade de falar, e as seguintes regras se aplicam:</p><p><strong>Pontos de Vida Temporários.</strong> Ao assumir uma Forma Selvagem, você adquire um número de Pontos de Vida Temporários igual ao seu nível de Druida.</p><p><strong>Estatísticas de Jogo.</strong> Suas estatísticas de jogo são substituídas pelo bloco de estatísticas da Fera, mas você mantém seu tipo de criatura, Pontos de Vida, Dados de Vida, valores de Inteligência, Sabedoria e Carisma, características de classe, idiomas e talentos. Você também mantém suas proficiências em perícia e salvaguarda e usa seu Bônus de Proficiência para elas, além de adquirir as proficiências da criatura. Se uma perícia ou modificador de salvaguarda no bloco de estatísticas da Fera for maior que o seu, use o do bloco de estatísticas.</p><p><strong>Sem Conjuração.</strong> Você não pode conjurar magias, mas a multimorfia não quebra sua Concentração ou interfere em uma magia que você já conjurou.</p><p><strong>Objetos.</strong> Sua capacidade de manipular objetos é determinada pelos membros da forma, e não pelos seus. Além disso, você escolhe se seu equipamento cai em seu espaço, se funde em sua nova forma ou se é usado por ela. O equipamento vestido funciona normalmente, mas o Mestre decide se é compatível para a nova forma usar um equipamento com base no tamanho e forma da criatura. Seu equipamento não muda de tamanho ou forma para corresponder à nova forma, e qualquer equipamento que a nova forma não possa usar deve cair no chão ou se fundir com a forma. O equipamento que se funde com a forma não tem efeito enquanto você estiver nessa forma.</p>"
+      },
+      {
+        "name": "Subclasse de Druida",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Druida à sua escolha. As subclasses Círculo da Lua, Círculo da Terra, Círculo das Estrelas e Círculo do Mar são detalhadas a seguir neste capítulo. Uma subclasse é uma especialidade que lhe concede características em determinados níveis de Druida. Durante toda sua jornada, você recebe cada uma das características de sua subclasse que são de seu nível de Druida ou inferior.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Druida.</p>"
+      },
+      {
+        "name": "Ressurgimento Selvagem",
+        "level": 5,
+        "description": "<p>Uma vez em cada um de seus turnos, se você não tiver mais usos de Forma Selvagem, pode recuperar um uso gastando um espaço de magia (nenhuma ação é necessária).</p><p>Além disso, você pode gastar um uso de Forma Selvagem (nenhuma ação é necessária) para recuperar um espaço de magia de 1º círculo, mas não pode fazê-lo novamente até completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Fúria Elemental",
+        "level": 7,
+        "description": "<p>O poder dos elementos flui através de você. Você recebe uma das seguintes opções à sua escolha.</p><p><strong>Ataque Primal.</strong> Uma vez em cada um dos seus turnos, ao atingir uma criatura com uma jogada de ataque usando uma arma ou um ataque da forma Animal em Forma Selvagem, pode causar 1d8 pontos de dano Elétrico, Gélido, Ígneo ou Trovejante (à sua escolha quando você atinge) adicional ao alvo.</p><p><strong>Conjuração Poderosa.</strong> Adicione seu modificador de Sabedoria ao dano causado com qualquer truque de Druida.</p>"
+      },
+      {
+        "name": "Fúria Elemental Aprimorada",
+        "level": 15,
+        "description": "<p>A opção que você escolheu para Fúria Elemental fica mais poderosa, conforme detalhado abaixo.</p><p><strong>Ataque Primal.</strong> O dano adicional de seu Ataque Primal aumenta para 2d8.</p><p><strong>Conjuração Poderosa.</strong> Ao conjurar um truque de Druida com um alcance de 3 metros ou mais, o alcance da magia aumenta para 90 metros.</p>"
+      },
+      {
+        "name": "Magias Bestiais",
+        "level": 18,
+        "description": "<p>Ao usar Forma Selvagem, você pode conjurar magias na forma Animal, exceto magias que tenham um componente Material com um custo especificado ou que consuma seu componente Material.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva da Viagem Dimensional é recomendada.</p>"
+      },
+      {
+        "name": "Arquidruida",
+        "level": 20,
+        "description": "<p>A vitalidade da natureza floresce constantemente dentro de você, concedendo-lhe os seguintes benefícios.</p><p><strong>Forma Selvagem Eterna.</strong> Sempre que você joga Iniciativa e não tem mais usos de Forma Selvagem, você recupera um uso gasto dela.</p><p><strong>Natureza Xamânica.</strong> Você pode converter usos de Forma Selvagem em um espaço de magia (nenhuma ação é necessária). Escolha um número de seus usos não gastos de Forma Selvagem e transforme-os em um único espaço de magia, com cada uso contribuindo com espaços de magia de 2º círculo. Por exemplo, se você transformar dois usos de Forma Selvagem, você produz um espaço de magia de 4º círculo. Após usar este benefício, você não pode fazê-lo novamente até completar um Descanso Longo.</p><p><strong>Longevidade.</strong> A magia primitiva que você utiliza permite que você envelheça mais lentamente: para cada dez anos que passam, seu corpo envelhece apenas um.</p>"
+      }
+    ]
+  },
+  "feiticeiro": {
+    "subtitle": "Feiticeiro. Um magista deslumbrante repleto de magia inata.",
+    "basicTraits": {
+      "Atributo Primário": "Carisma",
+      "Dado de Ponto de Vida": "d6 por nível de Feiticeiro",
+      "Proficiência em Salvaguardas": "Constituição e Carisma",
+      "Proficiências em Perícia": "Escolha 2: Arcanismo, Enganação, Intimidação, Intuição, Persuasão ou Religião.",
+      "Proficiências com Armas": "Armas Simples",
+      "Treinamento com Armaduras": "Nenhuma",
+      "Equipamento Inicial": "Escolha A ou B: (A) Lança, 2 Adagas, Foco Arcano (cristal), Kit de Explorador de Masmorras e 28 PO; ou (B) 50 PO"
+    },
+    "options": [
+      {
+        "id": "feiticeiro-skill-1",
+        "name": "Escolha uma Perícia de Feiticeiro",
+        "choices": [
+          "Arcanismo",
+          "Enganação",
+          "Intimidação",
+          "Intuição",
+          "Persuasão",
+          "Religião"
+        ]
+      },
+      {
+        "id": "feiticeiro-skill-2",
+        "name": "Escolha uma Perícia de Feiticeiro",
+        "choices": [
+          "Arcanismo",
+          "Enganação",
+          "Intimidação",
+          "Intuição",
+          "Persuasão",
+          "Religião"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Conjuração",
+        "level": 1,
+        "description": "<p>Através da sua magia inata, você pode conjurar magias. Veja o capítulo 7 para as regras sobre conjuração de magias. As informações abaixo detalham como você usa essas regras com magias de Feiticeiro, que aparecem na lista de magias de Feiticeiro mais adiante na descrição da classe.</p><p><strong>Truques.</strong> Você conhece quatro truques de Feiticeiro à sua escolha. Explosão Elemental, Luz, Prestidigitação Arcana e Toque Chocante são recomendados. Ao alcançar um nível de Feiticeiro, você pode substituir um dos seus truques dessa característica por outro truque de Feiticeiro à sua escolha.</p><p>Ao atingir os níveis 4 e 10 de Feiticeiro, você aprende mais um truque de Feiticeiro à sua escolha, conforme detalhado na coluna Truques da tabela Características de Feiticeiro.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Feiticeiro mostra quantos espaços de magia você tem para conjurar suas magias de 1º círculo ou superior. Você restaura todos os espaços gastos ao completar um Descanso Longo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de 1º círculo ou superior que estão disponíveis para você conjurar com essa característica. Para começar, escolha duas magias de Feiticeiro de 1º círculo. Detectar Magia e Mãos Flamejantes são recomendadas.</p><p>O número de magias em sua lista aumenta à medida que você atinge níveis de Feiticeiro, conforme mostrado na coluna Magias Preparadas da tabela Características de Feiticeiro. Sempre que esse número aumentar, escolha magias adicionais da lista de magias de Feiticeiro até que o número de magias em sua lista corresponda ao número da tabela. As magias escolhidas devem ser de um círculo para o qual você possui espaços de magia. Por exemplo, se você é um Feiticeiro de nível 3, sua lista de magias preparadas pode incluir seis magias de Feiticeiro de 1º ou 2º círculo em qualquer combinação.</p><p>Se outra característica de Feiticeiro lhe concede magias sempre preparadas, elas não contam para o número de magias que você pode preparar com essa característica, mas ainda são consideradas magias de Feiticeiro para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Sempre que você obtém um nível de Feiticeiro, pode substituir uma magia em sua lista por outra magia de Feiticeiro para a qual você tem espaços de magia.</p><p><strong>Atributo de Conjuração.</strong> Carisma é seu atributo de conjuração para suas magias de Feiticeiro.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Foco Arcano como um Foco de Conjuração para suas magias de Feiticeiro.</p>"
+      },
+      {
+        "name": "Feitiçaria Inata",
+        "level": 1,
+        "description": "<p>Um evento em seu passado deixou uma marca permanente em você, lhe infundindo magia latente. Como uma Ação Bônus, você pode liberar essa magia por 1 minuto, durante o qual você adquire os seguintes benefícios:</p><ul><li style=\"margin-left:20px;list-style-type:disc\">A CD para evitar suas magias de Feiticeiro aumenta em 1.</li><li style=\"margin-left:20px;list-style-type:disc\">Você tem Vantagem nas jogadas de ataque das magias de Feiticeiro que conjurar.</li></ul><p>Você pode usar essa característica duas vezes e restaura todos os usos gastos ao completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Fonte de Magia",
+        "level": 2,
+        "description": "<p>Você pode aproveitar a fonte de magia dentro de si. Essa fonte é representada por Pontos de Feitiçaria, que permitem que você crie uma variedade de efeitos mágicos.</p><p>Você tem 2 Pontos de Feitiçaria e adquire mais à medida que atinge níveis mais altos, conforme detalhado na coluna Pontos de Feitiçaria da tabela Características de Feiticeiro. Você não pode ter mais Pontos de Feitiçaria do que o número mostrado na tabela para o seu nível e restaura todos os Pontos de Feitiçaria gastos ao completar um Descanso Longo.</p><p>Você pode usar seus Pontos de Feitiçaria para abastecer as opções abaixo, juntamente com outras características, como Metamagia, que usam esses pontos.</p><p>Convertendo Espaços de Magia em Pontos de Feitiçaria. Você pode gastar um espaço de magia para receber um número de Pontos de Feitiçaria igual ao círculo do espaço (nenhuma ação é necessária).</p><p><strong>Criando Espaços de Magia.</strong> Como uma Ação Bônus, você pode transformar Pontos de Feitiçaria não gastos em um espaço de magia. A tabela Criando Espaços de Magia mostra o custo de criar um espaço de magia de um determinado círculo e lista o nível mínimo de Feiticeiro que você deve ter para criar um espaço. Você pode criar um espaço de magia não superior ao 5º círculo.</p><p>Qualquer espaço de magia que você criar com essa característica desaparece ao completar um Descanso Longo.</p><p>Criando Espaços de Magia</p><table border=\"1\" cellpadding=\"5\" cellspacing=\"0\"><tr><th>Círculo de Espaço de Magia</th><th>Custo de Ponto de Feitiçaria</th><th>Nível Mín. de Feiticeiro</th></tr><tr><td>1</td><td>2</td><td>2</td></tr><tr><td>2</td><td>3</td><td>3</td></tr><tr><td>3</td><td>5</td><td>5</td></tr><tr><td>4</td><td>6</td><td>7</td></tr><tr><td>5</td><td>7</td><td>9</td></tr></table>"
+      },
+      {
+        "name": "Metamagia",
+        "level": 2,
+        "description": "<p>Sua magia flui de dentro para fora, permitindo que você ajuste suas magias conforme necessário. Você adquire duas opções de Metamagia à sua escolha em “Opções de Metamagia”, que são apresentadas mais adiante na descrição desta classe. Essas opções podem ser usadas para modificar temporariamente as magias que conjura, consumindo a quantidade correspondente de Pontos de Feitiçaria.</p><p>Você pode usar apenas uma opção de Metamagia em uma magia ao conjurá-la, a menos que indicado de outra forma em uma dessas opções.</p><p>Ao atingir um nível de Feiticeiro, você pode substituir uma de suas opções de Metamagia por uma que não conhece. Você adquire mais duas opções no nível 10 de Feiticeiro e mais duas opções no nível 17 de Feiticeiro.</p>"
+      },
+      {
+        "name": "Subclasse de Feiticeiro",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Feiticeiro à sua escolha.As subclasses Feitiçaria Aberrante, Feitiçaria Dracônica, Feitiçaria Mecânica, Feitiçaria Selvagem estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Feiticeiro. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Feiticeiro ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Feiticeiro.</p>"
+      },
+      {
+        "name": "Restauração Feiticeira",
+        "level": 5,
+        "description": "<p>Ao completar um Descanso Curto, você pode recuperar os Pontos de Feitiçaria gastos, mas não mais do que um número igual à metade do seu nível de Feiticeiro (arredondado para baixo). Você pode usar essa característica novamente após completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Feitiçaria Encarnada",
+        "level": 7,
+        "description": "<p>Quando não houver mais usos de Feitiçaria Inata, você pode usá-la se gastar 2 Pontos de Feitiçaria ao executar a Ação Bônus para ativá-la.</p><p>Além disso, enquanto sua característica Feitiçaria Inata estiver ativa, você pode usar até duas de suas opções de Metamagia em cada magia conjurada.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva da Viagem Dimensional é recomendada.</p>"
+      },
+      {
+        "name": "Apoteose Arcana",
+        "level": 20,
+        "description": "<p>Enquanto sua característica Feitiçaria Inata estiver ativa, você pode usar uma opção de Metamagia em cada um de seus turnos sem gastar Pontos de Feitiçaria com ela.</p>"
+      }
+    ]
+  },
+  "guardiao": {
+    "subtitle": "Guardião. Um combatente errante imbuído de magia primitiva.",
+    "basicTraits": {
+      "Atributo Primário": "Destreza e Sabedoria",
+      "Dado de Ponto de Vida": "d10 por nível de Guardião",
+      "Proficiência em Salvaguarda": "Força e Destreza",
+      "Proficiências em Perícias": "Escolha 3: Atletismo, Furtividade, Intuição, Investigação, Lidar com Animais, Natureza, Percepção ou Sobrevivência",
+      "Proficiências com Armas": "Armas Simples e Marciais",
+      "Treinamento com Armadura": "Armaduras Leves, Médias e Escudos",
+      "Equipamento Inicial": "Escolha A ou B: (A) armadura de Couro Batido, Cimitarra, Espada Curta, Arco Longo, 20 Flechas, Aljava, Foco Druídico (ramo de visco), Kit de Aventureiro e 7 PO; ou (B) 150 PO"
+    },
+    "options": [
+      {
+        "id": "guardiao-skill-1",
+        "name": "Escolha uma Perícia de Guardião",
+        "choices": [
+          "Atletismo",
+          "Furtividade",
+          "Intuição",
+          "Investigação",
+          "Lidar com Animais",
+          "Natureza",
+          "Percepção",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "guardiao-skill-2",
+        "name": "Escolha uma Perícia de Guardião",
+        "choices": [
+          "Atletismo",
+          "Furtividade",
+          "Intuição",
+          "Investigação",
+          "Lidar com Animais",
+          "Natureza",
+          "Percepção",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "guardiao-skill-3",
+        "name": "Escolha uma Perícia de Guardião",
+        "choices": [
+          "Atletismo",
+          "Furtividade",
+          "Intuição",
+          "Investigação",
+          "Lidar com Animais",
+          "Natureza",
+          "Percepção",
+          "Sobrevivência"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Conjuração",
+        "level": 1,
+        "description": "<p>Você aprendeu a canalizar a essência mágica da natureza para conjurar magias. Veja o capítulo 7 para as regras sobre conjuração de magias. As informações abaixo detalham como você usa essas regras com as magias de Guardião, explicadas na lista de magias de Guardião mais adiante na descrição da classe.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Guardião mostra quantos espaços de magia você tem para conjurar suas magias de 1º círculo ou superior. Você restaura todos os espaços gastos ao completar um Descanso Longo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de 1º círculo ou superior que estão disponíveis para você conjurar com esta característica. Para começar, escolha duas magias de Guardião de 1º círculo. Curar Ferimentos e Golpe Constritor são recomendadas.</p><p>O número de magias em sua lista aumenta à medida que você atinge níveis de Guardião, conforme mostrado na coluna Magias Preparadas da tabela Características de Guardião. Sempre que esse número aumentar, escolha magias adicionais da lista de magias de Guardião até que o número de magias em sua lista corresponda ao número da tabela. As magias escolhidas devem ser de um círculo para o qual você possui espaços de magia. Por exemplo, se você é um Guardião de nível 5, sua lista de magias preparadas pode incluir seis magias de Guardião de 1º ou 2º círculo em qualquer combinação.</p><p>Se outra característica de Guardião lhe der magias que você sempre tem preparadas, essas magias não contam para o número de magias que você pode preparar com esta característica, mas essas magias, de outra forma, contam como magias de Guardião para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Sempre que completar um Descanso Longo, você pode substituir uma magia em sua lista por outra magia de Guardião para a qual você tem espaços de magia.</p><p><strong>Atributo de Conjuração.</strong> Sabedoria é seu atributo de conjuração para suas magias de Guardião.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Foco Druídico como um Foco de Conjuração para suas magias de Guardião.</p>"
+      },
+      {
+        "name": "Inimigo Favorito",
+        "level": 1,
+        "description": "<p>Você sempre tem a magia Marca do Predador preparada. Você pode conjurá-la duas vezes sem gastar um espaço de magia, e você restaura todos os usos gastos desta característica ao completar um Descanso Longo.</p><p>O número de vezes que você pode conjurar a magia sem um espaço de magia aumenta ao atingir certos níveis de Guardião, conforme mostrado na coluna Inimigo Favorito da tabela Características de Guardião.</p>"
+      },
+      {
+        "name": "Maestria em Arma",
+        "level": 1,
+        "description": "<p>Seu treinamento com armas permite que você use as propriedades de maestria de dois tipos de armas à sua escolha com as quais você tem proficiência, como Arcos Longos e Espadas Curtas.</p><p>Sempre que completar um Descanso Longo, você pode alterar os tipos de armas que escolheu. Por exemplo, você pode mudar para usar as propriedades de maestria de Cimitarras e Espadas Longas.</p>",
+        "options": [
+          {
+            "id": "guardiao-weapon-mastery-1",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente",
+              "Arco Longo",
+              "Besta de Mão",
+              "Besta Pesada",
+              "Mosquete",
+              "Pistola",
+              "Zarabatana"
+            ],
+            "group": "Armas Sem Categoria"
+          },
+          {
+            "id": "guardiao-weapon-mastery-2",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente",
+              "Arco Longo",
+              "Besta de Mão",
+              "Besta Pesada",
+              "Mosquete",
+              "Pistola",
+              "Zarabatana"
+            ],
+            "group": "Armas Sem Categoria"
+          }
+        ]
+      },
+      {
+        "name": "Estilo de Luta",
+        "level": 2,
+        "description": "<p>Você adquire um talento Estilo de Luta à sua escolha. Em vez de escolher um desses talentos, você pode escolher a opção abaixo.</p><p><strong>Combatente Druídico.</strong> Você aprende dois truques de Druida à sua escolha. Fagulha Estelar e Orientação são recomendados. Os truques escolhidos contam como magias de Guardião para você, e Sabedoria é seu atributo de conjuração para eles. Sempre que você atingir um nível de Guardião, pode substituir um desses truques por outro truque de Druida.</p>"
+      },
+      {
+        "name": "Explorador Hábil",
+        "level": 2,
+        "description": "<p>Graças às suas viagens, você adquire os seguintes benefícios.</p><p><strong>Especialista.</strong> Escolha uma perícia na qual você tenha proficiência, mas não seja Especialista. Você obtém Especialização nessa perícia.</p><p><strong>Idiomas.</strong> Você conhece dois idiomas à sua escolha da tabela de idiomas no capítulo 2.</p>"
+      },
+      {
+        "name": "Subclasse de Guardião",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Guardião à sua escolha. As subclasses Andarilho Feérico, Caçador, Senhor das Feras e Vigilante das Sombras estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Guardião. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Guardião ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Guardião.</p>"
+      },
+      {
+        "name": "Ataque Extra",
+        "level": 5,
+        "description": "<p>Você pode atacar duas vezes, em vez de uma, sempre que executar a ação Atacar no seu turno.</p>"
+      },
+      {
+        "name": "Errante",
+        "level": 6,
+        "description": "<p>Seu Deslocamento aumenta em 3 metros enquanto você não estiver usando Armadura Pesada. Você também tem um Deslocamento de Escalada e um Deslocamento de Natação igual ao seu Deslocamento.</p>"
+      },
+      {
+        "name": "Especialista",
+        "level": 9,
+        "description": "<p>Escolha duas perícias nas quais você tem proficiência, mas não seja Especialista. Você obtém Especialização nessas perícias.</p>"
+      },
+      {
+        "name": "Incansável",
+        "level": 10,
+        "description": "<p>As forças primordiais agora ajudam a impulsioná-lo em suas jornadas, concedendo-lhe os seguintes benefícios.</p><p><strong>Pontos de Vida Temporários.</strong> Como uma ação Usar Magia, você pode conceder a si um número de Pontos de Vida Temporários igual a 1d8 mais seu modificador de Sabedoria (mínimo de 1). Você pode usar essa ação um número de vezes igual ao seu modificador de Sabedoria (mínimo de uma vez) e restaura todos os usos gastos ao completar um Descanso Longo.</p><p><strong>Redução de Exaustão.</strong> Sempre que completar um Descanso Curto, seu nível de Exaustão, se houver, reduz em 1.</p>"
+      },
+      {
+        "name": "Predador Implacável",
+        "level": 13,
+        "description": "<p>Sofrer dano não quebra sua Concentração da Marca do Predador.</p>"
+      },
+      {
+        "name": "Véu da Natureza",
+        "level": 14,
+        "description": "<p>Você invoca espíritos da natureza para se esconder magicamente. Como uma Ação Bônus, você pode conceder a si a condição Invisível até o final do seu próximo turno.</p><p>Você pode usar essa característica um número de vezes igual ao seu modificador de Sabedoria (mínimo de uma vez) e restaura todos os usos gastos ao completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Caçador Preciso",
+        "level": 17,
+        "description": "<p>Você tem Vantagem em jogadas de ataque contra a criatura marcada pela sua Marca do Predador.</p>"
+      },
+      {
+        "name": "Sentidos Selvagens",
+        "level": 18,
+        "description": "<p>Sua connection com as forças da natureza lhe concede Visão às Cegas com um alcance de 9 metros.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva da Viagem Dimensional é recomendada.</p>"
+      },
+      {
+        "name": "Matador de Inimigos Favoritos",
+        "level": 20,
+        "description": "<p>O dado de dano da sua Marca do Predador é um d10 em vez de um d6.</p>"
+      }
+    ]
+  },
+  "guerreiro": {
+    "subtitle": "Guerreiro. Um mestre de todas as armas e armaduras.",
+    "basicTraits": {
+      "Atributo Primário": "Força ou Destreza",
+      "Dado de Ponto de Vida": "d10 por nível de Guerreiro",
+      "Proficiência em Salvaguardas": "Força e Constituição",
+      "Proficiências em Perícias": "Escolha 2: Acrobacia, Atletismo, História, Intimidação, Intuição, Lidar com Animais, Percepção, Persuasão ou Sobrevivência.",
+      "Proficiências com Armas": "Armas Simples e Marciais",
+      "Treinamento com Armadura": "Armaduras Leves, Médias e Pesadas e Escudos",
+      "Equipamento Inicial": "Escolha A, B ou C: (A) Cota de Malha, Espada Grande, Mangual, 8 Azagaias, Kit de Explorador de Masmorras e 4 PO; (B) Armadura de Couro Batido, Cimitarra, Espada Curta, Arco Longo, 20 Flechas, Aljava, Kit de Explorador de Masmorras e 11 PO; ou (C) 155 PO"
+    },
+    "options": [
+      {
+        "id": "guerreiro-skill-1",
+        "name": "Escolha uma Perícia de Guerreiro",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "História",
+          "Intimidação",
+          "Intuição",
+          "Lidar com Animais",
+          "Percepção",
+          "Persuasão",
+          "Sobrevivência"
+        ]
+      },
+      {
+        "id": "guerreiro-skill-2",
+        "name": "Escolha uma Perícia de Guerreiro",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "História",
+          "Intimidação",
+          "Intuição",
+          "Lidar com Animais",
+          "Percepção",
+          "Persuasão",
+          "Sobrevivência"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Estilo de Luta",
+        "level": 1,
+        "description": "<p>Você aprimorou suas proezas marciais e tem um talento de Estilo de Luta à sua escolha. Defensivo é o recomendado.</p><p>Sempre que atinge um nível de Guerreiro, você pode substituir o talento que escolheu por um talento diferente de Estilo de Luta.</p>",
+        "options": [
+          {
+            "id": "guerreiro-estilo-luta",
+            "name": "Escolha um Estilo de Luta",
+            "choices": [
+              "Arquearia",
+              "Combate com Armas de Arremesso",
+              "Combate com Armas Grandes",
+              "Combate com Duas Armas",
+              "Combate Desarmado",
+              "Defensivo",
+              "Duelismo",
+              "Interceptação",
+              "Luta às Cegas",
+              "Protetivo"
+            ],
+            "choiceDetails": {
+              "Arquearia": "Você recebe um bônus de <strong>+2 nas jogadas de ataque com armas à Distância</strong>.",
+              "Combate com Armas de Arremesso": "Ao atingir com ataque à distância usando arma com propriedade Arremesso, obtém <strong>+2 na jogada de dano</strong>.",
+              "Combate com Armas Grandes": "Ao jogar dano com arma Corpo a Corpo empunhada com as duas mãos (Duas Mãos ou Versátil), pode tratar qualquer 1 ou 2 em dado de dano como 3.",
+              "Combate com Duas Armas": "Ao realizar ataque adicional com arma Leve, pode <strong>adicionar o modificador de atributo ao dano</strong> desse ataque.",
+              "Combate Desarmado": "Ao atingir com Ataque Desarmado, pode causar dano Contundente de <strong>1d6 + modificador de Força</strong> (1d8 se sem arma ou Escudo). No início de cada turno, pode causar 1d4 de dano Contundente a criatura Imobilizada por você.",
+              "Defensivo": "Enquanto usar armadura Leve, Média ou Pesada, recebe <strong>+1 na Classe de Armadura</strong>.",
+              "Duelismo": "Ao segurar arma Corpo a Corpo em uma mão e nenhuma outra arma, recebe <strong>+2 nas jogadas de dano</strong> dessa arma.",
+              "Interceptação": "Quando criatura à vista atinge outra a 1,5m de você, pode usar Reação para <strong>reduzir o dano em 1d10 + Bônus de Proficiência</strong>. Requer Escudo ou arma Simples/Marcial.",
+              "Luta às Cegas": "Você tem <strong>Visão às Cegas</strong> com alcance de 3 metros.",
+              "Protetivo": "Quando criatura à vista ataca alvo a 1,5m de você, pode usar Reação para impor <strong>Desvantagem no ataque</strong> e em todos contra o alvo até o início do seu próximo turno. Requer Escudo."
+            }
+          }
+        ]
+      },
+      {
+        "name": "Maestria em Arma",
+        "level": 1,
+        "description": "<p>Seu treinamento com armas permite que você utilize as propriedades de maestria com três tipos de armas Simples ou Marciais à sua escolha. Sempre que completar um Descanso Longo, você pode praticar movimentos com armas e alterar uma dessas escolhas de armas.</p><p>Ao alcançar certos níveis de Guerreiro, você adquire a habilidade de usar as propriedades de maestria de mais tipos de armas, conforme mostrado na coluna Maestria em Armas da tabela Características de Guerreiro.</p>",
+        "options": [
+          {
+            "id": "guerreiro-weapon-mastery-1",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente",
+              "Arco Longo",
+              "Besta de Mão",
+              "Besta Pesada",
+              "Mosquete",
+              "Pistola",
+              "Zarabatana"
+            ],
+            "group": "Armas Sem Categoria"
+          },
+          {
+            "id": "guerreiro-weapon-mastery-2",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente",
+              "Arco Longo",
+              "Besta de Mão",
+              "Besta Pesada",
+              "Mosquete",
+              "Pistola",
+              "Zarabatana"
+            ],
+            "group": "Armas Sem Categoria"
+          },
+          {
+            "id": "guerreiro-weapon-mastery-3",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente",
+              "Arco Longo",
+              "Besta de Mão",
+              "Besta Pesada",
+              "Mosquete",
+              "Pistola",
+              "Zarabatana"
+            ],
+            "group": "Armas Sem Categoria"
+          }
+        ]
+      },
+      {
+        "name": "Recuperar Fôlego",
+        "level": 1,
+        "description": "<p>Você tem uma reserva limitada de resistência física e mental que pode usar. Como uma Ação Bônus, você pode usá-la para recuperar Pontos de Vida iguais a 1d10 mais seu nível de Guerreiro.</p><p>Você pode usar essa característica duas vezes. Você recupera um uso gasto quando completa um Descanso Curto e restaura todos os usos gastos quando completa um Descanso Longo.</p><p>Ao atingir certos níveis de Guerreiro, você adquire mais usos dessa característica, conforme mostrado na coluna Recuperar Fôlego da tabela Características de Guerreiro.</p>"
+      },
+      {
+        "name": "Mente Tática",
+        "level": 2,
+        "description": "<p>Você tem uma mente para táticas dentro e fora do campo de batalha. Ao falhar em um teste de atributo, você pode gastar um uso de seu Recuperar Fôlego para tentar alcançar a vitória. Em vez de recuperar Pontos de Vida, você joga 1d10 e adiciona o resultado ao teste de atributo, potencialmente transformando-o em sucesso. Se o teste ainda assim falhar, esse uso do Recuperar Fôlego não é gasto.</p>"
+      },
+      {
+        "name": "Surto de Ação",
+        "level": 2,
+        "description": "<p>Você pode se esforçar além de seus limites normais por um momento. No seu turno, você pode executar uma ação adicional, exceto a ação Usar Magia.</p><p>Após usar esta característica, você não pode usá-la novamente até completar um Descanso Curto ou Longo. A partir do nível 17, você pode usá-lo duas vezes antes de um descanso, mas apenas uma vez em um turno.</p>"
+      },
+      {
+        "name": "Subclasse de Guerreiro",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Guerreiro à sua escolha. As subclasses Campeão, Cavaleiro Místico, Combatente Psíquico e Mestre da Batalha estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Guerreiro. Pelo resto de sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Guerreiro ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 6, 8, 12, 14 e 16 de Guerreiro.</p>"
+      },
+      {
+        "name": "Ajuste Tático",
+        "level": 5,
+        "description": "<p>Sempre que executar uma Ação Bônus para seu Recuperar Fôlego, você pode mover-se até metade do seu Deslocamento sem provocar Ataques de Oportunidade.</p>"
+      },
+      {
+        "name": "Ataque Extra",
+        "level": 5,
+        "description": "<p>Você pode atacar duas vezes, em vez de uma, sempre que executar a ação Atacar no seu turno.</p>"
+      },
+      {
+        "name": "Indomável",
+        "level": 9,
+        "description": "<p>Ao falhar em uma salvaguarda, você pode jogá-la novamente adicionando um bônus igual ao seu nível de Guerreiro. Você deve usar o novo resultado e não pode usar essa característica novamente até completar um Descanso Longo.</p><p>A partir do nível 13, você pode usar essa característica duas vezes antes de um Descanso Longo e três vezes antes de um Descanso Longo ao atingir o nível 17.</p>"
+      },
+      {
+        "name": "Mestre Tático",
+        "level": 9,
+        "description": "<p>Ao atacar com uma arma cuja propriedade de maestria você pode usar, você pode substituir essa propriedade pela propriedade Empurrar, Drenar ou Lentidão para esse ataque.</p>"
+      },
+      {
+        "name": "Dois Ataques Extras",
+        "level": 11,
+        "description": "<p>Você pode atacar três vezes, em vez de uma, sempre que executar a ação Atacar no seu turno.</p>"
+      },
+      {
+        "name": "Ataques Estudados",
+        "level": 13,
+        "description": "<p>Você estuda seus oponentes e aprende com cada ataque que realiza. Se você realizar uma jogada de ataque contra uma criatura e errar, você tem Vantagem em sua próxima jogada de ataque contra essa criatura antes do final do seu próximo turno.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva da Proeza em Combate é recomendada.</p>"
+      },
+      {
+        "name": "Três Ataques Extras",
+        "level": 20,
+        "description": "<p>Você pode atacar quatro vezes, em vez de uma, sempre que executar a ação Atacar no seu turno.</p>"
+      }
+    ]
+  },
+  "ladino": {
+    "subtitle": "Ladino. Um especialista em furtividade e subterfúgio.",
+    "basicTraits": {
+      "Atributo Primário": "Destreza",
+      "Dado de Ponto de Vida": "d8 por nível de Ladino",
+      "Proficiência em Salvaguarda": "Destreza e Inteligência",
+      "Proficiência em Perícias": "Escolha 4: Acrobacia, Atletismo, Enganação, Furtividade, Intimidação, Intuição, Investigação, Percepção, Persuasão ou Prestidigitação.",
+      "Proficiências com Armas": "Armas Simples e Armas Marciais que tem a propriedade Acuidade ou Leve",
+      "Proficiências com Ferramentas": "Ferramentas de Ladrão",
+      "Treinamento com Armadura": "Armadura Leve",
+      "Equipamento Inicial": "Escolha A ou B: (A) Armadura de Couro, 2 Adagas, Espada Curta, Arco Curto, 20 Flechas, Aljava, Ferramentas de Ladrão, Kit de Assaltante e 8 PO; ou (B) 100 PO"
+    },
+    "options": [
+      {
+        "id": "ladino-skill-1",
+        "name": "Escolha uma Perícia de Ladino",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "Enganação",
+          "Furtividade",
+          "Intimidação",
+          "Intuição",
+          "Investigação",
+          "Percepção",
+          "Persuasão",
+          "Prestidigitação"
+        ]
+      },
+      {
+        "id": "ladino-skill-2",
+        "name": "Escolha uma Perícia de Ladino",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "Enganação",
+          "Furtividade",
+          "Intimidação",
+          "Intuição",
+          "Investigação",
+          "Percepção",
+          "Persuasão",
+          "Prestidigitação"
+        ]
+      },
+      {
+        "id": "ladino-skill-3",
+        "name": "Escolha uma Perícia de Ladino",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "Enganação",
+          "Furtividade",
+          "Intimidação",
+          "Intuição",
+          "Investigação",
+          "Percepção",
+          "Persuasão",
+          "Prestidigitação"
+        ]
+      },
+      {
+        "id": "ladino-skill-4",
+        "name": "Escolha uma Perícia de Ladino",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "Enganação",
+          "Furtividade",
+          "Intimidação",
+          "Intuição",
+          "Investigação",
+          "Percepção",
+          "Persuasão",
+          "Prestidigitação"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Ataque Furtivo",
+        "level": 1,
+        "description": "<p>Você sabe atacar sutilmente, explorando a distração do inimigo. Uma vez por turno, ao atingir uma criatura com uma jogada de ataque em que tem Vantagem com uma arma com Acuidade ou uma arma à Distância, você pode causar 1d6 pontos de dano adicional do tipo de dano da arma.</p><p>Você não precisa ter Vantagem na jogada de ataque se pelo menos um de seus aliados estiver a até 1,5 metro do alvo, e o aliado não tem a condição Incapacitado e você não tem Desvantagem na jogada de ataque.</p><p>O dano adicional aumenta à medida que você adquire níveis de Ladino, conforme mostrado na coluna Ataque Furtivo da tabela Características de Ladino.</p>"
+      },
+      {
+        "name": "Especialista",
+        "level": 1,
+        "description": "<p>Você obtém Especialização em duas de suas perícias, à sua escolha, nas quais já seja proficiente. Furtividade e Prestidigitação são recomendadas se você tiver proficiência nelas.</p><p>No nível 6 de Ladino, você obtém Especialização em mais duas perícias nas quais já seja proficiente à sua escolha.</p>",
+        "options": [
+          {
+            "id": "ladino-especialista-1",
+            "name": "Escolha uma perícia de especialização",
+            "sourceChoicesIds": ["ladino-skill-1", "ladino-skill-2", "ladino-skill-3", "ladino-skill-4"],
+            "choices": []
+          },
+          {
+            "id": "ladino-especialista-2",
+            "name": "Escolha uma perícia de especialização",
+            "sourceChoicesIds": ["ladino-skill-1", "ladino-skill-2", "ladino-skill-3", "ladino-skill-4"],
+            "choices": []
+          }
+        ]
+      },
+      {
+        "name": "Gíria do Ladrão",
+        "level": 1,
+        "description": "<p>Você aprendeu vários idiomas nas comunidades onde usou seus talentos gatunos. Você conhece a Gíria dos Ladrões e outro idioma à sua escolha, que você escolhe nas tabelas de idiomas no capítulo 2.</p>",
+        "options": [
+          {
+            "id": "ladino-giria-idioma",
+            "name": "Escolha um Idioma",
+            "choices": [
+              "Abissal", "Anão", "Celestial", "Comum", "Dracônico", "Dialeto Obscuro",
+              "Élfico", "Gigante", "Gnômico", "Goblin", "Infernal", "Linguagem de Sinais Comum",
+              "Orc", "Pequenino", "Primordial", "Silvestre", "Subcomum"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Maestria em Arma",
+        "level": 1,
+        "description": "<p>Seu treinamento com armas permite que você use as propriedades de maestria de dois tipos de armas à sua escolha com as quais você tem proficiência, como Adagas e Arcos Curtos.</p><p>Ao completar um Descanso Longo, você pode alterar os tipos de armas que escolheu. Por exemplo, você pode trocar para as propriedades de maestria de Cimitarras e Espadas Curtas.</p>",
+        "options": [
+          {
+            "id": "ladino-weapon-mastery-1",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Rapieira",
+              "Besta de Mão"
+            ],
+            "group": "Armas Sem Categoria"
+          },
+          {
+            "id": "ladino-weapon-mastery-2",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Rapieira",
+              "Besta de Mão"
+            ],
+            "group": "Armas Sem Categoria"
+          }
+        ]
+      },
+      {
+        "name": "Ação Ardilosa",
+        "level": 2,
+        "description": "<p>Seu pensamento rápido e agilidade permitem que você se mova e aja rapidamente. No seu turno, você pode executar uma das seguintes ações como uma Ação Bônus: Correr, Desengajar ou Esconder.</p>"
+      },
+      {
+        "name": "Mira Firme",
+        "level": 3,
+        "description": "<p>Como uma Ação Bônus, você concede a si mesmo Vantagem em sua próxima jogada de ataque no turno atual. Você pode usar esta característica somente se não tiver se movido durante este turno e, após usá-la, seu Deslocamento é 0 até o final do turno atual.</p>"
+      },
+      {
+        "name": "Subclasse de Ladino",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Ladino à sua escolha. As subclasses Adaga Espiritual, Assassino, Ladrão e Trapaceiro Arcano estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Ladino. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Ladino ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atende os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 10, 12 e 16 de Ladino.</p>"
+      },
+      {
+        "name": "Golpe Astuto",
+        "level": 5,
+        "description": "<p>Você encontrou maneiras astutas de aplicar seu Ataque Furtivo. Ao causar dano com ele, você pode adicionar um dos seguintes efeitos de Golpe Astuto, cada um com um custo em dados que deve ser subtraído do dano total do Ataque Furtivo. Remova o dado antes de jogar, e o efeito ocorre imediatamente após o dano. Por exemplo, ao escolher o efeito Envenenar, retire 1d6 de dano do Ataque Furtivo antes de jogá-lo.</p><p>Se um efeito de Golpe Astuto exigir uma salvaguarda, a CD é igual a 8 mais seu modificador de Destreza e Bônus de Proficiência.</p><p><strong>Envenenar (Custo: 1d6).</strong> Você adiciona uma toxina ao seu ataque, forçando o alvo a realizar uma salvaguarda de Constituição. Se falhar, o alvo tem a condição Envenenado por 1 minuto. No final de cada um dos turnos do alvo Envenenado, ele repete a salvaguarda, encerrando o efeito em si em caso de sucesso.</p><p>Para usar esse efeito, você deve ter um Kit de Veneno com você.</p><p><strong>Retirada (Custo: 1d6).</strong> Imediatamente após o ataque, você se move até metade do seu Deslocamento sem provocar Ataques de Oportunidade.</p><p><strong>Tropeço (Custo: 1d6).</strong> Se o alvo for Grande ou menor, ele deve ser bem-sucedido em uma salvaguarda de Destreza ou tem a condição Caído.</p>"
+      },
+      {
+        "name": "Esquiva Sobrenatural",
+        "level": 5,
+        "description": "<p>Quando um atacante à sua vista o atinge com uma jogada de ataque, você pode executar uma Reação para reduzir o dano pela metade do ataque (arredondado para baixo).</p>"
+      },
+      {
+        "name": "Evasão",
+        "level": 7,
+        "description": "<p>Você pode se esquivar com agilidade do caminho de certos perigos. Ao ser alvo de um efeito que permita uma salvaguarda de Destreza para receber apenas metade do dano, você não sofre dano se for bem-sucedido na salvaguarda e sofre apenas metade do dano se falhar. Você não pode usar esta característica se tem a condição Incapacitado.</p>"
+      },
+      {
+        "name": "Talento Confiável",
+        "level": 7,
+        "description": "<p>Ao realizar um teste de atributo que lhe permita adicionar seu bônus de proficiência em uma perícia ou ferramenta, você pode tratar um resultado de 9 ou menor como 10.</p>"
+      },
+      {
+        "name": "Golpe Astuto Aprimorado",
+        "level": 11,
+        "description": "<p>Você pode usar até dois efeitos de Golpe Astuto ao causar dano de Ataque Furtivo, pagando o custo do dado por cada efeito.</p>"
+      },
+      {
+        "name": "Golpes Sujos",
+        "level": 14,
+        "description": "<p>Você praticou novas maneiras de usar seu Ataque Furtivo de forma engenhosa. Os seguintes efeitos agora estão entre suas opções de Golpe Astuto.</p><p><strong>Aturdir (Custo: 2d6).</strong> O alvo deve ser bem-sucedido em uma salvaguarda de Constituição ou, no próximo turno, pode apenas se mover, executar uma ação ou uma Ação Bônus.</p><p><strong>Nocaute (Custo: 6d6).</strong> O alvo deve ser bem-sucedido em uma salvaguarda de Constituição ou tem a condição Inconsciente por 1 minuto ou até sofrer qualquer dano. O alvo Inconsciente repete a salvaguarda no final de cada um dos turnos dele, encerrando o efeito em caso de sucesso.</p><p><strong>Obscurecer (Custo: 3d6).</strong> O alvo deve ser bem-sucedido em uma salvaguarda de Destreza, ou tem a condição Cego até o final do próximo turno dele.</p>"
+      },
+      {
+        "name": "Mente Escorregadia",
+        "level": 15,
+        "description": "<p>Sua mente astuta é excepcionalmente difícil de controlar. Você adquire proficiência em salvaguardas de Sabedoria e Carisma.</p>"
+      },
+      {
+        "name": "Elusivo",
+        "level": 18,
+        "description": "<p>Você é tão evasivo que os atacantes raramente conseguem vantagem. Nenhuma jogada de ataque pode ter Vantagem contra você, a menos que você tenha a condição Incapacitado.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. A Dádiva do Espírito da Noite é recomendada.</p>"
+      },
+      {
+        "name": "Golpe de Sorte",
+        "level": 20,
+        "description": "<p>Você tem uma vocação maravilhosa para ter sucesso quando necessário. Se você falhar em um Teste de d20, pode transformar o resultado em um 20.</p><p>Após usar essa característica, você não pode usá-la novamente até completar um Descanso Curto ou Longo.</p>"
+      }
+    ]
+  },
+  "mago": {
+    "subtitle": "Mago. Um Estudioso Usuário de Magia Arcana.",
+    "basicTraits": {
+      "Atributo Primário": "Inteligência",
+      "Dado de Ponto de Vida": "d6 por nível de Mago",
+      "Proficiência em Salvaguarda": "Inteligência e Sabedoria",
+      "Proficiências em Perícias": "Escolha 2: Arcanismo, História, Intuição, Investigação, Medicina, Natureza ou Religião.",
+      "Proficiências com Armas": "Armas Simples",
+      "Treinamento com Armaduras": "Nenhuma",
+      "Equipamento Inicial": "Escolha A ou B: (A) 2 Adagas, Foco Arcano (Cajado), Kit de Erudito, Livro de Magias, Túnica e 5 PO; ou (B) 55 PO"
+    },
+    "options": [
+      {
+        "id": "mago-skill-1",
+        "name": "Escolha uma Perícia de Mago",
+        "choices": [
+          "Arcanismo",
+          "História",
+          "Intuição",
+          "Investigação",
+          "Medicina",
+          "Natureza",
+          "Religião"
+        ]
+      },
+      {
+        "id": "mago-skill-2",
+        "name": "Escolha uma Perícia de Mago",
+        "choices": [
+          "Arcanismo",
+          "História",
+          "Intuição",
+          "Investigação",
+          "Medicina",
+          "Natureza",
+          "Religião"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Adepto de Ritual",
+        "level": 1,
+        "description": "<p>Você pode conjurar qualquer magia como um Ritual se essa magia tiver o marcador Ritual e a magia estiver em seu livro de magias. Você não precisa ter a magia preparada, mas deve ler o livro para conjurar uma magia deste modo.</p>"
+      },
+      {
+        "name": "Conjuração",
+        "level": 1,
+        "description": "<p>Como estudante de magia arcana, você aprendeu a conjurar magias. Veja o capítulo 7 para as regras sobre conjuração de magias. As informações abaixo detalham como você usa essas regras com magias de Mago, que aparecem na lista de magias de Mago mais adiante na descrição da classe.</p><p><strong>Truques.</strong> Você conhece três truques de Mago à sua escolha. Luz, Mãos Mágicas e Raio de Gelo são recomendados. Ao completar um Descanso Longo, você pode substituir um dos seus truques dessa característica por outro truque de Mago à sua escolha.</p><p>Ao atingir os níveis 4 e 10 de Mago, você aprende mais um truque de Mago à sua escolha, conforme detalhado na coluna Truques da tabela Características de Mago.</p><p><strong>Livro de Magias.</strong> Seu aprendizado de mago culminou na criação de um livro único: seu livro de magias. É um objeto Minúsculo que pesa 1,5 quilo, contém 100 páginas e pode ser lido apenas por você ou por alguém que conjure Identificar. Você determina a aparência e os materiais do livro, como um tomo com bordas douradas ou uma coleção de pergaminhos amarrados com barbante.</p><p>O livro contém as magias de 1º círculo ou superior que você conhece. Ele começa com seis magias de mago 1º círculo à sua escolha. Armadura Arcana, Detectar Magia, Mísseis Mágicos, Onda Trovejante, Queda Suave e Sono são recomendadas.</p><p>Ao atingir um nível de Mago após o primeiro, adicione duas magias de Mago à sua escolha ao seu livro de magias. Cada uma dessas magias deve ser de um círculo para o qual você tenha espaços de magia, conforme detalhado na tabela Características de Mago. As magias são o ponto culminante da pesquisa arcana que você faz regularmente.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Mago mostra quantos espaços de magia você tem para conjurar suas magias de 1º círculo ou superior. Você restaura todos os espaços gastos ao completar um Descanso Longo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de 1º círculo ou superior que estão disponíveis para você conjurar com essa característica. Para isso, escolha quatro magias do seu livro de magias. As magias escolhidas devem ser de um círculo para o qual você tenha espaços de magia.</p><p>O número de magias em sua lista aumenta à medida que você alcança níveis de Mago, conforme detalhado na coluna Magias Preparadas da tabela Características de Mago. Sempre que esse número aumentar, escolha magias adicionais de Mago até que o número de magias em sua lista corresponda ao número na tabela. As magias escolhidas devem ser de um círculo para o qual você possua espaços de magia. Por exemplo, se você é um Mago de nível 3, sua lista de magias preparadas, escolhidas do seu livro de magias, pode incluir seis magias de 1º ou 2º círculo, em qualquer combinação.</p><p>Se outra característica de Mago lhe conceder magias que você sempre tem preparadas, essas magias não contam para o número de magias que você pode prepare com esta característica, mas essas magias, de outra forma, contam como magias de Mago para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Ao completar um Descanso Longo, você pode alterar sua lista de magias preparadas, substituindo qualquer uma das magias por outras do seu livro de magias.</p><p><strong>Atributo de Conjuração.</strong> Inteligência é seu atributo de conjuração para suas magias de Mago.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Foco Arcano ou seu livro de magias como um Foco de Conjuração para suas magias de Mago.</p><p>Expandindo e Substituindo um Livro de Magias</p><p>As magias que você adiciona ao seu livro de magias à medida que avança de nível refletem sua pesquisa mágica em andamento. Durante suas aventuras, você pode encontrar outras magias que podem ser incorporadas ao livro, como uma magia de Mago em um Pergaminho Mágico, que você pode copiar para o livro de magias.</p><p><strong>Copiando uma Magia para o Livro.</strong> Ao encontrar uma magia de Mago de 1º círculo ou superior, você pode copiá-la para o seu livro de magias se for de um círculo que você possa preparar e se tiver tempo para copiá-la. Para cada círculo de magia, a transcrição leva 2 horas e custa 50 PO. Depois disso, você pode preparar a magia como as outras magias em seu livro de magias.</p><p><strong>Copiando o Livro.</strong> Você pode copiar uma magia do seu livro de magias para outro livro. Isso é como copiar uma nova magia em seu livro de magias, mas mais rápido, já que você já sabe como conjurá-la. Você precisa gastar apenas 1 hora e 10 PO para cada círculo de magia copiada.</p><p>Se você perder seu livro de magias, você pode usar o mesmo procedimento para transcrever as magias de Mago que preparou em um novo livro de magias. Preencher o restante do novo livro exige que você encontre novas magias para fazê-lo. Por esse motivo, muitos magos mantêm um livro de magias reserva.</p>"
+      },
+      {
+        "name": "Recuperação Arcana",
+        "level": 1,
+        "description": "<p>Você pode recuperar um pouco de sua energia mágica estudando seu livro de magias. Ao completar um Descanso Curto, você pode escolher recuperar espaços de magia gastos. Os espaços de magia podem ter um círculo combinado igual a não mais da metade do seu nível de Mago (arredondado para cima), e nenhum dos espaços pode ser de 6º círculo ou superior. Por exemplo, se você é um Mago de nível 4, pode recuperar um valor de até dois círculos de espaços de magia, recuperando um espaço de magia de 2º círculo ou dois espaços de magia de 1º círculo.</p><p>Você pode usar esta característica novamente após completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Acadêmico",
+        "level": 2,
+        "description": "<p>Enquanto estudava magia, você também se especializou em outro campo de estudo. Escolha uma das seguintes perícias nas quais você tem proficiência: Arcanismo, História, Investigação, Medicina, Natureza ou Religião. Você tem Especialização na perícia escolhida.</p>"
+      },
+      {
+        "name": "Subclasse de Mago",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Mago à sua escolha. As subclasses Abjurador, Adivinhador, Evocador e Ilusionista estão detalhadas após a descrição desta classe.Uma subclasse é uma especialidade que concede a você características em determinados níveis de Mago. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Mago ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Mago.</p>"
+      },
+      {
+        "name": "Memorizar Magia",
+        "level": 5,
+        "description": "<p>Ao completar um Descanso Curto, você pode estudar seu livro de magias e substituir uma das magias de Mago de 1º círculo ou superior que você preparou para sua característica Conjuração por outra magia de 1º círculo ou superior do livro.</p>"
+      },
+      {
+        "name": "Maestria de Magias",
+        "level": 18,
+        "description": "<p>Você alcançou tal domínio sobre certas magias que pode conjurá-las à vontade. Escolha uma magia de 1º e uma de 2º círculo em seu livro de magias que tenham um tempo de conjuração de uma ação. Você sempre tem essas magias preparadas, e pode conjurá-las em seu círculo mais baixo sem gastar um espaço de magia. Para conjurar qualquer uma delas em um círculo superior, você deve gastar um espaço de magia.</p><p>Ao completar um Descanso Longo, você pode estudar seu livro de magias e substituir uma dessas magias por uma magia elegível do mesmo círculo do livro.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva da Recordação de Magia é recomendado.</p>"
+      },
+      {
+        "name": "Assinatura Mágica",
+        "level": 20,
+        "description": "<p>Escolha duas magias de 3º círculo em seu livro de magias como suas assinaturas mágicas. Você sempre tem essas magias preparadas e pode conjurá-las, cada uma delas, uma vez no 3º círculo sem gastar um espaço de magia. Ao realizar isso, você não pode conjurá-las deste modo novamente até completar um Descanso Curto ou Longo. Para conjurar uma das magias em um círculo superior, você deve gastar um espaço de magia.</p>"
+      }
+    ]
+  },
+  "monge": {
+    "subtitle": "Monge. Um artista marcial com um foco sobrenatural.",
+    "basicTraits": {
+      "Atributo Primário": "Destreza e Sabedoria",
+      "Dado de Ponto de Vida": "d8 por nível de Monge",
+      "Proficiência em Salvaguardas": "Força e Destreza",
+      "Proficiência em Perícias": "Escolha 2: Acrobacia, Atletismo, Furtividade, História, Intuição ou Religião",
+      "Proficiências com Armas": "Armas Simples e Marciais que têm a propriedade Leve",
+      "Proficiências com Ferramentas": "Escolha um tipo de Ferramentas de Artesão ou Instrumento Musical",
+      "Treinamento com Armadura": "Nenhuma",
+      "Equipamento Inicial": "Escolha A ou B: (A) Lança, 5 Adagas, Ferramentas de Artesão ou Instrumento Musical escolhido para a proficiência com ferramenta acima, Kit de Aventureiro e 11 PO; ou (B) 50 PO"
+    },
+    "options": [
+      {
+        "id": "monge-skill-1",
+        "name": "Escolha uma Perícia de Monge",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "Furtividade",
+          "História",
+          "Intuição",
+          "Religião"
+        ]
+      },
+      {
+        "id": "monge-skill-2",
+        "name": "Escolha uma Perícia de Monge",
+        "choices": [
+          "Acrobacia",
+          "Atletismo",
+          "Furtividade",
+          "História",
+          "Intuição",
+          "Religião"
+        ]
+      },
+      {
+        "id": "monge-ferramenta",
+        "name": "Escolha Ferramentas de Artesão ou Instrumento Musical",
+        "choices": [
+          "Alaúde", "Charamela", "Flauta", "Flauta de Pã",
+          "Ferramentas de Alvenaria", "Ferramentas de Calígrafo", "Ferramentas de Carpinteiro",
+          "Ferramentas de Cartógrafo", "Ferramentas de Costureiro", "Ferramentas de Coureiro",
+          "Ferramentas de Ferreiro", "Ferramentas de Joalheiro", "Ferramentas de Oleiro",
+          "Ferramentas de Pintor", "Ferramentas de Sapateiro", "Ferramentas de Soprador de Vidro",
+          "Ferramentas de Tecelão", "Ferramentas de Trabalhador em Madeira",
+          "Lira", "Suprimentos de Alquimista", "Suprimentos de Cervejeiro",
+          "Tambor", "Trombeta", "Utensílios de Cozinheiro", "Violino", "Xilofone"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Artes Marciais",
+        "level": 1,
+        "description": "<p>Sua prática de artes marciais lhe confere domínio de estilos de combate que usam seu Ataque Desarmado e armas de Monge, que incluem:</p><ul><li style=\"margin-left:20px;list-style-type:disc\">Armas Simples Corpo a Corpo</li><li style=\"margin-left:20px;list-style-type:disc\">Armas Marciais Corpo a Corpo que tem a propriedade Leve</li></ul><p>Você adquire os seguintes benefícios enquanto estiver desarmado ou empunhando apenas armas de Monge e não estiver vestindo armadura ou empunhando um Escudo.</p><p><strong>Ataque Desarmado Adicional.</strong> Você pode realizar um Ataque Desarmado como uma Ação Bônus.</p><p><strong>Dado de Artes Marciais.</strong> Você pode jogar 1d6 ao invés do dano normal de seu Ataque Desarmado ou armas de Monge. Este dado muda à medida que você atinge níveis de Monge, conforme detalhado na coluna Artes Marciais da tabela Características de Monge.</p><p><strong>Ataques com Destreza.</strong> Você pode usar seu modificador de Destreza em vez de seu modificador de Força para as jogadas de ataque e dano de seus Ataques Desarmados e armas de Monge. Além disso, quando você usa a opção Empurrar ou Imobilizar do seu Ataque Desarmado, você pode usar seu modificador de Destreza em vez de seu modificador de Força para determinar a CD da salvaguarda.</p>"
+      },
+      {
+        "name": "Defesa sem Armadura",
+        "level": 1,
+        "description": "<p>Enquanto você não estiver vestindo armadura ou empunhando um Escudo, sua Classe de Armadura base é igual a 10 mais seus modificadores de Destreza e Sabedoria.</p>"
+      },
+      {
+        "name": "Foco do Monge",
+        "level": 2,
+        "description": "<p>Seu foco e treinamento marcial permitem que você aproveite uma reserva de energia extraordinária dentro de si. Essa energia é representada por Pontos de Foco. Seu nível de Monge determina o número de pontos que você tem, conforme detalhado na coluna Pontos de Foco da tabela Características de Monge.</p><p>Você pode gastar esses pontos para melhorar ou impulsionar certas características de Monge. Você começa aprendendo três dessas características: Defesa Paciente, Passo do Vento e Torrente de Golpes, cada uma das quais é detalhada abaixo.</p><p>Ao gastar um Ponto de Foco, ele não está disponível. Você restaura todos os usos gastos ao completar um Descanso Curto ou Longo.</p><p>Algumas características que usam Pontos de Foco exigem que seu alvo realize uma salvaguarda. A CD da salvaguarda é igual a 8 mais seu modificador de Sabedoria e seu Bônus de Proficiência.</p><p><strong>Defesa Paciente.</strong> Você pode executar a ação Desengajar como uma Ação Bônus. Como alternativa, você pode gastar 1 Ponto de Foco para executar as ações Desengajar e Esquivar como uma Ação Bônus.</p><p><strong>Passo do Vento.</strong> Você pode executar a ação Correr como uma Ação Bônus. Como alternativa, você pode gastar 1 Ponto de Foco para executar as ações Desengajar e Correr como uma Ação Bônus, e sua distância de salto é dobrada durante o turno.</p><p><strong>Torrente de Golpes.</strong> Você pode gastar 1 Ponto de Foco para realizar dois Ataques Desarmados como uma Ação Bônus.</p>"
+      },
+      {
+        "name": "Metabolismo Incomum",
+        "level": 2,
+        "description": "<p>Ao jogar Iniciativa, você pode restaurar todos os Pontos de Foco gastos. Ao realizar isso, jogue seu dado de Artes Marciais e recupere um número de Pontos de Vida igual ao seu nível de Monge mais o valor jogado.</p><p>Após usar essa característica, você não pode usá-la novamente até completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Movimento sem Armadura",
+        "level": 2,
+        "description": "<p>Seu Deslocamento aumenta em 3 metros enquanto você não vestir armadura ou empunhar um Escudo. Esse bônus aumenta quando você atinge certos níveis de Monge, conforme detalhado na tabela Características de Monge.</p>"
+      },
+      {
+        "name": "Defletir Ataques",
+        "level": 3,
+        "description": "<p>Ao ser atingido devido uma jogada de ataque e o dano dessa jogada incluir dano Contundente, Cortante ou Perfurante, você pode executar uma Reação para reduzir o dano total do ataque. A redução é igual a 1d10 mais seu modificador de Destreza e nível de Monge.</p><p>Ao reduzir o dano a 0, você pode gastar 1 Ponto de Foco para redirecionar parte da força do ataque. Para isso, escolha uma criatura à vista a até 1,5 metro de você se o ataque for corpo a corpo, ou a até 18 metros se for à distância e sem Cobertura Total. Essa criatura deve ser bem-sucedida em uma salvaguarda de Destreza ou sofre dano igual a duas jogadas de seu dado de Artes Marciais mais seu modificador de Destreza. O dano é do mesmo tipo causado pelo ataque.</p>"
+      },
+      {
+        "name": "Subclasse de Monge",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Monge à sua escolha. As subclasses Combatente da Mão Espalmada, Combatente da Misericórdia, Combatente das Sombras e Combatente dos Elementos estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Monge. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Monge ou menor.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Monge.</p>"
+      },
+      {
+        "name": "Queda Lenta",
+        "level": 4,
+        "description": "<p>Você pode executar uma Reação ao estar em queda para reduzir qualquer dano recebido da queda em um valor igual a cinco vezes seu nível de Monge.</p>"
+      },
+      {
+        "name": "Ataque Extra",
+        "level": 5,
+        "description": "<p>Você pode atacar duas vezes, em vez de uma, sempre que executar a ação Atacar no seu turno.</p>"
+      },
+      {
+        "name": "Golpe Atordoante",
+        "level": 5,
+        "description": "<p>Uma vez por turno, ao acertar uma criatura com uma arma de Monge ou um Ataque Desarmado, você pode gastar 1 Ponto de Foco para tentar um golpe atordoante. O alvo deve realizar uma salvaguarda de Constituição. Se falhar, o alvo tem a condição Atordoado até o início do seu próximo turno. Em caso de sucesso, o Deslocamento do alvo é reduzido pela metade até o início do seu próximo turno, e a próxima jogada de ataque realizada contra o alvo antes disso tem Vantagem.</p>"
+      },
+      {
+        "name": "Golpes Potencializados",
+        "level": 6,
+        "description": "<p>Ao causar dano com seu Ataque Desarmado, você escolhe entre causar dano Energético ou seu tipo de dano normal.</p>"
+      },
+      {
+        "name": "Evasão",
+        "level": 7,
+        "description": "<p>Ao ser alvo de um efeito que permita uma salvaguarda de Destreza para receber apenas metade do dano, você não recebe dano em caso de sucesso e sofre apenas metade do dano se falhar.</p><p>Você não se beneficia dessa característica se tem a condição Incapacitado.</p>"
+      },
+      {
+        "name": "Movimento Acrobático",
+        "level": 9,
+        "description": "<p>Enquanto não vestir armadura ou empunhar um Escudo, você adquire a capacidade de se mover no seu turno ao longo de superfícies verticais e por líquidos sem entrar em queda durante o movimento.</p>"
+      },
+      {
+        "name": "Foco Aprimorado",
+        "level": 10,
+        "description": "<p>Sua Defesa Paciente, Passo do Vento e Torrente de Golpes adquirem os seguintes benefícios.</p><p><strong>Defesa Paciente.</strong> Ao gastar um Ponto de Foco para usar Defesa Paciente, você adquire um número de Pontos de Vida Temporários igual a duas jogadas de seus dados de Artes Marciais.</p><p><strong>Passo do Vento.</strong> Ao gastar um Ponto de Foco para usar Passo do Vento, você pode escolher uma criatura voluntária a até 1,5 metro de si que seja Grande ou menor. Você move a criatura com você até o final do seu turno. O movimento da criatura não provoca Ataques de Oportunidade.</p><p><strong>Torrente de Golpes.</strong> Você pode gastar 1 Ponto de Foco para usar Torrente de Golpes e realizar três Ataques Desarmados em vez de dois.</p>"
+      },
+      {
+        "name": "Restauro Pessoal",
+        "level": 10,
+        "description": "<p>Por pura força de vontade, você pode remover uma das seguintes condições de si no final de cada um dos seus turnos: Amedrontado, Enfeitiçado ou Envenenado.</p><p>Além disso, você não sofre níveis de Exaustão por não se alimentar e se hidratar.</p>"
+      },
+      {
+        "name": "Defletir Energia",
+        "level": 13,
+        "description": "<p>Agora você pode usar sua característica Defletir Ataques contra ataques que causam qualquer tipo de dano, não apenas Contundente, Cortante ou Perfurante.</p>"
+      },
+      {
+        "name": "Sobrevivente Disciplinado",
+        "level": 14,
+        "description": "<p>Sua disciplina física e mental lhe concede proficiência em todas as salvaguardas.</p><p>Além disso, ao realizar uma salvaguarda e falhar, você pode gastar 1 Ponto de Foco para jogar novamente, e deve usar o novo resultado.</p>"
+      },
+      {
+        "name": "Foco Perfeito",
+        "level": 15,
+        "description": "<p>Ao jogar Iniciativa e não usar Metabolismo Incomum, você recupera Pontos de Foco gastos até ter 4, se tiver 3 ou menos.</p>"
+      },
+      {
+        "name": "Defesa Superior",
+        "level": 18,
+        "description": "<p>No início do seu turno, você pode gastar 3 Pontos de Foco para se fortalecer contra danos por 1 minuto ou até ter a condição Incapacitado. Durante esse período, você tem Resistência a todos os tipos de dano, exceto Energético.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva do Ataque Irresistível é recomendada.</p>"
+      },
+      {
+        "name": "Corpo e Mente",
+        "level": 20,
+        "description": "<p>Você auto aperfeiçoou seu corpo e mente a novos patamares. Seus valores de Destreza e Sabedoria aumentam em 4, até no máximo 25.</p>"
+      }
+    ]
+  },
+  "paladino": {
+    "subtitle": "Paladino. Um combatente devotado com juramento sagrado.",
+    "basicTraits": {
+      "Atributo Primário": "Força e Carisma",
+      "Dado de Ponto de Vida": "d10 por nível de Paladino",
+      "Proficiência em Salvaguarda": "Sabedoria e Carisma",
+      "Proficiência em Perícias": "Escolha 2: Atletismo, Intimidação, Intuição, Medicina, Persuasão ou Religião.",
+      "Proficiências com Armas": "Armas Simples e Marciais",
+      "Treinamento com Armadura": "Armaduras Leves, Médias, Pesadas e Escudos",
+      "Equipamento Inicial": "Escolha A ou B: (A) Cota de Malha, Escudo, Espada Longa, 6 Azagaias, Símbolo Sagrado, Kit de Sacerdote e 9 PO; ou (B) 150 PO"
+    },
+    "options": [
+      {
+        "id": "paladino-skill-1",
+        "name": "Escolha uma Perícia de Paladino",
+        "choices": [
+          "Atletismo",
+          "Intimidação",
+          "Intuição",
+          "Medicina",
+          "Persuasão",
+          "Religião"
+        ]
+      },
+      {
+        "id": "paladino-skill-2",
+        "name": "Escolha uma Perícia de Paladino",
+        "choices": [
+          "Atletismo",
+          "Intimidação",
+          "Intuição",
+          "Medicina",
+          "Persuasão",
+          "Religião"
+        ]
+      }
+    ],
+    "features": [
+      {
+        "name": "Conjuração",
+        "level": 1,
+        "description": "<p>Você aprendeu a conjurar magias por meio de oração e meditação. Veja o capítulo 7 para as regras sobre conjuração de magias. As informações abaixo detalham como você usa essas regras com as magias de Paladino, explicadas na lista de magias de Paladino mais adiante na descrição da classe.</p><p><strong>Espaços de Magia.</strong> A tabela Características de Paladino mostra quantos espaços de magia você tem para conjurar suas magias de 1º círculo ou superior. Você restaura todos os espaços gastos ao completar um Descanso Longo.</p><p>Magias Preparadas de 1º Círculo ou Superior. Você prepara a lista de magias de 1º círculo ou superior que estão disponíveis para você conjurar com essa característica. Para começar, escolha duas magias de Paladino de 1º círculo. Destruição Cauterizante e Heroísmo são recomendadas.</p><p>O número de magias em sua lista aumenta à medida que você atinge níveis de Paladino, conforme mostrado na coluna Magias Preparadas da tabela Características de Paladino. Sempre que esse número aumentar, escolha magias adicionais da lista de magias de Paladino até que o número de magias em sua lista corresponda ao número da tabela. As magias escolhidas devem ser de um círculo para o qual você possui espaços de magia. Por exemplo, se você é um Paladino de nível 5, sua lista de magias preparadas pode incluir seis magias de Paladino de 1º ou 2º círculo em qualquer combinação.</p><p>Se outra característica de Paladino lhe der magias que você sempre tem preparadas, essas magias não contam para o número de magias que você pode preparar com esta característica, mas essas magias, de outra forma, contam como magias de Paladino para você.</p><p><strong>Mudando Suas Magias Preparadas.</strong> Sempre que completar um Descanso Longo, você pode substituir uma magia em sua lista por outra magia de Paladino para a qual você tem espaços de magia.</p><p><strong>Atributo de Conjuração.</strong> Carisma é seu atributo de conjuração para suas magias de Paladino.</p><p><strong>Foco de Conjuração.</strong> Você pode usar um Símbolo Sagrado como um Foco de Conjuração para suas magias de Paladino.</p>"
+      },
+      {
+        "name": "Maestria em Arma",
+        "level": 1,
+        "description": "<p>Seu treinamento com armas permite que você use as propriedades de maestria de dois tipos de armas à sua escolha com as quais você tem proficiência, como Azagaia e Espadas Longas.</p><p>Sempre que completar um Descanso Longo, você pode alterar os tipos de armas que escolheu. Por exemplo, você pode mudar para usar as propriedades de maestria de Alabardas e Manguais.</p>",
+        "options": [
+          {
+            "id": "paladino-weapon-mastery-1",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente",
+              "Arco Longo",
+              "Besta de Mão",
+              "Besta Pesada",
+              "Mosquete",
+              "Pistola",
+              "Zarabatana"
+            ],
+            "group": "Armas Sem Categoria"
+          },
+          {
+            "id": "paladino-weapon-mastery-2",
+            "name": "Escolha uma Maestria em Arma",
+            "choices": [
+              "Adaga",
+              "Azagaia",
+              "Cajado",
+              "Clava",
+              "Clava Grande",
+              "Foice",
+              "Lança",
+              "Maça",
+              "Machadinha",
+              "Martelo Leve",
+              "Arco Curto",
+              "Besta Leve",
+              "Dardo",
+              "Funda",
+              "Alabarda",
+              "Chicote",
+              "Cimitarra",
+              "Espada Curta",
+              "Espada Grande",
+              "Espada Longa",
+              "Glaive",
+              "Lança de Montaria",
+              "Lança Longa",
+              "Maça Estrela",
+              "Machado de Batalha",
+              "Machado Grande",
+              "Malho",
+              "Mangual",
+              "Martelo de Guerra",
+              "Picareta de Guerra",
+              "Rapieira",
+              "Tridente",
+              "Arco Longo",
+              "Besta de Mão",
+              "Besta Pesada",
+              "Mosquete",
+              "Pistola",
+              "Zarabatana"
+            ],
+            "group": "Armas Sem Categoria"
+          }
+        ]
+      },
+      {
+        "name": "Mãos Consagradas",
+        "level": 1,
+        "description": "<p><strong>Seu toque abençoado pode aliviar feridas.</strong> Você tem uma reserva de poder de cura que reabastece ao completar um Descanso Longo. Com essa reserva, você pode recuperar um número total de Pontos de Vida igual a cinco vezes seu nível de Paladino.</p><p>Como uma Ação Bônus, você toca uma criatura (que pode ser você mesmo) e extrair poder dessa reserva de cura para restaurar um número de Pontos de Vida para essa criatura, até o valor máximo restante na reserva.</p><p>Você também pode gastar 5 Pontos de Vida dessa reserva de poder de cura para remover a condição Envenenado da criatura; esses pontos não restauram Pontos de Vida da criatura.</p>"
+      },
+      {
+        "name": "Destruição do Paladino",
+        "level": 2,
+        "description": "<p>Você sempre tem a magia Destruição Divina preparada. Além disso, você pode conjurá-la sem gastar um espaço de magia, não podendo conjurá-la dessa forma novamente antes de completar um Descanso Longo</p>"
+      },
+      {
+        "name": "Estilo de Luta",
+        "level": 2,
+        "description": "<p>Você adquire um talento Estilo de Luta à sua escolha. Em vez de escolher um desses talentos, você pode escolher a opção abaixo.</p><p><strong>Combatente Abençoado.</strong> Você aprende dois truques de Clérigo à sua escolha. Chama Sagrada e Orientação são recomendados. Os truques escolhidos contam como magias de Paladino para você, e Carisma é o atributo de conjuração para elas. Sempre que você atinge um nível de Paladino, pode substituir um desses truques por outro truque de Clérigo.</p>"
+      },
+      {
+        "name": "Canalizar Divindade",
+        "level": 3,
+        "description": "<p>Você pode canalizar energia divina diretamente dos Planos Externos, usando-a para causar efeitos mágicos. Você começa com um desses efeitos: Sentido Divino, descrito abaixo. Outras características de Paladino dão opções adicionais de efeito de Canalizar Divindade. Cada vez que você usa Canalizar Divindade desta classe, você escolhe qual efeito desta classe usar.</p><p>Você pode usar Canalizar Divindade desta classe duas vezes e três vezes a partir do nível 11 de Paladino. Você recupera um uso gasto ao completar um Descanso Curto, e restaura todos os usos gastos ao completar um Descanso Longo.</p><p>Se um efeito de Canalizar Divindade exigir uma salvaguarda, a CD é igual a CD para evitar magias da característica Conjuração desta classe.</p><p><strong>Sentido Divino.</strong> Como uma Ação Bônus, você pode abrir sua consciência para detectar Celestiais, Ínferos e Mortos-Vivos. Pelos próximos 10 minutos ou até você ter a condição Incapacitado, você sabe a localização de qualquer criatura desse tipo a até 18 metros de você e conhece o tipo de criatura. Dentro do mesmo raio, você também detecta a presença de qualquer lugar ou objeto que tenha sido consagrado ou profanado, como na magia Consagrar.</p>"
+      },
+      {
+        "name": "Subclasse de Paladino",
+        "level": 3,
+        "description": "<p>Você adquire uma subclasse de Paladino à sua escolha.As subclasses Juramento da Devoção, Juramento da Glória, Juramento de Vingança e Juramento dos Anciões estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que lhe concede características em determinados níveis de Paladino. Durante toda sua jornada, você recebe cada uma das características de sua subclasse de seu nível de Paladino ou menor.</p><p>Quebrando Seu Juramento</p><p>Um Paladino busca manter os mais altos padrões de conduta, mas até os mais dedicados podem falhar. Às vezes, um Paladino transgride seu juramento.</p><p>Ao quebrar um voto, um Paladino geralmente busca absolvição, passando a noite em vigília como sinal de penitência ou realizando um jejum. Após um rito de perdão, o Paladino retoma seu caminho.</p><p>Se o seu Paladino violar o juramento sem arrependimento, converse com seu Mestre. Nesse caso, o seu Paladino pode precisar escolher uma subclasse mais adequada ou até abandonar a classe em favor de outra.</p>"
+      },
+      {
+        "name": "Aumento no Valor de Atributo",
+        "level": 4,
+        "description": "<p>Você adquire o talento Aumento no Valor de Atributo ou outro talento à sua escolha para o qual atenda os pré-requisitos. Você adquire essa característica novamente nos níveis 8, 12 e 16 de Paladino.</p>"
+      },
+      {
+        "name": "Ataque Extra",
+        "level": 5,
+        "description": "<p>Você pode atacar duas vezes, em vez de uma, sempre que executar a ação Atacar no seu turno.</p>"
+      },
+      {
+        "name": "Montaria Fiel",
+        "level": 5,
+        "description": "<p>Você pode pedir auxílio de uma montaria sobrenatural. Você sempre tem a magia Convocar Montaria preparada.</p><p>Você também pode conjurar a magia uma vez sem gastar um espaço de magia, e restaura a capacidade de fazê-lo ao completar um Descanso Longo.</p>"
+      },
+      {
+        "name": "Aura de Proteção",
+        "level": 6,
+        "description": "<p>Você irradia uma aura protetora e invisível em uma Emanação de 3 metros que se origina em você. A aura fica inativa em você, caso tenha a condição Incapacitado.</p><p>Você e seus aliados na aura adquirem um bônus em salvaguardas igual ao seu modificador de Carisma (bônus mínimo de +1).</p><p>Se outro Paladino estiver presente, uma criatura pode se beneficiar de apenas uma Aura de Proteção de cada vez; a criatura escolhe qual aura recebe enquanto estiver nela.</p>"
+      },
+      {
+        "name": "Repudiar Inimigos",
+        "level": 9,
+        "description": "<p>Como uma ação Usar Magia, você pode fazer um uso de Canalizar Divindade para subjugar inimigos com temor. Ao apresentar seu Símbolo Sagrado ou arma, você pode escolher um número de criaturas igual ao seu modificador de Carisma (no mínimo uma criatura) à sua vista e a até 18 metros de você. Cada alvo deve ser bem-sucedido em uma salvaguarda de Sabedoria ou tem a condição Amedrontado por 1 minuto ou até sofrer qualquer dano. Enquanto Amedrontado deste modo, um alvo pode realizar apenas uma das opções seguintes nos turnos dele: mover-se, executar uma ação ou executar uma Ação Bônus.</p>"
+      },
+      {
+        "name": "Aura de Coragem",
+        "level": 10,
+        "description": "<p>Você e seus aliados têm Imunidade à condição Amedrontado enquanto estiverem em sua Aura de Proteção. Se um aliado Amedrontado entrar na aura, essa condição não tem efeito sobre esse aliado enquanto ele estiver na aura.</p>"
+      },
+      {
+        "name": "Golpes Radiantes",
+        "level": 11,
+        "description": "<p>Seus golpes agora imbuem poder sobrenatural. Ao atingir alvo com uma jogada de ataque usando uma arma Corpo a Corpo ou um Ataque Desarmado, o alvo sofre 1d8 pontos de dano Radiante adicionais.</p>"
+      },
+      {
+        "name": "Toque Restaurador",
+        "level": 14,
+        "description": "<p>Ao usar Mãos Consagradas em uma criatura, você também pode remover uma ou mais das seguintes condições da criatura: Amedrontado, Atordoado, Cego, Enfeitiçado, Paralisado ou Surdo. Você deve gastar 5 Pontos de Vida da reserva de cura de Mãos Consagradas para cada uma dessas condições que deseja remover; esses pontos não restauram Pontos de Vida para a criatura.</p>"
+      },
+      {
+        "name": "Aura Expandida",
+        "level": 18,
+        "description": "<p>Sua Aura de Proteção agora é uma Emanação de 9 metros.</p>"
+      },
+      {
+        "name": "Dádiva Épica",
+        "level": 19,
+        "description": "<p>Você adquire o talento Dádiva Épica ou outro talento à sua escolha para o qual se qualifica. Dádiva da Visão Verdadeira é recomendada.</p>"
+      }
+    ]
+  }
+}

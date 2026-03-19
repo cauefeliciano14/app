@@ -1,0 +1,492 @@
+{
+  "adventuringGear": [
+    {
+      "name": "Ácido",
+      "weight": "0,5 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Água Benta",
+      "weight": "0,5 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Algibeira",
+      "weight": "0,5 kg",
+      "cost": "5 PP"
+    },
+    {
+      "name": "Aljava",
+      "weight": "0,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Antitoxina",
+      "weight": "—",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Apito Sinalizador",
+      "weight": "—",
+      "cost": "5 PC"
+    },
+    {
+      "name": "Aríete Portável",
+      "weight": "16,5 kg",
+      "cost": "4 PO"
+    },
+    {
+      "name": "Armadilha de Caça",
+      "weight": "12,5 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Arpéu",
+      "weight": "2 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Balde",
+      "weight": "1 kg",
+      "cost": "5 PC"
+    },
+    {
+      "name": "Baliza",
+      "weight": "3,5 kg",
+      "cost": "5 PC"
+    },
+    {
+      "name": "Barril",
+      "weight": "35 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Baú",
+      "weight": "12,5 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Bolsa de Componentes",
+      "weight": "1 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Cadeado",
+      "weight": "0,5 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Caixa para Fogo",
+      "weight": "0,5 kg",
+      "cost": "5 PP"
+    },
+    {
+      "name": "Caneta Tinteiro",
+      "weight": "—",
+      "cost": "2 PC"
+    },
+    {
+      "name": "Cantil (cheio)",
+      "weight": "2,5 kg",
+      "cost": "2 PP"
+    },
+    {
+      "name": "Cesta",
+      "weight": "1 kg",
+      "cost": "4 PP"
+    },
+    {
+      "name": "Cobertor",
+      "weight": "1,5 kg",
+      "cost": "5 PP"
+    },
+    {
+      "name": "Corda",
+      "weight": "2,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Cordão",
+      "weight": "—",
+      "cost": "1 PP"
+    },
+    {
+      "name": "Corrente",
+      "weight": "5 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Escada",
+      "weight": "12,5 kg",
+      "cost": "1 PP"
+    },
+    {
+      "name": "Esferas de Metal",
+      "weight": "1 kg (saco)",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Espelho",
+      "weight": "250 g",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Estacas de Ferro",
+      "weight": "2,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Estojo, Mapa ou Pergaminho",
+      "weight": "0,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Estojo, Virote de Besta",
+      "weight": "0,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Estrepes",
+      "weight": "1 kg (saco)",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Fogo Alquímico",
+      "weight": "0,5 kg",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Frasco",
+      "weight": "—",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Garrafa de Vidro (1 litro)",
+      "weight": "1 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Grilhões",
+      "weight": "3 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Jarro (4 litros)",
+      "weight": "2 kg",
+      "cost": "2 PC"
+    },
+    {
+      "name": "Kit de Artista",
+      "weight": "29 kg",
+      "cost": "40 PO"
+    },
+    {
+      "name": "Kit de Assaltante",
+      "weight": "21 kg",
+      "cost": "16 PO"
+    },
+    {
+      "name": "Kit de Aventureiro",
+      "weight": "27,5 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Kit de Curandeiro",
+      "weight": "1,5 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Kit de Diplomata",
+      "weight": "19,5 kg",
+      "cost": "39 PO"
+    },
+    {
+      "name": "Kit de Erudito",
+      "weight": "11 kg",
+      "cost": "40 PO"
+    },
+    {
+      "name": "Kit de Escalada",
+      "weight": "6 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Kit de Explorador de Masmorras",
+      "weight": "27,5 kg",
+      "cost": "12 PO"
+    },
+    {
+      "name": "Kit de Sacerdote",
+      "weight": "14,5 kg",
+      "cost": "33 PO"
+    },
+    {
+      "name": "Lâmpada",
+      "weight": "0,5 kg",
+      "cost": "5 PP"
+    },
+    {
+      "name": "Lanterna Coberta",
+      "weight": "1 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Lanterna Foca-facho",
+      "weight": "1 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Livro",
+      "weight": "2,5 kg",
+      "cost": "25 PO"
+    },
+    {
+      "name": "Luneta",
+      "weight": "0,5 kg",
+      "cost": "1.000 PO"
+    },
+    {
+      "name": "Lupa",
+      "weight": "—",
+      "cost": "100 PO"
+    },
+    {
+      "name": "Mapa",
+      "weight": "—",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Mochila",
+      "weight": "2,5 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Óleo",
+      "weight": "0,5 kg",
+      "cost": "1 PP"
+    },
+    {
+      "name": "Pá",
+      "weight": "2,5 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Papel",
+      "weight": "—",
+      "cost": "2 PP"
+    },
+    {
+      "name": "Pé de Cabra",
+      "weight": "2,5 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Perfume",
+      "weight": "—",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Pergaminho",
+      "weight": "—",
+      "cost": "1 PP"
+    },
+    {
+      "name": "Pergaminho Mágico (1º Círculo)",
+      "weight": "—",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Pergaminho Mágico (Truque)",
+      "weight": "—",
+      "cost": "30 PO"
+    },
+    {
+      "name": "Poção de Cura",
+      "weight": "250 g",
+      "cost": "50 PO"
+    },
+    {
+      "name": "Pote",
+      "weight": "0,5 kg",
+      "cost": "2 PC"
+    },
+    {
+      "name": "Pote, Ferro",
+      "weight": "5 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Rações",
+      "weight": "1 kg",
+      "cost": "5 PP"
+    },
+    {
+      "name": "Rede",
+      "weight": "1,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Roldana e Polias",
+      "weight": "2,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Roupas, Fantasia",
+      "weight": "2 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Roupas, Finas",
+      "weight": "3 kg",
+      "cost": "15 PO"
+    },
+    {
+      "name": "Roupas, Viagem",
+      "weight": "2 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Saca",
+      "weight": "250 g",
+      "cost": "1 PC"
+    },
+    {
+      "name": "Saco de Dormir",
+      "weight": "3,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Sino",
+      "weight": "—",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Tenda",
+      "weight": "10 kg",
+      "cost": "2 PO"
+    },
+    {
+      "name": "Tinta",
+      "weight": "—",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Tocha",
+      "weight": "0,5 kg",
+      "cost": "1 PC"
+    },
+    {
+      "name": "Túnica",
+      "weight": "2 kg",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Vela",
+      "weight": "—",
+      "cost": "1 PC"
+    },
+    {
+      "name": "Veneno Básico",
+      "weight": "—",
+      "cost": "100 PO"
+    }
+  ],
+  "ammunition": [
+    {
+      "type": "Agulhas",
+      "quantity": "50",
+      "storage": "Algibeira",
+      "weight": "0,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "type": "Balas, Arma de Fogo",
+      "quantity": "10",
+      "storage": "Algibeira",
+      "weight": "1 kg",
+      "cost": "3 PO"
+    },
+    {
+      "type": "Balas, Funda",
+      "quantity": "20",
+      "storage": "Algibeira",
+      "weight": "750 g",
+      "cost": "4 PC"
+    },
+    {
+      "type": "Flechas",
+      "quantity": "20",
+      "storage": "Aljava",
+      "weight": "0,5 kg",
+      "cost": "1 PO"
+    },
+    {
+      "type": "Virotes",
+      "quantity": "20",
+      "storage": "Estojo",
+      "weight": "750 g",
+      "cost": "1 PO"
+    }
+  ],
+  "arcaneFocus": [
+    {
+      "name": "Cajado (também um Bastão)",
+      "weight": "2 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Cetro",
+      "weight": "1 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Cristal",
+      "weight": "0,5 kg",
+      "cost": "10 PO"
+    },
+    {
+      "name": "Orbe",
+      "weight": "1,5 kg",
+      "cost": "20 PO"
+    },
+    {
+      "name": "Varinha",
+      "weight": "0,5 kg",
+      "cost": "10 PO"
+    }
+  ],
+  "druidicFocus": [
+    {
+      "name": "Cajado de madeira (também um Bastão)",
+      "weight": "2 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Ramo de visco",
+      "weight": "—",
+      "cost": "1 PO"
+    },
+    {
+      "name": "Varinha de teixo",
+      "weight": "0,5 kg",
+      "cost": "10 PO"
+    }
+  ],
+  "holySymbol": [
+    {
+      "name": "Amuleto (usado ou segurado)",
+      "weight": "0,5 kg",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Emblema (exibido em tecido ou em um Escudo)",
+      "weight": "—",
+      "cost": "5 PO"
+    },
+    {
+      "name": "Relicário (segurado)",
+      "weight": "1 kg",
+      "cost": "5 PO"
+    }
+  ]
+}

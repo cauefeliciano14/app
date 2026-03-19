@@ -1,0 +1,129 @@
+{
+  "species": [
+    {
+      "id": "aasimar",
+      "name": "Aasimar",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-2,10 metros de altura) ou Pequeno (cerca de 0,60-1,20 metro de altura), escolhido ao selecionar esta espécie Deslocamento: 9 metros Resistência Celestial. Você tem Resistência a dano Necrótico e Radiante. Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Mãos Curativas. Você executa uma ação Usar Magia, toca uma criatura e joga um número de d4s igual ao seu Bônus de Proficiência. A criatura restaura número de Pontos de Vida igual ao total jogado. Após usar esse traço, você não pode usá-lo novamente até completar um Descanso Longo. Portador da Luz. Você conhece o truque da Luz. Carisma é seu atributo de conjuração para isso. Revelação Celestial. No nível 3 de personagem, você pode se transformar como uma Ação Bônus usando uma das opções abaixo (escolha a opção cada vez que você se transformar). A transformação se mantém por 1 minuto ou até você a encerrar (nenhuma ação é necessária). Uma vez que você se transforma, não pode fazê-lo novamente até completar um Descanso Longo. Uma vez em cada um dos seus turnos, até que a transformação termine, você pode infligir dano adicional a um alvo ao causar dano a ele com um ataque ou uma magia. O dano adicional é igual ao seu Bônus de Proficiência, e o tipo de dano adicional é Necrótico para Manto Necrótico ou Radiante para Asas Celestiais e Transfiguração Radiante. Aqui estão as opções de transformação: Asas Celestiais. Duas asas espectrais brotam em suas costas temporariamente. Até que a transformação se encerre, você tem um Deslocamento de Voo igual ao seu Deslocamento. Manto Necrótico. Seus olhos se tornam brevemente poças de escuridão, e asas que não voam brotam em suas costas temporariamente. Criaturas que não sejam seus aliados a até 3 metros de você devem ser bem-sucedidas em uma salvaguarda de Carisma (CD 8 + seu modificador de Carisma e seu Bônus de Proficiência) ou têm a condição Amedrontado até o final do seu próximo turno. Transfiguração Radiante. Luz abrasadora irradia temporariamente de seus olhos e boca. Pela duração da transformação, você emite Luz Plena em um raio de 3 metros e Meia-luz por mais 3 metros, e no fim de cada um de seus turnos, cada criatura a até 3 metros de você sofre dano Radiante igual ao seu Bônus de Proficiência."
+    },
+    {
+      "id": "anão",
+      "name": "Anão",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-1,50 metro de altura) Deslocamento: 9 metros Visão no Escuro. Você tem Visão no Escuro com um alcance de 36 metros. Resistência a Toxinas. Você tem Resistência a Dano Venenoso. Você também tem Vantagem nas salvaguardas que realizar para evitar ou encerrar a condição Envenenado. Tenacidade Anã. Seus Pontos de Vida máximos aumentam em 1, e novamente em 1, sempre que você atinge um nível de personagem. Conhecimento de Pedras. Como uma Ação Bônus, você adquire Sismiconsciência com um alcance de 18 metros por 10 minutos. Você deve estar em, ou tocar, uma superfície de pedra para usar a Sismiconsciência. A pedra pode ser natural ou trabalhada. Você pode usar essa Ação Bônus um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo."
+    },
+    {
+      "id": "draconato",
+      "name": "Draconato",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,50-2,10 metros de altura) Deslocamento: 9 metros Herança Dracônica. Sua linhagem deriva de um progenitor dracônico. Escolha o tipo de dragão da tabela Herança Dracônica. Sua escolha afeta suas características de Ataque de Sopro e Resistência a Dano, bem como sua aparência. Herança Dracônica DragãoTipo de DanoAzulElétricoBrancoGélidoBronzeElétricoCobreÁcidoLatãoÍgneoNegroÁcidoOuroÍgneoPrataGélidoVerdeVenenosoVermelhoÍgneo Ataque de Sopro. Ao executar a ação Atacar no seu turno, você pode substituir um de seus ataques por uma emissão de energia mágica em um Cone de 4,5 metros ou em uma Linha de 9 metros de largura (escolha a forma a cada vez). Cada criatura nessa área deve realizar uma salvaguarda de Destreza (CD 8 + seu modificador de Constituição e seu Bônus de Proficiência). Se falhar, uma criatura sofre 1d10 pontos de dano do tipo determinado por seu traço Herança Dracônica. Em caso de sucesso, uma criatura sofre metade do dano. Esse dano aumenta em 1d10 quando você atinge os níveis de personagem 5 (2d10), 11 (3d10) e 17 (4d10). Você pode usar esse Ataque de Sopro um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo. Resistência a Dano. Você tem Resistência ao tipo de dano determinado por seu traço Herança Dracônica. Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Voo Dracônico. No nível 5 do personagem, você pode canalizar magia dracônica para beneficiar de um voo temporário. Como uma Ação Bônus, você cria asas espectrais nas costas que duram 10 minutos ou até que você as retraia (nenhuma ação é necessária) ou tem a condição Incapacitado. Pela duração, você tem um Deslocamento de Voo igual ao seu Deslocamento. Suas asas parecem feitas da mesma energia que o seu Ataque de Sopro. Após usar esse traço, você não pode usá-lo novamente até completar um Descanso Longo."
+    },
+    {
+      "id": "elfo",
+      "name": "Elfo",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,50-1,80 metro de altura) Deslocamento: 9 metros Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Linhagem Élfica. Você é de uma linhagem que lhe concede habilidades sobrenaturais. Escolha uma linhagem da tabela Linhagem Élfica. Você adquire o benefício de nível 1 dessa linhagem. Ao atingir os níveis 3 e 5, você aprende uma magia de círculo superior, conforme indicado na tabela. Essa magia está sempre preparada e pode ser conjurada uma vez sem usar um espaço de magia, restaurando essa capacidade ao completar um Descanso Longo. Além disso, você pode conjurá-la usando qualquer espaço de magia apropriado que possua. Inteligência, Sabedoria ou Carisma é seu atributo de conjuração para as magias que você conjura com este traço (escolha o atributo quando selecionar a linhagem). Linhagem Élfica LinhagemNível 1Nível 3Nível 5Alto ElfoVocê conhece o truque Prestidigitação Arcana. Sempre que completar um Descanso Longo, você pode substituir este truque por um truque diferente da lista de magias de Mago.Detectar MagiaPasso NebulosoDrowO alcance da sua Visão no Escuro aumenta para 36 metros. Você também conhece o truque Luzes Dançantes.Fogo das FadasEscuridãoElfo SilvestreSeu Deslocamento aumenta para 10,5 metros. Você também conhece o truque Arte Druídica.Passos LargosPassos Sem Rastro Ancestralidade Feérica. Você tem Vantagem ao realizar salvaguardas para evitar ou encerrar a condição Enfeitiçado. Sentidos Aguçados. Você tem proficiência na perícia Intuição, Percepção ou Sobrevivência. Transe. Você pode completar um Descanso Longo em 4 horas ao meditar, sem a necessidade de dormir, mantendo a consciência, e magia não pode forçá-lo a dormir."
+    },
+    {
+      "id": "gnomo",
+      "name": "Gnomo",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Pequeno (cerca de 0,90-1,20 metro de altura) Deslocamento: 9 metros Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Astúcia de Gnomo. Você tem Vantagem em salvaguardas de Inteligência, Sabedoria e Carisma. Linhagem Gnômica. Você pertence a uma linhagem que lhe confere habilidades sobrenaturais. Escolha uma das seguintes opções; sua escolha determina se Inteligência, Sabedoria ou Carisma é seu atributo de conjuração para as magias desse traço (escolha o atributo quando selecionar a linhagem): Gnomo das Rochas. Você conhece os truques Prestidigitação Arcana e Reparar. Além disso, você pode gastar 10 minutos conjurando Prestidigitação Arcana para fabricar um dispositivo mecânico minúsculo (CA 5, 1 PV), como um brinquedo, isqueiro mecânico ou caixa de música. Ao fabricar o dispositivo, você determina a função dele escolhendo um efeito de Prestidigitação Arcana; o dispositivo produz esse efeito sempre que você ou outra criatura executa uma Ação Bônus para ativá-lo com um toque. Se o efeito escolhido tiver opções possíveis, você escolhe uma dessas opções para o dispositivo ao fabricá-lo. Por exemplo, se você escolher o efeito de Brincar com Fogo da magia, você determina se o dispositivo acende ou extingue fogo; o dispositivo não faz ambas as coisas. Você pode ter três desses dispositivos ao mesmo tempo, e cada um se desfaz 8 horas após ser fabricado ou quando você o desmonta com um toque como uma ação Usar Objeto. Gnomo do Bosque. Você conhece o truque Ilusão Menor. Você também sempre tem a magia Falar com Animais preparada. É possível conjurá-la sem um espaço de magia um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo. Você também pode usar qualquer espaço de magia que tiver para conjurá-la."
+    },
+    {
+      "id": "golias",
+      "name": "Golias",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 2,10-2,40 metros de altura) Deslocamento: 10,5 metros Ancestralidade Gigante. Você é descendente de Gigantes. Escolha um dos seguintes benefícios — um benefício sobrenatural de sua ancestralidade; você pode usar o benefício escolhido um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Longo: Arrepio do Gelo (Gigante do Gelo). Ao atingir um alvo com uma jogada de ataque e causar dano a ele, você também pode infligir 1d6 pontos de dano Gélido a esse alvo e reduzir o Deslocamento dele em 3 metros até o início do seu próximo turno. Queimadura de Fogo (Gigante de Fogo). Ao atingir um alvo com uma jogada de ataque e causar dano a ele, você também pode causar 1d10 pontos de dano Ígneo a esse alvo. Resistência da Pedra (Gigante da Pedra). Ao sofrer dano, pode executar uma Reação para jogar 1d12. Adicione seu modificador de Constituição ao número obtido e reduza o dano desse total. Salto da Nuvem (Gigante das Nuvens). Como uma Ação Bônus, você se teleporta magicamente até 9 metros para um espaço desocupado à sua vista. Tombo da Colina (Gigante da Colina). Ao atingir uma criatura Grande ou menor com uma jogada de ataque e causar dano a ela, você pode impor a esse alvo a condição Caído. Trovão da Tempestade (Gigante da Tempestade). Ao sofrer dano de uma criatura a até 18 metros de você, você pode executar uma Reação para causar 1d8 pontos de dano Trovejante a essa criatura. Forma Grande. A partir do nível 5 de personagem, você pode alterar seu tamanho para Grande como uma Ação Bônus se estiver em um espaço grande o suficiente. Essa transformação se mantém por 10 minutos ou até que você a encerrar (nenhuma ação é necessária). Pela duração, você tem Vantagem em testes de Força, e seu Deslocamento aumenta em 3 metros. Após usar este traço, você não pode utilizá-lo novamente até completar um Descanso Longo. Porte Poderoso. Você tem Vantagem em qualquer teste de atributo que realizar para encerrar a condição Imobilizado. Você também conta como um tamanho maior ao determinar sua capacidade de carga."
+    },
+    {
+      "id": "humano",
+      "name": "Humano",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-2,10 metros de altura) ou Pequeno (cerca de 0,60-1,20 metro de altura), escolhido ao selecionar esta espécie Deslocamento: 9 metros Eficiente. Você adquire Inspiração Heroica sempre que completar um Descanso Longo. Hábil. Você adquire proficiência em uma perícia à sua escolha. Versátil. Você adquire um talento de Origem à sua escolha. Habilidoso é recomendado."
+    },
+    {
+      "id": "orc",
+      "name": "Orc",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,80-2,10 metros de altura) Deslocamento: 9 metros Pico de Adrenalina. Você pode executar a ação Correr como uma Ação Bônus. Ao executar isso, você adquire um número de Pontos de Vida Temporários igual ao seu Bônus de Proficiência. Você pode usar este traço um número de vezes igual ao seu Bônus de Proficiência, e você restaura todos os usos gastos quando completa um Descanso Curto ou Longo. Visão no Escuro. Você tem Visão no Escuro com um alcance de 36 metros. Vigor Implacável. Ao ser reduzido a 0 Pontos de Vida, mas não morto imediatamente, você fica com 1 Ponto de Vida. Após usar este traço, você não pode fazê-lo novamente até completar um Descanso Longo."
+    },
+    {
+      "id": "pequenino",
+      "name": "Pequenino",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Pequeno (cerca de 0,60-0,90 metro de altura) Deslocamento: 9 metros Corajoso. Você tem Vantagem nas salvaguardas que realizar para evitar ou encerrar a condição Amedrontado. Agilidade Pequenina. Você pode se mover pelo espaço de qualquer criatura que seja um tamanho maior que você, mas você não pode parar no mesmo espaço. Sorte. Ao tirar 1 no d20 de um Teste de d20, você pode jogar novamente o dado e deve usar a nova jogada. Furtividade Natural. Você pode executar a ação Esconder mesmo quando estiver encoberto apenas por uma criatura que seja pelo menos um tamanho maior que você."
+    },
+    {
+      "id": "tiferino",
+      "name": "Tiferino",
+      "description": "Tipo de Criatura: Humanoide Tamanho: Médio (cerca de 1,20-2,10 metros de altura) ou Pequeno (cerca de 0,90-1,20 metro de altura), escolhido ao selecionar esta espécie Visão no Escuro. Você tem Visão no Escuro com um alcance de 18 metros. Legado Ínfero. Você é o portador de um legado que lhe confere poderes sobrenaturais. Escolha um legado da tabela Legados Ínferos. Você adquire o benefício de nível 1 do legado escolhido. Ao atingir os níveis de personagem 3 e 5, você aprende magias de círculo superior, conforme indicado na tabela. Essas magias estão sempre preparadas e podem ser conjuradas uma vez sem usar um espaço de magia, sendo restauradas quando completa um Descanso Longo. Além disso, você pode conjurá-las utilizando qualquer espaço de magia que possua do círculo correspondente. Atributos como Inteligência, Sabedoria ou Carisma servem como seu atributo de conjuração para essas magias (escolha um atributo ao selecionar o legado). Legados Ínferos LegadoNível 1Nível 3Nível 5AbissalVocê tem Resistência a dano Venenoso. Você também conhece o truque Rajada de Veneno.Raio Nauseante Paralisar PessoaCtônicoVocê tem Resistência a dano Necrótico. Você também conhece o truque Toque Necrótico.Vitalidade VaziaRaio do EnfraquecimentoInfernalVocê tem Resistência a dano Ígneo. Você também conhece o truque Raio de Fogo.Repreensão DiabólicaEscuridão Presença Sobrenatural. Você conhece o truque Taumaturgia. Ao conjurar com este traço, a magia usa o mesmo atributo de conjuração que você usa para sua Característica Legado Ínfero. Capítulo 5 - Talentos As gêmeas Weathermay-Foxgrove, Gennifer e Laurie, juntamente com os investigadores Alanik Ray e Arthur Sedgwick, lutam para escapar dos horrores do Castelo Ravenloft. Este capítulo oferece uma variedade de talentos, que são características especiais não vinculadas a uma classe de personagem. Um talento representa uma capacidade específica ou uma área de especialização que concede qualidades especiais ao personagem. Ele incorpora treinamento, experiência e habilidades além do que uma classe oferece. As seções abaixo explicam as partes de um talento e apresentam uma variedade de opções de talentos organizados em categorias. Seu antecedente concede um talento e, em determinados níveis, sua classe concede o talento Aumento no Valor de Atributo ou a escolha de outro talento para o qual você se qualifique. Independentemente do modo pelo qual você adquire um talento, você só pode obtê-lo uma vez, a menos que a descrição do talento indique o contrário."
+    }
+  ],
+  "classes": [
+    {
+      "id": "barbaro",
+      "name": "Bárbaro",
+      "description": "Combatente corpo a corpo movido por uma Fúria primitiva. Sua fúria amplia força, reflexos e sentidos. Atua como protetor e líder, enfrentando perigos diretamente para defender sua comunidade.",
+      "icon": "Class Icon - Barbarian.svg"
+    },
+    {
+      "id": "bardo",
+      "name": "Bardo",
+      "description": "Conjurador que usa música, arte e palavras como fonte de magia. Inspira aliados, cura, cria ilusões e enfraquece inimigos. Viajante e colecionador de conhecimento, une versatilidade e poder arcano.",
+      "icon": "Class Icon - Bard.svg"
+    },
+    {
+      "id": "bruxo",
+      "name": "Bruxo",
+      "description": "Ocultista que obtém poder por meio de pactos sobrenaturais. Sua magia vem de forças além do mundo comum, concedendo habilidades únicas derivadas de conhecimento proibido.",
+      "icon": "Class Icon - Warlock.svg"
+    },
+    {
+      "id": "clerigo",
+      "name": "Clérigo",
+      "description": "Sacerdote que canaliza poder divino para curar, fortalecer e punir. Recebe magia de uma divindade ou entidade imortal e atua como intermediário entre o mundo mortal e os planos divinos.",
+      "icon": "Class Icon - Cleric.svg"
+    },
+    {
+      "id": "druida",
+      "name": "Druida",
+      "description": "Guardião da natureza que utiliza magia primal. Controla elementos, transforma-se em animais e protege o equilíbrio natural. Atua como defensor de regiões selvagens e locais sagrados.",
+      "icon": "Class Icon - Druid.svg"
+    },
+    {
+      "id": "feiticeiro",
+      "name": "Feiticeiro",
+      "description": "Conjurador com magia inata, parte de sua própria essência. Seu poder pode ter origem sobrenatural, hereditária ou planar. Aprende a moldar essa energia interna de forma única.",
+      "icon": "Class Icon - Sorcerer.svg"
+    },
+    {
+      "id": "guardiao",
+      "name": "Guardião",
+      "description": "Combatente dos ermos com habilidades marciais e magia primal. Especialista em rastreamento e sobrevivência, protege o mundo natural contra monstros e tiranos.",
+      "icon": "Class Icon - Ranger.svg"
+    },
+    {
+      "id": "guerreiro",
+      "name": "Guerreiro",
+      "description": "Mestre em armas e armaduras. Versátil e altamente treinado, domina diversos estilos de combate e pode se especializar em técnicas específicas.",
+      "icon": "Class Icon - Fighter.svg"
+    },
+    {
+      "id": "ladino",
+      "name": "Ladino",
+      "description": "Especialista em furtividade e precisão. Utiliza astúcia, ataques furtivos e habilidades técnicas para superar obstáculos e inimigos com eficiência.",
+      "icon": "Class Icon - Rogue.svg"
+    },
+    {
+      "id": "mago",
+      "name": "Mago",
+      "description": "Estudioso da magia arcana. Aprende e categoriza magias em escolas, dominando feitiços de amplo alcance e grande poder por meio de estudo disciplinado.",
+      "icon": "Class Icon - Wizard.svg"
+    },
+    {
+      "id": "monge",
+      "name": "Monge",
+      "description": "Artista marcial que canaliza energia interior. Combina disciplina mental e treinamento físico para realizar feitos extraordinários com velocidade e precisão.",
+      "icon": "Class Icon - Monk.svg"
+    },
+    {
+      "id": "paladino",
+      "name": "Paladino",
+      "description": "Guerreiro sagrado que realiza um juramento poderoso. Une combate marcial e magia divina para proteger aliados e combater forças da corrupção.",
+      "icon": "Class Icon - Paladin.svg"
+    }
+  ],
+  "backgrounds": []
+}
