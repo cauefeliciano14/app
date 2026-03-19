@@ -1160,6 +1160,7 @@ function App() {
         {/* Step 0: Class Selection */}
         {currentStep === 0 && (
           <div className="step-container">
+            <ValidationBanner errors={validationResult.byStep.class} />
             {currentPhase === 2 && character.characterClass ? (
               <>
                 {/* Standardized header for Phase 2 */}
@@ -1490,6 +1491,7 @@ function App() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingRight: '12px', paddingBottom: '40px' }}>
+              <ValidationBanner errors={validationResult.byStep.background} />
               <div style={{ marginBottom: '24px' }}>
                 <h2 style={{ fontSize: '1.4rem', color: '#f1f5f9', margin: '0 0 8px 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ color: '#f97316' }}>✦</span> Escolha sua Origem: Antecedente
@@ -1795,6 +1797,7 @@ function App() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingRight: '12px', paddingBottom: '40px' }}>
+              <ValidationBanner errors={validationResult.byStep.species} />
               <div style={{ marginBottom: '24px' }}>
                 <h2 style={{ fontSize: '1.4rem', color: '#f1f5f9', margin: '0 0 8px 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ color: '#f97316' }}>✦</span> Escolha sua Espécie: Raça
@@ -1887,6 +1890,7 @@ function App() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingRight: '12px', paddingBottom: '40px' }}>
+              <ValidationBanner errors={validationResult.byStep.attributes} />
               <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
                 <div>
                   <h2 style={{ fontSize: '1.4rem', color: '#f1f5f9', margin: '0 0 8px 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
