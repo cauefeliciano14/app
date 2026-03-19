@@ -842,6 +842,65 @@ const ValidationBanner: React.FC<{ errors: string[] }> = ({ errors }) => {
 const CREATION_STORAGE_KEY = 'dnd_creation_state';
 const CREATION_STATE_VERSION = 1;
 
+const BACKGROUNDS_WITH_TOOL_SELECTOR = new Set([
+  'artesao', 'artista', 'guarda', 'nobre', 'soldado',
+]);
+
+const KNOWN_SPECIES_IDS = new Set([
+  'draconato', 'elfo', 'gnomo', 'golias', 'tiferino', 'aasimar', 'humano',
+]);
+
+const CLASS_OPTION_IDS_BY_CLASS = Object.fromEntries(
+  Object.entries(classDetailsData as Record<string, { options?: Array<{ id: string }> }>).map(([classId, details]) => [
+    classId,
+    new Set((details.options ?? []).map((option) => option.id)),
+  ])
+) as Record<string, Set<string>>;
+
+const ALL_CLASS_OPTION_IDS = new Set(
+  Object.values(CLASS_OPTION_IDS_BY_CLASS).flatMap((ids) => Array.from(ids))
+);
+
+function normalizeFeatureChoices(
+  rawChoices: Record<string, string>,
+  currentClassId: string | null,
+  currentSpeciesId: string | null,
+  currentBackgroundId: string | null,
+): Record<string, string> {
+  const normalized: Record<string, string> = {};
+  const currentClassOptionIds = currentClassId ? (CLASS_OPTION_IDS_BY_CLASS[currentClassId] ?? new Set<string>()) : new Set<string>();
+  const currentSpeciesPrefix = currentSpeciesId ? `${currentSpeciesId}-` : null;
+  const allowToolChoice = Boolean(currentBackgroundId && BACKGROUNDS_WITH_TOOL_SELECTOR.has(currentBackgroundId));
+
+  for (const [key, value] of Object.entries(rawChoices)) {
+    if (!value) continue;
+
+    if (ALL_CLASS_OPTION_IDS.has(key)) {
+      if (currentClassOptionIds.has(key)) normalized[key] = value;
+      continue;
+    }
+
+    if (KNOWN_SPECIES_IDS.has(key)) {
+      if (key === currentSpeciesId) normalized[key] = value;
+      continue;
+    }
+
+    if ([...KNOWN_SPECIES_IDS].some((speciesId) => key.startsWith(`${speciesId}-`))) {
+      if (currentSpeciesPrefix && key.startsWith(currentSpeciesPrefix)) normalized[key] = value;
+      continue;
+    }
+
+    if (key === 'toolProficiency') {
+      if (allowToolChoice) normalized[key] = value;
+      continue;
+    }
+
+    normalized[key] = value;
+  }
+
+  return normalized;
+}
+
 const DEFAULT_CHARACTER: Character = {
   name: '',
   portrait: null,
@@ -953,13 +1012,17 @@ function App() {
       }
     }
 
-    // Normalizar escolhas de espécie: chaves flat → objeto tipado
+    // Normalizar escolhas dependentes do contexto atual para evitar resíduos incompatíveis.
+    const classId = character.characterClass?.id ?? null;
+    const backgroundId = selectedBackground?.id ?? null;
     const speciesId = character.species?.id ?? null;
+    const featureChoicesNormalized = normalizeFeatureChoices(character.choices, classId, speciesId, backgroundId);
+
     let speciesChoicesNormalized: Record<string, string> | undefined;
     if (speciesId) {
       const result: Record<string, string> = {};
-      const prefix = speciesId + '-';
-      for (const [key, value] of Object.entries(character.choices)) {
+      const prefix = `${speciesId}-`;
+      for (const [key, value] of Object.entries(featureChoicesNormalized)) {
         if (key.startsWith(prefix)) {
           result[key.slice(prefix.length)] = value;
         }
@@ -967,24 +1030,32 @@ function App() {
       if (Object.keys(result).length > 0) speciesChoicesNormalized = result;
     }
 
+    const backgroundChoicesNormalized = backgroundId && BACKGROUNDS_WITH_TOOL_SELECTOR.has(backgroundId)
+      ? { toolProficiency: featureChoicesNormalized.toolProficiency || undefined }
+      : undefined;
+
     return {
-      classId: character.characterClass?.id ?? null,
-      backgroundId: selectedBackground?.id ?? null,
+      classId,
+      backgroundId,
       speciesId,
-      speciesLineage: speciesId ? character.choices[speciesId] ?? undefined : undefined,
+      speciesLineage: speciesId ? featureChoicesNormalized[speciesId] ?? undefined : undefined,
       speciesChoices: speciesChoicesNormalized,
       attributeMethod: character.attributes.method,
       baseAttributes: character.attributes.base as CharacterChoices['baseAttributes'],
       backgroundBonusDistribution,
       equippedArmorId: character.equipment.equippedArmorId ?? undefined,
       hasShield: character.equipment.hasShieldEquipped,
-      backgroundChoices: {
-        toolProficiency: character.choices["toolProficiency"] || undefined,
-      },
+      backgroundChoices: backgroundChoicesNormalized,
       equipmentChoices: {
         classOption: character.equipment.classOption,
         backgroundOption: character.equipment.backgroundOption,
       },
+      inventory: character.equipment.inventory.map((item: any) => ({
+        name: item.name as string,
+        quantity: item.quantity as number | undefined,
+        source: item.source as string | undefined,
+        isStartingGear: item.isStartingGear as boolean | undefined,
+      })),
       inventoryWeapons: character.equipment.inventory.map((item: any) => item.name as string),
       spellSelections: {
         cantrips: character.spells.learnedCantrips,
@@ -992,7 +1063,7 @@ function App() {
       },
       talentSelections: character.talentSelections,
       languageSelections: character.languages,
-      featureChoices: character.choices,
+      featureChoices: featureChoicesNormalized,
       characterDetails: { name: character.name, portrait: character.portrait },
       level: characterLevel,
     };
@@ -1160,6 +1231,7 @@ function App() {
         {/* Step 0: Class Selection */}
         {currentStep === 0 && (
           <div className="step-container">
+            <ValidationBanner errors={validationResult.byStep.class} />
             {currentPhase === 2 && character.characterClass ? (
               <>
                 {/* Standardized header for Phase 2 */}
@@ -1490,6 +1562,7 @@ function App() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingRight: '12px', paddingBottom: '40px' }}>
+              <ValidationBanner errors={validationResult.byStep.background} />
               <div style={{ marginBottom: '24px' }}>
                 <h2 style={{ fontSize: '1.4rem', color: '#f1f5f9', margin: '0 0 8px 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ color: '#f97316' }}>✦</span> Escolha sua Origem: Antecedente
@@ -1795,6 +1868,7 @@ function App() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingRight: '12px', paddingBottom: '40px' }}>
+              <ValidationBanner errors={validationResult.byStep.species} />
               <div style={{ marginBottom: '24px' }}>
                 <h2 style={{ fontSize: '1.4rem', color: '#f1f5f9', margin: '0 0 8px 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ color: '#f97316' }}>✦</span> Escolha sua Espécie: Raça
@@ -1887,6 +1961,7 @@ function App() {
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0 0 16px 0' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingRight: '12px', paddingBottom: '40px' }}>
+              <ValidationBanner errors={validationResult.byStep.attributes} />
               <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
                 <div>
                   <h2 style={{ fontSize: '1.4rem', color: '#f1f5f9', margin: '0 0 8px 0', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>

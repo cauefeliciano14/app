@@ -25,21 +25,24 @@ export function InventoryTab({
   onUpdatePlayState,
   onManageEquipment,
   equippedArmorId,
-  hasShieldEquipped,
+  hasShieldEquipped = false,
   onEquipArmor,
   onEquipShield,
 }: InventoryTabProps) {
   const toggleEquipped = (itemName: string) => {
-    // Also update armor/shield engine state when toggling armor items
     const armorEntry = getArmorByName(itemName);
-    if (armorEntry && onEquipArmor && onEquipShield) {
-      if (armorEntry.type === 'shield') {
-        onEquipShield(!hasShieldEquipped);
-      } else {
-        const isCurrentlyEquipped = equippedArmorId === armorEntry.id;
-        onEquipArmor(isCurrentlyEquipped ? null : armorEntry.id);
-      }
+
+    if (armorEntry?.type === 'shield') {
+      onEquipShield?.(!hasShieldEquipped);
+      return;
     }
+
+    if (armorEntry) {
+      const isCurrentlyEquipped = equippedArmorId === armorEntry.id;
+      onEquipArmor?.(isCurrentlyEquipped ? null : armorEntry.id);
+      return;
+    }
+
     onUpdatePlayState(prev => {
       const equipped = prev.equippedItemIds.includes(itemName)
         ? prev.equippedItemIds.filter(id => id !== itemName)
@@ -84,7 +87,12 @@ export function InventoryTab({
             ))}
           </div>
           {inventory.map((item, i) => {
-            const isEquipped = playState.equippedItemIds.includes(item.name);
+            const armorEntry = getArmorByName(item.name);
+            const isEquipped = armorEntry
+              ? armorEntry.type === 'shield'
+                ? hasShieldEquipped
+                : armorEntry.id === equippedArmorId
+              : playState.equippedItemIds.includes(item.name);
             const isAttuned = playState.attunedItemIds.includes(item.name);
             return (
               <div key={i} style={{

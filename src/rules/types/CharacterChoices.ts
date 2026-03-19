@@ -13,6 +13,13 @@ export interface BackgroundBonusDistribution {
   distribution: Partial<Record<AttributeKey, number>>;
 }
 
+export interface ValidationInventoryItem {
+  name: string;
+  quantity?: number;
+  source?: string;
+  isStartingGear?: boolean;
+}
+
 export interface CharacterChoices {
   level?: number;
   classId: string | null;
@@ -29,6 +36,7 @@ export interface CharacterChoices {
     toolProficiency?: string;
   };
   equipmentChoices: { classOption: 'A' | 'B' | null; backgroundOption: 'A' | 'B' | null };
+  inventory?: ValidationInventoryItem[];
   inventoryWeapons?: string[];
   spellSelections: { cantrips: string[]; prepared: string[] };
   talentSelections: Record<string, Record<string, string>>;

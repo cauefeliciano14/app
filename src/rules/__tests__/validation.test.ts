@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { validateChoices } from '../engine/validation';
 import type { CharacterChoices } from '../types/CharacterChoices';
 import { getClassSpellcastingData } from '../data/classRules';
+import bardoSpells from '../../data/spells/bardo_spells.json';
 
 // ---------------------------------------------------------------------------
 // Helper para construir choices mínimas
@@ -17,7 +18,8 @@ function makeChoices(overrides: Partial<CharacterChoices>): CharacterChoices {
       inteligencia: 10, sabedoria: 10, carisma: 10,
     },
     backgroundBonusDistribution: null,
-    equipmentChoices: { classOption: 'A', backgroundOption: 'A' },
+    equipmentChoices: { classOption: 'B', backgroundOption: 'B' },
+    inventory: [],
     spellSelections: { cantrips: [], prepared: [] },
     talentSelections: {},
     languageSelections: [],
@@ -54,6 +56,21 @@ function makeCompleteWarrior(): CharacterChoices {
     },
     languageSelections: ['Élfico', 'Anão'],
     equipmentChoices: { classOption: 'A', backgroundOption: 'A' },
+    inventory: [
+      { name: 'Cota de Malha' },
+      { name: 'Espada Longa' },
+      { name: 'Espada Curta' },
+      { name: 'Besta Leve' },
+      { name: 'Kit de Aventureiro' },
+      { name: 'Girote' },
+      { name: 'Lança' },
+      { name: 'Arco Curto' },
+      { name: 'Flecha' },
+      { name: 'Kit de Curandeiro' },
+      { name: 'Kit de Jogo' },
+      { name: 'Aljava' },
+      { name: 'Roupas de Viagem' },
+    ],
   });
 }
 
@@ -85,7 +102,7 @@ describe('Validação — Etapa Classe', () => {
   it('classe inválida → erro', () => {
     const r = validateChoices(makeChoices({ classId: 'inventada' }));
     expect(r.byStep.class.length).toBeGreaterThan(0);
-    expect(r.byStep.class[0]).toMatch(/não reconhecida/i);
+    expect(r.byStep.class[0]).toMatch(/não é mais válida/i);
   });
 
   it('guerreiro sem escolhas obrigatórias → erro sobre opção pendente', () => {
@@ -97,7 +114,7 @@ describe('Validação — Etapa Classe', () => {
     expect(r.byStep.class.length).toBeGreaterThanOrEqual(0);
     // Se não houver opções de classe (details.options), tudo bem
     // O teste é que NÃO dá erro de classe inexistente
-    expect(r.byStep.class.every(e => !e.includes('não reconhecida'))).toBe(true);
+    expect(r.byStep.class.every(e => !e.includes('não é mais válida'))).toBe(true);
   });
 });
 
@@ -173,7 +190,7 @@ describe('Validação — Etapa Espécie', () => {
         // falta 'elfo-cantrip'
       },
     }));
-    expect(r.byStep.species.some(e => e.includes('elfo-cantrip'))).toBe(true);
+    expect(r.byStep.species.some(e => e.includes('truque de alto elfo'))).toBe(true);
   });
 
   it('elfo da floresta sem cantrip → sem erro de cantrip', () => {
@@ -258,7 +275,7 @@ describe('Validação de magia — Clérigo nível 1', () => {
   });
 
   it('truques suficientes → sem erro de truque', () => {
-    const cantrips = Array.from({ length: requiredCantrips }, (_, i) => `Truque${i}`);
+    const cantrips = ['Chama Sagrada', 'Taumaturgia', 'Luz'].slice(0, requiredCantrips);
     const r = validateChoices(makeChoices({
       classId: 'clerigo',
       spellSelections: { cantrips, prepared: [] },
@@ -292,8 +309,14 @@ describe('Validação de magia — Bardo nível 1 (known/prepared)', () => {
   });
 
   it('truques e magias suficientes → sem erro de magia', () => {
-    const cantrips = Array.from({ length: requiredCantrips }, (_, i) => `Truque${i}`);
-    const prepared = Array.from({ length: requiredSpells }, (_, i) => `Magia${i}`);
+    const cantrips = (bardoSpells as Array<{ name: string; level: string | number }>)
+      .filter((spell) => spell.level === 'Truque' || spell.level === 0)
+      .slice(0, requiredCantrips)
+      .map((spell) => spell.name);
+    const prepared = (bardoSpells as Array<{ name: string; level: string | number }>)
+      .filter((spell) => spell.level === 1 || spell.level === '1' || spell.level === '1º Círculo')
+      .slice(0, requiredSpells)
+      .map((spell) => spell.name);
     const r = validateChoices(makeChoices({
       classId: 'bardo',
       spellSelections: { cantrips, prepared },
@@ -373,5 +396,66 @@ describe('Equipamento incompleto → bloqueio', () => {
       equipmentChoices: { classOption: null, backgroundOption: null },
     }));
     expect(r.byStep.equipment.length).toBeGreaterThanOrEqual(2);
+  });
+});
+
+
+describe('Validação explícita de inconsistências em magia e equipamento', () => {
+  it('bloqueia truque duplicado', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'clerigo',
+      spellSelections: { cantrips: ['Chama Sagrada', 'Chama Sagrada'], prepared: [] },
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('truques duplicados'))).toBe(true);
+  });
+
+  it('bloqueia magia duplicada', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'bardo',
+      spellSelections: {
+        cantrips: ['Luz', 'Zombaria Viciosa'],
+        prepared: ['Enfeitiçar Pessoa', 'Enfeitiçar Pessoa'],
+      },
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('magias duplicadas'))).toBe(true);
+  });
+
+  it('bloqueia excesso de seleção de truques e magias', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'bardo',
+      spellSelections: {
+        cantrips: ['Luz', 'Zombaria Viciosa', 'Amigos'],
+        prepared: ['Enfeitiçar Pessoa', 'Palavra Curativa', 'Sono', 'Heroísmo', 'Compreender Idiomas'],
+      },
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('no máximo 2 truque'))).toBe(true);
+    expect(r.byStep.equipment.some(e => e.includes('no máximo 4 magia'))).toBe(true);
+  });
+
+  it('bloqueia equippedArmorId inválido', () => {
+    const r = validateChoices(makeChoices({
+      equippedArmorId: 'cota_de_placas',
+      inventory: [{ name: 'Armadura de Couro' }],
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('armadura equipada'))).toBe(true);
+  });
+
+  it('bloqueia hasShield sem escudo no inventário', () => {
+    const r = validateChoices(makeChoices({
+      hasShield: true,
+      inventory: [{ name: 'Armadura de Couro' }],
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('escudo'))).toBe(true);
+  });
+
+  it('bloqueia pacote de equipamento sem inventário correspondente', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'guerreiro',
+      backgroundId: 'soldado',
+      equipmentChoices: { classOption: 'A', backgroundOption: 'A' },
+      inventory: [{ name: 'Espada Longa' }, { name: 'Roupas de Viagem' }],
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('pacote de equipamento de classe'))).toBe(true);
+    expect(r.byStep.equipment.some(e => e.includes('pacote de equipamento de antecedente'))).toBe(true);
   });
 });

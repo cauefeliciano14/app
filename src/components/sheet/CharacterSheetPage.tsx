@@ -153,6 +153,7 @@ export function CharacterSheetPage({
             specialSenses={derivedSheet.specialSenses}
           />
           <ProficienciesCard
+            skillProficiencies={derivedSheet.skillProficiencies}
             armorProficiencies={derivedSheet.armorProficiencies}
             weaponProficiencies={derivedSheet.weaponProficiencies}
             toolProficiencies={derivedSheet.toolProficiencies}
@@ -173,6 +174,7 @@ export function CharacterSheetPage({
             onRemove={handleRemoveCondition}
           />
           <DefensesCard
+            derivedDefenses={derivedSheet.derivedDefenses}
             activeDefenses={playState.activeDefenses}
             onAdd={handleAddDefense}
             onRemove={handleRemoveDefense}
