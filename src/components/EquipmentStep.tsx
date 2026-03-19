@@ -40,6 +40,35 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
   const equipmentState = character.equipment;
   const spellsState = character.spells;
 
+  const sanitizeEquippedState = (prevEquipment: any, nextInventory: any[]) => {
+    const nextEquipment = {
+      ...prevEquipment,
+      inventory: nextInventory,
+    };
+
+    if (prevEquipment.equippedArmorId) {
+      const equippedArmorStillPresent = nextInventory.some((item: any) => {
+        const armor = getArmorByName(item.name);
+        return armor?.type !== 'shield' && armor?.id === prevEquipment.equippedArmorId;
+      });
+
+      if (!equippedArmorStillPresent) {
+        nextEquipment.equippedArmorId = null;
+      }
+    }
+
+    if (prevEquipment.hasShieldEquipped) {
+      const previousShieldCount = prevEquipment.inventory.filter((item: any) => getArmorByName(item.name)?.type === 'shield').length;
+      const nextShieldCount = nextInventory.filter((item: any) => getArmorByName(item.name)?.type === 'shield').length;
+
+      if (nextShieldCount < previousShieldCount) {
+        nextEquipment.hasShieldEquipped = false;
+      }
+    }
+
+    return nextEquipment;
+  };
+
   // Load class spells
   const [classSpells, setClassSpells] = useState<any[]>([]);
   useEffect(() => {
@@ -132,7 +161,7 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
       }
       draft.hasShieldEquipped = hasShield;
 
-      return draft;
+      return sanitizeEquippedState(prev, draft.inventory);
     });
 
     // Collapse starting, expand inventory
@@ -152,19 +181,44 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
   };
 
   const handleRemoveItem = (id: string) => {
-    updateEquipment((prev: any) => ({
-      ...prev,
-      inventory: prev.inventory.filter((i: any) => i.id !== id),
-    }));
+    updateEquipment((prev: any) => {
+      const removedItem = prev.inventory.find((i: any) => i.id === id);
+      const nextInventory = prev.inventory.filter((i: any) => i.id !== id);
+      const nextEquipment = sanitizeEquippedState(prev, nextInventory);
+      const removedArmor = removedItem ? getArmorByName(removedItem.name) : null;
+
+      if (removedArmor?.type === 'shield' && prev.hasShieldEquipped) {
+        nextEquipment.hasShieldEquipped = false;
+      }
+
+      if (removedArmor && removedArmor.type !== 'shield' && removedArmor.id === prev.equippedArmorId) {
+        nextEquipment.equippedArmorId = null;
+      }
+
+      return nextEquipment;
+    });
   };
 
   const handleChangeQuantity = (id: string, delta: number) => {
-    updateEquipment((prev: any) => ({
-      ...prev,
-      inventory: prev.inventory.map((i: any) =>
-        i.id === id ? { ...i, quantity: Math.max(0, i.quantity + delta) } : i
-      ).filter((i: any) => i.quantity > 0),
-    }));
+    updateEquipment((prev: any) => {
+      const targetItem = prev.inventory.find((i: any) => i.id === id);
+      const nextInventory = prev.inventory
+        .map((i: any) => i.id === id ? { ...i, quantity: Math.max(0, i.quantity + delta) } : i)
+        .filter((i: any) => i.quantity > 0);
+
+      const nextEquipment = sanitizeEquippedState(prev, nextInventory);
+      const removedArmor = targetItem && targetItem.quantity + delta <= 0 ? getArmorByName(targetItem.name) : null;
+
+      if (removedArmor?.type === 'shield' && prev.hasShieldEquipped) {
+        nextEquipment.hasShieldEquipped = false;
+      }
+
+      if (removedArmor && removedArmor.type !== 'shield' && removedArmor.id === prev.equippedArmorId) {
+        nextEquipment.equippedArmorId = null;
+      }
+
+      return nextEquipment;
+    });
   };
 
   const handleCurrencyChange = (coin: string, delta: number) => {
