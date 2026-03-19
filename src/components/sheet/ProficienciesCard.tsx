@@ -1,5 +1,6 @@
 
 interface ProficienciesCardProps {
+  skillProficiencies: string[];
   armorProficiencies: string[];
   weaponProficiencies: string[];
   toolProficiencies: string[];
@@ -21,6 +22,7 @@ function ProfSection({ title, items }: { title: string; items: string[] }) {
 }
 
 export function ProficienciesCard({
+  skillProficiencies,
   armorProficiencies,
   weaponProficiencies,
   toolProficiencies,
@@ -36,6 +38,7 @@ export function ProficienciesCard({
       <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '8px' }}>
         PROFICIÊNCIAS E IDIOMAS
       </div>
+      <ProfSection title="PERÍCIAS" items={skillProficiencies} />
       <ProfSection title="ARMADURAS" items={armorProficiencies} />
       <ProfSection title="ARMAS" items={weaponProficiencies} />
       <ProfSection title="FERRAMENTAS" items={toolProficiencies} />
