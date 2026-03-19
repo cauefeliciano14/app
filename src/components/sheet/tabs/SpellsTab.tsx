@@ -35,8 +35,8 @@ export function SpellsTab({
   preparedSpells,
 }: SpellsTabProps) {
   const [circleFilter, setCircleFilter] = useState<string>('all');
+  const racialCantrips = derivedSheet.racialCantrips ?? [];
 
-  // Build name → level lookup from spells_all.json
   const spellLevelMap = useMemo(() => {
     const map = new Map<string, string>();
     for (const sp of spellsAll as Array<{ name: string; level: string }>) {
@@ -45,7 +45,6 @@ export function SpellsTab({
     return map;
   }, []);
 
-  // Group prepared spells by circle
   const groupedPrepared = useMemo(() => {
     const groups: Record<string, string[]> = {};
     for (const name of preparedSpells) {
@@ -56,15 +55,14 @@ export function SpellsTab({
     return groups;
   }, [preparedSpells, spellLevelMap]);
 
-  // Available circles for filter pills (sorted)
   const availableCircles = useMemo(() => {
     const circles = new Set<string>();
-    if (learnedCantrips.length > 0) circles.add('Truque');
+    if (learnedCantrips.length > 0 || racialCantrips.length > 0) circles.add('Truque');
     for (const c of Object.keys(groupedPrepared)) circles.add(c);
     return CIRCLE_ORDER.filter(c => circles.has(c));
-  }, [learnedCantrips, groupedPrepared]);
+  }, [groupedPrepared, learnedCantrips, racialCantrips]);
 
-  if (!derivedSheet.isCaster) {
+  if (!derivedSheet.isCaster && racialCantrips.length === 0) {
     return (
       <div style={{
         textAlign: 'center',
@@ -105,7 +103,6 @@ export function SpellsTab({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* Header stats */}
       <div style={{
         display: 'flex',
         gap: '12px',
@@ -119,10 +116,10 @@ export function SpellsTab({
         <StatPill label="Bônus de Ataque" value={signedMod(derivedSheet.spellAttackBonus ?? 0)} />
         <StatPill label="CD de Resistência" value={String(derivedSheet.spellSaveDC ?? 0)} />
         <StatPill label="Magias Preparadas" value={String(derivedSheet.preparedSpellCount ?? 0)} />
-        <StatPill label="Truques" value={String(derivedSheet.cantripsKnown ?? 0)} />
+        <StatPill label="Truques de Classe" value={String(derivedSheet.cantripsKnown ?? 0)} />
+        {racialCantrips.length > 0 && <StatPill label="Truques Raciais" value={String(racialCantrips.length)} />}
       </div>
 
-      {/* Spell slots */}
       {slotLevels.length > 0 && (
         <div style={{
           background: 'rgba(17,18,24,0.6)',
@@ -158,34 +155,10 @@ export function SpellsTab({
                   <span style={{ fontSize: '0.8rem', color: '#475569', minWidth: '40px' }}>
                     {remaining}/{total}
                   </span>
-                  <button
-                    onClick={() => handleSpendSlot(level)}
-                    disabled={remaining <= 0}
-                    style={{
-                      background: remaining > 0 ? 'rgba(248,113,113,0.15)' : 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(248,113,113,0.2)',
-                      borderRadius: '5px',
-                      color: remaining > 0 ? '#f87171' : '#475569',
-                      padding: '2px 8px',
-                      fontSize: '0.7rem',
-                      cursor: remaining > 0 ? 'pointer' : 'default',
-                    }}
-                  >
+                  <button onClick={() => handleSpendSlot(level)} disabled={remaining <= 0} style={slotButtonStyle(remaining > 0, 'rgba(248,113,113,0.15)', 'rgba(248,113,113,0.2)', '#f87171')}>
                     Gastar
                   </button>
-                  <button
-                    onClick={() => handleRestoreSlot(level)}
-                    disabled={spent <= 0}
-                    style={{
-                      background: spent > 0 ? 'rgba(74,222,128,0.1)' : 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(74,222,128,0.2)',
-                      borderRadius: '5px',
-                      color: spent > 0 ? '#4ade80' : '#475569',
-                      padding: '2px 8px',
-                      fontSize: '0.7rem',
-                      cursor: spent > 0 ? 'pointer' : 'default',
-                    }}
-                  >
+                  <button onClick={() => handleRestoreSlot(level)} disabled={spent <= 0} style={slotButtonStyle(spent > 0, 'rgba(74,222,128,0.1)', 'rgba(74,222,128,0.2)', '#4ade80')}>
                     Restaurar
                   </button>
                 </div>
@@ -195,49 +168,41 @@ export function SpellsTab({
         </div>
       )}
 
-      {/* Circle filter pills */}
       {availableCircles.length > 1 && (
         <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           <button
             onClick={() => setCircleFilter('all')}
-            style={{
-              background: circleFilter === 'all' ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
-              border: `1px solid ${circleFilter === 'all' ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
-              borderRadius: '20px',
-              color: circleFilter === 'all' ? '#a78bfa' : '#94a3b8',
-              padding: '4px 12px',
-              fontSize: '0.78rem',
-              cursor: 'pointer',
-            }}
+            style={filterPillStyle(circleFilter === 'all')}
           >
             Todos
           </button>
           {availableCircles.map(c => (
-            <button
-              key={c}
-              onClick={() => setCircleFilter(c)}
-              style={{
-                background: circleFilter === c ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
-                border: `1px solid ${circleFilter === c ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                borderRadius: '20px',
-                color: circleFilter === c ? '#a78bfa' : '#94a3b8',
-                padding: '4px 12px',
-                fontSize: '0.78rem',
-                cursor: 'pointer',
-              }}
-            >
+            <button key={c} onClick={() => setCircleFilter(c)} style={filterPillStyle(circleFilter === c)}>
               {c}
             </button>
           ))}
         </div>
       )}
 
-      {/* Cantrips */}
       {learnedCantrips.length > 0 && (circleFilter === 'all' || circleFilter === 'Truque') && (
-        <SpellList title="TRUQUES" spells={learnedCantrips} accent="#fbbf24" />
+        <SpellList
+          title="TRUQUES"
+          subtitle="Aprendidos pela classe; contam no limite normal."
+          spells={learnedCantrips}
+          accent="#fbbf24"
+        />
       )}
 
-      {/* Prepared spells grouped by circle */}
+      {racialCantrips.length > 0 && (circleFilter === 'all' || circleFilter === 'Truque') && (
+        <SpellList
+          title="TRUQUES RACIAIS"
+          subtitle="Origem racial/específica; não contam no limite de truques da classe."
+          spells={racialCantrips}
+          accent="#22c55e"
+          badge="Racial"
+        />
+      )}
+
       {CIRCLE_ORDER.filter(c => c !== 'Truque' && groupedPrepared[c]).map(circle => {
         if (circleFilter !== 'all' && circleFilter !== circle) return null;
         return (
@@ -250,18 +215,16 @@ export function SpellsTab({
         );
       })}
 
-      {/* Unknown circle fallback */}
       {groupedPrepared['?'] && (circleFilter === 'all' || circleFilter === '?') && (
         <SpellList title="MAGIAS PREPARADAS" spells={groupedPrepared['?']} accent="#a78bfa" />
       )}
 
-      {learnedCantrips.length === 0 && preparedSpells.length === 0 && (
+      {learnedCantrips.length === 0 && racialCantrips.length === 0 && preparedSpells.length === 0 && (
         <div style={{ color: '#475569', fontSize: '0.85rem', textAlign: 'center', padding: '16px' }}>
           Nenhuma magia selecionada.
         </div>
       )}
 
-      {/* Manage button */}
       <button
         onClick={onManageSpells}
         style={{
@@ -290,7 +253,19 @@ function StatPill({ label, value }: { label: string; value: string }) {
   );
 }
 
-function SpellList({ title, spells, accent }: { title: string; spells: string[]; accent: string }) {
+function SpellList({
+  title,
+  subtitle,
+  spells,
+  accent,
+  badge,
+}: {
+  title: string;
+  subtitle?: string;
+  spells: string[];
+  accent: string;
+  badge?: string;
+}) {
   return (
     <div style={{
       background: 'rgba(17,18,24,0.6)',
@@ -298,13 +273,33 @@ function SpellList({ title, spells, accent }: { title: string; spells: string[];
       borderRadius: '10px',
       padding: '12px 14px',
     }}>
-      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '8px' }}>
-        {title}
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px', alignItems: 'center', marginBottom: subtitle ? '4px' : '8px' }}>
+        <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em' }}>
+          {title}
+        </div>
+        {badge && (
+          <span style={{
+            background: `${accent}1a`,
+            border: `1px solid ${accent}33`,
+            borderRadius: '999px',
+            color: accent,
+            fontSize: '0.68rem',
+            fontWeight: 600,
+            padding: '2px 8px',
+          }}>
+            {badge}
+          </span>
+        )}
       </div>
+      {subtitle && (
+        <div style={{ fontSize: '0.76rem', color: '#64748b', marginBottom: '8px' }}>
+          {subtitle}
+        </div>
+      )}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
         {spells.map(s => (
           <span key={s} style={{
-            background: `rgba(${accent === '#fbbf24' ? '251,191,36' : '167,139,250'},0.1)`,
+            background: `${accent}1a`,
             border: `1px solid ${accent}33`,
             borderRadius: '6px',
             color: accent,
@@ -317,4 +312,28 @@ function SpellList({ title, spells, accent }: { title: string; spells: string[];
       </div>
     </div>
   );
+}
+
+function filterPillStyle(active: boolean) {
+  return {
+    background: active ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
+    border: `1px solid ${active ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
+    borderRadius: '20px',
+    color: active ? '#a78bfa' : '#94a3b8',
+    padding: '4px 12px',
+    fontSize: '0.78rem',
+    cursor: 'pointer',
+  } as const;
+}
+
+function slotButtonStyle(enabled: boolean, background: string, border: string, color: string) {
+  return {
+    background: enabled ? background : 'rgba(255,255,255,0.03)',
+    border: `1px solid ${border}`,
+    borderRadius: '5px',
+    color: enabled ? color : '#475569',
+    padding: '2px 8px',
+    fontSize: '0.7rem',
+    cursor: enabled ? 'pointer' : 'default',
+  } as const;
 }

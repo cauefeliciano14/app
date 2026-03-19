@@ -85,6 +85,9 @@ export interface DerivedSheet {
   // Truques raciais (não contam no limite de classe)
   racialCantrips: string[];
 
+  // Resistências/defesas derivadas de efeitos permanentes da ficha
+  derivedDefenses: string[];
+
   // Talento de origem (do antecedente)
   originTalent?: string;
 }
