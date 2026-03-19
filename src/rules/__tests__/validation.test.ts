@@ -85,7 +85,7 @@ describe('Validação — Etapa Classe', () => {
   it('classe inválida → erro', () => {
     const r = validateChoices(makeChoices({ classId: 'inventada' }));
     expect(r.byStep.class.length).toBeGreaterThan(0);
-    expect(r.byStep.class[0]).toMatch(/não reconhecida/i);
+    expect(r.byStep.class[0]).toMatch(/não é mais válida/i);
   });
 
   it('guerreiro sem escolhas obrigatórias → erro sobre opção pendente', () => {
@@ -97,7 +97,7 @@ describe('Validação — Etapa Classe', () => {
     expect(r.byStep.class.length).toBeGreaterThanOrEqual(0);
     // Se não houver opções de classe (details.options), tudo bem
     // O teste é que NÃO dá erro de classe inexistente
-    expect(r.byStep.class.every(e => !e.includes('não reconhecida'))).toBe(true);
+    expect(r.byStep.class.every(e => !e.includes('não é mais válida'))).toBe(true);
   });
 });
 
@@ -173,7 +173,7 @@ describe('Validação — Etapa Espécie', () => {
         // falta 'elfo-cantrip'
       },
     }));
-    expect(r.byStep.species.some(e => e.includes('elfo-cantrip'))).toBe(true);
+    expect(r.byStep.species.some(e => e.includes('truque de alto elfo'))).toBe(true);
   });
 
   it('elfo da floresta sem cantrip → sem erro de cantrip', () => {

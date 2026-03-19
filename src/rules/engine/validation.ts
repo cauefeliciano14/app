@@ -31,6 +31,56 @@ const BACKGROUNDS_WITH_TOOL_SELECTOR = new Set([
   'artesao', 'artista', 'guarda', 'nobre', 'soldado',
 ]);
 
+const STEP_CHOICE_LABELS: Record<string, string> = {
+  draconato: 'a ancestralidade dracônica',
+  elfo: 'a linhagem élfica',
+  'elfo-skill': 'a proficiência de perícia élfica',
+  'elfo-attr': 'o atributo da sua herança élfica',
+  'elfo-cantrip': 'o truque de alto elfo',
+  gnomo: 'a linhagem gnômica',
+  'gnomo-attr': 'o atributo da sua herança gnômica',
+  golias: 'a ancestralidade golias',
+  tiferino: 'a linhagem tiferina',
+  'tiferino-size': 'o porte do tiferino',
+  'tiferino-attr': 'o atributo da herança tiferina',
+  'aasimar-size': 'o porte do aasimar',
+  'humano-size': 'o porte do humano',
+  'humano-skill': 'a perícia extra do humano',
+  'humano-talent': 'o talento do humano',
+};
+
+function describeChoice(choiceKey: string): string {
+  return STEP_CHOICE_LABELS[choiceKey] ?? `a opção obrigatória (${choiceKey})`;
+}
+
+function makePendingChoiceMessage(choiceKey: string): string {
+  return `Escolha ${describeChoice(choiceKey)} para continuar.`;
+}
+
+function makeActionableBonusErrors(errors: string[]): string[] {
+  return errors.map((error) => {
+    const invalidAttr = error.match(/^Atributo "(.+)" não é permitido por este antecedente\.$/);
+    if (invalidAttr) {
+      return `Redistribua os bônus do antecedente sem usar ${invalidAttr[1]}.`;
+    }
+
+    const totalMismatch = error.match(/^Modo (\+[^ ]+) requer bônus total de 3\. Atual: (\d+)\.$/);
+    if (totalMismatch) {
+      return `Ajuste os bônus do antecedente no padrão ${totalMismatch[1]} até somar 3 pontos.`;
+    }
+
+    if (error === 'Modo +2/+1 requer exatamente um atributo com +2 e outro com +1.') {
+      return 'Distribua o bônus do antecedente em dois atributos diferentes: um com +2 e outro com +1.';
+    }
+
+    if (error === 'Modo +1/+1/+1 requer exatamente três atributos diferentes com +1 cada.') {
+      return 'Distribua o bônus do antecedente em três atributos diferentes, com +1 em cada um.';
+    }
+
+    return error;
+  });
+}
+
 // ---------------------------------------------------------------------------
 // Escolhas obrigatórias de espécie (condicional)
 // ---------------------------------------------------------------------------
@@ -107,16 +157,16 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
   // =========================================================================
 
   if (!choices.classId) {
-    byStep.class.push('Nenhuma classe selecionada.');
+    byStep.class.push('Escolha uma classe para começar a criação do personagem.');
   } else if (!isValidClass(choices.classId)) {
-    byStep.class.push(`Classe "${choices.classId}" não reconhecida.`);
+    byStep.class.push('Selecione novamente a classe: a opção salva não é mais válida.');
   } else {
     // Opções obrigatórias da classe (ex: Estilo de Combate)
     const details = getClassDetails(choices.classId) as Record<string, any> | null;
     if (details?.options) {
       for (const opt of details.options as Array<{ id: string; name: string }>) {
         if (!choices.featureChoices[opt.id]) {
-          byStep.class.push(`Escolha obrigatória pendente: ${opt.name ?? opt.id}.`);
+          byStep.class.push(`Defina ${opt.name ?? opt.id} para concluir a etapa de classe.`);
         }
       }
     }
@@ -127,23 +177,23 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
   // =========================================================================
 
   if (!choices.backgroundId) {
-    byStep.background.push('Nenhum antecedente selecionado.');
+    byStep.background.push('Escolha um antecedente para liberar os benefícios de origem.');
   } else if (!isValidBackground(choices.backgroundId)) {
-    byStep.background.push(`Antecedente "${choices.backgroundId}" não reconhecido.`);
+    byStep.background.push('Selecione novamente o antecedente: a opção salva não é mais válida.');
   } else {
     // Bônus de atributo
     if (choices.backgroundBonusDistribution) {
       const allowed = getAllowedBonusAttributes(choices.backgroundId);
       const result = validateBonusDistribution(choices.backgroundBonusDistribution, allowed);
-      byStep.background.push(...result.errors);
+      byStep.background.push(...makeActionableBonusErrors(result.errors));
     } else {
-      byStep.background.push('Bônus de atributo do antecedente não distribuído.');
+      byStep.background.push('Distribua os bônus de atributo do antecedente antes de avançar.');
     }
 
     // Ferramenta (se aplicável)
     if (BACKGROUNDS_WITH_TOOL_SELECTOR.has(choices.backgroundId)) {
       if (!choices.featureChoices['toolProficiency']) {
-        byStep.background.push('Escolha a proficiência de ferramenta do antecedente.');
+        byStep.background.push('Escolha a proficiência de ferramenta concedida pelo antecedente.');
       }
     }
 
@@ -152,7 +202,7 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     if (talentName) {
       const talentSel = choices.talentSelections[talentName];
       if (!checkTalentComplete(talentName, talentSel)) {
-        byStep.background.push('Talento de origem incompleto — preencha todas as subescolhas.');
+        byStep.background.push('Complete as escolhas do talento de origem para continuar.');
       }
     }
   }
@@ -162,7 +212,7 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
   // =========================================================================
 
   if (!choices.speciesId) {
-    byStep.species.push('Nenhuma espécie selecionada.');
+    byStep.species.push('Escolha uma espécie para definir os traços do personagem.');
   } else {
     // Idiomas: precisa de pelo menos 2 manuais (excluindo common, thieves-cant, druidic)
     const manualLangs = (choices.languageSelections ?? []).filter(
@@ -176,7 +226,7 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     const required = getRequiredSpeciesChoices(choices.speciesId, choices.featureChoices);
     for (const key of required) {
       if (!choices.featureChoices[key]) {
-        byStep.species.push(`Escolha obrigatória pendente: ${key}.`);
+        byStep.species.push(makePendingChoiceMessage(key));
       }
     }
   }
@@ -186,14 +236,14 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
   // =========================================================================
 
   if (!choices.attributeMethod) {
-    byStep.attributes.push('Método de geração de atributos não selecionado.');
+    byStep.attributes.push('Escolha um método para definir os atributos do personagem.');
   } else {
     const complete = isAttributesStepComplete({
       method: choices.attributeMethod,
       base: choices.baseAttributes,
     });
     if (!complete) {
-      byStep.attributes.push('Atributos incompletos ou inválidos para o método selecionado.');
+      byStep.attributes.push('Finalize a distribuição de atributos conforme o método selecionado.');
     }
   }
 
@@ -202,10 +252,10 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
   // =========================================================================
 
   if (choices.equipmentChoices.classOption === null) {
-    byStep.equipment.push('Opção de equipamento de classe não selecionada.');
+    byStep.equipment.push('Escolha o pacote de equipamento da classe.');
   }
   if (choices.equipmentChoices.backgroundOption === null) {
-    byStep.equipment.push('Opção de equipamento de antecedente não selecionada.');
+    byStep.equipment.push('Escolha o pacote de equipamento do antecedente.');
   }
 
   // Validação de magia por classe
@@ -217,7 +267,7 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
       if (requiredCantrips > 0) {
         const current = choices.spellSelections.cantrips.length;
         if (current < requiredCantrips) {
-          byStep.equipment.push(`Selecione ${requiredCantrips - current} truque(s) (${current}/${requiredCantrips}).`);
+          byStep.equipment.push(`Escolha mais ${requiredCantrips - current} truque(s) para completar a seleção (${current}/${requiredCantrips}).`);
         }
       }
 
@@ -227,7 +277,7 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
         const current = choices.spellSelections.prepared.length;
         if (current < requiredSpells) {
           const verb = spellData.preparedSpellsByLevel ? 'Prepare' : 'Escolha';
-          byStep.equipment.push(`${verb} ao menos ${requiredSpells - current} magia(s) (${current}/${requiredSpells}).`);
+          byStep.equipment.push(`${verb} mais ${requiredSpells - current} magia(s) para completar a seleção (${current}/${requiredSpells}).`);
         }
       }
     }
