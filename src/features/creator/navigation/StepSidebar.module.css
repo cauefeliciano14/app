@@ -16,25 +16,11 @@
   font-weight: 600;
 }
 
-.details {
-  background: var(--surface-subtle);
-  border: 1px solid var(--border-separator);
-  border-radius: 14px;
-}
-
-.summary {
-  cursor: pointer;
-  list-style: none;
-  padding: 12px 14px;
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
 .detailList {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  padding: 0 12px 12px;
+  padding: 0;
 }
 
 .navButton {
