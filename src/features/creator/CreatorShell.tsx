@@ -72,7 +72,7 @@ export function CreatorShell() {
                       setIsPortraitModalOpen(false);
                     }}
                   >
-                    <img src={`/imgs/portrait_caracter/${p}`} alt={p} />
+                    <img src={`/imgs/portrait_caracter/${p}`} alt="Opção de retrato do personagem" />
                   </div>
                 ))}
               </div>

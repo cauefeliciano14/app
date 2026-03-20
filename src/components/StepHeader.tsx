@@ -70,7 +70,13 @@ export const StepHeader = ({
             onClick={onPortraitClick}
             title="Escolher retrato do personagem"
           >
-            {portrait && <img src={`/imgs/portrait_caracter/${portrait}`} alt="Portrait" className="profile-image" />}
+            {portrait && (
+              <img
+                src={`/imgs/portrait_caracter/${portrait}`}
+                alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
+                className="profile-image"
+              />
+            )}
           </div>
 
           <div className="name-input-column">

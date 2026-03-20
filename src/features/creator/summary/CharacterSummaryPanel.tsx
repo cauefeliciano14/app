@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
+import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
 import patterns from '../../../styles/panelPatterns.module.css';
 import styles from './CharacterSummaryPanel.module.css';
 
@@ -20,6 +21,8 @@ export function CharacterSummaryPanel() {
     .filter(Boolean)
     .join(' • ');
 
+  const displayLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
+
   const quickFacts = useMemo(
     () => [
       { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1) },
@@ -39,7 +42,7 @@ export function CharacterSummaryPanel() {
           {character.portrait ? (
             <img
               src={`/imgs/portrait_caracter/${character.portrait}`}
-              alt={character.name || 'Retrato'}
+              alt={character.name ? `Retrato de ${character.name}` : 'Retrato do personagem'}
               className="profile-image"
             />
           ) : null}
@@ -66,7 +69,7 @@ export function CharacterSummaryPanel() {
       </div>
 
       <SummaryIssues items={mainPendencies} />
-      <SummaryList title="Idiomas" items={derivedSheet.languages} empty="Nenhum idioma extra." />
+      <SummaryList title="Idiomas" items={displayLanguages} empty="Nenhum idioma extra." />
       <SummaryList title="Perícias" items={derivedSheet.skillProficiencies} empty="Nenhuma perícia definida." />
     </div>
   );
