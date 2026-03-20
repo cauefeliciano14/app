@@ -134,6 +134,11 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
                 ‹
               </button>
               <StepSidebar />
+              {impactSection && (
+                <div style={{ marginTop: '14px' }}>
+                  <ChoiceImpact section={impactSection} />
+                </div>
+              )}
             </>
           )}
         </aside>
@@ -151,7 +156,6 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
             />
             <hr className={styles.separator} style={{ marginBottom: hrMarginBottom }} />
             {errors && errors.length > 0 && <ValidationBanner errors={errors} />}
-            {impactSection ? <ChoiceImpact section={impactSection} /> : null}
             <div className={styles.content}>{children}</div>
           </div>
         </main>

@@ -213,6 +213,24 @@
   cursor: not-allowed;
 }
 
+.btnResumo {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: border-color 0.18s, color 0.18s;
+}
+
+.btnResumo:hover {
+  border-color: rgba(249, 115, 22, 0.35);
+  color: var(--text-secondary);
+}
+
 @media (max-width: 640px) {
   .mainRow {
     flex-wrap: wrap;

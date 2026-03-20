@@ -50,27 +50,24 @@
 
 /* ── Selection layout (Origin + Species) ── */
 .selectionLayout {
-  display: grid;
-  grid-template-columns: minmax(160px, 200px) minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .selectionRail {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 6px;
-  align-content: start;
-  position: sticky;
-  top: 16px;
 }
 
 .selectionButton {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
-  padding: 10px 14px;
+  padding: 9px 12px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.07);
   background: rgba(26, 27, 35, 0.8);
@@ -132,17 +129,6 @@
 
 .selectionPanel {
   padding: clamp(16px, 2vw, 22px);
-}
-
-@media (max-width: 860px) {
-  .selectionLayout {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .selectionRail {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    position: static;
-  }
 }
 
 @media (max-width: 600px) {

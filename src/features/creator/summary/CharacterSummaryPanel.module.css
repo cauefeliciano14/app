@@ -4,11 +4,9 @@
   gap: 12px;
 }
 
-.headerRow,
-.cardHeader {
+.headerRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
 }
 
@@ -18,201 +16,35 @@
   font-weight: 700;
 }
 
-.pendingBadge {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(249,115,22,0.15);
-  border: 1px solid rgba(249,115,22,0.25);
-  color: #fdba74;
-  font-size: 0.68rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.pendingHint {
-  color: var(--text-faint);
-  font-size: 0.62rem;
-  font-style: italic;
-}
-
-.identityCard,
-.summaryPillCard {
-  background: var(--surface-subtle);
-  border: 1px solid var(--border-default);
+/* ── Pendências card (red tones) ─────────────────────────────────────────── */
+.pendenciasCard {
+  background: rgba(220, 38, 38, 0.07);
+  border: 1px solid rgba(220, 38, 38, 0.25);
   border-radius: 12px;
-  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.identityCard {
   padding: 12px;
 }
 
-.identityTitle {
-  color: var(--text-primary);
-  font-size: 0.78rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-/* ── Redesigned identity card ─────────────────────────────────────────────── */
-.identityHeader {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.identityAvatar {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(249, 115, 22, 0.3);
-  background: rgba(249, 115, 22, 0.06);
-}
-
-.avatarImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.avatarPlaceholder {
-  width: 100%;
-  height: 100%;
+.pendenciasHeader {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  opacity: 0.45;
-}
-
-.identityInfo {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.identityName {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-}
-
-.identityChips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.chipClass {
-  background: rgba(249, 115, 22, 0.15);
-  border: 1px solid rgba(249, 115, 22, 0.35);
-  color: #fdba74;
-  border-radius: 6px;
-  padding: 2px 7px;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-.chipSecondary {
-  background: rgba(148, 163, 184, 0.09);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  color: #94a3b8;
-  border-radius: 6px;
-  padding: 2px 7px;
-  font-size: 0.68rem;
-  font-weight: 500;
-}
-
-.chipEmpty {
-  background: transparent;
-  border: 1px dashed rgba(100, 116, 139, 0.3);
-  color: #475569;
-  border-radius: 6px;
-  padding: 2px 7px;
-  font-size: 0.68rem;
-}
-
-.identityOrigin {
-  font-size: 0.7rem;
-  color: #64748b;
-  font-style: normal;
-}
-
-.identityOrigin em {
-  font-style: italic;
-  color: #475569;
-}
-
-.quickFactsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: space-between;
   gap: 8px;
+  margin-bottom: 8px;
 }
 
-.summaryPillCard {
-  padding: 8px 10px;
-  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.pillLabel {
-  color: var(--text-muted);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-}
-
-.pillValue {
-  color: var(--text-primary);
-  font-size: 0.95rem;
+.pendenciasTitle {
+  color: #f87171;
+  font-size: 0.72rem;
   font-weight: 700;
-}
-
-.emptyState {
-  color: var(--text-muted);
-  font-size: 0.78rem;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.tagList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  list-style: none;
-  margin: 8px 0 0;
-  padding: 0;
-}
-
-.tagItem {
-  background: rgba(249, 115, 22, 0.1);
-  border: 1px solid rgba(249, 115, 22, 0.22);
-  border-radius: 999px;
-  color: var(--text-primary);
-  font-size: 0.74rem;
-  padding: 4px 9px;
-}
-
-.subLabel {
-  color: var(--text-muted);
-  font-size: 0.62rem;
-  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-top: 10px;
+}
+
+.pendenciasHint {
+  color: rgba(248, 113, 113, 0.5);
+  font-size: 0.62rem;
+  font-style: italic;
+  white-space: nowrap;
 }
 
 .pendingList {
@@ -221,26 +53,24 @@
   gap: 2px;
 }
 
-/* Pending rows are now clickable buttons */
 .pendingRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  width: 100%;
+  width: calc(100% + 12px);
+  margin: 0 -6px;
   background: transparent;
   border: none;
   border-radius: 8px;
-  padding: 5px 6px;
-  margin: 0 -6px;
-  width: calc(100% + 12px);
+  padding: 6px 6px;
   cursor: pointer;
   transition: background 0.15s ease;
   text-align: left;
 }
 
 .pendingRow:hover:not(:disabled) {
-  background: rgba(249, 115, 22, 0.09);
+  background: rgba(220, 38, 38, 0.12);
 }
 
 .pendingRow:disabled {
@@ -248,43 +78,30 @@
 }
 
 .pendingLabel {
-  color: var(--text-secondary, #cbd5e1);
-  font-size: 0.78rem;
+  color: #fca5a5;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
 
 .pendingCount {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
-  height: 20px;
+  min-width: 22px;
+  height: 22px;
   padding: 0 5px;
   border-radius: 999px;
-  background: rgba(249,115,22,0.15);
-  border: 1px solid rgba(249,115,22,0.25);
-  color: #fdba74;
-  font-size: 0.68rem;
+  background: rgba(220, 38, 38, 0.22);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  color: #f87171;
+  font-size: 0.72rem;
   font-weight: 700;
   flex-shrink: 0;
 }
 
-
-/* ── Flash highlight animation ────────────────────────────────────────────── */
-@keyframes flashHighlight {
-  0% {
-    background-color: transparent;
-    box-shadow: none;
-  }
-  16% {
-    background-color: rgba(249, 115, 22, 0.13);
-    box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.32), 0 0 14px rgba(249, 115, 22, 0.08);
-  }
-  100% {
-    background-color: transparent;
-    box-shadow: none;
-  }
-}
-
-.flashHighlight {
-  animation: flashHighlight 1.5s ease-out forwards;
+.pendenciasResolved {
+  color: #4ade80;
+  font-size: 0.82rem;
+  margin: 0;
+  padding: 4px 0;
 }
