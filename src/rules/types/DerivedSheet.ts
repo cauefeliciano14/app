@@ -55,7 +55,7 @@ export interface DerivedSheet {
   speed: string;
   specialSenses: string[];
 
-  // Proficiências (labels como strings)
+  // Proficiências e idiomas (valores internos usados pelo motor de regras)
   skillProficiencies: string[];
   weaponProficiencies: string[];
   armorProficiencies: string[];

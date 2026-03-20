@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
+import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
 import patterns from '../../../styles/panelPatterns.module.css';
 import styles from './CharacterSummaryPanel.module.css';
 
@@ -17,6 +18,8 @@ export function CharacterSummaryPanel() {
   const { derivedSheet, validationResult, characterLevel } = useCharacter();
   const mainPendencies = validationResult.errors.slice(0, 5);
 
+  const displayLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
+
   const quickFacts = useMemo(
     () => [
       { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1) },
@@ -30,6 +33,22 @@ export function CharacterSummaryPanel() {
   return (
     <div className={patterns.stackSm}>
       <div className={patterns.sectionTitle}>Resumo persistente</div>
+
+      <div className={styles.header}>
+        <div className={`profile-placeholder ${character.portrait ? 'has-image' : ''} ${styles.portrait}`.trim()}>
+          {character.portrait ? (
+            <img
+              src={`/imgs/portrait_caracter/${character.portrait}`}
+              alt={character.name ? `Retrato de ${character.name}` : 'Retrato do personagem'}
+              className="profile-image"
+            />
+          ) : null}
+        </div>
+        <div>
+          <div className={styles.name}>{character.name || 'Sem nome'}</div>
+          <div className={styles.subtitle}>{identityLine || 'Sem identidade principal definida'}</div>
+        </div>
+      </div>
 
       <div className={patterns.responsiveGrid2}>
         {quickFacts.map((fact) => (
@@ -47,7 +66,7 @@ export function CharacterSummaryPanel() {
       </div>
 
       <SummaryIssues items={mainPendencies} />
-      <SummaryList title="Idiomas" items={derivedSheet.languages} empty="Nenhum idioma extra." />
+      <SummaryList title="Idiomas" items={displayLanguages} empty="Nenhum idioma extra." />
       <SummaryList title="Perícias" items={derivedSheet.skillProficiencies} empty="Nenhuma perícia definida." />
     </div>
   );
