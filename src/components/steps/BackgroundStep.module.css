@@ -1,0 +1,295 @@
+.detailsCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: clamp(var(--space-md), 2vw, 20px) clamp(18px, 2vw, 20px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(17, 18, 24, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.detailsHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailsTitle {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.5rem, 1.15rem + 1vw, 1.9rem);
+  letter-spacing: 0.5px;
+}
+
+.detailsDescription {
+  margin: 0;
+  color: var(--text-body);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.detailsDivider {
+  border: none;
+  border-top: 1px solid var(--border-separator);
+  margin: var(--space-sm) 0 0;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+  margin-top: 4px;
+  align-items: start;
+}
+
+.metaCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  background: rgba(249, 115, 22, 0.05);
+}
+
+.metaCardLabel {
+  color: var(--color-accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.skillItem {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.skillName {
+  color: var(--color-accent);
+}
+
+.skillAttr {
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.accordionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.accordion {
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(17, 18, 24, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.accordionIncomplete {
+  border-color: rgba(249, 115, 22, 0.5);
+}
+
+.accordionSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.summaryLead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.alertBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.summaryText {
+  min-width: 0;
+}
+
+.summaryTitle {
+  display: block;
+  color: var(--text-bright);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.summaryMeta {
+  display: block;
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.summaryMetaAccent {
+  color: var(--color-accent);
+}
+
+.summaryMetaMuted {
+  color: var(--text-faint);
+}
+
+.summaryChevron {
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.accordionBody {
+  padding: 0 18px 14px;
+  border-top: 1px solid var(--border-separator);
+}
+
+.benefitsLabel {
+  margin: 10px 0 8px;
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.benefitText {
+  margin: 4px 0;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.benefitStrong {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.attributeBody {
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--border-separator);
+}
+
+.attributeDescription {
+  margin: 0 0 var(--space-md);
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.attributeNameStrong {
+  color: var(--text-bright);
+}
+
+.fieldBlock {
+  margin-bottom: var(--space-md);
+}
+
+.fieldLabel {
+  display: block;
+  margin-bottom: var(--space-sm);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.appliedBonusCard {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  background: rgba(249, 115, 22, 0.05);
+}
+
+.appliedBonusText {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 0.85rem;
+}
+
+.appliedBonusHighlight {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.appliedBonusStrong {
+  color: #fff;
+}
+
+.selectFields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.selectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 12px;
+}
+
+.selectField {
+  min-width: 0;
+}
+
+.selectLabel {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+
+.selectValueAccent {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.placeholderIcon {
+  margin-bottom: 12px;
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
+
+.placeholderText {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .attributeBody {
+    padding: var(--space-md);
+  }
+
+  .accordionSummary {
+    padding: 12px 14px;
+  }
+
+  .accordionBody {
+    padding: 0 14px 14px;
+  }
+}
