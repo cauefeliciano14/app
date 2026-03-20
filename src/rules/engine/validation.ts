@@ -4,17 +4,9 @@ import { isValidBackground, getAllowedBonusAttributes, getBackgroundTalent } fro
 import { isAttributesStepComplete, validateBonusDistribution } from '../calculators/attributes';
 import { checkTalentComplete } from '../../components/TalentChoices';
 import { getClassBaseProficiencies } from '../calculators/proficiency';
-import { getSpellSelectionRequirement } from '../utils/spellSelection';
+import { getSpellSelectionRequirement, getValidSpellNames } from '../utils/spellSelection';
 import { getArmorTrainingLabel, hasArmorInInventory, hasShieldInInventory, resolveEquippedArmor } from '../utils/equipment';
 import { getEquipmentForBackground, getEquipmentForClass, itemSubChoices } from '../../data/equipmentData';
-import bardoSpells from '../../data/spells/bardo_spells.json';
-import bruxoSpells from '../../data/spells/bruxo_spells.json';
-import clerigoSpells from '../../data/spells/clerigo_spells.json';
-import druidaSpells from '../../data/spells/druida_spells.json';
-import feiticeiroSpells from '../../data/spells/feiticeiro_spells.json';
-import guardiaoSpells from '../../data/spells/guardiao_spells.json';
-import magoSpells from '../../data/spells/mago_spells.json';
-import paladinoSpells from '../../data/spells/paladino_spells.json';
 
 export interface StepValidation {
   class: string[];
@@ -51,17 +43,6 @@ const STEP_CHOICE_LABELS: Record<string, string> = {
   'humano-size': 'o porte do humano',
   'humano-skill': 'a perícia extra do humano',
   'humano-talent': 'o talento do humano',
-};
-
-const CLASS_SPELLS_BY_ID: Record<string, Array<{ name: string; level: string | number }>> = {
-  bardo: bardoSpells,
-  bruxo: bruxoSpells,
-  clerigo: clerigoSpells,
-  druida: druidaSpells,
-  feiticeiro: feiticeiroSpells,
-  guardiao: guardiaoSpells,
-  mago: magoSpells,
-  paladino: paladinoSpells,
 };
 
 function describeChoice(choiceKey: string): string {
@@ -135,18 +116,6 @@ function findDuplicates(values: string[]): string[] {
   return [...countOccurrences(values).entries()]
     .filter(([, count]) => count > 1)
     .map(([value]) => value);
-}
-
-function getValidSpellNames(classId: string, level: 'cantrip' | 1): Set<string> {
-  const spells = CLASS_SPELLS_BY_ID[classId] ?? [];
-  return new Set(
-    spells
-      .filter((spell) => {
-        if (level === 'cantrip') return spell.level === 'Truque' || spell.level === 0;
-        return spell.level === 1 || spell.level === '1' || spell.level === '1º Círculo';
-      })
-      .map((spell) => spell.name)
-  );
 }
 
 function getInventoryCounts(inventory: ValidationInventoryItem[]): Map<string, number> {
@@ -307,6 +276,7 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
       byStep.equipment.push('Seu personagem não tem treinamento com escudo. Desequipe-o ou ajuste a construção.');
     }
   }
+
 
   if (choices.classId) {
     const spellData = getClassSpellcastingData(choices.classId);
