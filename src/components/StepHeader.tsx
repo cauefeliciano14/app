@@ -10,8 +10,6 @@ export interface StepHeaderProps {
   setCharacterName: (name: string) => void;
   portrait: string | null;
   onPortraitClick: () => void;
-  onToggleSummary?: () => void;
-  summaryCollapsed?: boolean;
 }
 
 export const StepHeader = ({
@@ -22,8 +20,6 @@ export const StepHeader = ({
   setCharacterName,
   portrait,
   onPortraitClick,
-  onToggleSummary,
-  summaryCollapsed,
 }: StepHeaderProps) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
@@ -144,15 +140,6 @@ export const StepHeader = ({
           >
             Avançar ›
           </button>
-          {onToggleSummary && (
-            <button
-              onClick={onToggleSummary}
-              className={styles.btnResumo}
-              title={summaryCollapsed ? 'Abrir resumo' : 'Fechar resumo'}
-            >
-              Resumo {summaryCollapsed ? '›' : '‹'}
-            </button>
-          )}
         </div>
       </div>
     </div>

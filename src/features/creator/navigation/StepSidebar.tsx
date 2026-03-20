@@ -43,6 +43,19 @@ export function StepSidebar() {
               ? styles.badgePending
               : styles.badgeIdle;
 
+          let subtitle: string | null = null;
+          if (complete) {
+            subtitle = 'Concluída';
+          } else if (active && pending === 0) {
+            subtitle = 'Em andamento';
+          } else if (pending > 0) {
+            subtitle = `${pending} pendente${pending > 1 ? 's' : ''}`;
+          }
+
+          const subtitleClass = complete
+            ? styles.navSubtitleDone
+            : styles.navSubtitlePending;
+
           return (
             <button
               key={item.label}
@@ -50,7 +63,12 @@ export function StepSidebar() {
               className={`${styles.navButton} ${active ? styles.navButtonActive : ''}`.trim()}
             >
               <div className={styles.navHeader}>
-                <span className={styles.navLabel}>{item.label}</span>
+                <div className={styles.navLabelGroup}>
+                  <span className={styles.navLabel}>{item.label}</span>
+                  {subtitle && (
+                    <span className={`${styles.navSubtitle} ${subtitleClass}`}>{subtitle}</span>
+                  )}
+                </div>
                 <span className={`${patterns.pill} ${styles.stepBadge} ${badgeClass}`.trim()}>
                   {complete ? '✓' : pending > 0 ? pending : item.index + 1}
                 </span>
