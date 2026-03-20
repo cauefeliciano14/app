@@ -76,6 +76,32 @@
   font-weight: 700;
 }
 
+.supportingText,
+.emptyState {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+.tagItem {
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  padding: 6px 10px;
+}
+
 @media (max-width: 920px) {
   .quickFactsGrid {
     grid-template-columns: 1fr;

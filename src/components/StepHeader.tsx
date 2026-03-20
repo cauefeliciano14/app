@@ -65,13 +65,13 @@ export const StepHeader = ({
               className={styles.portraitImage}
             />
           ) : (
-            <span className={styles.portraitPlaceholder}>Retrato</span>
+            <span className={styles.portraitPlaceholder}>Sem retrato</span>
           )}
         </button>
 
         <div className={styles.nameColumn}>
           <label className={styles.characterNameLabel} htmlFor="character-name-input">
-            Nome do Personagem
+            Nome do personagem
           </label>
           <input
             id="character-name-input"
@@ -79,11 +79,11 @@ export const StepHeader = ({
             className={styles.characterNameInput}
             value={characterName}
             onChange={(e) => setCharacterName(e.target.value)}
-            placeholder="Digite o nome..."
+            placeholder="Digite o nome do personagem"
           />
           <div className={styles.suggestionsContainer}>
             <button type="button" className={styles.suggestionsLink} onClick={generateNames}>
-              MOSTRAR SUGESTÕES{suggestions.length > 0 ? ':' : ''}
+              Mostrar sugestões{suggestions.length > 0 ? ':' : ''}
             </button>
 
             {suggestions.length > 0 && (

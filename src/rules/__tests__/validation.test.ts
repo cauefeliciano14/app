@@ -54,7 +54,7 @@ function makeCompleteWarrior(): CharacterChoices {
       'humano-skill': 'Percepção',
       'humano-talent': 'Atacante Selvagem',
     },
-    languageSelections: ['Élfico', 'Anão'],
+    languageSelections: ['elvish', 'dwarvish'],
     equipmentChoices: { classOption: 'A', backgroundOption: 'A' },
     inventory: [
       { name: 'Cota de Malha' },
@@ -168,7 +168,7 @@ describe('Validação — Etapa Espécie', () => {
   it('com 2 idiomas e escolhas completas → sem erro de espécie', () => {
     const r = validateChoices(makeChoices({
       speciesId: 'humano',
-      languageSelections: ['Élfico', 'Anão'],
+      languageSelections: ['elvish', 'dwarvish'],
       featureChoices: {
         'humano-size': 'Médio',
         'humano-skill': 'Percepção',
@@ -182,7 +182,7 @@ describe('Validação — Etapa Espécie', () => {
   it('elfo alto-elfo sem cantrip → erro', () => {
     const r = validateChoices(makeChoices({
       speciesId: 'elfo',
-      languageSelections: ['Comum', 'Anão'],
+      languageSelections: ['common', 'dwarvish'],
       featureChoices: {
         'elfo': 'alto-elfo',
         'elfo-skill': 'Percepção',
@@ -196,7 +196,7 @@ describe('Validação — Etapa Espécie', () => {
   it('elfo da floresta sem cantrip → sem erro de cantrip', () => {
     const r = validateChoices(makeChoices({
       speciesId: 'elfo',
-      languageSelections: ['Élfico', 'Anão'],
+      languageSelections: ['elvish', 'dwarvish'],
       featureChoices: {
         'elfo': 'elfo-da-floresta',
         'elfo-skill': 'Percepção',

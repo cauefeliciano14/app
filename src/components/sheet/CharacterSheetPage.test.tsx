@@ -27,7 +27,7 @@ function makeChoices(overrides: Partial<CharacterChoices>): CharacterChoices {
     equipmentChoices: { classOption: 'A', backgroundOption: 'A' },
     spellSelections: { cantrips: [], prepared: [] },
     talentSelections: {},
-    languageSelections: ['Comum'],
+    languageSelections: ['common'],
     featureChoices: {},
     characterDetails: { name: 'Teste', portrait: null },
     ...overrides,
