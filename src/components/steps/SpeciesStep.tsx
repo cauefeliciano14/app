@@ -1,7 +1,6 @@
 import React from "react";
 import speciesData from "../../data/species.json";
 import { SpeciesDetails } from "../SpeciesDetails";
-import { ValidationBanner } from "../ValidationBanner";
 import { StepLayout } from "./StepLayout";
 import styles from "./StepLayout.module.css";
 import { useCharacter } from "../../context/CharacterContext";
@@ -43,7 +42,6 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
       impactSection="species"
     >
       <div className={styles.stepContent}>
-        <ValidationBanner errors={validationErrors} />
         <div className={styles.sectionIntro}>
           <div className={styles.sectionTitleRow}>
             <span className={styles.sectionIcon}>✦</span>
