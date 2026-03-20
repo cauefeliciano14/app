@@ -41,7 +41,7 @@ export function PortraitPickerModal({ currentPortrait, onClose, onSelect }: Port
               onClick={() => onSelect(portrait)}
               aria-pressed={currentPortrait === portrait}
             >
-              <img src={`/imgs/portrait_caracter/${portrait}`} alt={portrait} />
+              <img src={`/imgs/portrait_caracter/${portrait}`} alt={`Opção de retrato ${portrait.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ')}`} />
             </button>
           ))}
         </div>

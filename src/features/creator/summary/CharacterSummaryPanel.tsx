@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
+import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
 import styles from './CharacterSummaryPanel.module.css';
 
 export function CharacterSummaryPanel() {
@@ -21,6 +22,11 @@ export function CharacterSummaryPanel() {
     { label: 'PV', value: String(derivedSheet.maxHP) },
   ];
 
+  const presentedLanguages = useMemo(
+    () => getLanguageDisplayNames(derivedSheet.languages),
+    [derivedSheet.languages],
+  );
+
   return (
     <div className={styles.panel}>
       <div className={styles.sectionTitle}>Resumo persistente</div>
@@ -41,6 +47,24 @@ export function CharacterSummaryPanel() {
         {quickFacts.map((fact) => (
           <SummaryPill key={fact.label} label={fact.label} value={fact.value} />
         ))}
+      </div>
+
+      <div className={styles.identityCard}>
+        <div className={styles.identityTitle}>Idiomas conhecidos</div>
+        <p className={styles.supportingText}>
+          O motor mantém IDs internos; a interface exibe os nomes localizados abaixo.
+        </p>
+        {presentedLanguages.length > 0 ? (
+          <ul className={styles.tagList}>
+            {presentedLanguages.map((language) => (
+              <li key={language} className={styles.tagItem}>
+                {language}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={styles.emptyState}>Nenhum idioma adicional selecionado.</p>
+        )}
       </div>
     </div>
   );

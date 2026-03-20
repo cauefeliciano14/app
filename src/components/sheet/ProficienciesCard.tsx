@@ -1,3 +1,4 @@
+import { getLanguageDisplayNames } from '../../utils/languagePresentation';
 
 interface ProficienciesCardProps {
   skillProficiencies: string[];
@@ -28,6 +29,8 @@ export function ProficienciesCard({
   toolProficiencies,
   languages,
 }: ProficienciesCardProps) {
+  const presentedLanguages = getLanguageDisplayNames(languages);
+
   return (
     <div style={{
       background: 'rgba(17,18,24,0.6)',
@@ -42,7 +45,7 @@ export function ProficienciesCard({
       <ProfSection title="ARMADURAS" items={armorProficiencies} />
       <ProfSection title="ARMAS" items={weaponProficiencies} />
       <ProfSection title="FERRAMENTAS" items={toolProficiencies} />
-      <ProfSection title="IDIOMAS" items={languages} />
+      <ProfSection title="IDIOMAS" items={presentedLanguages} />
     </div>
   );
 }
