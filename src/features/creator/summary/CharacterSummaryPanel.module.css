@@ -1,0 +1,99 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.portrait {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+}
+
+.name {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.statCard {
+  background: var(--surface-subtle);
+  border-radius: 10px;
+  padding: var(--space-sm) 10px;
+  text-align: center;
+}
+
+.statLabel {
+  color: var(--text-muted);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+}
+
+.statValue {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.summaryPillCard {
+  background: var(--surface-subtle);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.pillLabel {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+}
+
+.pillValue {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.detailsSummary {
+  cursor: pointer;
+  list-style: none;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detailsTitle {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.detailsCount {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.detailsBody {
+  padding: 0 12px 12px;
+}
+
+.emptyText {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+}
+
+.issueOk {
+  color: #4ade80;
+  font-size: 0.82rem;
+}
+
+.issueList {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-body);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
