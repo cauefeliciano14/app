@@ -65,6 +65,9 @@ export function applyTalentEffects(
     case 'Curandeiro':
       effect.notes?.push('Médico de Combate com Kit de Curandeiro.', 'Pode repetir resultados 1 em cura.');
       break;
+    case 'Atacante Selvagem':
+      effect.notes?.push('Uma vez por turno, ao atingir com uma arma, pode rolar os dados de dano da arma duas vezes e usar qualquer resultado.');
+      break;
     case 'Habilidoso':
       [selections?.pick1, selections?.pick2, selections?.pick3].filter(Boolean).forEach((pick) => {
         if (!pick) return;

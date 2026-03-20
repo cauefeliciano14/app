@@ -169,6 +169,42 @@ describe('Validação — Etapa Espécie', () => {
     expect(r.byStep.species).toHaveLength(0);
   });
 
+  it('humano com talento escolhido mas incompleto → erro acionável na etapa de espécie', () => {
+    const r = validateChoices(makeChoices({
+      speciesId: 'humano',
+      languageSelections: ['elvish', 'dwarvish'],
+      featureChoices: {
+        'humano-size': 'Médio',
+        'humano-skill': 'Percepção',
+        'humano-talent': 'Habilidoso',
+      },
+      talentSelections: {
+        Habilidoso: { pick1: 'Percepção' },
+      },
+    }));
+    expect(r.byStep.species).toContain('Complete as escolhas obrigatórias do talento do humano para continuar.');
+  });
+
+  it('humano com talento completo → passa na etapa de espécie', () => {
+    const r = validateChoices(makeChoices({
+      speciesId: 'humano',
+      languageSelections: ['elvish', 'dwarvish'],
+      featureChoices: {
+        'humano-size': 'Médio',
+        'humano-skill': 'Percepção',
+        'humano-talent': 'Habilidoso',
+      },
+      talentSelections: {
+        Habilidoso: {
+          pick1: 'Percepção',
+          pick2: 'Atletismo',
+          pick3: 'Ferramentas de Ladrão',
+        },
+      },
+    }));
+    expect(r.byStep.species).toHaveLength(0);
+  });
+
   it('elfo alto-elfo sem cantrip → erro', () => {
     const r = validateChoices(makeChoices({
       speciesId: 'elfo',

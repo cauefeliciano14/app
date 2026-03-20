@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import magoSpells from '../data/spells/mago_spells.json';
 import talentsData from '../data/talents.json';
 import { highlightKeywords } from '../utils/formatting';
+import { TalentChoiceSection, checkTalentComplete } from './TalentChoices';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -342,12 +343,17 @@ const HumanoHabil: React.FC<ChoiceProps> = ({ choices, setChoice }) => (
 );
 
 /** Humano — Versátil */
-const HumanoVersatil: React.FC<ChoiceProps> = ({ choices, setChoice }) => {
+const HumanoVersatil: React.FC<ChoiceProps & { character: any; setCharacter: any }> = ({ choices, setChoice, character, setCharacter }) => {
   const selectedTalent = originTalents.find((t: any) => t.name === choices['humano-talent']);
+  const talentName = choices['humano-talent'];
+  const talentSelections = talentName ? (character.talentSelections?.[talentName] ?? {}) : {};
+  const talentComplete = talentName ? checkTalentComplete(talentName, talentSelections) : false;
+  const allTalentSelections = Object.values(character.talentSelections ?? {}).flatMap((selection: any) => Object.values(selection ?? {}));
+
   return (
-    <Accordion title="Versátil" badge={choices['humano-talent'] ? '✓' : '▾'} incomplete={!choices['humano-talent']}>
+    <Accordion title="Versátil" badge={talentName && talentComplete ? '✓' : '▾'} incomplete={!talentName || !talentComplete}>
       <p style={{ margin: '0 0 10px 0', fontSize: '0.875rem', color: '#cbd5e1', lineHeight: 1.6 }} dangerouslySetInnerHTML={{ __html: highlightKeywords('Você adquire um talento de Origem à sua escolha.') }} />
-      <select className="premium-select" value={choices['humano-talent'] || ''} onChange={e => setChoice('humano-talent', e.target.value)} style={selectStyle}>
+      <select className="premium-select" value={talentName || ''} onChange={e => setChoice('humano-talent', e.target.value)} style={selectStyle}>
         <option value="">Escolha um Talento de Origem...</option>
         {originTalents.map((t: any) => <option key={t.id} value={t.name}>{t.name}</option>)}
       </select>
@@ -358,6 +364,27 @@ const HumanoVersatil: React.FC<ChoiceProps> = ({ choices, setChoice }) => {
             <p key={i} style={{ margin: i < selectedTalent.benefits.length - 1 ? '0 0 6px 0' : '0', fontSize: '0.83rem', color: '#cbd5e1', lineHeight: 1.6 }} dangerouslySetInnerHTML={{ __html: highlightKeywords(b) }} />
           ))}
         </div>
+      )}
+      {talentName && (
+        <SubSection title="Escolhas do talento" incomplete={!talentComplete}>
+          <TalentChoiceSection
+            talentName={talentName}
+            selections={talentSelections}
+            onChange={(newSelections) => setCharacter((prev: any) => ({
+              ...prev,
+              talentSelections: {
+                ...prev.talentSelections,
+                [talentName]: newSelections,
+              },
+            }))}
+            allSelections={allTalentSelections as string[]}
+          />
+          {!talentComplete && (
+            <p style={{ margin: '10px 0 0 0', fontSize: '0.8rem', color: '#f97316', lineHeight: 1.5 }}>
+              Complete todas as escolhas obrigatórias deste talento para liberar o avanço da etapa de espécie.
+            </p>
+          )}
+        </SubSection>
       )}
     </Accordion>
   );
@@ -639,7 +666,7 @@ export const SpeciesDetails: React.FC<SpeciesDetailsProps> = ({ character, setCh
             return <HumanoHabil key={trait.title} choices={choices} setChoice={setChoice} />;
           }
           if (species.id === 'humano' && trait.title === 'Versátil') {
-            return <HumanoVersatil key={trait.title} choices={choices} setChoice={setChoice} />;
+            return <HumanoVersatil key={trait.title} choices={choices} setChoice={setChoice} character={character} setCharacter={setCharacter} />;
           }
           return <TraitAccordion key={trait.title} trait={trait} />;
         })
