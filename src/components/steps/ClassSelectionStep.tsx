@@ -4,6 +4,7 @@ import classDetailsData from '../../data/classDetails.json';
 import { FeatureExpandable } from '../FeatureExpandable';
 import { StepLayout } from './StepLayout';
 import styles from './ClassSelectionStep.module.css';
+import layoutStyles from './StepLayout.module.css';
 import { getClassHPData } from '../../rules/data/classRules';
 import { useCharacter } from '../../context/CharacterContext';
 import { useWizard } from '../../context/WizardContext';
@@ -14,7 +15,6 @@ export interface ClassSelectionStepProps {
 }
 
 const getClassIconSrc = (classId: string) => `/imgs/icone_classe/${classId}.png`;
-const getClassCardArtSrc = (classId: string) => `/imgs/descriçao_classe/${classId}.png`;
 const getClassHeroArtSrc = (classId: string) => `/imgs/${classId}.png`;
 
 type ClassDetails = {
@@ -150,52 +150,49 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
       impactSection="class"
     >
       <div className={styles.stepRoot}>
-        <div className={styles.stepGrid}>
-          <div className={styles.classColumn}>
-            <div>
-              <div className={styles.sectionHeading}>
-                <h2 style={{ margin: 0, color: '#f8fafc', fontSize: '1.3rem' }}>Classe</h2>
-              </div>
-              <p style={{ margin: '6px 0 0', color: '#94a3b8', fontSize: '0.84rem' }}>
-                Selecione uma classe para ver tudo o que muda na ficha imediatamente.
-              </p>
-            </div>
-            <div className={styles.classList}>
-              {bgData.classes.map((cls) => {
-                const isSelected = selectedClass?.id === cls.id;
-                const cardMeta = getClassCardMeta(cls.id);
-                return (
-                  <button
-                    key={cls.id}
-                    onClick={() => handleSelectClass(cls)}
-                    className={`${styles.classCard} ${isSelected ? styles.classCardSelected : ''}`}
-                  >
-                    <div className={styles.classCardArtWrap}>
-                      <img src={getClassCardArtSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardArt} />
-                      <div className={styles.classCardOverlay} />
-                      <div className={styles.classCardIdentityBadge}>
-                        <img src={getClassIconSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardIcon} />
-                      </div>
-                      <div className={styles.classCardTitleOnArt}>{cls.name}</div>
-                    </div>
-                    <div className={styles.classCardBody}>
-                      <div className={styles.classCardMetaRow}>
-                        {cardMeta.primaryAttribute ? (
-                          <span className={styles.classMetaChip}>{cardMeta.primaryAttribute}</span>
-                        ) : null}
-                        {cardMeta.hitDie ? <span className={styles.classMetaChip}>{cardMeta.hitDie}</span> : null}
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-            <button onClick={onReset} className={styles.resetButton}>
-              Novo Personagem
-            </button>
+        <div className={layoutStyles.sectionIntro}>
+          <div className={layoutStyles.sectionTitleRow}>
+            <span className={layoutStyles.sectionIcon}>✦</span>
+            <span>Escolha sua Classe</span>
           </div>
+          <p className={layoutStyles.sectionDescription}>
+            Menus menores e alinhados horizontalmente para facilitar a comparação. A arte da classe só aparece depois da seleção, sem espaços vazios na etapa.
+          </p>
+        </div>
 
-          <div className={styles.detailsColumn}>
+        <div className={styles.classRail}>
+          {bgData.classes.map((cls) => {
+            const isSelected = selectedClass?.id === cls.id;
+            const cardMeta = getClassCardMeta(cls.id);
+            return (
+              <button
+                key={cls.id}
+                type="button"
+                onClick={() => handleSelectClass(cls)}
+                className={`${styles.classMenuButton} ${isSelected ? styles.classMenuButtonSelected : ''}`}
+              >
+                <span className={styles.classMenuIdentity}>
+                  <span className={styles.classMenuIconWrap}>
+                    <img src={getClassIconSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardIcon} />
+                  </span>
+                  <span className={styles.classMenuName}>{cls.name}</span>
+                </span>
+                <span className={styles.classMenuMetaRow}>
+                  {cardMeta.primaryAttribute ? (
+                    <span className={styles.classMetaChip}>{cardMeta.primaryAttribute}</span>
+                  ) : null}
+                  {cardMeta.hitDie ? <span className={styles.classMetaChip}>{cardMeta.hitDie}</span> : null}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <button onClick={onReset} className={styles.resetButton}>
+          Novo Personagem
+        </button>
+
+        <div className={styles.detailsColumn}>
             {!selectedClass || !classDetails ? (
               <div className={styles.placeholder}>Escolha uma classe para revisar detalhes e opções obrigatórias.</div>
             ) : (
@@ -286,7 +283,6 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
               </>
             )}
           </div>
-        </div>
       </div>
     </StepLayout>
   );
