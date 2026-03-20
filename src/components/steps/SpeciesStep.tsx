@@ -16,7 +16,6 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
     character,
     setCharacter,
     handleSelectSpecies,
-    stepSelections,
     validationResult,
   } = useCharacter();
 
@@ -30,15 +29,12 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
       onPrev={() => setCurrentStep(1)}
       onNext={() => setCurrentStep(3)}
       canAdvance={canAdvance}
-      activeStep={3}
-      onStepClick={setCurrentStep}
       characterName={character.name}
       setCharacterName={(n: string) =>
         setCharacter((prev) => ({ ...prev, name: n }))
       }
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
-      selections={stepSelections}
       impactSection="species"
     >
       <div className={styles.stepContent}>

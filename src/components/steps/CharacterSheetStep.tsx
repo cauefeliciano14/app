@@ -16,7 +16,6 @@ export const CharacterSheetStep: React.FC = () => {
     playState,
     setPlayState,
     selectedBackground,
-    stepSelections,
     validationResult,
   } = useCharacter();
 
@@ -47,13 +46,10 @@ export const CharacterSheetStep: React.FC = () => {
       onPrev={() => setCurrentStep(4)}
       onNext={() => {}}
       canAdvance={false}
-      activeStep={6}
-      onStepClick={setCurrentStep}
       characterName={character.name}
       setCharacterName={(n: string) => setCharacter(prev => ({ ...prev, name: n }))}
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
-      selections={stepSelections}
       errors={validationErrors}
     >
       <CharacterSheetPage

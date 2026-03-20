@@ -119,7 +119,6 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
     handleSelectClass,
     handleChoiceChange,
     allSelections,
-    stepSelections,
     validationResult,
   } = useCharacter();
   const { setCurrentStep, setIsPortraitModalOpen } = useWizard();
@@ -140,13 +139,10 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
     <StepLayout
       onNext={() => setCurrentStep(1)}
       canAdvance={canAdvance}
-      activeStep={1}
-      onStepClick={setCurrentStep}
       characterName={character.name}
       setCharacterName={(name: string) => setCharacter((prev) => ({ ...prev, name }))}
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
-      selections={stepSelections}
       impactSection="class"
     >
       <div className={styles.stepRoot}>

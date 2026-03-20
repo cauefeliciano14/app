@@ -31,7 +31,6 @@ export const BackgroundStep: React.FC = () => {
     handleChoiceChange,
     handleTalentSelectionChange,
     allSelections,
-    stepSelections,
     validationResult,
   } = useCharacter();
 
@@ -45,15 +44,12 @@ export const BackgroundStep: React.FC = () => {
       onPrev={() => setCurrentStep(0)}
       onNext={() => setCurrentStep(2)}
       canAdvance={canAdvance}
-      activeStep={2}
-      onStepClick={setCurrentStep}
       characterName={character.name}
       setCharacterName={(n: string) =>
         setCharacter((prev) => ({ ...prev, name: n }))
       }
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
-      selections={stepSelections}
       impactSection="background"
     >
       <div className={styles.stepContent}>
