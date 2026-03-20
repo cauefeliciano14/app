@@ -15,11 +15,8 @@ const LABELS: Record<(typeof ATTRS)[number], string> = {
 };
 
 export function CharacterSummaryPanel() {
-  const { character, selectedBackground, derivedSheet, validationResult, characterLevel } = useCharacter();
+  const { derivedSheet, validationResult, characterLevel } = useCharacter();
   const mainPendencies = validationResult.errors.slice(0, 5);
-  const identityLine = [character.characterClass?.name, selectedBackground?.name, character.species?.name]
-    .filter(Boolean)
-    .join(' • ');
 
   const displayLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
 

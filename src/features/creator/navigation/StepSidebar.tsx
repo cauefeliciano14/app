@@ -14,7 +14,7 @@ const ITEMS = [
 
 export function StepSidebar() {
   const { currentStep, setCurrentStep } = useWizard();
-  const { validationResult, stepSelections } = useCharacter();
+  const { validationResult } = useCharacter();
 
   const pendingMap = {
     class: validationResult.byStep.class.length,
@@ -24,8 +24,6 @@ export function StepSidebar() {
     equipment: validationResult.byStep.equipment.length,
     sheet: validationResult.errors.length,
   };
-
-  const currentItem = ITEMS[currentStep];
 
   return (
     <div className={styles.root}>
@@ -58,8 +56,7 @@ export function StepSidebar() {
           {ITEMS.map((item) => {
             const active = currentStep === item.index;
             const pending = pendingMap[item.key];
-            const selectedLabel = stepSelections[item.index + 1];
-            const complete = item.key === 'sheet' ? validationResult.isValid : Boolean(selectedLabel) && pending === 0;
+            const complete = item.key === 'sheet' ? validationResult.isValid : pending === 0 && item.index < currentStep;
             const badgeClass = complete
               ? styles.badgeComplete
               : pending > 0
@@ -78,24 +75,11 @@ export function StepSidebar() {
                     {complete ? '✓' : pending > 0 ? pending : item.index + 1}
                   </span>
                 </div>
-                <span className={`${styles.navMeta} ${active ? styles.navMetaActive : ''}`.trim()}>
-                  {pending > 0
-                    ? `${pending} pendência${pending > 1 ? 's' : ''}`
-                    : selectedLabel ?? (item.key === 'sheet' ? 'Revisão final' : 'Pronto para revisar')}
-                </span>
               </button>
             );
           })}
         </div>
       </details>
-
-      <div className={patterns.panelCardAccent}>
-        <div className={`${patterns.panelTitle} ${styles.currentTitle}`.trim()}>Etapa atual</div>
-        <div className={styles.currentLabel}>{currentItem?.label ?? '—'}</div>
-        <div className={styles.currentMeta}>
-          {currentItem ? `${pendingMap[currentItem.key]} pendência${pendingMap[currentItem.key] !== 1 ? 's' : ''} nesta etapa.` : 'Selecione uma etapa para continuar.'}
-        </div>
-      </div>
     </div>
   );
 }
