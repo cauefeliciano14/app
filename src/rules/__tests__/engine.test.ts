@@ -453,4 +453,55 @@ describe('Escolhas de espécie no engine', () => {
     }));
     expect(sheet.derivedDefenses).toContain('Resistência a Ígneo');
   });
+
+  it('golias com ancestralidade escolhida → traço derivado aparece na ficha', () => {
+    const sheet = deriveSheet(makeChoices({
+      speciesId: 'golias',
+      speciesChoices: { golias: 'pedra' },
+      featureChoices: { golias: 'pedra' },
+    }));
+    expect(sheet.derivedTraits).toEqual(expect.arrayContaining([
+      expect.stringContaining('Porte Poderoso'),
+      expect.stringContaining('Resistência da Pedra'),
+    ]));
+  });
+
+  it('orc → traços de nível 1 ficam registrados como efeitos derivados', () => {
+    const sheet = deriveSheet(makeChoices({ speciesId: 'orc' }));
+    expect(sheet.specialSenses).toContain('Visão no Escuro (36 metros)');
+    expect(sheet.derivedTraits).toEqual(expect.arrayContaining([
+      expect.stringContaining('Pico de Adrenalina'),
+      expect.stringContaining('Vigor Implacável'),
+    ]));
+  });
+
+  it('pequenino → traços raciais relevantes aparecem como efeitos derivados', () => {
+    const sheet = deriveSheet(makeChoices({ speciesId: 'pequenino' }));
+    expect(sheet.derivedTraits).toEqual(expect.arrayContaining([
+      expect.stringContaining('Corajoso'),
+      expect.stringContaining('Sorte'),
+      expect.stringContaining('Furtividade Natural'),
+    ]));
+  });
+
+  it('anão → adiciona PV por nível e sentido especial de sismiconsciência', () => {
+    const sheet = deriveSheet(makeChoices({ speciesId: 'anao' }));
+    expect(sheet.maxHP).toBe(1);
+    expect(sheet.specialSenses).toContain('Sismiconsciência (18 metros, por 10 minutos ao tocar pedra)');
+  });
+
+  it('humano com Atacante Selvagem → talento aplicado gera nota derivada', () => {
+    const sheet = deriveSheet(makeChoices({
+      speciesId: 'humano',
+      featureChoices: {
+        'humano-talent': 'Atacante Selvagem',
+      },
+    }));
+    expect(sheet.activeTalents).toEqual(expect.arrayContaining([
+      expect.objectContaining({ name: 'Atacante Selvagem', source: 'species' }),
+    ]));
+    expect(sheet.derivedTraits).toEqual(expect.arrayContaining([
+      expect.stringContaining('rolar os dados de dano da arma duas vezes'),
+    ]));
+  });
 });

@@ -58,6 +58,7 @@ function normalizeSpeciesChoices(choices: CharacterChoices): Record<string, stri
     draconato: choices.speciesChoices?.draconato ?? choices.featureChoices?.draconato,
     elfo: choices.speciesChoices?.elfo ?? choices.speciesLineage ?? choices.featureChoices?.elfo,
     gnomo: choices.speciesChoices?.gnomo ?? choices.speciesLineage ?? choices.featureChoices?.gnomo,
+    golias: choices.speciesChoices?.golias ?? choices.speciesLineage ?? choices.featureChoices?.golias,
     tiferino: choices.speciesChoices?.tiferino ?? choices.speciesLineage ?? choices.featureChoices?.tiferino,
   };
 }

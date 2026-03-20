@@ -184,4 +184,36 @@ describe('CharacterSheetPage racial/species derived display', () => {
 
     view.cleanup();
   }, 20000);
+
+  it('mostra traços derivados de talento na aba de características', () => {
+    const view = renderSheet(makeChoices({
+      backgroundId: 'fazendeiro',
+      speciesId: 'humano',
+      featureChoices: { 'humano-talent': 'Atacante Selvagem' },
+    }));
+
+    clickTab(view.container, 'Características');
+
+    expect(view.container.textContent).toContain('TALENTOS APLICADOS');
+    expect(view.container.textContent).toContain('Atacante Selvagem');
+    expect(view.container.textContent).toContain('rolar os dados de dano da arma duas vezes');
+
+    view.cleanup();
+  }, 20000);
+
+  it('mostra traços derivados do golias na aba de características', () => {
+    const view = renderSheet(makeChoices({
+      speciesId: 'golias',
+      speciesChoices: { golias: 'pedra' },
+      featureChoices: { golias: 'pedra' },
+    }));
+
+    clickTab(view.container, 'Características');
+
+    expect(view.container.textContent).toContain('EFEITOS DERIVADOS');
+    expect(view.container.textContent).toContain('Porte Poderoso');
+    expect(view.container.textContent).toContain('Resistência da Pedra');
+
+    view.cleanup();
+  }, 20000);
 });

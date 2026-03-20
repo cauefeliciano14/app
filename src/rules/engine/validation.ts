@@ -247,6 +247,16 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
         byStep.species.push(makePendingChoiceMessage(key));
       }
     }
+
+    if (choices.speciesId === 'humano') {
+      const humanTalent = choices.featureChoices['humano-talent'] ?? choices.speciesChoices?.talent;
+      if (humanTalent) {
+        const humanTalentSelections = choices.talentSelections[humanTalent];
+        if (!checkTalentComplete(humanTalent, humanTalentSelections)) {
+          byStep.species.push('Complete as escolhas obrigatórias do talento do humano para continuar.');
+        }
+      }
+    }
   }
 
   if (!choices.attributeMethod) {

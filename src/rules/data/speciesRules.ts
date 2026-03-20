@@ -70,13 +70,15 @@ const TIEFLING_EFFECTS_BY_LINEAGE: Record<string, Pick<SpeciesLevelOneEffects, '
   },
 };
 
-const GNOME_EFFECTS_BY_LINEAGE: Record<string, Pick<SpeciesLevelOneEffects, 'racialCantrips' | 'preparedSpells'>> = {
+const GNOME_EFFECTS_BY_LINEAGE: Record<string, Pick<SpeciesLevelOneEffects, 'racialCantrips' | 'preparedSpells' | 'notes'>> = {
   'gnomo-do-bosque': {
     racialCantrips: ['Ilusão Menor'],
     preparedSpells: ['Falar com Animais'],
+    notes: ['Falar com Animais fica sempre preparada e pode ser conjurada sem espaço de magia um número de vezes igual ao bônus de proficiência por Descanso Longo.'],
   },
   'gnomo-das-rochas': {
     racialCantrips: ['Prestidigitação Arcana', 'Reparar'],
+    notes: ['Pode fabricar um pequeno dispositivo mecânico ao conjurar Prestidigitação Arcana por 10 minutos.'],
   },
 };
 
@@ -92,6 +94,15 @@ const ELF_EFFECTS_BY_LINEAGE: Record<string, SpeciesLevelOneEffects> = {
     speed: '10,5 metros',
     racialCantrips: ['Arte Druídica'],
   },
+};
+
+const GOLIATH_NOTES_BY_LINEAGE: Record<string, string> = {
+  gelo: 'Arrepio do Gelo: ao acertar um ataque, causa +1d6 de dano Gélido e reduz o deslocamento do alvo em 3m até o início do seu próximo turno.',
+  fogo: 'Queimadura de Fogo: ao acertar um ataque, causa +1d10 de dano Ígneo adicional.',
+  pedra: 'Resistência da Pedra: reação para reduzir dano em 1d12 + modificador de Constituição.',
+  nuvens: 'Salto da Nuvem: ação bônus para se teleportar até 9 metros para um espaço visível desocupado.',
+  colina: 'Tombo da Colina: ao acertar uma criatura Grande ou menor, pode deixá-la Caída.',
+  tempestade: 'Trovão da Tempestade: reação para causar 1d8 de dano Trovejante a uma criatura que lhe causou dano a até 18 metros.',
 };
 
 export function getSpeciesData(speciesId: string): RawSpecies | null {
@@ -140,21 +151,26 @@ export function getSpeciesLevelOneEffects(speciesId: string, choices: Record<str
     case 'aasimar':
       baseEffects.derivedDefenses?.push('Resistência a Necrótico', 'Resistência a Radiante');
       baseEffects.racialCantrips?.push('Luz');
+      baseEffects.notes?.push('Mãos Curativas: uma vez por Descanso Longo, cura 2d4 PV no nível 1.');
       break;
     case 'anao':
       baseEffects.derivedDefenses?.push('Resistência a Venenoso', 'Vantagem contra Envenenado');
+      baseEffects.specialSenses?.push('Sismiconsciência (18 metros, por 10 minutos ao tocar pedra)');
+      baseEffects.notes?.push('Conhecimento de Pedras: como ação bônus, ganha Sismiconsciência por 10 minutos ao tocar pedra.');
       baseEffects.maxHpBonusPerLevel = 1;
       break;
     case 'draconato': {
       const lineage = choices.draconato;
       const resistance = lineage ? DRACONIC_RESISTANCE_BY_LINEAGE[lineage] : undefined;
       if (resistance) baseEffects.derivedDefenses?.push(resistance);
+      baseEffects.notes?.push('Ataque de Sopro: substitui um ataque por cone de 4,5m ou linha de 9m que causa 1d10 do tipo da herança.');
       break;
     }
     case 'elfo': {
       const lineage = choices.elfo;
       const skill = choices.skill;
       if (skill) baseEffects.skillProficiencies?.push(skill);
+      baseEffects.notes?.push('Ancestralidade Feérica: vantagem para evitar ou encerrar a condição Enfeitiçado.', 'Transe: completa Descanso Longo em 4 horas.');
       const lineageEffects = lineage ? ELF_EFFECTS_BY_LINEAGE[lineage] : undefined;
       if (lineageEffects?.speed) baseEffects.speed = lineageEffects.speed;
       if (lineageEffects?.specialSenses?.length) baseEffects.specialSenses = lineageEffects.specialSenses;
@@ -166,12 +182,38 @@ export function getSpeciesLevelOneEffects(speciesId: string, choices: Record<str
     case 'gnomo': {
       const lineage = choices.gnomo;
       const lineageEffects = lineage ? GNOME_EFFECTS_BY_LINEAGE[lineage] : undefined;
+      baseEffects.notes?.push('Astúcia de Gnomo: vantagem em salvaguardas de Inteligência, Sabedoria e Carisma.');
       if (lineageEffects?.racialCantrips?.length) baseEffects.racialCantrips?.push(...lineageEffects.racialCantrips);
       if (lineageEffects?.preparedSpells?.length) baseEffects.preparedSpells?.push(...lineageEffects.preparedSpells);
+      if (lineageEffects?.notes?.length) baseEffects.notes?.push(...lineageEffects.notes);
+      break;
+    }
+    case 'golias': {
+      baseEffects.notes?.push(
+        'Porte Poderoso: vantagem para encerrar a condição Imobilizado e conta como um tamanho maior para capacidade de carga.',
+      );
+      const lineage = choices.golias;
+      const lineageNote = lineage ? GOLIATH_NOTES_BY_LINEAGE[lineage] : undefined;
+      if (lineageNote) baseEffects.notes?.push(lineageNote);
       break;
     }
     case 'humano':
       if (choices.skill) baseEffects.skillProficiencies?.push(choices.skill);
+      baseEffects.notes?.push('Eficiente: ganha Inspiração Heroica ao completar um Descanso Longo.');
+      break;
+    case 'orc':
+      baseEffects.notes?.push(
+        'Pico de Adrenalina: ação bônus para Correr e ganhar PV temporários iguais ao bônus de proficiência.',
+        'Vigor Implacável: ao cair a 0 PV, fica com 1 PV uma vez por Descanso Longo.',
+      );
+      break;
+    case 'pequenino':
+      baseEffects.notes?.push(
+        'Corajoso: vantagem para evitar ou encerrar a condição Amedrontado.',
+        'Agilidade Pequenina: pode se mover pelo espaço de criaturas maiores.',
+        'Sorte: ao tirar 1 em um d20 de um teste d20, pode jogar novamente o dado.',
+        'Furtividade Natural: pode se esconder atrás de uma criatura maior.',
+      );
       break;
     case 'tiferino': {
       const lineage = choices.tiferino;
