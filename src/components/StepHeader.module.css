@@ -41,14 +41,7 @@
 }
 
 .spacer {
-  width: 85px;
-}
-
-/* ── Progress bar wrapper ── */
-.progressWrapper {
   flex: 1;
-  overflow: hidden;
-  margin: 0 20px;
 }
 
 /* ── Advance button area ── */

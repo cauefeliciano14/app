@@ -11,12 +11,12 @@ export interface StepLayoutProps {
   onNext: () => void;
   canAdvance: boolean;
   activeStep: number;
-  onStepClick: (step: number) => void;
+  onStepClick?: (step: number) => void;
   characterName: string;
   setCharacterName: (name: string) => void;
   portrait: string | null;
   onPortraitClick: () => void;
-  selections: Record<number, string>;
+  selections?: Record<number, string>;
   errors?: string[];
   hrMarginBottom?: string;
   children: React.ReactNode;
@@ -36,12 +36,10 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   onNext,
   canAdvance,
   activeStep,
-  onStepClick,
   characterName,
   setCharacterName,
   portrait,
   onPortraitClick,
-  selections,
   errors,
   hrMarginBottom = '16px',
   children,
@@ -59,13 +57,10 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
               onPrev={onPrev}
               onNext={onNext}
               canAdvance={canAdvance}
-              activeStep={activeStep}
-              onStepClick={onStepClick}
               characterName={characterName}
               setCharacterName={setCharacterName}
               portrait={portrait}
               onPortraitClick={onPortraitClick}
-              selections={selections}
             />
             <hr className={styles.separator} style={{ marginBottom: hrMarginBottom }} />
             {errors && errors.length > 0 && <ValidationBanner errors={errors} />}
