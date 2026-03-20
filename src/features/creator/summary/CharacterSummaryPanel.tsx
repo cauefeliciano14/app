@@ -1,35 +1,24 @@
-import { useMemo } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
 import { ContextualPopover } from '../../../components/ui/ContextualPopover';
 import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
 import patterns from '../../../styles/panelPatterns.module.css';
 import styles from './CharacterSummaryPanel.module.css';
 
-const ATTRS = ['forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma'] as const;
-const LABELS: Record<(typeof ATTRS)[number], string> = {
-  forca: 'FOR',
-  destreza: 'DES',
-  constituicao: 'CON',
-  inteligencia: 'INT',
-  sabedoria: 'SAB',
-  carisma: 'CAR',
-};
-
 export function CharacterSummaryPanel() {
+  const { character, selectedBackground, derivedSheet, characterLevel } = useCharacter();
+  const identityLine = [character.characterClass?.name, selectedBackground?.name, character.species?.name]
+    .filter(Boolean)
+    .join(' • ');
   const { derivedSheet, validationResult, characterLevel } = useCharacter();
   const mainPendencies = validationResult.errors.slice(0, 5);
 
   const displayLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
 
-  const quickFacts = useMemo(
-    () => [
-      { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1) },
-      { label: 'CA', value: String(derivedSheet.armorClass) },
-      { label: 'PV', value: String(derivedSheet.maxHP) },
-      { label: 'Desloc.', value: derivedSheet.speed || '—' },
-    ],
-    [characterLevel, derivedSheet.armorClass, derivedSheet.level, derivedSheet.maxHP, derivedSheet.speed],
-  );
+  const quickFacts = [
+    { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1) },
+    { label: 'CA', value: String(derivedSheet.armorClass) },
+    { label: 'PV', value: String(derivedSheet.maxHP) },
+  ];
 
   return (
     <div className={patterns.stackSm}>
