@@ -3,7 +3,9 @@ import { isValidClass, getClassDetails, getClassSpellcastingData } from '../data
 import { isValidBackground, getAllowedBonusAttributes, getBackgroundTalent } from '../data/backgroundRules';
 import { isAttributesStepComplete, validateBonusDistribution } from '../calculators/attributes';
 import { checkTalentComplete } from '../../components/TalentChoices';
-import { getArmorById, getArmorByName } from '../data/armorRules';
+import { getClassBaseProficiencies } from '../calculators/proficiency';
+import { getSpellSelectionRequirement } from '../utils/spellSelection';
+import { getArmorTrainingLabel, hasArmorInInventory, hasShieldInInventory, resolveEquippedArmor } from '../utils/equipment';
 import { getEquipmentForBackground, getEquipmentForClass, itemSubChoices } from '../../data/equipmentData';
 import bardoSpells from '../../data/spells/bardo_spells.json';
 import bruxoSpells from '../../data/spells/bruxo_spells.json';
@@ -123,15 +125,6 @@ function getRequiredSpeciesChoices(
     default:
       return [];
   }
-}
-
-function getRequiredSpellSelections(classId: string, level: number): number {
-  const data = getClassSpellcastingData(classId);
-  if (!data?.isCaster) return 0;
-  const idx = Math.max(0, Math.min(level - 1, 19));
-  return data.preparedSpellsByLevel?.[idx]
-    ?? data.spellSlotsKnownByLevel?.[idx]
-    ?? 0;
 }
 
 function countOccurrences(values: string[]): Map<string, number> {
@@ -293,46 +286,34 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     }
   }
 
-  const equippedArmor = choices.equippedArmorId ? getArmorById(choices.equippedArmorId) : null;
+  const equippedArmor = resolveEquippedArmor(choices.equippedArmorId);
   if (choices.equippedArmorId) {
-    const hasArmorInInventory = inventory.some((item) => {
-      const armor = getArmorByName(item.name);
-      return Boolean(armor && armor.type !== 'shield' && armor.id === choices.equippedArmorId);
-    });
-    if (!equippedArmor || equippedArmor.type === 'shield' || !hasArmorInInventory) {
+    const armorExistsInInventory = hasArmorInInventory(inventory, choices.equippedArmorId);
+    if (!equippedArmor || equippedArmor.type === 'shield' || !armorExistsInInventory) {
       byStep.equipment.push('A armadura equipada precisa existir no inventário atual.');
     }
   }
 
+  const classArmorProficiencies = choices.classId ? getClassBaseProficiencies(choices.classId).armorCategories : [];
+  if (equippedArmor && !classArmorProficiencies.includes(getArmorTrainingLabel(equippedArmor))) {
+    byStep.equipment.push(`Seu personagem não tem treinamento com ${getArmorTrainingLabel(equippedArmor).toLowerCase()}. Escolha outra armadura ou troque o equipamento.`);
+  }
+
   if (choices.hasShield) {
-    const hasShieldInInventory = inventory.some((item) => getArmorByName(item.name)?.type === 'shield');
-    if (!hasShieldInInventory) {
+    if (!hasShieldInInventory(inventory)) {
       byStep.equipment.push('O escudo só pode ser equipado quando existir um escudo no inventário.');
+    }
+    if (!classArmorProficiencies.includes('Escudo')) {
+      byStep.equipment.push('Seu personagem não tem treinamento com escudo. Desequipe-o ou ajuste a construção.');
     }
   }
 
   if (choices.classId) {
     const spellData = getClassSpellcastingData(choices.classId);
-    if (spellData?.isCaster) {
+    const { isCaster, requiredCantrips, requiredPreparedSpells, mode } = getSpellSelectionRequirement(choices);
+    if (spellData?.isCaster && isCaster) {
       const selectedCantrips = choices.spellSelections.cantrips;
       const preparedSpells = choices.spellSelections.prepared;
-      const requiredCantrips = spellData.cantripsKnownByLevel[Math.min(level - 1, 19)] ?? 0;
-      if (requiredCantrips > 0) {
-        const current = choices.spellSelections.cantrips.length;
-        if (current < requiredCantrips) {
-          byStep.equipment.push(`Escolha mais ${requiredCantrips - current} truque(s) para completar a seleção (${current}/${requiredCantrips}).`);
-        }
-      }
-
-      // Magias preparadas/conhecidas
-      const requiredSpells = getRequiredSpellSelections(choices.classId, level);
-      if (requiredSpells > 0) {
-        const current = choices.spellSelections.prepared.length;
-        if (current < requiredSpells) {
-          const verb = spellData.preparedSpellsByLevel ? 'Prepare' : 'Escolha';
-          byStep.equipment.push(`${verb} mais ${requiredSpells - current} magia(s) para completar a seleção (${current}/${requiredSpells}).`);
-        }
-      }
       const validCantrips = getValidSpellNames(choices.classId, 'cantrip');
       const validLevel1Spells = getValidSpellNames(choices.classId, 1);
 
@@ -353,12 +334,12 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
         byStep.equipment.push(`Escolha mais ${requiredCantrips - current} truque(s) para completar a seleção (${current}/${requiredCantrips}).`);
       }
 
-      if (preparedSpells.length > requiredSpells) {
-        byStep.equipment.push(`Selecione no máximo ${requiredSpells} magia(s) de 1º nível para esta classe no nível ${level}.`);
-      } else if (requiredSpells > 0 && preparedSpells.length < requiredSpells) {
+      const spellVerb = mode === 'known' ? 'Escolha' : 'Prepare';
+      if (preparedSpells.length > requiredPreparedSpells) {
+        byStep.equipment.push(`Selecione no máximo ${requiredPreparedSpells} magia(s) de 1º nível para esta classe no nível ${level}.`);
+      } else if (requiredPreparedSpells > 0 && preparedSpells.length < requiredPreparedSpells) {
         const current = preparedSpells.length;
-        const verb = spellData.preparedSpellsByLevel ? 'Prepare' : 'Escolha';
-        byStep.equipment.push(`${verb} mais ${requiredSpells - current} magia(s) para completar a seleção (${current}/${requiredSpells}).`);
+        byStep.equipment.push(`${spellVerb} mais ${requiredPreparedSpells - current} magia(s) para completar a seleção (${current}/${requiredPreparedSpells}).`);
       }
 
       const invalidCantrips = selectedCantrips.filter((spell) => !validCantrips.has(spell));

@@ -91,17 +91,6 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
   const dexMod = modifiers['destreza'] ?? 0;
   const initiative = calculateInitiative(dexMod);
 
-  // CA
-  const wisMod = modifiers['sabedoria'] ?? 0;
-  const armorClass = calculateAC({
-    dexModifier: dexMod,
-    equippedArmorId: choices.equippedArmorId,
-    hasShield: choices.hasShield,
-    classId,
-    conModifier: conMod,
-    wisModifier: wisMod,
-  });
-
   // Proficiências
   const classProfs = getClassBaseProficiencies(classId);
   const bgProfs = getBackgroundProficiencies(backgroundId);
@@ -125,6 +114,18 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
       merged.tools.push(chosenTool);
     }
   }
+
+  // CA
+  const wisMod = modifiers['sabedoria'] ?? 0;
+  const armorClass = calculateAC({
+    dexModifier: dexMod,
+    equippedArmorId: choices.equippedArmorId,
+    hasShield: choices.hasShield,
+    classId,
+    conModifier: conMod,
+    wisModifier: wisMod,
+    armorProficiencies: merged.armorCategories,
+  });
 
   // Velocidade e sentidos (da espécie)
   const speed = speciesId ? getSpeciesSpeed(speciesId) : '9 metros';
@@ -175,7 +176,7 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
 
   // Armas do inventário
   for (const weaponName of choices.inventoryWeapons ?? []) {
-    const atk = buildWeaponAttack(weaponName, strMod, dexMod, profBonus);
+    const atk = buildWeaponAttack(weaponName, strMod, dexMod, profBonus, merged.weaponCategories);
     if (atk) computedWeaponAttacks.push(atk);
   }
 

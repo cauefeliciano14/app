@@ -254,8 +254,7 @@ describe('Validação — Etapa Equipamento', () => {
 describe('Validação de magia — Clérigo nível 1', () => {
   const spellData = getClassSpellcastingData('clerigo')!;
   const requiredCantrips = spellData.cantripsKnownByLevel[0];
-  // Clérigo prepara WIS+nível dinamicamente — não tem preparedSpellsByLevel estático
-  // Portanto a validação só checa truques, não magias preparadas
+  // Clérigo prepara WIS+nível dinamicamente e a validação deve exigir esse total.
 
   it('dados de classe: clérigo é conjurador', () => {
     expect(spellData.isCaster).toBe(true);
@@ -272,6 +271,20 @@ describe('Validação de magia — Clérigo nível 1', () => {
       equipmentChoices: { classOption: 'A', backgroundOption: 'A' },
     }));
     expect(r.byStep.equipment.some(e => e.includes('truque'))).toBe(true);
+  });
+
+
+  it('sem magias preparadas suficientes → erro usando total dinâmico', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'clerigo',
+      baseAttributes: {
+        forca: 10, destreza: 10, constituicao: 10,
+        inteligencia: 10, sabedoria: 16, carisma: 10,
+      },
+      spellSelections: { cantrips: ['Chama Sagrada', 'Taumaturgia', 'Luz'], prepared: ['Bênção', 'Curar Ferimentos'] },
+      equipmentChoices: { classOption: 'A', backgroundOption: 'A' },
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('Prepare mais 2 magia'))).toBe(true);
   });
 
   it('truques suficientes → sem erro de truque', () => {
@@ -457,5 +470,26 @@ describe('Validação explícita de inconsistências em magia e equipamento', ()
     }));
     expect(r.byStep.equipment.some(e => e.includes('pacote de equipamento de classe'))).toBe(true);
     expect(r.byStep.equipment.some(e => e.includes('pacote de equipamento de antecedente'))).toBe(true);
+  });
+});
+
+
+describe('Validação de treinamento de equipamento', () => {
+  it('bloqueia armadura equipada sem treinamento apropriado', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'mago',
+      equippedArmorId: 'couro',
+      inventory: [{ name: 'Armadura de Couro' }],
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('não tem treinamento com armadura leve'))).toBe(true);
+  });
+
+  it('bloqueia escudo equipado sem treinamento apropriado', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'mago',
+      hasShield: true,
+      inventory: [{ name: 'Escudo' }],
+    }));
+    expect(r.byStep.equipment.some(e => e.includes('não tem treinamento com escudo'))).toBe(true);
   });
 });

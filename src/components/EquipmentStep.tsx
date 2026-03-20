@@ -4,6 +4,7 @@ import { isCaster as engineIsCaster } from '../rules/calculators/spells';
 import type { DerivedSheet } from '../rules/types/DerivedSheet';
 import { getEquipmentForClass, getEquipmentForBackground } from '../data/equipmentData';
 import { getArmorByName } from '../rules/data/armorRules';
+import { sanitizeEquipmentState } from '../rules/utils/equipment';
 import { Accordion } from './equipment/Accordion';
 import { TabBar } from './equipment/TabBar';
 import { StartingEquipment } from './equipment/StartingEquipment';
@@ -22,6 +23,7 @@ interface EquipmentStepProps {
 }
 
 export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selectedBackground, updateEquipment, updateSpells, derivedSheet }) => {
+  void derivedSheet;
   const classId = character.characterClass?.id || '';
   const bgId = selectedBackground?.id || '';
   const spellInfo = classStartingSpells[classId];
@@ -40,34 +42,6 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
   const equipmentState = character.equipment;
   const spellsState = character.spells;
 
-  const sanitizeEquippedState = (prevEquipment: any, nextInventory: any[]) => {
-    const nextEquipment = {
-      ...prevEquipment,
-      inventory: nextInventory,
-    };
-
-    if (prevEquipment.equippedArmorId) {
-      const equippedArmorStillPresent = nextInventory.some((item: any) => {
-        const armor = getArmorByName(item.name);
-        return armor?.type !== 'shield' && armor?.id === prevEquipment.equippedArmorId;
-      });
-
-      if (!equippedArmorStillPresent) {
-        nextEquipment.equippedArmorId = null;
-      }
-    }
-
-    if (prevEquipment.hasShieldEquipped) {
-      const previousShieldCount = prevEquipment.inventory.filter((item: any) => getArmorByName(item.name)?.type === 'shield').length;
-      const nextShieldCount = nextInventory.filter((item: any) => getArmorByName(item.name)?.type === 'shield').length;
-
-      if (nextShieldCount < previousShieldCount) {
-        nextEquipment.hasShieldEquipped = false;
-      }
-    }
-
-    return nextEquipment;
-  };
 
   // Load class spells
   const [classSpells, setClassSpells] = useState<any[]>([]);
@@ -161,7 +135,7 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
       }
       draft.hasShieldEquipped = hasShield;
 
-      return sanitizeEquippedState(prev, draft.inventory);
+      return sanitizeEquipmentState({ ...draft, inventory: draft.inventory });
     });
 
     // Collapse starting, expand inventory
@@ -184,7 +158,7 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
     updateEquipment((prev: any) => {
       const removedItem = prev.inventory.find((i: any) => i.id === id);
       const nextInventory = prev.inventory.filter((i: any) => i.id !== id);
-      const nextEquipment = sanitizeEquippedState(prev, nextInventory);
+      const nextEquipment = sanitizeEquipmentState({ ...prev, inventory: nextInventory });
       const removedArmor = removedItem ? getArmorByName(removedItem.name) : null;
 
       if (removedArmor?.type === 'shield' && prev.hasShieldEquipped) {
@@ -206,7 +180,7 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
         .map((i: any) => i.id === id ? { ...i, quantity: Math.max(0, i.quantity + delta) } : i)
         .filter((i: any) => i.quantity > 0);
 
-      const nextEquipment = sanitizeEquippedState(prev, nextInventory);
+      const nextEquipment = sanitizeEquipmentState({ ...prev, inventory: nextInventory });
       const removedArmor = targetItem && targetItem.quantity + delta <= 0 ? getArmorByName(targetItem.name) : null;
 
       if (removedArmor?.type === 'shield' && prev.hasShieldEquipped) {

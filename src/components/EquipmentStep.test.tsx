@@ -22,7 +22,7 @@ const baseDerivedSheet: DerivedSheet = {
   specialSenses: [],
   skillProficiencies: [],
   weaponProficiencies: [],
-  armorProficiencies: [],
+  armorProficiencies: ['Armadura Leve', 'Armadura Média', 'Armadura Pesada', 'Escudo'],
   savingThrowProficiencies: [],
   toolProficiencies: [],
   languages: [],
@@ -103,6 +103,7 @@ function Harness({
     classId: character.characterClass.id,
     conModifier: baseDerivedSheet.modifiers.constituicao,
     wisModifier: baseDerivedSheet.modifiers.sabedoria,
+    armorProficiencies: baseDerivedSheet.armorProficiencies,
   });
 
   return (

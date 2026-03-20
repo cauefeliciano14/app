@@ -1,17 +1,8 @@
-import { getClassHPData } from '../data/classRules';
-import { getArmorById, getArmorByName } from '../data/armorRules';
 import { getWeaponByName } from '../data/weaponRules';
+import { getClassHPData } from '../data/classRules';
 import type { WeaponAttack } from '../types/DerivedSheet';
+import { hasArmorTraining, hasWeaponProficiency, resolveEquippedArmor } from '../utils/equipment';
 
-// ---------------------------------------------------------------------------
-// Pontos de Vida
-// ---------------------------------------------------------------------------
-
-/**
- * Calcula o máximo de PV no nível informado.
- * Nível 1: base_hp + mod_CON
- * Nível 2+: (base_hp + mod_CON) + (nível - 1) * (hp_fixo + mod_CON)
- */
 export function calculateMaxHP(
   classId: string,
   level: number,
@@ -30,30 +21,10 @@ export function calculateMaxHP(
   );
 }
 
-// ---------------------------------------------------------------------------
-// Iniciativa
-// ---------------------------------------------------------------------------
-
-/** Iniciativa = modificador de Destreza */
 export function calculateInitiative(dexModifier: number): number {
   return dexModifier;
 }
 
-// ---------------------------------------------------------------------------
-// Classe de Armadura
-// ---------------------------------------------------------------------------
-
-/**
- * Calcula a CA considerando armadura equipada, escudo e classe.
- *
- * Sem armadura (padrão): 10 + mod DEX
- * Bárbaro sem armadura: 10 + mod DEX + mod CON  (classId='barbaro', conModifier fornecido)
- * Monge sem armadura:   10 + mod DEX + mod WIS  (classId='monge', wisModifier fornecido)
- * Armadura leve:        base + mod DEX
- * Armadura média:       base + min(mod DEX, 2)
- * Armadura pesada:      base (sem DEX)
- * Escudo:               +2 (acumulativo)
- */
 export function calculateAC(params: {
   dexModifier: number;
   equippedArmorId?: string;
@@ -61,33 +32,19 @@ export function calculateAC(params: {
   classId?: string;
   conModifier?: number;
   wisModifier?: number;
+  armorProficiencies?: string[];
 }): number {
-  const { dexModifier, equippedArmorId, hasShield, classId, conModifier, wisModifier } = params;
+  const { dexModifier, equippedArmorId, hasShield, classId, conModifier, wisModifier, armorProficiencies = [] } = params;
 
-  let ac = 0;
+  const equippedArmor = resolveEquippedArmor(equippedArmorId);
+  const canUseArmor = hasArmorTraining(equippedArmor, armorProficiencies);
 
-  if (equippedArmorId) {
-    // Tentar por ID primeiro, depois por nome
-    const armor = getArmorById(equippedArmorId) ?? getArmorByName(equippedArmorId);
+  let ac = canUseArmor && equippedArmor && equippedArmor.type !== 'shield'
+    ? equippedArmor.baseAC + (equippedArmor.maxDexBonus === null ? dexModifier : Math.min(dexModifier, equippedArmor.maxDexBonus))
+    : unarmoredAC(classId, dexModifier, conModifier, wisModifier);
 
-    if (armor && armor.type !== 'shield') {
-      if (armor.type === 'light') {
-        ac = armor.baseAC + dexModifier;
-      } else if (armor.type === 'medium') {
-        ac = armor.baseAC + Math.min(dexModifier, 2);
-      } else {
-        // heavy: sem bônus de DEX
-        ac = armor.baseAC;
-      }
-    } else {
-      // Armadura não encontrada — CA sem armadura
-      ac = unarmoredAC(classId, dexModifier, conModifier, wisModifier);
-    }
-  } else {
-    ac = unarmoredAC(classId, dexModifier, conModifier, wisModifier);
-  }
-
-  if (hasShield) {
+  const canUseShield = hasShield && armorProficiencies.includes('Escudo');
+  if (canUseShield) {
     ac += 2;
   }
 
@@ -101,64 +58,58 @@ function unarmoredAC(
   wisModifier: number | undefined
 ): number {
   if (classId === 'barbaro' && conModifier !== undefined) {
-    return 10 + dexModifier + conModifier; // Defesa sem Armadura
+    return 10 + dexModifier + conModifier;
   }
   if (classId === 'monge' && wisModifier !== undefined) {
-    return 10 + dexModifier + wisModifier; // Defesa sem Armadura do Monge
+    return 10 + dexModifier + wisModifier;
   }
   return 10 + dexModifier;
 }
 
-// ---------------------------------------------------------------------------
-// Ataques
-// ---------------------------------------------------------------------------
-
-/** Bônus de ataque corpo a corpo: mod Força + BP (ou DEX se finesse e DEX > STR) */
 export function calculateMeleeAttackBonus(
   strModifier: number,
   proficiencyBonus: number,
   isFinesse = false,
-  dexModifier = 0
+  dexModifier = 0,
+  isProficient = true
 ): number {
   const abilityMod = isFinesse
     ? Math.max(strModifier, dexModifier)
     : strModifier;
-  return abilityMod + proficiencyBonus;
+  return abilityMod + (isProficient ? proficiencyBonus : 0);
 }
 
-/** Bônus de ataque à distância: mod Destreza + BP */
 export function calculateRangedAttackBonus(
   dexModifier: number,
-  proficiencyBonus: number
+  proficiencyBonus: number,
+  isProficient = true
 ): number {
-  return dexModifier + proficiencyBonus;
+  return dexModifier + (isProficient ? proficiencyBonus : 0);
 }
 
-/**
- * Constrói os dados de ataque para uma arma, incluindo bônus de ataque e dano.
- * Retorna null se a arma não for encontrada.
- */
 export function buildWeaponAttack(
   weaponName: string,
   strModifier: number,
   dexModifier: number,
-  proficiencyBonus: number
+  proficiencyBonus: number,
+  weaponProficiencies: string[] = []
 ): WeaponAttack | null {
   const weapon = getWeaponByName(weaponName);
   if (!weapon) return null;
 
+  const isProficient = hasWeaponProficiency(weaponName, weaponProficiencies);
   let attackBonus: number;
   let damageBonus: number;
 
   if (weapon.isRanged) {
-    attackBonus = calculateRangedAttackBonus(dexModifier, proficiencyBonus);
+    attackBonus = calculateRangedAttackBonus(dexModifier, proficiencyBonus, isProficient);
     damageBonus = dexModifier;
   } else if (weapon.isFinesse) {
     const mod = Math.max(strModifier, dexModifier);
-    attackBonus = mod + proficiencyBonus;
+    attackBonus = mod + (isProficient ? proficiencyBonus : 0);
     damageBonus = mod;
   } else {
-    attackBonus = calculateMeleeAttackBonus(strModifier, proficiencyBonus);
+    attackBonus = calculateMeleeAttackBonus(strModifier, proficiencyBonus, false, dexModifier, isProficient);
     damageBonus = strModifier;
   }
 
