@@ -96,7 +96,7 @@ export const BackgroundStep: React.FC = () => {
           <div className={styles.selectionDetails} ref={detailsRef}>
             {selectedBackground ? (
               <div id="background-details" className={styles.selectionDetails}>
-                <div className={bgStyles.detailsCard}>
+                <div className={`${styles.summaryCardBase} ${styles.selectionPanel} ${bgStyles.detailsCard}`}>
                   <div className={bgStyles.detailsHeading}>
                     <h3 className={bgStyles.detailsTitle}>
                       {selectedBackground.name}
@@ -430,7 +430,7 @@ export const BackgroundStep: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className={styles.selectionPlaceholder}>
+              <div className={`${styles.selectionPlaceholder} ${styles.placeholderPanel}`}>
                 <span className={bgStyles.placeholderIcon}>📖</span>
                 <p className={bgStyles.placeholderText}>
                   Selecione um antecedente para ver os detalhes

@@ -1,17 +1,14 @@
-.stepRoot {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-height: 0;
-  padding: 0 4px 40px 0;
-  box-sizing: border-box;
+.placeholderPanel {
+  border-style: dashed;
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(17, 18, 24, 0.42);
 }
 
-.classRail {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px;
-  align-items: stretch;
+.classSummaryCard {
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.06);
 }
 
 .classMenuButton {
@@ -100,33 +97,6 @@
   background: transparent;
   border: 1px solid rgba(255,255,255,0.12);
   color: #94a3b8;
-}
-
-.detailsColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  min-width: 0;
-}
-
-.placeholder {
-  min-height: 10rem;
-  border-radius: 16px;
-  border: 1px dashed rgba(255,255,255,0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #64748b;
-  padding: 24px;
-  text-align: center;
-  background: rgba(17, 18, 24, 0.42);
-}
-
-.classSummaryCard {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 18px;
-  padding: 18px;
 }
 
 .summaryHeroPanel {
@@ -305,14 +275,6 @@
 }
 
 @media (max-width: 720px) {
-  .stepRoot {
-    padding-right: 0;
-  }
-
-  .classRail {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
-
   .classMenuButton {
     min-height: 82px;
   }

@@ -11,6 +11,7 @@
   min-height: 0;
 }
 
+.stepRoot,
 .stepContent {
   display: flex;
   flex-direction: column;
@@ -56,10 +57,17 @@
 }
 
 .selectionRail {
+  --selection-rail-min: 150px;
+  --selection-rail-min-mobile: 110px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(var(--selection-rail-min), 1fr));
   gap: 10px;
   align-items: stretch;
+}
+
+.selectionRailWide {
+  --selection-rail-min: 180px;
+  --selection-rail-min-mobile: 140px;
 }
 
 .selectionButton {
@@ -103,6 +111,7 @@
   flex-shrink: 0;
 }
 
+.detailsColumn,
 .selectionDetails {
   display: flex;
   flex-direction: column;
@@ -110,15 +119,18 @@
   min-width: 0;
 }
 
+.placeholderPanel,
 .selectionPlaceholder,
+.summaryCardBase,
 .selectionPanel {
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.07);
   background: rgba(17, 18, 24, 0.5);
 }
 
+.placeholderPanel,
 .selectionPlaceholder {
-  min-height: 16rem;
+  min-height: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,16 +141,22 @@
   font-size: 0.9rem;
 }
 
+.selectionPlaceholder {
+  min-height: 16rem;
+}
+
+.summaryCardBase,
 .selectionPanel {
   padding: clamp(16px, 2vw, 22px);
 }
 
 @media (max-width: 600px) {
+  .stepRoot,
   .stepContent {
     padding-right: 0;
   }
 
   .selectionRail {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(var(--selection-rail-min-mobile), 1fr));
   }
 }
