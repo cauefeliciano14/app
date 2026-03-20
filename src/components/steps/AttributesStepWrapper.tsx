@@ -33,6 +33,7 @@ export const AttributesStepWrapper: React.FC = () => {
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       selections={stepSelections}
+      impactSection="attributes"
     >
       <div className={styles.stepContent}>
         <ValidationBanner errors={validationErrors} />

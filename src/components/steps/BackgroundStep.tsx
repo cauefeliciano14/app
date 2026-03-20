@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import backgroundsData from "../../data/backgrounds.json";
 import talentsData from "../../data/talents.json";
 import {
@@ -15,6 +15,8 @@ import { useCharacter, ATTR_METADATA } from "../../context/CharacterContext";
 import { useWizard } from "../../context/WizardContext";
 
 export const BackgroundStep: React.FC = () => {
+  const detailsRef = useRef<HTMLDivElement | null>(null);
+
   const {
     character,
     setCharacter,
@@ -52,6 +54,7 @@ export const BackgroundStep: React.FC = () => {
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       selections={stepSelections}
+      impactSection="background"
     >
       <div className={styles.stepContent}>
         <ValidationBanner errors={validationErrors} />
@@ -76,7 +79,9 @@ export const BackgroundStep: React.FC = () => {
                   className={`${styles.selectionButton} ${isSelected ? styles.selectionButtonActive : ""}`.trim()}
                   onClick={() => {
                     setSelectedBackground(bg);
-                    window.scrollTo(0, 0);
+                    requestAnimationFrame(() => {
+                      detailsRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                    });
                     setAttrChoiceMode("");
                     setAttrPlus1("");
                     setAttrPlus2("");
@@ -93,7 +98,7 @@ export const BackgroundStep: React.FC = () => {
             })}
           </div>
 
-          <div className={styles.selectionDetails}>
+          <div className={styles.selectionDetails} ref={detailsRef}>
             {selectedBackground ? (
               <div id="background-details" className={styles.selectionDetails}>
                 {/* Info Card */}

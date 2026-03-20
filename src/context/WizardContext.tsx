@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import { loadCreationState } from '../utils/persistence';
 
 interface WizardContextValue {
@@ -6,16 +6,22 @@ interface WizardContextValue {
   setCurrentStep: (step: number) => void;
   isPortraitModalOpen: boolean;
   setIsPortraitModalOpen: (open: boolean) => void;
+  sidebarCollapsed: boolean;
+  setSidebarCollapsed: (collapsed: boolean) => void;
+  summaryCollapsed: boolean;
+  setSummaryCollapsed: (collapsed: boolean) => void;
   goToStep: (n: number) => void;
 }
 
 const WizardContext = createContext<WizardContextValue | null>(null);
 
 export const WizardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const savedState = React.useMemo(() => loadCreationState(), []);
+  const savedState = useMemo(() => loadCreationState(), []);
 
   const [currentStep, setCurrentStep] = useState(savedState?.currentStep ?? 0);
   const [isPortraitModalOpen, setIsPortraitModalOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(savedState?.shellState?.sidebarCollapsed ?? false);
+  const [summaryCollapsed, setSummaryCollapsed] = useState(savedState?.shellState?.summaryCollapsed ?? false);
 
   const goToStep = (n: number) => {
     setCurrentStep(n);
@@ -28,6 +34,10 @@ export const WizardProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setCurrentStep,
         isPortraitModalOpen,
         setIsPortraitModalOpen,
+        sidebarCollapsed,
+        setSidebarCollapsed,
+        summaryCollapsed,
+        setSummaryCollapsed,
         goToStep,
       }}
     >
