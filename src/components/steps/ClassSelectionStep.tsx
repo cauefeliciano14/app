@@ -24,6 +24,21 @@ type ClassDetails = {
   options?: Array<any>;
 };
 
+function getTraitValue(traits: Record<string, string>, labels: string[]) {
+  const entry = Object.entries(traits).find(([key]) => labels.includes(key));
+  return entry?.[1] ?? null;
+}
+
+function getClassCardMeta(classId: string) {
+  const details = (classDetailsData as Record<string, ClassDetails>)[classId];
+  const traits = details?.basicTraits ?? {};
+
+  return {
+    primaryAttribute: getTraitValue(traits, ['Atributo Primário']),
+    hitDie: getClassHPData(classId)?.hitDieLabel ?? getTraitValue(traits, ['Dado de Ponto de Vida']),
+  };
+}
+
 export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset, languagesData }) => {
   void languagesData;
   const {
@@ -42,7 +57,9 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
   const canAdvance = validationErrors.length === 0;
   const selectedClass = character.characterClass;
   const classDetails = selectedClass ? (classDetailsData as Record<string, ClassDetails>)[selectedClass.id] : null;
+  const selectedClassMeta = selectedClass ? getClassCardMeta(selectedClass.id) : null;
   const activeFeatures = (classDetails?.features ?? []).filter((feature) => feature.level <= characterLevel);
+
   return (
     <StepLayout
       onNext={() => setCurrentStep(1)}
@@ -70,6 +87,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
             <div className={styles.classList}>
               {bgData.classes.map((cls) => {
                 const isSelected = selectedClass?.id === cls.id;
+                const cardMeta = getClassCardMeta(cls.id);
                 return (
                   <button
                     key={cls.id}
@@ -79,11 +97,17 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                     <div className={styles.classCardArtWrap}>
                       <img src={getClassCardArtSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardArt} />
                       <div className={styles.classCardOverlay} />
-                      <img src={getClassIconSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardIcon} />
+                      <div className={styles.classCardIdentityBadge}>
+                        <img src={getClassIconSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardIcon} />
+                      </div>
+                      <div className={styles.classCardTitleOnArt}>{cls.name}</div>
                     </div>
                     <div className={styles.classCardBody}>
-                      <div className={styles.classCardTitleRow}>
-                        <div className={styles.classCardTitle}>{cls.name}</div>
+                      <div className={styles.classCardMetaRow}>
+                        {cardMeta.primaryAttribute ? (
+                          <span className={styles.classMetaChip}>{cardMeta.primaryAttribute}</span>
+                        ) : null}
+                        {cardMeta.hitDie ? <span className={styles.classMetaChip}>{cardMeta.hitDie}</span> : null}
                       </div>
                       <div className={styles.classCardDescription}>{cls.description}</div>
                     </div>
@@ -102,22 +126,24 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
             ) : (
               <>
                 <div className={styles.classSummaryCard}>
-                  <div className={styles.summaryHeader}>
-                    <div className={styles.summaryIdentity}>
-                      <div className={styles.summaryHeroWrap}>
-                        <img src={getClassHeroArtSrc(selectedClass.id)} alt={`Arte de ${selectedClass.name}`} className={styles.summaryHeroArt} />
-                      </div>
-                      <div className={styles.summaryIdentityText}>
-                        <div className={styles.summaryBadge}>
-                          <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
-                          Classe selecionada
-                        </div>
-                        <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
-                        <p className={styles.summaryDescription}>{selectedClass.description}</p>
-                      </div>
+                  <div className={styles.summaryHeroPanel}>
+                    <div className={styles.summaryHeroWrap}>
+                      <img src={getClassHeroArtSrc(selectedClass.id)} alt={`Arte de ${selectedClass.name}`} className={styles.summaryHeroArt} />
+                      <div className={styles.summaryHeroOverlay} />
                     </div>
-                    <div className={styles.summaryStats}>
-                      <SummaryStat label="Dado de vida" value={getClassHPData(selectedClass.id)?.hitDieLabel || '—'} />
+                    <div className={styles.summaryHeroContent}>
+                      <div className={styles.summaryBadge}>
+                        <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
+                        Classe selecionada
+                      </div>
+                      <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
+                      <p className={styles.summaryDescription}>{selectedClass.description}</p>
+                      <div className={styles.summaryStatsInline}>
+                        <SummaryStat label="Dado de vida" value={getClassHPData(selectedClass.id)?.hitDieLabel || '—'} />
+                        {selectedClassMeta?.primaryAttribute ? (
+                          <SummaryStat label="Atributo-chave" value={selectedClassMeta.primaryAttribute || '—'} />
+                        ) : null}
+                      </div>
                     </div>
                   </div>
                   <div className={styles.traitsGrid}>

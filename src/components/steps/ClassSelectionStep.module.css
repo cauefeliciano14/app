@@ -8,7 +8,7 @@
 .stepGrid {
   display: grid;
   grid-template-columns:
-    minmax(clamp(13.5rem, 17vw, 15.5rem), 0.95fr)
+    minmax(clamp(15.5rem, 21vw, 18rem), 1fr)
     minmax(clamp(22rem, 1vw + 24rem, 1fr), 1.8fr);
   grid-template-areas: 'classes details';
   gap: 16px;
@@ -32,41 +32,42 @@
 .classList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   overflow-y: auto;
   padding-right: 4px;
 }
 
 .classCard {
-  display: grid;
-  grid-template-columns: minmax(5.5rem, 6.4rem) minmax(0, 1fr);
-  gap: 12px;
-  padding: 12px;
-  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  border-radius: 18px;
   border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025));
   text-align: left;
-  align-items: center;
+  overflow: hidden;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
 
 .classCard:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   border-color: rgba(249,115,22,0.28);
   background: rgba(255,255,255,0.05);
+  box-shadow: 0 14px 30px rgba(15,23,42,0.22);
 }
 
 .classCardSelected {
-  background: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(15,23,42,0.8));
+  background: linear-gradient(180deg, rgba(249,115,22,0.12), rgba(15,23,42,0.92));
   border-color: rgba(249,115,22,0.44);
-  box-shadow: 0 10px 26px rgba(15,23,42,0.28);
+  box-shadow: 0 16px 36px rgba(15,23,42,0.3);
 }
 
 .classCardArtWrap {
   position: relative;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 9;
   background: linear-gradient(180deg, rgba(30,41,59,0.96), rgba(15,23,42,0.96));
 }
 
@@ -74,55 +75,82 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 18%;
   display: block;
 }
 
 .classCardOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.22) 58%, rgba(15,23,42,0.8) 100%);
+  background: linear-gradient(180deg, rgba(15,23,42,0.08) 0%, rgba(15,23,42,0.18) 42%, rgba(15,23,42,0.88) 100%);
+}
+
+.classCardIdentityBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.78);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 10px 24px rgba(15,23,42,0.38);
 }
 
 .classCardIcon {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  width: 30px;
-  height: 30px;
-  padding: 6px;
-  border-radius: 999px;
+  width: 22px;
+  height: 22px;
   object-fit: contain;
-  background: rgba(15,23,42,0.82);
-  border: 1px solid rgba(255,255,255,0.14);
-  box-shadow: 0 8px 18px rgba(15,23,42,0.35);
+}
+
+.classCardTitleOnArt {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 12px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  text-shadow: 0 6px 18px rgba(15,23,42,0.75);
 }
 
 .classCardBody {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 9px;
   min-width: 0;
+  padding: 12px 14px 14px;
 }
 
-.classCardTitleRow {
+.classCardMetaRow {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
-.classCardTitle {
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.98rem;
-  line-height: 1.2;
+.classMetaChip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(148,163,184,0.12);
+  border: 1px solid rgba(148,163,184,0.14);
+  color: #e2e8f0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .classCardDescription {
   color: #cbd5e1;
-  font-size: 0.77rem;
-  line-height: 1.55;
+  font-size: 0.79rem;
+  line-height: 1.58;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -156,47 +184,52 @@
 .classSummaryCard {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 18px;
 }
 
-.summaryHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.summaryIdentity {
+.summaryHeroPanel {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
-  gap: 16px;
-  align-items: center;
-  flex: 1 1 26rem;
-  min-width: min(100%, 24rem);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
+  min-height: 24rem;
 }
 
 .summaryHeroWrap {
-  border-radius: 14px;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  min-height: 16rem;
-  background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
-  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .summaryHeroArt {
   width: 100%;
   height: 100%;
-  min-height: 16rem;
   display: block;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 12%;
 }
 
-.summaryIdentityText {
+.summaryHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.68) 38%, rgba(15,23,42,0.16) 100%),
+    linear-gradient(180deg, rgba(15,23,42,0.04) 0%, rgba(15,23,42,0.18) 48%, rgba(15,23,42,0.84) 100%);
+}
+
+.summaryHeroContent {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  max-width: min(34rem, 100%);
+  padding: clamp(1rem, 1.4vw, 1.5rem);
 }
 
 .summaryBadge {
@@ -207,8 +240,8 @@
   padding: 6px 10px;
   border-radius: 999px;
   color: #fdba74;
-  background: rgba(249,115,22,0.12);
-  border: 1px solid rgba(249,115,22,0.18);
+  background: rgba(249,115,22,0.14);
+  border: 1px solid rgba(249,115,22,0.22);
   font-size: 0.74rem;
   font-weight: 600;
 }
@@ -222,29 +255,31 @@
 .summaryTitle {
   margin: 0;
   color: #fff;
-  font-size: clamp(1.5rem, 1rem + 1vw, 1.9rem);
+  font-size: clamp(1.7rem, 1rem + 1.2vw, 2.25rem);
 }
 
 .summaryDescription {
   margin: 0;
-  color: #cbd5e1;
-  font-size: 0.92rem;
-  line-height: 1.7;
-  max-width: 60ch;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  line-height: 1.72;
+  max-width: 58ch;
 }
 
-.summaryStats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(clamp(7.5rem, 20vw, 9rem), 1fr));
-  gap: 8px;
-  min-width: min(100%, 18rem);
-  align-self: start;
+.summaryStatsInline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 4px;
 }
 
 .summaryStat {
-  background: rgba(0,0,0,0.18);
-  border-radius: 10px;
+  background: rgba(2,6,23,0.42);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
   padding: 10px 12px;
+  min-width: min(100%, 11rem);
 }
 
 .summaryStatLabel {
@@ -343,30 +378,25 @@
 @media (max-width: 1320px) {
   .stepGrid {
     grid-template-columns:
-      minmax(clamp(13rem, 22vw, 15rem), 0.95fr)
+      minmax(clamp(14rem, 24vw, 16.5rem), 0.98fr)
       minmax(clamp(22rem, 40vw, 34rem), 1.45fr);
     grid-template-areas: 'classes details';
+  }
+
+  .summaryHeroPanel {
+    min-height: 22rem;
   }
 }
 
 @media (max-width: 1100px) {
   .stepGrid {
     grid-template-columns:
-      minmax(clamp(12.5rem, 28vw, 15rem), 0.9fr)
+      minmax(clamp(13rem, 28vw, 15rem), 0.92fr)
       minmax(clamp(20rem, 1vw + 22rem, 1fr), 1.35fr);
   }
 
-  .classCard {
-    grid-template-columns: minmax(5rem, 5.8rem) minmax(0, 1fr);
-  }
-
-  .summaryIdentity {
-    grid-template-columns: minmax(9rem, 10rem) minmax(0, 1fr);
-  }
-
-  .summaryStats {
-    width: 100%;
-    min-width: 0;
+  .summaryHeroPanel {
+    min-height: 20rem;
   }
 }
 
@@ -386,27 +416,25 @@
 }
 
 @media (max-width: 720px) {
-  .classCard {
-    grid-template-columns: minmax(4.6rem, 5.4rem) minmax(0, 1fr);
-    gap: 10px;
-    padding: 10px;
+  .classCardArtWrap {
+    aspect-ratio: 4 / 3;
   }
 
-  .classCardDescription {
-    -webkit-line-clamp: 3;
+  .classCardBody {
+    padding: 12px;
   }
 
-  .summaryIdentity {
-    grid-template-columns: minmax(0, 1fr);
+  .summaryHeroPanel {
+    min-height: 18rem;
   }
 
-  .summaryHeroWrap,
-  .summaryHeroArt {
-    min-height: 13rem;
+  .summaryHeroOverlay {
+    background:
+      linear-gradient(180deg, rgba(15,23,42,0.14) 0%, rgba(15,23,42,0.5) 48%, rgba(15,23,42,0.9) 100%);
   }
 
-  .summaryStats {
-    grid-template-columns: minmax(0, 1fr);
+  .summaryHeroContent {
+    max-width: 100%;
   }
 
   .traitsGrid {
