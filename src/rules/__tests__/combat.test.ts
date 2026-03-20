@@ -152,8 +152,26 @@ describe('novas regras de treinamento e proficiência', () => {
     expect(calculateAC({ dexModifier: 2, equippedArmorId: 'couro', hasShield: true, armorProficiencies: [] })).toBe(12);
   });
 
+  it('mantém defesa sem armadura de monge mesmo com armadura inválida equipada', () => {
+    expect(calculateAC({ dexModifier: 3, wisModifier: 2, classId: 'monge', equippedArmorId: 'couro', armorProficiencies: [] })).toBe(15);
+  });
+
   it('arma sem proficiência não soma bônus de proficiência no ataque', () => {
     const atk = buildWeaponAttack('Espada Longa', 3, 1, 2, ['Armas Simples']);
+    expect(atk).not.toBeNull();
+    expect(atk!.attackBonus).toBe(3);
+    expect(atk!.damageBonus).toBe(3);
+  });
+
+  it('arma finesse sem proficiência usa o melhor atributo mas não soma proficiência', () => {
+    const atk = buildWeaponAttack('Adaga', 1, 4, 2, []);
+    expect(atk).not.toBeNull();
+    expect(atk!.attackBonus).toBe(4);
+    expect(atk!.damageBonus).toBe(4);
+  });
+
+  it('arma à distância usa DEX e dano independe da proficiência', () => {
+    const atk = buildWeaponAttack('Arco Curto', 0, 3, 2, []);
     expect(atk).not.toBeNull();
     expect(atk!.attackBonus).toBe(3);
     expect(atk!.damageBonus).toBe(3);
