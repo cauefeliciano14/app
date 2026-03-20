@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { ActiveTalentSummary } from '../../../rules/types/DerivedSheet';
 
 interface Feature {
   level: number;
@@ -15,6 +16,8 @@ interface FeaturesTraitsTabProps {
   classFeatures: Feature[];
   speciesTraits: Trait[];
   originTalent?: string;
+  activeTalents?: ActiveTalentSummary[];
+  derivedTraits?: string[];
   backgroundName?: string;
   backgroundSkills?: string[];
   backgroundTool?: string;
@@ -25,6 +28,8 @@ export function FeaturesTraitsTab({
   classFeatures,
   speciesTraits,
   originTalent,
+  activeTalents = [],
+  derivedTraits = [],
   backgroundName,
   backgroundSkills,
   backgroundTool,
@@ -34,7 +39,6 @@ export function FeaturesTraitsTab({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* Class features */}
       {activeFeatures.length > 0 && (
         <Section title="CARACTERÍSTICAS DE CLASSE">
           {activeFeatures.map((f, i) => (
@@ -43,7 +47,6 @@ export function FeaturesTraitsTab({
         </Section>
       )}
 
-      {/* Species traits */}
       {speciesTraits.length > 0 && (
         <Section title="TRAÇOS DE ESPÉCIE">
           {speciesTraits.map((t, i) => (
@@ -52,16 +55,37 @@ export function FeaturesTraitsTab({
         </Section>
       )}
 
-      {/* Origin talent */}
-      {originTalent && (
-        <Section title="TALENTO DE ORIGEM">
-          <div style={{ fontSize: '0.88rem', color: '#f1f5f9', fontWeight: 500 }}>
-            {originTalent}
-          </div>
+      {(activeTalents.length > 0 || originTalent) && (
+        <Section title="TALENTOS APLICADOS">
+          {activeTalents.map((talent) => (
+            <div key={`${talent.source}-${talent.name}`} style={{ marginBottom: '10px' }}>
+              <div style={{ fontSize: '0.88rem', color: '#f1f5f9', fontWeight: 600 }}>
+                {talent.name}
+                <span style={{ color: '#64748b', fontSize: '0.74rem', marginLeft: '8px' }}>
+                  {talent.source === 'background' ? 'Antecedente' : 'Espécie'}
+                </span>
+              </div>
+              {talent.notes.length > 0 && (
+                <ul style={{ margin: '6px 0 0 18px', color: '#94a3b8', fontSize: '0.82rem', lineHeight: 1.5 }}>
+                  {talent.notes.map((note) => <li key={note}>{note}</li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+          {activeTalents.length === 0 && originTalent && (
+            <div style={{ fontSize: '0.88rem', color: '#f1f5f9', fontWeight: 500 }}>{originTalent}</div>
+          )}
         </Section>
       )}
 
-      {/* Background */}
+      {derivedTraits.length > 0 && (
+        <Section title="EFEITOS DERIVADOS">
+          <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.84rem', lineHeight: 1.6 }}>
+            {derivedTraits.map((trait) => <li key={trait}>{trait}</li>)}
+          </ul>
+        </Section>
+      )}
+
       {backgroundName && (
         <Section title="ANTECEDENTE">
           <div style={{ fontSize: '0.88rem', color: '#f1f5f9', marginBottom: '6px', fontWeight: 500 }}>
@@ -82,7 +106,7 @@ export function FeaturesTraitsTab({
         </Section>
       )}
 
-      {activeFeatures.length === 0 && speciesTraits.length === 0 && !originTalent && (
+      {activeFeatures.length === 0 && speciesTraits.length === 0 && !originTalent && activeTalents.length === 0 && derivedTraits.length === 0 && (
         <div style={{ color: '#475569', fontSize: '0.85rem', textAlign: 'center', padding: '24px' }}>
           Nenhuma característica disponível.
         </div>

@@ -36,6 +36,19 @@ export interface DerivedSavingThrow {
   proficient: boolean;
 }
 
+
+export interface DerivedSpellFeature {
+  name: string;
+  source: 'species' | 'talent';
+  origin: string;
+}
+
+export interface ActiveTalentSummary {
+  name: string;
+  source: 'background' | 'species';
+  notes: string[];
+}
+
 export interface DerivedSheet {
   // Nível
   level: number;
@@ -84,10 +97,14 @@ export interface DerivedSheet {
 
   // Truques raciais (não contam no limite de classe)
   racialCantrips: string[];
+  bonusCantrips: DerivedSpellFeature[];
+  bonusPreparedSpells: DerivedSpellFeature[];
 
   // Resistências/defesas derivadas de efeitos permanentes da ficha
   derivedDefenses: string[];
+  derivedTraits: string[];
 
-  // Talento de origem (do antecedente)
+  // Talentos/benefícios aplicados no motor
   originTalent?: string;
+  activeTalents: ActiveTalentSummary[];
 }

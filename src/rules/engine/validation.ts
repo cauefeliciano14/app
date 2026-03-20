@@ -149,6 +149,35 @@ function hasMinimumInventoryForItems(inventory: ValidationInventoryItem[], requi
   return true;
 }
 
+
+function isOptionVisible(option: Record<string, any>, chosenValues: Record<string, string>): boolean {
+  const showWhen = option.showWhen as { id?: string; value?: string } | undefined;
+  if (!showWhen?.id) return true;
+  return chosenValues[showWhen.id] === showWhen.value;
+}
+
+function getRequiredClassOptions(classId: string, level: number, chosenValues: Record<string, string>) {
+  const details = getClassDetails(classId) as Record<string, any> | null;
+  if (!details) return [] as Array<{ id: string; name: string }>;
+
+  const rootOptions = (details.options ?? []) as Array<Record<string, any>>;
+  const featureOptions = ((details.features ?? []) as Array<Record<string, any>>)
+    .filter((feature) => (feature.level ?? 0) <= level)
+    .flatMap((feature) => (feature.options ?? []) as Array<Record<string, any>>);
+
+  return [...rootOptions, ...featureOptions]
+    .filter((option) => isOptionVisible(option, chosenValues))
+    .map((option) => ({ id: option.id as string, name: (option.name as string) ?? (option.id as string) }));
+}
+
+function getStartingGearBySource(inventory: ValidationInventoryItem[], source: 'class' | 'bg'): ValidationInventoryItem[] {
+  return inventory.filter((item) => item.isStartingGear && item.source === source);
+}
+
+function hasUnresolvedSubChoiceForPackage(items: ValidationInventoryItem[], requiredItems: string[]): boolean {
+  return requiredItems.some((requiredItem) => (itemSubChoices[requiredItem] ?? []).length > 0 && items.some((item) => item.name === requiredItem));
+}
+
 export function validateChoices(choices: CharacterChoices): ValidationResult {
   const byStep: StepValidation = {
     class: [],
@@ -166,12 +195,10 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
   } else if (!isValidClass(choices.classId)) {
     byStep.class.push('Selecione novamente a classe: a opção salva não é mais válida.');
   } else {
-    const details = getClassDetails(choices.classId) as Record<string, any> | null;
-    if (details?.options) {
-      for (const opt of details.options as Array<{ id: string; name: string }>) {
-        if (!choices.featureChoices[opt.id]) {
-          byStep.class.push(`Defina ${opt.name ?? opt.id} para concluir a etapa de classe.`);
-        }
+    const requiredOptions = getRequiredClassOptions(choices.classId, level, choices.featureChoices);
+    for (const opt of requiredOptions) {
+      if (!choices.featureChoices[opt.id]) {
+        byStep.class.push(`Defina ${opt.name ?? opt.id} para concluir a etapa de classe.`);
       }
     }
   }
@@ -241,17 +268,35 @@ export function validateChoices(choices: CharacterChoices): ValidationResult {
     byStep.equipment.push('Escolha o pacote de equipamento do antecedente.');
   }
 
-  if (choices.classId && choices.equipmentChoices.classOption === 'A') {
+  if (choices.classId) {
     const classPackage = getEquipmentForClass(choices.classId);
-    if (!hasMinimumInventoryForItems(inventory, classPackage.optionA.items)) {
-      byStep.equipment.push('O inventário não corresponde ao pacote de equipamento de classe selecionado.');
+    const classStartingItems = getStartingGearBySource(inventory, 'class');
+    if (choices.equipmentChoices.classOption === 'A') {
+      if (!hasMinimumInventoryForItems(inventory, classPackage.optionA.items)) {
+        byStep.equipment.push('O inventário não corresponde ao pacote de equipamento de classe selecionado.');
+      }
+      if (hasUnresolvedSubChoiceForPackage(classStartingItems, classPackage.optionA.items)) {
+        byStep.equipment.push('Há subescolha faltando no pacote de equipamento de classe.');
+      }
+    }
+    if (choices.equipmentChoices.classOption === 'B' && classStartingItems.length > 0) {
+      byStep.equipment.push('O pacote de equipamento de classe está inconsistente: a opção B concede apenas ouro inicial.');
     }
   }
 
-  if (choices.backgroundId && choices.equipmentChoices.backgroundOption === 'A') {
+  if (choices.backgroundId) {
     const backgroundPackage = getEquipmentForBackground(choices.backgroundId);
-    if (!hasMinimumInventoryForItems(inventory, backgroundPackage.optionA.items)) {
-      byStep.equipment.push('O inventário não corresponde ao pacote de equipamento de antecedente selecionado.');
+    const backgroundStartingItems = getStartingGearBySource(inventory, 'bg');
+    if (choices.equipmentChoices.backgroundOption === 'A') {
+      if (!hasMinimumInventoryForItems(inventory, backgroundPackage.optionA.items)) {
+        byStep.equipment.push('O inventário não corresponde ao pacote de equipamento de antecedente selecionado.');
+      }
+      if (hasUnresolvedSubChoiceForPackage(backgroundStartingItems, backgroundPackage.optionA.items)) {
+        byStep.equipment.push('Há subescolha faltando no pacote de equipamento de antecedente.');
+      }
+    }
+    if (choices.equipmentChoices.backgroundOption === 'B' && backgroundStartingItems.length > 0) {
+      byStep.equipment.push('O pacote de equipamento de antecedente está inconsistente: a opção B concede apenas ouro inicial.');
     }
   }
 

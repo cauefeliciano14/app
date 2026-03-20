@@ -136,6 +136,8 @@ export function SheetTabs({
           classFeatures={classFeatures}
           speciesTraits={speciesTraits}
           originTalent={derivedSheet.originTalent}
+          activeTalents={derivedSheet.activeTalents}
+          derivedTraits={derivedSheet.derivedTraits}
           backgroundName={backgroundName}
           backgroundSkills={backgroundSkills}
           backgroundTool={backgroundTool}

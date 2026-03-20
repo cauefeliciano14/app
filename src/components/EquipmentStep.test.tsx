@@ -34,7 +34,11 @@ const baseDerivedSheet: DerivedSheet = {
   weaponAttacks: [],
   isCaster: false,
   racialCantrips: [],
+  bonusCantrips: [],
+  bonusPreparedSpells: [],
   derivedDefenses: [],
+  derivedTraits: [],
+  activeTalents: [],
 };
 
 function createCharacter(equipmentOverrides: Record<string, any> = {}) {

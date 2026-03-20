@@ -20,6 +20,12 @@ interface SpellsTabProps {
   preparedSpells: string[];
 }
 
+
+const SPELL_LEVEL_MAP = new Map<string, string>();
+for (const sp of spellsAll as Array<{ name: string; level: string }>) {
+  SPELL_LEVEL_MAP.set(sp.name, sp.level);
+}
+
 const CIRCLE_ORDER = [
   'Truque', '1º Círculo', '2º Círculo', '3º Círculo', '4º Círculo',
   '5º Círculo', '6º Círculo', '7º Círculo', '8º Círculo', '9º Círculo',
@@ -34,33 +40,28 @@ export function SpellsTab({
 }: SpellsTabProps) {
   const [circleFilter, setCircleFilter] = useState<string>('all');
   const racialCantrips = derivedSheet.racialCantrips ?? [];
-
-  const spellLevelMap = useMemo(() => {
-    const map = new Map<string, string>();
-    for (const sp of spellsAll as Array<{ name: string; level: string }>) {
-      map.set(sp.name, sp.level);
-    }
-    return map;
-  }, []);
+  const bonusCantrips = derivedSheet.bonusCantrips ?? [];
+  const bonusPreparedSpells = derivedSheet.bonusPreparedSpells ?? [];
 
   const groupedPrepared = useMemo(() => {
     const groups: Record<string, string[]> = {};
     for (const name of preparedSpells) {
-      const circle = spellLevelMap.get(name) ?? '?';
+      const circle = SPELL_LEVEL_MAP.get(name) ?? '?';
       if (!groups[circle]) groups[circle] = [];
       groups[circle].push(name);
     }
     return groups;
-  }, [preparedSpells, spellLevelMap]);
+  }, [preparedSpells]);
 
   const availableCircles = useMemo(() => {
     const circles = new Set<string>();
-    if (learnedCantrips.length > 0 || racialCantrips.length > 0) circles.add('Truque');
+    if (learnedCantrips.length > 0 || bonusCantrips.length > 0) circles.add('Truque');
     for (const c of Object.keys(groupedPrepared)) circles.add(c);
+    if (bonusPreparedSpells.length > 0) circles.add('1º Círculo');
     return CIRCLE_ORDER.filter(c => circles.has(c));
-  }, [groupedPrepared, learnedCantrips, racialCantrips]);
+  }, [groupedPrepared, learnedCantrips, bonusCantrips, bonusPreparedSpells]);
 
-  if (!derivedSheet.isCaster && racialCantrips.length === 0) {
+  if (!derivedSheet.isCaster && bonusCantrips.length === 0 && bonusPreparedSpells.length === 0) {
     return (
       <div style={{
         textAlign: 'center',
@@ -115,7 +116,8 @@ export function SpellsTab({
         <StatPill label="CD de Resistência" value={String(derivedSheet.spellSaveDC ?? 0)} />
         <StatPill label="Magias Preparadas" value={String(derivedSheet.preparedSpellCount ?? 0)} />
         <StatPill label="Truques de Classe" value={String(derivedSheet.cantripsKnown ?? 0)} />
-        {racialCantrips.length > 0 && <StatPill label="Truques Raciais" value={String(racialCantrips.length)} />}
+        {bonusCantrips.length > 0 && <StatPill label="Truques Extra" value={String(bonusCantrips.length)} />}
+        {bonusPreparedSpells.length > 0 && <StatPill label="Magias Extra" value={String(bonusPreparedSpells.length)} />}
       </div>
 
       {slotLevels.length > 0 && (
@@ -201,6 +203,16 @@ export function SpellsTab({
         />
       )}
 
+      {bonusCantrips.filter((spell) => spell.source === 'talent').length > 0 && (circleFilter === 'all' || circleFilter === 'Truque') && (
+        <SpellList
+          title="TRUQUES DE TALENTO"
+          subtitle="Concedidos por talentos de origem/específicos."
+          spells={bonusCantrips.filter((spell) => spell.source === 'talent').map((spell) => `${spell.name} — ${spell.origin}`)}
+          accent="#38bdf8"
+          badge="Talento"
+        />
+      )}
+
       {CIRCLE_ORDER.filter(c => c !== 'Truque' && groupedPrepared[c]).map(circle => {
         if (circleFilter !== 'all' && circleFilter !== circle) return null;
         return (
@@ -217,7 +229,17 @@ export function SpellsTab({
         <SpellList title="MAGIAS PREPARADAS" spells={groupedPrepared['?']} accent="#a78bfa" />
       )}
 
-      {learnedCantrips.length === 0 && racialCantrips.length === 0 && preparedSpells.length === 0 && (
+      {bonusPreparedSpells.length > 0 && (circleFilter === 'all' || circleFilter === '1º Círculo') && (
+        <SpellList
+          title="MAGIAS EXTRA"
+          subtitle="Preparadas por traços raciais ou talentos."
+          spells={bonusPreparedSpells.map((spell) => `${spell.name} — ${spell.origin}`)}
+          accent="#34d399"
+          badge="Extra"
+        />
+      )}
+
+      {learnedCantrips.length === 0 && bonusCantrips.length === 0 && preparedSpells.length === 0 && bonusPreparedSpells.length === 0 && (
         <div style={{ color: '#475569', fontSize: '0.85rem', textAlign: 'center', padding: '16px' }}>
           Nenhuma magia selecionada.
         </div>

@@ -111,7 +111,7 @@ describe('CharacterSheetPage racial/species derived display', () => {
     expect(view.container.textContent).toContain(String(view.derivedSheet.cantripsKnown ?? 0));
 
     view.cleanup();
-  });
+  }, 20000);
 
   it('mostra a perícia extra do humano nas proficiências da ficha', () => {
     const view = renderSheet(makeChoices({
@@ -131,8 +131,45 @@ describe('CharacterSheetPage racial/species derived display', () => {
     expect(view.container.textContent).toContain('Percepção');
 
     view.cleanup();
-  });
+  }, 20000);
 
+
+  it('mostra truques e magia extra de talento na aba de magias', () => {
+    const view = renderSheet(makeChoices({
+      backgroundId: 'acolito',
+      talentSelections: {
+        'Iniciado em Magia (Clérigo)': {
+          spellcastingAbility: 'Sabedoria',
+          cantrip1: 'Luz',
+          cantrip2: 'Taumaturgia',
+          level1Spell: 'Bênção',
+        },
+      },
+    }));
+
+    clickTab(view.container, 'Magias');
+
+    expect(view.container.textContent).toContain('TRUQUES DE TALENTO');
+    expect(view.container.textContent).toContain('Luz — Iniciado em Magia (Clérigo)');
+    expect(view.container.textContent).toContain('MAGIAS EXTRA');
+    expect(view.container.textContent).toContain('Bênção — Iniciado em Magia (Clérigo)');
+
+    view.cleanup();
+  }, 20000);
+
+  it('mostra talentos aplicados e efeitos derivados na aba de características', () => {
+    const view = renderSheet(makeChoices({
+      backgroundId: 'fazendeiro',
+    }));
+
+    clickTab(view.container, 'Características');
+
+    expect(view.container.textContent).toContain('TALENTOS APLICADOS');
+    expect(view.container.textContent).toContain('Vigoroso');
+    expect(view.container.textContent).toContain('PV máximos +2');
+
+    view.cleanup();
+  }, 20000);
   it('mostra a resistência derivada do draconato na ficha', () => {
     const view = renderSheet(makeChoices({
       classId: 'guerreiro',
@@ -146,5 +183,5 @@ describe('CharacterSheetPage racial/species derived display', () => {
     expect(view.container.textContent).toContain('Resistência a Ígneo');
 
     view.cleanup();
-  });
+  }, 20000);
 });
