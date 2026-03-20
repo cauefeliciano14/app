@@ -155,44 +155,11 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
               </>
             )}
           </div>
-
-          <div className={styles.sideColumn}>
-            <Panel title="Impacto imediato">
-              <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                <li>PV máximos: <strong>{selectedClass ? engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers['constituicao'] ?? 0) : '—'}</strong></li>
-                <li>CA atual derivada: <strong>{derivedSheet.armorClass}</strong></li>
-                <li>Bônus de proficiência: <strong>+{derivedSheet.proficiencyBonus}</strong></li>
-              </ul>
-            </Panel>
-            <Panel title="O que falta">
-              {validationErrors.length === 0 ? (
-                <div style={{ color: '#4ade80', fontSize: '0.82rem' }}>Etapa pronta para avançar.</div>
-              ) : (
-                <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                  {validationErrors.map((error) => <li key={error}>{error}</li>)}
-                </ul>
-              )}
-            </Panel>
-            <Panel title="Resumo da classe">
-              <div style={{ color: '#94a3b8', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                {selectedClass ? 'Veja os detalhes ao centro e finalize quaisquer escolhas obrigatórias destacadas em laranja.' : 'Selecione uma classe na coluna da esquerda.'}
-              </div>
-            </Panel>
-          </div>
         </div>
       </div>
     </StepLayout>
   );
 };
-
-function Panel({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px', padding: '14px' }}>
-      <div style={{ color: '#f8fafc', fontWeight: 700, marginBottom: '8px' }}>{title}</div>
-      {children}
-    </div>
-  );
-}
 
 function SummaryStat({ label, value }: { label: string; value: string }) {
   return (

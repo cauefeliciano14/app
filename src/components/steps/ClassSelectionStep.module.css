@@ -9,17 +9,15 @@
   display: grid;
   grid-template-columns:
     minmax(clamp(13.5rem, 17vw, 15.5rem), 0.95fr)
-    minmax(clamp(20rem, 34vw, 28rem), 1.5fr)
-    minmax(clamp(14rem, 18vw, 16rem), 0.9fr);
-  grid-template-areas: 'classes details side';
+    minmax(clamp(20rem, 34vw, 28rem), 1.9fr);
+  grid-template-areas: 'classes details';
   gap: 16px;
   min-height: 0;
   align-items: start;
 }
 
 .classColumn,
-.detailsColumn,
-.sideColumn {
+.detailsColumn {
   min-width: 0;
 }
 
@@ -86,27 +84,12 @@
   margin-top: 16px;
 }
 
-.sideColumn {
-  grid-area: side;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 @media (max-width: 1320px) {
   .stepGrid {
     grid-template-columns:
       minmax(clamp(13rem, 22vw, 15rem), 0.95fr)
       minmax(clamp(22rem, 40vw, 34rem), 1.45fr);
-    grid-template-areas:
-      'classes details'
-      'side side';
-  }
-
-  .sideColumn {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    align-items: start;
+    grid-template-areas: 'classes details';
   }
 }
 
@@ -128,8 +111,7 @@
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       'classes'
-      'details'
-      'side';
+      'details';
   }
 
   .classList,
@@ -138,9 +120,6 @@
     padding-right: 0;
   }
 
-  .sideColumn {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 720px) {
