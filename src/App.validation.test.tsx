@@ -90,7 +90,7 @@ describe('App validation banners by creation step', () => {
     const html = view.container.innerHTML;
     expect(html.indexOf('Escolha uma classe para começar a criação do personagem.')).toBeGreaterThan(-1);
     expect(html.indexOf('Escolha uma classe para começar a criação do personagem.')).toBeLessThan(
-      html.indexOf('Escolha sua classe:')
+      html.indexOf('Selecione uma classe para ver tudo o que muda na ficha imediatamente.')
     );
 
     view.cleanup();

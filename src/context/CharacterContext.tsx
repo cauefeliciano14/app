@@ -11,6 +11,7 @@ import { DEFAULT_CHARACTER } from '../types/character';
 import { BACKGROUNDS_WITH_TOOL_SELECTOR } from '../data/backgroundToolSelectors';
 import { normalizeFeatureChoices } from '../utils/characterNormalization';
 import { loadCreationState, CREATION_STORAGE_KEY } from '../utils/persistence';
+import { sanitizeEquipmentState } from '../rules/utils/equipment';
 
 // ---------------------------------------------------------------------------
 // ATTR_METADATA constant
@@ -269,6 +270,14 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   useEffect(() => {
     localStorage.setItem('dnd_play_state', JSON.stringify(playState));
   }, [playState]);
+
+
+  useEffect(() => {
+    setCharacter(prev => {
+      const nextEquipment = sanitizeEquipmentState(prev.equipment);
+      return nextEquipment === prev.equipment ? prev : { ...prev, equipment: nextEquipment };
+    });
+  }, [character.equipment.inventory, character.equipment.equippedArmorId, character.equipment.hasShieldEquipped]);
 
   // Automatic Languages (Ladino -> Giria dos Ladroes, Druida -> Druidico)
   useEffect(() => {

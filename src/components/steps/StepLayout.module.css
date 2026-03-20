@@ -3,3 +3,10 @@
   border-top: 1px solid var(--border-subtle);
   margin: 0;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}

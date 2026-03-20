@@ -60,7 +60,7 @@ describe('calculateAC', () => {
   });
 
   it('com escudo, DEX+0 → CA 12', () => {
-    expect(calculateAC({ dexModifier: 0, hasShield: true })).toBe(12);
+    expect(calculateAC({ dexModifier: 0, hasShield: true, armorProficiencies: ['Escudo'] })).toBe(12);
   });
 
   it('barbaro sem armadura, DEX+2, CON+3 → CA 15 (Defesa sem Armadura)', () => {
@@ -72,19 +72,19 @@ describe('calculateAC', () => {
   });
 
   it('cota_malha_parcial (armadura média), DEX+3 → CA 14+2=16', () => {
-    expect(calculateAC({ dexModifier: 3, equippedArmorId: 'cota_malha_parcial' })).toBe(16);
+    expect(calculateAC({ dexModifier: 3, equippedArmorId: 'cota_malha_parcial', armorProficiencies: ['Armadura Média'] })).toBe(16);
   });
 
   it('armadura_de_placas (pesada), DEX+3 → CA 18 (sem DEX)', () => {
-    expect(calculateAC({ dexModifier: 3, equippedArmorId: 'armadura_de_placas' })).toBe(18);
+    expect(calculateAC({ dexModifier: 3, equippedArmorId: 'armadura_de_placas', armorProficiencies: ['Armadura Pesada'] })).toBe(18);
   });
 
   it('cota_de_placas (pesada) + escudo → CA 16+2=18', () => {
-    expect(calculateAC({ dexModifier: 0, equippedArmorId: 'cota_de_placas', hasShield: true })).toBe(18);
+    expect(calculateAC({ dexModifier: 0, equippedArmorId: 'cota_de_placas', hasShield: true, armorProficiencies: ['Armadura Pesada', 'Escudo'] })).toBe(18);
   });
 
   it('couro (leve), DEX+3 → CA 11+3=14', () => {
-    expect(calculateAC({ dexModifier: 3, equippedArmorId: 'couro' })).toBe(14);
+    expect(calculateAC({ dexModifier: 3, equippedArmorId: 'couro', armorProficiencies: ['Armadura Leve'] })).toBe(14);
   });
 });
 
@@ -120,7 +120,7 @@ describe('calculateRangedAttackBonus', () => {
 // ---------------------------------------------------------------------------
 describe('buildWeaponAttack', () => {
   it('Adaga (finesse): STR+1, DEX+3, BP+2 → ataque +5, dano +3', () => {
-    const atk = buildWeaponAttack('Adaga', 1, 3, 2);
+    const atk = buildWeaponAttack('Adaga', 1, 3, 2, ['Armas Simples']);
     expect(atk).not.toBeNull();
     expect(atk!.attackBonus).toBe(5); // DEX(3) + BP(2) pois DEX>STR
     expect(atk!.damageBonus).toBe(3);
@@ -129,20 +129,33 @@ describe('buildWeaponAttack', () => {
   });
 
   it('Maça (corpo a corpo normal): STR+3, DEX+1, BP+2 → ataque +5', () => {
-    const atk = buildWeaponAttack('Maça', 3, 1, 2);
+    const atk = buildWeaponAttack('Maça', 3, 1, 2, ['Armas Simples']);
     expect(atk).not.toBeNull();
     expect(atk!.attackBonus).toBe(5);
     expect(atk!.damageBonus).toBe(3);
   });
 
   it('Arco Curto (distância): DEX+3, BP+2 → ataque +5', () => {
-    const atk = buildWeaponAttack('Arco Curto', 0, 3, 2);
+    const atk = buildWeaponAttack('Arco Curto', 0, 3, 2, ['Armas Simples']);
     expect(atk).not.toBeNull();
     expect(atk!.attackBonus).toBe(5);
     expect(atk!.damageBonus).toBe(3);
   });
 
   it('arma desconhecida retorna null', () => {
-    expect(buildWeaponAttack('Espada Fantástica', 3, 2, 2)).toBeNull();
+    expect(buildWeaponAttack('Espada Fantástica', 3, 2, 2, ['Armas Simples'])).toBeNull();
+  });
+});
+
+describe('novas regras de treinamento e proficiência', () => {
+  it('ignora armadura e escudo sem treinamento apropriado', () => {
+    expect(calculateAC({ dexModifier: 2, equippedArmorId: 'couro', hasShield: true, armorProficiencies: [] })).toBe(12);
+  });
+
+  it('arma sem proficiência não soma bônus de proficiência no ataque', () => {
+    const atk = buildWeaponAttack('Espada Longa', 3, 1, 2, ['Armas Simples']);
+    expect(atk).not.toBeNull();
+    expect(atk!.attackBonus).toBe(3);
+    expect(atk!.damageBonus).toBe(3);
   });
 });
