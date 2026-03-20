@@ -16,10 +16,7 @@ const LABELS: Record<AttributeKey, string> = {
 };
 
 export function CharacterSummaryPanel() {
-  const { character, selectedBackground, derivedSheet, validationResult, characterLevel } = useCharacter();
-  const identityLine = [character.characterClass?.name, selectedBackground?.name, character.species?.name]
-    .filter(Boolean)
-    .join(' • ');
+  const { derivedSheet, validationResult, characterLevel } = useCharacter();
   const mainPendencies = validationResult.errors.slice(0, 5);
 
   const displayLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
@@ -41,22 +38,6 @@ export function CharacterSummaryPanel() {
             <li>Use os atalhos abaixo só quando precisar revisar pendências, idiomas ou perícias.</li>
           </ul>
         </ContextualPopover>
-      </div>
-
-      <div className={styles.header}>
-        <div className={`profile-placeholder ${character.portrait ? 'has-image' : ''} ${styles.portrait}`.trim()}>
-          {character.portrait ? (
-            <img
-              src={`/imgs/portrait_caracter/${character.portrait}`}
-              alt={character.name ? `Retrato de ${character.name}` : 'Retrato do personagem'}
-              className="profile-image"
-            />
-          ) : null}
-        </div>
-        <div>
-          <div className={styles.name}>{character.name || 'Sem nome'}</div>
-          <div className={styles.subtitle}>{identityLine || 'Sem identidade principal definida'}</div>
-        </div>
       </div>
 
       <div className={patterns.responsiveGrid2}>
