@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useRef, useEffect, useState } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
+import { useWizard } from '../../../context/WizardContext';
 import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
 import styles from './CharacterSummaryPanel.module.css';
 
@@ -11,9 +12,58 @@ const STEP_LABELS: Record<string, string> = {
   equipment: 'Equipamento',
 };
 
+const STEP_INDEX: Record<string, number> = {
+  class: 0,
+  background: 1,
+  species: 2,
+  attributes: 3,
+  equipment: 4,
+};
+
 export function CharacterSummaryPanel() {
   const { character, selectedBackground, derivedSheet, characterLevel, validationResult } = useCharacter();
+  const { setCurrentStep } = useWizard();
 
+  // ── Reactive flash detection ───────────────────────────────────────────────
+  const prevDerivedRef = useRef<typeof derivedSheet | null>(null);
+  const prevClassIdRef = useRef<string | undefined>(undefined);
+  const [flashedSections, setFlashedSections] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const prev = prevDerivedRef.current;
+    const currClassId = character.characterClass?.id;
+
+    if (prev === null) {
+      prevDerivedRef.current = derivedSheet;
+      prevClassIdRef.current = currClassId;
+      return;
+    }
+
+    const changed = new Set<string>();
+    if (prev.maxHP !== derivedSheet.maxHP) changed.add('hp');
+    if (prev.armorClass !== derivedSheet.armorClass) changed.add('ca');
+    if (JSON.stringify(prev.finalAttributes) !== JSON.stringify(derivedSheet.finalAttributes)) {
+      changed.add('attributes');
+    }
+    if (JSON.stringify(prev.skillProficiencies) !== JSON.stringify(derivedSheet.skillProficiencies)) {
+      changed.add('skills');
+    }
+    if (JSON.stringify(prev.languages) !== JSON.stringify(derivedSheet.languages)) {
+      changed.add('languages');
+    }
+    if (prevClassIdRef.current !== currClassId) changed.add('identity');
+
+    prevDerivedRef.current = derivedSheet;
+    prevClassIdRef.current = currClassId;
+
+    if (changed.size === 0) return;
+
+    setFlashedSections(changed);
+    const t = setTimeout(() => setFlashedSections(new Set()), 1500);
+    return () => clearTimeout(t);
+  }, [derivedSheet, character.characterClass?.id]);
+
+  // ── Data ──────────────────────────────────────────────────────────────────
   const identityItems = useMemo(
     () => [
       { label: 'Nome', value: character.name || 'Sem nome' },
@@ -25,9 +75,9 @@ export function CharacterSummaryPanel() {
   );
 
   const quickFacts = [
-    { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1) },
-    { label: 'CA', value: String(derivedSheet.armorClass) },
-    { label: 'PV', value: String(derivedSheet.maxHP) },
+    { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1), flash: false },
+    { label: 'CA', value: String(derivedSheet.armorClass), flash: flashedSections.has('ca') },
+    { label: 'PV', value: String(derivedSheet.maxHP), flash: flashedSections.has('hp') },
   ];
 
   const coreStats = useMemo(
@@ -42,21 +92,29 @@ export function CharacterSummaryPanel() {
     [derivedSheet.finalAttributes],
   );
 
-  const presentedLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
+  const presentedLanguages = useMemo(
+    () => getLanguageDisplayNames(derivedSheet.languages),
+    [derivedSheet.languages],
+  );
   const keySkills = useMemo(() => derivedSheet.skillProficiencies.slice(0, 6), [derivedSheet.skillProficiencies]);
 
   const pendingItems = useMemo(
     () => Object.entries(validationResult.byStep)
-      .filter(([_, issues]) => issues.length > 0)
+      .filter(([, issues]) => issues.length > 0)
       .map(([key, issues]) => ({
         key,
         label: STEP_LABELS[key] ?? key,
         count: Array.from(new Set(issues)).length,
+        stepIndex: STEP_INDEX[key] ?? -1,
       })),
     [validationResult.byStep],
   );
 
   const totalPending = pendingItems.reduce((sum, item) => sum + item.count, 0);
+
+  const identityFlash = flashedSections.has('identity');
+  const attrFlash = flashedSections.has('attributes');
+  const skillsFlash = flashedSections.has('skills') || flashedSections.has('languages');
 
   return (
     <div className={styles.panel}>
@@ -67,12 +125,14 @@ export function CharacterSummaryPanel() {
         )}
       </div>
 
-      <div className={styles.identityCard}>
+      <div className={`${styles.identityCard} ${identityFlash ? styles.flashHighlight : ''}`}>
         <div className={styles.cardHeader}>
           <div className={styles.identityTitle}>Identidade</div>
         </div>
 
-        {character.portrait ? <img src={character.portrait} alt="Retrato atual do personagem" className={styles.portraitPreview} /> : null}
+        {character.portrait
+          ? <img src={character.portrait} alt="Retrato atual do personagem" className={styles.portraitPreview} />
+          : null}
 
         <dl className={styles.identityList}>
           {identityItems.map((item) => (
@@ -85,19 +145,23 @@ export function CharacterSummaryPanel() {
       </div>
 
       <div className={styles.quickFactsGrid}>
-        {quickFacts.map((fact) => <SummaryPill key={fact.label} label={fact.label} value={fact.value} />)}
+        {quickFacts.map((fact) => (
+          <SummaryPill key={fact.label} label={fact.label} value={fact.value} flash={fact.flash} />
+        ))}
       </div>
 
-      <div className={styles.identityCard}>
+      <div className={`${styles.identityCard} ${attrFlash ? styles.flashHighlight : ''}`}>
         <div className={styles.cardHeader}>
           <div className={styles.identityTitle}>Atributos finais</div>
         </div>
         <div className={styles.quickFactsGrid}>
-          {coreStats.map(([label, value]) => <SummaryPill key={label} label={String(label)} value={String(value)} />)}
+          {coreStats.map(([label, value]) => (
+            <SummaryPill key={label} label={String(label)} value={String(value)} />
+          ))}
         </div>
       </div>
 
-      <div className={styles.identityCard}>
+      <div className={`${styles.identityCard} ${skillsFlash ? styles.flashHighlight : ''}`}>
         <div className={styles.cardHeader}>
           <div className={styles.identityTitle}>Perícias e idiomas</div>
         </div>
@@ -114,7 +178,9 @@ export function CharacterSummaryPanel() {
           <>
             <div className={styles.subLabel}>Idiomas</div>
             <ul className={styles.tagList}>
-              {presentedLanguages.map((language) => <li key={language} className={styles.tagItem}>{language}</li>)}
+              {presentedLanguages.map((language) => (
+                <li key={language} className={styles.tagItem}>{language}</li>
+              ))}
             </ul>
           </>
         )}
@@ -124,13 +190,20 @@ export function CharacterSummaryPanel() {
         <div className={styles.identityCard}>
           <div className={styles.cardHeader}>
             <div className={styles.identityTitle}>Pendências principais</div>
+            <span className={styles.pendingHint}>clique para ir</span>
           </div>
           <div className={styles.pendingList}>
             {pendingItems.map((item) => (
-              <div key={item.key} className={styles.pendingRow}>
+              <button
+                key={item.key}
+                className={styles.pendingRow}
+                onClick={() => { if (item.stepIndex >= 0) setCurrentStep(item.stepIndex); }}
+                title={`Ir para ${item.label}`}
+                disabled={item.stepIndex < 0}
+              >
                 <span className={styles.pendingLabel}>{item.label}</span>
                 <span className={styles.pendingCount}>{item.count}</span>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -139,9 +212,9 @@ export function CharacterSummaryPanel() {
   );
 }
 
-function SummaryPill({ label, value }: { label: string; value: string }) {
+function SummaryPill({ label, value, flash }: { label: string; value: string; flash?: boolean }) {
   return (
-    <div className={styles.summaryPillCard}>
+    <div className={`${styles.summaryPillCard} ${flash ? styles.flashHighlight : ''}`}>
       <div className={styles.pillLabel}>{label}</div>
       <div className={styles.pillValue}>{value}</div>
     </div>

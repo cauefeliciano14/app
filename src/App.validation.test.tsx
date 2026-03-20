@@ -88,7 +88,7 @@ describe('App validation banners by creation step', () => {
   it('keeps the persistent summary visible on the class step', () => {
     const view = renderAppAtStep(0);
 
-    expect(view.container.textContent).toContain('Resumo persistente');
+    expect(view.container.textContent).toContain('Resumo');
     expect(view.container.textContent).toContain('Atributos finais');
     expect(view.container.textContent).toContain('Pendências principais');
 

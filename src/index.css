@@ -940,6 +940,72 @@ details[open] > summary .summary-chevron {
   object-fit: cover;
 }
 
+/* ── Microinterações: Transição de etapas ───────────────────────────────── */
+
+/* Fade-in com leve deslocamento horizontal (para frente) */
+@keyframes stepEnterForward {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Fade-in com leve deslocamento horizontal (para trás) */
+@keyframes stepEnterBack {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Pulse discreto para badges de pendência */
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+  50%       { box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.18); }
+}
+
+.badge-pulse {
+  animation: badgePulse 2.4s ease-in-out infinite;
+}
+
+/* Indicador de autosave */
+@keyframes savedFade {
+  0%   { opacity: 0; transform: translateY(4px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.saved-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: var(--z-tooltip);
+  animation: savedFade 2.2s ease-out forwards;
+}
+
+/* Hover mais rico para cards selectionáveis */
+.selectable-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Inputs com transição de foco mais suave */
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.12);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
 /* ── Accessibility: Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,

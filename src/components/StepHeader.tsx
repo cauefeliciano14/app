@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { FANTASY_NAMES } from '../data/fantasyNames';
 import styles from './StepHeader.module.css';
 
@@ -22,89 +22,124 @@ export const StepHeader = ({
   onPortraitClick,
 }: StepHeaderProps) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
 
-  const generateNames = () => {
+  const generateAndShow = () => {
+    if (suggestionsOpen) {
+      setSuggestionsOpen(false);
+      return;
+    }
     const shuffled = [...FANTASY_NAMES].sort(() => 0.5 - Math.random());
-    setSuggestions(shuffled.slice(0, 3));
+    setSuggestions(shuffled.slice(0, 5));
+    setSuggestionsOpen(true);
   };
+
+  const pickSuggestion = (name: string) => {
+    setCharacterName(name);
+    setSuggestionsOpen(false);
+  };
+
+  // Close on outside click
+  useEffect(() => {
+    if (!suggestionsOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(e.target as Node)) {
+        setSuggestionsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [suggestionsOpen]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!suggestionsOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSuggestionsOpen(false);
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [suggestionsOpen]);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.topRow}>
-        {onPrev ? (
-          <button onClick={onPrev} className={styles.btnBack}>
-            &laquo; Voltar
-          </button>
-        ) : (
-          <div className={styles.spacer} />
-        )}
+      <div className={styles.mainRow}>
+        {/* Portrait */}
+        <button
+          type="button"
+          className={`${styles.portraitButton} ${portrait ? styles.portraitButtonFilled : ''}`.trim()}
+          onClick={onPortraitClick}
+          aria-label="Escolher retrato do personagem"
+        >
+          {portrait ? (
+            <img
+              src={`/imgs/portrait_caracter/${portrait}`}
+              alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
+              className={styles.portraitImage}
+            />
+          ) : (
+            <span className={styles.portraitPlaceholder}>+</span>
+          )}
+        </button>
 
-        <div className={styles.advanceArea}>
+        {/* Name + suggestions */}
+        <div className={styles.nameArea}>
+          <div className={styles.nameInputRow}>
+            <input
+              id="character-name-input"
+              type="text"
+              className={styles.characterNameInput}
+              value={characterName}
+              onChange={(e) => setCharacterName(e.target.value)}
+              placeholder="Nome do personagem"
+              aria-label="Nome do personagem"
+            />
+            <div className={styles.suggestionsWrap} ref={suggestionsRef}>
+              <button
+                type="button"
+                className={`${styles.suggestBtn} ${suggestionsOpen ? styles.suggestBtnActive : ''}`}
+                onClick={generateAndShow}
+                title="Sugerir nomes"
+                aria-expanded={suggestionsOpen}
+              >
+                ✦ Sugerir
+              </button>
+              {suggestionsOpen && (
+                <div className={styles.suggestionsDropdown} role="listbox">
+                  {suggestions.map((name) => (
+                    <button
+                      key={name}
+                      type="button"
+                      role="option"
+                      className={styles.suggestionItem}
+                      onClick={() => pickSuggestion(name)}
+                    >
+                      {name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div className={styles.navButtons}>
+          {onPrev ? (
+            <button onClick={onPrev} className={styles.btnBack}>
+              ‹ Voltar
+            </button>
+          ) : (
+            <div className={styles.spacer} />
+          )}
           <button
             onClick={onNext}
-            className={canAdvance ? styles.btnAdvance : `${styles.btnAdvance} ${styles.btnAdvanceDisabled}`}
+            className={`${styles.btnAdvance} ${!canAdvance ? styles.btnAdvanceDisabled : ''}`}
             disabled={!canAdvance}
           >
-            Avançar &raquo;
+            Avançar ›
           </button>
-        </div>
-      </div>
-
-      <div className={styles.identityRow}>
-        <div className={styles.portraitColumn}>
-          <button
-            type="button"
-            className={`${styles.portraitButton} ${portrait ? styles.portraitButtonFilled : ''}`.trim()}
-            onClick={onPortraitClick}
-            aria-label="Escolher retrato do personagem"
-          >
-            {portrait ? (
-              <img
-                src={`/imgs/portrait_caracter/${portrait}`}
-                alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
-                className={styles.portraitImage}
-              />
-            ) : (
-              <span className={styles.portraitPlaceholder}>Sem retrato</span>
-            )}
-          </button>
-          <span className={styles.portraitLabel}>Retrato</span>
-        </div>
-
-        <div className={styles.nameColumn}>
-          <label className={styles.characterNameLabel} htmlFor="character-name-input">
-            Nome do personagem
-          </label>
-          <input
-            id="character-name-input"
-            type="text"
-            className={styles.characterNameInput}
-            value={characterName}
-            onChange={(e) => setCharacterName(e.target.value)}
-            placeholder="Digite o nome do personagem"
-          />
-          <div className={styles.suggestionsContainer}>
-            <button type="button" className={styles.suggestionsLink} onClick={generateNames}>
-              Mostrar sugestões{suggestions.length > 0 ? ':' : ''}
-            </button>
-
-            {suggestions.length > 0 && (
-              <div className={styles.suggestionsDisplay}>
-                {suggestions.map((suggestion, index) => (
-                  <React.Fragment key={suggestion}>
-                    <button
-                      type="button"
-                      className={styles.suggestionItem}
-                      onClick={() => setCharacterName(suggestion)}
-                    >
-                      {suggestion}
-                    </button>
-                    {index < suggestions.length - 1 ? <span className={styles.suggestionSeparator}>•</span> : null}
-                  </React.Fragment>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>

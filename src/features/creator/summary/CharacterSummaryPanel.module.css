@@ -31,11 +31,18 @@
   white-space: nowrap;
 }
 
+.pendingHint {
+  color: var(--text-faint);
+  font-size: 0.62rem;
+  font-style: italic;
+}
+
 .identityCard,
 .summaryPillCard {
   background: var(--surface-subtle);
   border: 1px solid var(--border-default);
   border-radius: 12px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .identityCard {
@@ -85,6 +92,7 @@
 
 .summaryPillCard {
   padding: 8px 10px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .pillLabel {
@@ -136,14 +144,33 @@
 .pendingList {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
+/* Pending rows are now clickable buttons */
 .pendingRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 6px;
+  margin: 0 -6px;
+  width: calc(100% + 12px);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+}
+
+.pendingRow:hover:not(:disabled) {
+  background: rgba(249, 115, 22, 0.09);
+}
+
+.pendingRow:disabled {
+  cursor: default;
 }
 
 .pendingLabel {
@@ -164,6 +191,7 @@
   color: #fdba74;
   font-size: 0.68rem;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .portraitPreview {
@@ -173,4 +201,24 @@
   border-radius: 10px;
   margin-bottom: 12px;
   border: 1px solid var(--border-subtle);
+}
+
+/* ── Flash highlight animation ────────────────────────────────────────────── */
+@keyframes flashHighlight {
+  0% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  16% {
+    background-color: rgba(249, 115, 22, 0.13);
+    box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.32), 0 0 14px rgba(249, 115, 22, 0.08);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.flashHighlight {
+  animation: flashHighlight 1.5s ease-out forwards;
 }
