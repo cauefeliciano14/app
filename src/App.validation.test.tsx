@@ -84,6 +84,26 @@ afterEach(() => {
 });
 
 describe('App validation banners by creation step', () => {
+
+  it('keeps the persistent summary visible on the class step', () => {
+    const view = renderAppAtStep(0);
+
+    expect(view.container.textContent).toContain('Resumo persistente');
+    expect(view.container.textContent).toContain('Atributos finais');
+    expect(view.container.textContent).toContain('Pendências principais');
+
+    view.cleanup();
+  });
+
+  it('renders the class step as stable master-detail without hidden subphase copy', () => {
+    const view = renderAppAtStep(0);
+
+    expect(view.container.textContent).toContain('Classe');
+    expect(view.container.textContent).toContain('Escolha uma classe para revisar detalhes e opções obrigatórias.');
+    expect(view.container.textContent).toContain('Selecione uma classe para ver tudo o que muda na ficha imediatamente.');
+
+    view.cleanup();
+  });
   it('shows class pending errors on step 0 before the class list', () => {
     const view = renderAppAtStep(0);
 
