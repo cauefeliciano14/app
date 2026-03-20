@@ -92,7 +92,7 @@ export const BackgroundStep: React.FC = () => {
                   }}
                 >
                   <span className={styles.selectionButtonName}>{bg.name}</span>
-                  <span className={styles.selectionButtonMarker}>{isSelected ? 'Selecionada' : 'Ver'}</span>
+                  {isSelected && <span className={styles.selectionButtonMarker}>✓</span>}
                 </button>
               );
             })}

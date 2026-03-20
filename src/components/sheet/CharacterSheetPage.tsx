@@ -100,7 +100,7 @@ export function CharacterSheetPage({
   return (
     <div className={styles.page}>
       <section className={styles.heroGrid}>
-        <div className={styles.heroIdentity}>
+        <div className={styles.heroLeft}>
           <SheetHeader
             name={characterName}
             portrait={portrait}
@@ -108,8 +108,6 @@ export function CharacterSheetPage({
             className={className}
             level={characterLevel}
           />
-        </div>
-        <div className={styles.heroAbilities}>
           <AbilityScoreCards
             finalAttributes={derivedSheet.finalAttributes}
             modifiers={derivedSheet.modifiers}
@@ -147,9 +145,6 @@ export function CharacterSheetPage({
             toolProficiencies={derivedSheet.toolProficiencies}
             languages={derivedSheet.languages}
           />
-        </div>
-
-        <div className={styles.supportColumn}>
           <ConditionsCard
             activeConditions={playState.activeConditions}
             onAdd={handleAddCondition}

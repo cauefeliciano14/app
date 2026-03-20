@@ -66,7 +66,7 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
                   onClick={() => handleSelectSpecies(sp)}
                 >
                   <span className={styles.selectionButtonName}>{sp.name}</span>
-                  <span className={styles.selectionButtonMarker}>{isSelected ? 'Selecionada' : 'Ver'}</span>
+                  {isSelected && <span className={styles.selectionButtonMarker}>✓</span>}
                 </button>
               );
             })}

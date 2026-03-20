@@ -64,16 +64,6 @@ export function CharacterSummaryPanel() {
   }, [derivedSheet, character.characterClass?.id]);
 
   // ── Data ──────────────────────────────────────────────────────────────────
-  const identityItems = useMemo(
-    () => [
-      { label: 'Nome', value: character.name || 'Sem nome' },
-      { label: 'Classe', value: character.characterClass?.name || 'Não definida' },
-      { label: 'Origem', value: selectedBackground?.name || 'Não definida' },
-      { label: 'Espécie', value: character.species?.name || 'Não definida' },
-    ],
-    [character.characterClass?.name, character.name, character.species?.name, selectedBackground?.name],
-  );
-
   const quickFacts = [
     { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1), flash: false },
     { label: 'CA', value: String(derivedSheet.armorClass), flash: flashedSections.has('ca') },
@@ -126,22 +116,30 @@ export function CharacterSummaryPanel() {
       </div>
 
       <div className={`${styles.identityCard} ${identityFlash ? styles.flashHighlight : ''}`}>
-        <div className={styles.cardHeader}>
-          <div className={styles.identityTitle}>Identidade</div>
-        </div>
-
-        {character.portrait
-          ? <img src={character.portrait} alt="Retrato atual do personagem" className={styles.portraitPreview} />
-          : null}
-
-        <dl className={styles.identityList}>
-          {identityItems.map((item) => (
-            <div key={item.label} className={styles.identityRow}>
-              <dt className={styles.identityLabel}>{item.label}</dt>
-              <dd className={styles.identityValue}>{item.value}</dd>
+        <div className={styles.identityHeader}>
+          <div className={styles.identityAvatar}>
+            {character.portrait
+              ? <img src={character.portrait} alt="Retrato" className={styles.avatarImg} />
+              : <div className={styles.avatarPlaceholder}>⚔</div>
+            }
+          </div>
+          <div className={styles.identityInfo}>
+            <div className={styles.identityName}>{character.name || 'Sem nome'}</div>
+            <div className={styles.identityChips}>
+              {character.characterClass?.name
+                ? <span className={styles.chipClass}>{character.characterClass.name}</span>
+                : <span className={styles.chipEmpty}>Classe</span>
+              }
+              {character.species?.name
+                ? <span className={styles.chipSecondary}>{character.species.name}</span>
+                : <span className={styles.chipEmpty}>Espécie</span>
+              }
             </div>
-          ))}
-        </dl>
+            <div className={styles.identityOrigin}>
+              {selectedBackground?.name || <em>Origem não definida</em>}
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className={styles.quickFactsGrid}>
@@ -186,28 +184,6 @@ export function CharacterSummaryPanel() {
         )}
       </div>
 
-      {pendingItems.length > 0 && (
-        <div className={styles.identityCard}>
-          <div className={styles.cardHeader}>
-            <div className={styles.identityTitle}>Pendências principais</div>
-            <span className={styles.pendingHint}>clique para ir</span>
-          </div>
-          <div className={styles.pendingList}>
-            {pendingItems.map((item) => (
-              <button
-                key={item.key}
-                className={styles.pendingRow}
-                onClick={() => { if (item.stepIndex >= 0) setCurrentStep(item.stepIndex); }}
-                title={`Ir para ${item.label}`}
-                disabled={item.stepIndex < 0}
-              >
-                <span className={styles.pendingLabel}>{item.label}</span>
-                <span className={styles.pendingCount}>{item.count}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
