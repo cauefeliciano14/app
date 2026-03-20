@@ -3,10 +3,8 @@ import bgData from '../../data/db.json';
 import classDetailsData from '../../data/classDetails.json';
 import { FeatureExpandable } from '../FeatureExpandable';
 import { ValidationBanner } from '../ValidationBanner';
-import { ContextualPopover } from '../ui/ContextualPopover';
 import { StepLayout } from './StepLayout';
 import styles from './ClassSelectionStep.module.css';
-import { calculateMaxHP as engineCalculateMaxHP } from '../../rules/calculators/combat';
 import { getClassHPData } from '../../rules/data/classRules';
 import { useCharacter } from '../../context/CharacterContext';
 import { useWizard } from '../../context/WizardContext';
@@ -37,7 +35,6 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
     allSelections,
     stepSelections,
     validationResult,
-    derivedSheet,
   } = useCharacter();
   const { setCurrentStep, setIsPortraitModalOpen } = useWizard();
 
@@ -46,14 +43,6 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
   const selectedClass = character.characterClass;
   const classDetails = selectedClass ? (classDetailsData as Record<string, ClassDetails>)[selectedClass.id] : null;
   const activeFeatures = (classDetails?.features ?? []).filter((feature) => feature.level <= characterLevel);
-  const immediateImpact = selectedClass
-    ? [
-        `PV máximos agora: ${engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers.constituicao ?? 0)}`,
-        `CA atual derivada: ${derivedSheet.armorClass}`,
-        `Bônus de proficiência: +${derivedSheet.proficiencyBonus}`,
-      ]
-    : ['Selecione uma classe para calcular PV, CA e proficiência desta etapa.'];
-
   return (
     <StepLayout
       onNext={() => setCurrentStep(1)}
@@ -73,16 +62,9 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
             <div>
               <div className={styles.sectionHeading}>
                 <h2 style={{ margin: 0, color: '#f8fafc', fontSize: '1.3rem' }}>Classe</h2>
-                <ContextualPopover label="Impacto agora" title="O que muda imediatamente" variant="chip">
-                  <ul className={styles.contextList}>
-                    {immediateImpact.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </ContextualPopover>
               </div>
               <p style={{ margin: '6px 0 0', color: '#94a3b8', fontSize: '0.84rem' }}>
-                Escolha uma classe e consulte os detalhes contextuais apenas quando precisar.
+                Selecione uma classe para ver tudo o que muda na ficha imediatamente. Consulte os detalhes contextuais apenas quando precisar.
               </p>
             </div>
             <div className={styles.classList}>
@@ -130,22 +112,11 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                           <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
                           Classe selecionada
                         </div>
-                        <div className={styles.sectionHeading}>
-                          <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
-                          <ContextualPopover label="Resumo" title="Leitura auxiliar da classe" variant="chip" align="right">
-                            <div className={styles.contextText}>
-                              Revise os traços abaixo para entender proficiências, papel esperado e restrições antes de fechar as escolhas destacadas.
-                            </div>
-                          </ContextualPopover>
-                        </div>
+                        <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
                         <p className={styles.summaryDescription}>{selectedClass.description}</p>
                       </div>
                     </div>
                     <div className={styles.summaryStats}>
-                      <SummaryStat
-                        label="PV iniciais"
-                        value={String(engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers.constituicao ?? 0))}
-                      />
                       <SummaryStat label="Dado de vida" value={getClassHPData(selectedClass.id)?.hitDieLabel || '—'} />
                     </div>
                   </div>
@@ -162,19 +133,8 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                 <div className={styles.optionsHeader}>
                   <div>
                     <h4 className={styles.optionsTitle}>Escolhas e características</h4>
-                    <p className={styles.optionsSubtitle}>Abra apenas o bloco necessário para concluir a etapa.</p>
+                    <p className={styles.optionsSubtitle}>As pendências já aparecem no topo; aqui ficam apenas as escolhas que você ainda precisa abrir.</p>
                   </div>
-                  <ContextualPopover label="Pendências" title="O que ainda falta" variant="chip" align="right">
-                    {validationErrors.length === 0 ? (
-                      <div className={styles.contextTextSuccess}>Etapa pronta para avançar.</div>
-                    ) : (
-                      <ul className={styles.contextList}>
-                        {validationErrors.map((error) => (
-                          <li key={error}>{error}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </ContextualPopover>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>

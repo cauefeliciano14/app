@@ -1,31 +1,66 @@
-.titleRow {
+.panel {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 12px;
 }
 
-.statCard {
-  background: var(--surface-subtle);
-  border-radius: 10px;
-  padding: var(--space-sm) 10px;
-  text-align: center;
-}
-
-.statLabel {
-  color: var(--text-muted);
-  font-size: 0.64rem;
-  letter-spacing: 0.08em;
-}
-
-.statValue {
+.sectionTitle {
   color: var(--text-primary);
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
+.identityCard,
 .summaryPillCard {
   background: var(--surface-subtle);
-  border-radius: 10px;
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+}
+
+.identityCard {
+  padding: 12px;
+}
+
+.identityTitle {
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.identityList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.identityRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.identityLabel {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.identityValue {
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.quickFactsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.summaryPillCard {
   padding: 10px 12px;
 }
 
@@ -41,84 +76,8 @@
   font-weight: 700;
 }
 
-.contextActions {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.contextChipCard {
-  background: var(--surface-subtle);
-  border: 1px solid var(--border-default);
-  border-radius: 12px;
-  padding: 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.contextChipHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.contextChipLabel {
-  color: var(--text-primary);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.contextChipCount {
-  border-radius: 999px;
-  padding: 2px 8px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-muted);
-}
-
-.toneAccent {
-  background: rgba(249, 115, 22, 0.18);
-  color: #fdba74;
-}
-
-.toneSuccess {
-  background: rgba(74, 222, 128, 0.18);
-  color: #86efac;
-}
-
-.toneDefault {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-muted);
-}
-
-.emptyText {
-  color: var(--text-faint);
-  font-size: 0.8rem;
-}
-
-.issueOk {
-  color: #4ade80;
-  font-size: 0.82rem;
-}
-
-.popoverList {
-  margin: 0;
-  padding-left: 18px;
-  color: var(--text-body);
-  font-size: 0.82rem;
-  line-height: 1.5;
-}
-
 @media (max-width: 920px) {
-  .contextActions {
+  .quickFactsGrid {
     grid-template-columns: 1fr;
-  }
-
-  .titleRow {
-    align-items: flex-start;
-    flex-direction: column;
   }
 }
