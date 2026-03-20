@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { DerivedSheet } from '../../rules/types/DerivedSheet';
 import type { CharacterPlayState } from '../../types/playState';
 import { SheetHeader } from './SheetHeader';
@@ -42,6 +43,37 @@ interface CharacterSheetPageProps {
   onEquipArmor?: (armorId: string | null) => void;
   onEquipShield?: (equipped: boolean) => void;
 }
+
+const pageGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '16px',
+};
+
+const topRowGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '16px',
+  alignItems: 'start',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+};
+
+const abilityScoreCellStyle: CSSProperties = {
+  minWidth: 0,
+  gridColumn: 'span 2',
+};
+
+const sideColumnStackStyle: CSSProperties = {
+  display: 'grid',
+  gap: '10px',
+  alignContent: 'start',
+  minWidth: 0,
+};
+
+const secondaryRowGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '16px',
+  alignItems: 'start',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+};
 
 export function CharacterSheetPage({
   characterName,
@@ -102,6 +134,10 @@ export function CharacterSheetPage({
   };
 
   return (
+    <div style={pageGridStyle}>
+      {/* Row 1: Header | Ability Scores | Quick Stats */}
+      <div style={topRowGridStyle}>
+        <div style={{ minWidth: 0 }}>
     <div className={styles.page}>
       <div className={styles.topRow}>
         <div className={styles.headerColumn}>
@@ -113,12 +149,14 @@ export function CharacterSheetPage({
             level={characterLevel}
           />
         </div>
+        <div style={abilityScoreCellStyle}>
         <div className={styles.abilityColumn}>
           <AbilityScoreCards
             finalAttributes={derivedSheet.finalAttributes}
             modifiers={derivedSheet.modifiers}
           />
         </div>
+        <div style={{ minWidth: 0 }}>
         <div className={styles.statsColumn}>
           <QuickStatsRow
             derivedSheet={derivedSheet}
@@ -128,6 +166,10 @@ export function CharacterSheetPage({
         </div>
       </div>
 
+      {/* Row 2: Left column | Skills | Right column */}
+      <div style={secondaryRowGridStyle}>
+        {/* Left: Saving Throws + Senses + Proficiencies */}
+        <div style={sideColumnStackStyle}>
       <div className={styles.contentRow}>
         <div className={styles.sideColumn}>
           <SavingThrowsCard derivedSavingThrows={derivedSheet.derivedSavingThrows} />
@@ -146,6 +188,13 @@ export function CharacterSheetPage({
           />
         </div>
 
+        {/* Center: Skills */}
+        <div style={{ minWidth: 0 }}>
+          <SkillsCard skills={derivedSheet.skills} />
+        </div>
+
+        {/* Right: Conditions + Defenses */}
+        <div style={sideColumnStackStyle}>
         <div className={styles.centerColumn}>
           <SkillsCard skills={derivedSheet.skills} />
         </div>

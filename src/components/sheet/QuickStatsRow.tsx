@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import type { DerivedSheet } from '../../rules/types/DerivedSheet';
 import type { CharacterPlayState } from '../../types/playState';
 import styles from './QuickStatsRow.module.css';
@@ -12,6 +13,26 @@ interface QuickStatsRowProps {
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
 }
+
+const statCardsGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '8px',
+  alignItems: 'stretch',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(96px, 1fr))',
+};
+
+const actionRowGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '8px',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+};
+
+const restPanelGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '6px',
+  alignItems: 'center',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(56px, auto)) minmax(72px, auto) minmax(120px, 1fr) auto',
+};
 
 export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: QuickStatsRowProps) {
   const [hpInput, setHpInput] = useState('');
@@ -86,6 +107,23 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
   const hpColor = hpPercent > 50 ? '#4ade80' : hpPercent > 25 ? '#fbbf24' : '#f87171';
 
   const statCard = (label: string, value: string, accent?: string) => (
+    <div style={{
+      background: 'rgba(17, 18, 24, 0.6)',
+      border: '1px solid rgba(255,255,255,0.07)',
+      borderRadius: '10px',
+      padding: '8px 14px',
+      textAlign: 'center',
+      minWidth: 0,
+      minHeight: '72px',
+      display: 'grid',
+      alignContent: 'center',
+      justifyItems: 'center',
+      gap: '2px',
+    }}>
+      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '2px' }}>
+        {label}
+      </div>
+      <div style={{ fontSize: '1.2rem', fontWeight: 700, color: accent ?? '#f1f5f9' }}>
     <div className={styles.statCard}>
       <div className={styles.statLabel}>{label}</div>
       <div className={styles.statValue} style={{ color: accent }}>
@@ -95,6 +133,9 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
   );
 
   return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      {/* Stat pills row */}
+      <div style={statCardsGridStyle}>
     <div className={styles.root}>
       <div className={styles.statRow}>
         {statCard('PB', signedMod(derivedSheet.proficiencyBonus), '#38bdf8')}
@@ -150,6 +191,22 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
         </div>
       </div>
 
+      {/* Inspiration + Rest buttons row */}
+      <div style={actionRowGridStyle}>
+        <button
+          onClick={() => onUpdatePlayState(prev => ({ ...prev, heroicInspiration: !prev.heroicInspiration }))}
+          style={{
+            background: playState.heroicInspiration ? 'rgba(167,139,250,0.2)' : 'rgba(17,18,24,0.6)',
+            border: `1px solid ${playState.heroicInspiration ? 'rgba(167,139,250,0.5)' : 'rgba(255,255,255,0.07)'}`,
+            borderRadius: '8px',
+            color: playState.heroicInspiration ? '#a78bfa' : '#64748b',
+            padding: '6px 10px',
+            fontSize: '0.75rem',
+            cursor: 'pointer',
+            fontWeight: 600,
+            transition: 'all 0.2s',
+            minHeight: '38px',
+          }}
       <div className={styles.actionRow}>
         <button
           onClick={() => onUpdatePlayState(prev => ({ ...prev, heroicInspiration: !prev.heroicInspiration }))}
@@ -159,6 +216,32 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
         </button>
         <button
           onClick={() => setShortRestOpen(prev => !prev)}
+          style={{
+            background: shortRestOpen ? 'rgba(251,191,36,0.15)' : 'rgba(17,18,24,0.6)',
+            border: `1px solid ${shortRestOpen ? 'rgba(251,191,36,0.35)' : 'rgba(255,255,255,0.07)'}`,
+            borderRadius: '8px',
+            color: shortRestOpen ? '#fbbf24' : '#94a3b8',
+            padding: '6px 10px',
+            fontSize: '0.75rem',
+            cursor: 'pointer',
+            minHeight: '38px',
+          }}
+        >
+          Desc. Curto
+        </button>
+        <button
+          onClick={handleLongRest}
+          style={{
+            background: 'rgba(17,18,24,0.6)',
+            border: '1px solid rgba(255,255,255,0.07)',
+            borderRadius: '8px',
+            color: '#94a3b8',
+            padding: '6px 10px',
+            fontSize: '0.75rem',
+            cursor: 'pointer',
+            minHeight: '38px',
+          }}
+        >
           className={`${styles.toggleButton} ${shortRestOpen ? styles.toggleActiveRest : ''}`.trim()}
         >
           Desc. Curto
@@ -176,6 +259,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
           <div className={styles.shortRestMeta}>
             Dado: {derivedSheet.hitDie} · Mod CON: {conMod >= 0 ? '+' : ''}{conMod}
           </div>
+          <div style={restPanelGridStyle}>
           <div className={`${styles.inlineRow} ${styles.alignCenter}`.trim()}>
             <input
               type="number"
@@ -185,6 +269,35 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
               onChange={e => setHdCount(e.target.value)}
               className={`${styles.input} ${styles.inputXs}`.trim()}
             />
+            <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>dado(s)</span>
+            <button
+              onClick={handleShortRest}
+              style={{
+                background: 'rgba(251,191,36,0.15)',
+                border: '1px solid rgba(251,191,36,0.3)',
+                borderRadius: '6px',
+                color: '#fbbf24',
+                padding: '4px 10px',
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                fontWeight: 600,
+                minHeight: '34px',
+              }}
+            >
+              Recuperar PV
+            </button>
+            <button
+              onClick={() => setShortRestOpen(false)}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#64748b',
+                cursor: 'pointer',
+                fontSize: '0.8rem',
+                padding: '4px 6px',
+                minHeight: '34px',
+              }}
+            >
             <span className={styles.shortRestLabel}>dado(s)</span>
             <button onClick={handleShortRest} className={`${styles.actionButton} ${styles.warningButton}`.trim()}>
               Recuperar PV
