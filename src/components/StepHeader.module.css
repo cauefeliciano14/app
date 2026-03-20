@@ -129,6 +129,13 @@
   font-weight: 600;
 }
 
+
+.portraitLabel {
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .nameColumn {
   display: flex;
   flex: 1;

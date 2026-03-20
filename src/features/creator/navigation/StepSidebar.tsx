@@ -29,53 +29,33 @@ export function StepSidebar() {
     <div className={styles.root}>
       <div className={patterns.sectionTitle}>Etapas</div>
 
-      <label className={styles.jumpLabel}>
-        <span className={styles.jumpCaption}>Ir para etapa</span>
-        <select
-          className="premium-select"
-          aria-label="Ir para etapa"
-          value={currentStep}
-          onChange={(e) => setCurrentStep(Number(e.target.value))}
-        >
-          {ITEMS.map((item) => {
-            const pending = pendingMap[item.key];
-
-            return (
-              <option key={item.label} value={item.index}>
-                {item.index + 1}. {item.label}{pending > 0 ? ` · ${pending} pendência${pending > 1 ? 's' : ''}` : ''}
-              </option>
-            );
-          })}
-        </select>
-      </label>
-
       <div className={styles.detailList}>
-          {ITEMS.map((item) => {
-            const active = currentStep === item.index;
-            const pending = pendingMap[item.key];
-            const complete = item.key === 'sheet' ? validationResult.isValid : pending === 0 && item.index < currentStep;
-            const badgeClass = complete
-              ? styles.badgeComplete
-              : pending > 0
-                ? styles.badgePending
-                : styles.badgeIdle;
+        {ITEMS.map((item) => {
+          const active = currentStep === item.index;
+          const pending = pendingMap[item.key];
+          const complete = item.key === 'sheet' ? validationResult.isValid : pending === 0 && item.index < currentStep;
+          const badgeClass = complete
+            ? styles.badgeComplete
+            : pending > 0
+              ? styles.badgePending
+              : styles.badgeIdle;
 
-            return (
-              <button
-                key={item.label}
-                onClick={() => setCurrentStep(item.index)}
-                className={`${styles.navButton} ${active ? styles.navButtonActive : ''}`.trim()}
-              >
-                <div className={styles.navHeader}>
-                  <span className={styles.navLabel}>{item.label}</span>
-                  <span className={`${patterns.pill} ${styles.stepBadge} ${badgeClass}`.trim()}>
-                    {complete ? '✓' : pending > 0 ? pending : item.index + 1}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+          return (
+            <button
+              key={item.label}
+              onClick={() => setCurrentStep(item.index)}
+              className={`${styles.navButton} ${active ? styles.navButtonActive : ''}`.trim()}
+            >
+              <div className={styles.navHeader}>
+                <span className={styles.navLabel}>{item.label}</span>
+                <span className={`${patterns.pill} ${styles.stepBadge} ${badgeClass}`.trim()}>
+                  {complete ? '✓' : pending > 0 ? pending : item.index + 1}
+                </span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }

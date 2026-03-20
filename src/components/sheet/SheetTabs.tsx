@@ -29,8 +29,6 @@ interface SheetTabsProps {
   derivedSheet: DerivedSheet;
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
-  onGoToEquipment: () => void;
-  onGoToSpells: () => void;
   // Character raw data for features/background tabs
   classFeatures: Feature[];
   speciesTraits: Trait[];
@@ -54,8 +52,6 @@ export function SheetTabs({
   derivedSheet,
   playState,
   onUpdatePlayState,
-  onGoToEquipment,
-  onGoToSpells,
   classFeatures,
   speciesTraits,
   inventory,
@@ -120,7 +116,6 @@ export function SheetTabs({
           derivedSheet={derivedSheet}
           playState={playState}
           onUpdatePlayState={onUpdatePlayState}
-          onManageSpells={onGoToSpells}
           learnedCantrips={learnedCantrips}
           preparedSpells={preparedSpells}
         />
@@ -130,7 +125,6 @@ export function SheetTabs({
           inventory={inventory}
           playState={playState}
           onUpdatePlayState={onUpdatePlayState}
-          onManageEquipment={onGoToEquipment}
           equippedArmorId={equippedArmorId}
           hasShieldEquipped={hasShieldEquipped}
           onEquipArmor={onEquipArmor}

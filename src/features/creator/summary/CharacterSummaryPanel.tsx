@@ -52,37 +52,25 @@ export function CharacterSummaryPanel() {
       .map(([key, issues]) => ({
         key,
         label: STEP_LABELS[key] ?? key,
-        count: issues.length,
-        sample: issues[0],
+        count: Array.from(new Set(issues)).length,
       })),
     [validationResult.byStep],
   );
-
-  const classSummary = character.characterClass?.description ?? 'Selecione uma classe para exibir um resumo curto aqui.';
-  const portraitSummary = character.portrait
-    ? 'O retrato atual é apenas visual e pode ser trocado a qualquer momento pela miniatura do cabeçalho.'
-    : 'Escolha um retrato quando quiser definir a identidade visual do personagem. Isso não altera regras nem escolhas mecânicas.';
 
   return (
     <div className={styles.panel}>
       <div className={styles.headerRow}>
         <div className={styles.sectionTitle}>Resumo persistente</div>
-        <HelpTooltip label="O que fica fixo" title="Somente o essencial" align="right">
-          Este painel mantém identidade, números rápidos, atributos finais, idiomas, perícias e pendências principais visíveis em todas as etapas.
-        </HelpTooltip>
       </div>
 
       <div className={styles.identityCard}>
         <div className={styles.cardHeader}>
           <div className={styles.identityTitle}>Identidade resumida</div>
-          <div className={styles.headerActions}>
-            <HelpTooltip label="Resumo da classe" title={character.characterClass?.name ?? 'Classe não definida'} variant="chip" align="right">
-              {classSummary}
+          {character.characterClass?.description ? (
+            <HelpTooltip label="Resumo da classe" title={character.characterClass.name} variant="chip" align="right">
+              {character.characterClass.description}
             </HelpTooltip>
-            <HelpTooltip label="Retrato" title="Ajuda sobre retrato" variant="chip" align="right">
-              {portraitSummary}
-            </HelpTooltip>
-          </div>
+          ) : null}
         </div>
 
         {character.portrait ? <img src={character.portrait} alt="Retrato atual do personagem" className={styles.portraitPreview} /> : null}
@@ -116,9 +104,6 @@ export function CharacterSummaryPanel() {
       <div className={styles.identityCard}>
         <div className={styles.cardHeader}>
           <div className={styles.identityTitle}>Perícias e idiomas</div>
-          <HelpTooltip label="Leitura rápida" title="Somente o núcleo" align="right">
-            Esta área mostra as proficiências mais importantes para acompanhar o impacto imediato das escolhas sem abrir a ficha completa.
-          </HelpTooltip>
         </div>
 
         {keySkills.length > 0 ? (
@@ -148,17 +133,14 @@ export function CharacterSummaryPanel() {
       <div className={styles.identityCard}>
         <div className={styles.cardHeader}>
           <div className={styles.identityTitle}>Pendências principais</div>
-          <HelpTooltip label="Pendências" title="Como ler esta área" align="right">
-            Mostramos apenas a contagem e a primeira mensagem acionável de cada etapa bloqueada para manter a navegação previsível.
-          </HelpTooltip>
         </div>
 
         {pendingItems.length > 0 ? (
           <div className={styles.tagList}>
             {pendingItems.map((item) => (
-              <HelpTooltip key={item.key} label={`${item.label} · ${item.count}`} title={`Pendências em ${item.label}`} variant="chip" align="right">
-                {item.sample}
-              </HelpTooltip>
+              <span key={item.key} className={styles.tagItem}>
+                {item.label} · {item.count}
+              </span>
             ))}
           </div>
         ) : (

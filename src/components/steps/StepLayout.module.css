@@ -19,3 +19,132 @@
   padding: 0 12px 56px 0;
   box-sizing: border-box;
 }
+
+.sectionIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 64rem;
+}
+
+.sectionTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f1f5f9;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.sectionIcon {
+  color: #f97316;
+}
+
+.sectionDescription {
+  margin: 0;
+  max-width: 60rem;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.selectionLayout {
+  display: grid;
+  grid-template-columns: minmax(16rem, 18rem) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.selectionRail {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.selectionButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #1a1b23;
+  color: #e2e8f0;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.selectionButton:hover {
+  border-color: rgba(249,115,22,0.5);
+  background: rgba(249,115,22,0.04);
+  transform: translateY(-2px);
+}
+
+.selectionButtonActive {
+  background: linear-gradient(180deg, rgba(249,115,22,0.18), rgba(249,115,22,0.08));
+  border-color: rgba(249,115,22,0.65);
+  box-shadow: 0 10px 24px rgba(249,115,22,0.16);
+  color: #fff;
+}
+
+.selectionButtonName {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.selectionButtonMarker {
+  color: #f97316;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.selectionDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.selectionPlaceholder,
+.selectionPanel {
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(17, 18, 24, 0.56);
+}
+
+.selectionPlaceholder {
+  min-height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  padding: 24px;
+  text-align: center;
+}
+
+.selectionPanel {
+  padding: clamp(18px, 2vw, 24px);
+}
+
+@media (max-width: 980px) {
+  .selectionLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .selectionRail {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .stepContent {
+    padding-right: 0;
+  }
+
+  .selectionRail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

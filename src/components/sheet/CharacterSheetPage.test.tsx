@@ -51,8 +51,6 @@ function renderSheet(choices: CharacterChoices, spellState?: { learnedCantrips?:
         derivedSheet={derivedSheet}
         playState={DEFAULT_PLAY_STATE}
         onUpdatePlayState={() => {}}
-        onGoToEquipment={() => {}}
-        onGoToSpells={() => {}}
         classFeatures={[]}
         speciesTraits={[]}
         inventory={[]}

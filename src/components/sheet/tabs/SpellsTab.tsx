@@ -16,7 +16,6 @@ interface SpellsTabProps {
   derivedSheet: DerivedSheet;
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
-  onManageSpells: () => void;
   learnedCantrips: string[];
   preparedSpells: string[];
 }
@@ -30,7 +29,6 @@ export function SpellsTab({
   derivedSheet,
   playState,
   onUpdatePlayState,
-  onManageSpells,
   learnedCantrips,
   preparedSpells,
 }: SpellsTabProps) {
@@ -225,21 +223,6 @@ export function SpellsTab({
         </div>
       )}
 
-      <button
-        onClick={onManageSpells}
-        style={{
-          background: 'rgba(167,139,250,0.1)',
-          border: '1px solid rgba(167,139,250,0.25)',
-          borderRadius: '8px',
-          color: '#a78bfa',
-          padding: '10px',
-          fontSize: '0.85rem',
-          cursor: 'pointer',
-          fontWeight: 500,
-        }}
-      >
-        Gerenciar Magias
-      </button>
     </div>
   );
 }

@@ -43,125 +43,35 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
     >
       <div className={styles.stepContent}>
         <ValidationBanner errors={validationErrors} />
-        <div style={{ marginBottom: "24px" }}>
-          <h2
-            style={{
-              fontSize: "1.4rem",
-              color: "#f1f5f9",
-              margin: "0 0 8px 0",
-              fontWeight: 600,
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-            }}
-          >
-            <span style={{ color: "#f97316" }}>✦</span> Escolha sua Espécie:
-            Raça
-          </h2>
-          <p
-            style={{
-              fontSize: "0.85rem",
-              color: "#94a3b8",
-              margin: 0,
-              lineHeight: 1.6,
-              maxWidth: "900px",
-            }}
-          >
-            Sua espécie define traços inatos e características raciais.
-            Selecione uma raça abaixo para ver todos os seus traços.
+        <div className={styles.sectionIntro}>
+          <div className={styles.sectionTitleRow}>
+            <span className={styles.sectionIcon}>✦</span>
+            <span>Escolha sua Espécie: Raça</span>
+          </div>
+          <p className={styles.sectionDescription}>
+            A espécie define traços inatos e escolhas raciais. Selecione uma opção para abrir uma visão mais fluida, com as informações principais e os detalhes específicos lado a lado.
           </p>
         </div>
 
-        {/* Species Layout: 2 Columns */}
-        <div
-          style={{
-            display: "flex",
-            gap: "24px",
-            alignItems: "flex-start",
-            flexWrap: "wrap",
-          }}
-        >
-          {/* Left Column: Species List */}
-          <div
-            style={{
-              flex: "1 1 240px",
-              maxWidth: "300px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "8px",
-            }}
-          >
+        <div className={styles.selectionLayout}>
+          <div className={styles.selectionRail}>
             {speciesData.species.map((sp: any) => {
               const isSelected = character.species?.id === sp.id;
               return (
-                <div
+                <button
                   key={sp.id}
+                  type="button"
+                  className={`${styles.selectionButton} ${isSelected ? styles.selectionButtonActive : ""}`.trim()}
                   onClick={() => handleSelectSpecies(sp)}
-                  style={{
-                    background: isSelected ? "#f97316" : "#1a1b23",
-                    border: isSelected
-                      ? "1px solid #f97316"
-                      : "1px solid rgba(255,255,255,0.08)",
-                    borderRadius: "8px",
-                    padding: "12px 16px",
-                    cursor: "pointer",
-                    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    boxShadow: isSelected
-                      ? "0 4px 20px rgba(249,115,22,0.25)"
-                      : "none",
-                    transform: isSelected
-                      ? "translateY(-2px)"
-                      : "translateY(0)",
-                  }}
-                  onMouseOver={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.borderColor =
-                        "rgba(249,115,22,0.5)";
-                      e.currentTarget.style.background =
-                        "rgba(249,115,22,0.04)";
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                    }
-                  }}
-                  onMouseOut={(e) => {
-                    if (!isSelected) {
-                      e.currentTarget.style.borderColor =
-                        "rgba(255,255,255,0.08)";
-                      e.currentTarget.style.background = "#1a1b23";
-                      e.currentTarget.style.transform = "translateY(0)";
-                    }
-                  }}
                 >
-                  <h3
-                    style={{
-                      margin: 0,
-                      fontSize: "0.95rem",
-                      color: isSelected ? "#ffffff" : "#e2e8f0",
-                      fontWeight: isSelected ? "700" : "500",
-                      letterSpacing: "0.2px",
-                    }}
-                  >
-                    {sp.name}
-                  </h3>
-                  {isSelected && (
-                    <span style={{ color: "#fff", fontSize: "1rem" }}>✦</span>
-                  )}
-                </div>
+                  <span className={styles.selectionButtonName}>{sp.name}</span>
+                  <span className={styles.selectionButtonMarker}>{isSelected ? 'Selecionada' : 'Ver'}</span>
+                </button>
               );
             })}
           </div>
 
-          {/* Right Column: Species Details */}
-          <div
-            style={{
-              flex: "2 1 400px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "16px",
-            }}
-          >
+          <div className={styles.selectionDetails}>
             {character.species ? (
               <SpeciesDetails
                 character={character}
@@ -170,19 +80,7 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
                 languagesData={languagesData}
               />
             ) : (
-              <div
-                style={{
-                  height: "300px",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "rgba(17, 18, 24, 0.4)",
-                  borderRadius: "12px",
-                  border: "1px dashed rgba(255,255,255,0.1)",
-                  color: "#64748b",
-                }}
-              >
+              <div className={styles.selectionPlaceholder}>
                 <span
                   style={{
                     fontSize: "2.5rem",

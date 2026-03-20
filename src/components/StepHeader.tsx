@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FANTASY_NAMES } from '../data/fantasyNames';
 import styles from './StepHeader.module.css';
-import { HelpTooltip } from './ui/HelpTooltip';
 
 export interface StepHeaderProps {
   onPrev?: () => void;
@@ -57,7 +56,6 @@ export const StepHeader = ({
             type="button"
             className={`${styles.portraitButton} ${portrait ? styles.portraitButtonFilled : ''}`.trim()}
             onClick={onPortraitClick}
-            title="Escolher retrato do personagem"
             aria-label="Escolher retrato do personagem"
           >
             {portrait ? (
@@ -70,9 +68,7 @@ export const StepHeader = ({
               <span className={styles.portraitPlaceholder}>Sem retrato</span>
             )}
           </button>
-          <HelpTooltip label="Retrato" title="Como funciona a seleção" variant="chip">
-            O retrato é opcional e serve apenas para identidade visual. Clique na miniatura para abrir o modal, comparar opções e trocar a imagem quando quiser.
-          </HelpTooltip>
+          <span className={styles.portraitLabel}>Retrato</span>
         </div>
 
         <div className={styles.nameColumn}>

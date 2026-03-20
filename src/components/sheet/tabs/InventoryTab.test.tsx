@@ -84,7 +84,6 @@ function InventoryHarness({
         inventory={inventory}
         playState={playState}
         onUpdatePlayState={setPlayState}
-        onManageEquipment={() => undefined}
         equippedArmorId={equippedArmorId}
         hasShieldEquipped={hasShieldEquipped}
         onEquipArmor={setEquippedArmorId}
