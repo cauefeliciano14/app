@@ -62,31 +62,10 @@ export function CreatorShell() {
           currentPortrait={character.portrait}
           onClose={() => setIsPortraitModalOpen(false)}
           onSelect={(portrait) => {
-            setCharacter(prev => ({ ...prev, portrait }));
+            setCharacter((prev) => ({ ...prev, portrait }));
             setIsPortraitModalOpen(false);
           }}
         />
-        <div className="tooltip-overlay" onClick={() => setIsPortraitModalOpen(false)}>
-          <div className="class-tooltip" style={{ maxWidth: '800px', width: '90%' }} onClick={(e) => e.stopPropagation()}>
-            <div style={{ padding: '20px' }}>
-              <h2 style={{ color: '#f97316', marginBottom: '20px' }}>Escolha seu Retrato</h2>
-              <div className="portrait-grid">
-                {PORTRAITS.map((p) => (
-                  <div
-                    key={p}
-                    className={`portrait-item ${character.portrait === p ? 'selected' : ''}`}
-                    onClick={() => {
-                      setCharacter(prev => ({ ...prev, portrait: p }));
-                      setIsPortraitModalOpen(false);
-                    }}
-                  >
-                    <img src={`/imgs/portrait_caracter/${p}`} alt="Opção de retrato do personagem" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
       )}
     </div>
   );

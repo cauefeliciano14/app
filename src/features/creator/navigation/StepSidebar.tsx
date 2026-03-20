@@ -49,10 +49,7 @@ export function StepSidebar() {
         </select>
       </label>
 
-      <details open className={styles.details}>
-        <summary className={styles.summary}>Navegação detalhada</summary>
-
-        <div className={styles.detailList}>
+      <div className={styles.detailList}>
           {ITEMS.map((item) => {
             const active = currentStep === item.index;
             const pending = pendingMap[item.key];
@@ -79,7 +76,6 @@ export function StepSidebar() {
             );
           })}
         </div>
-      </details>
     </div>
   );
 }

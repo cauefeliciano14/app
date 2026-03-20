@@ -20,6 +20,12 @@ const getClassIconSrc = (classId: string) => `/imgs/icone_classe/${classId}.png`
 const getClassCardArtSrc = (classId: string) => `/imgs/descriçao_classe/${classId}.png`;
 const getClassHeroArtSrc = (classId: string) => `/imgs/${classId}.png`;
 
+type ClassDetails = {
+  basicTraits: Record<string, string>;
+  features?: Array<any>;
+  options?: Array<any>;
+};
+
 export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset, languagesData }) => {
   void languagesData;
   const {
@@ -38,13 +44,11 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
   const validationErrors = validationResult.byStep.class;
   const canAdvance = validationErrors.length === 0;
   const selectedClass = character.characterClass;
-  const classDetails = selectedClass
-    ? (classDetailsData as Record<string, { basicTraits: Record<string, string>; features?: Array<any>; options?: Array<any> }>)[selectedClass.id]
-    : null;
+  const classDetails = selectedClass ? (classDetailsData as Record<string, ClassDetails>)[selectedClass.id] : null;
   const activeFeatures = (classDetails?.features ?? []).filter((feature) => feature.level <= characterLevel);
   const immediateImpact = selectedClass
     ? [
-        `PV máximos agora: ${engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers['constituicao'] ?? 0)}`,
+        `PV máximos agora: ${engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers.constituicao ?? 0)}`,
         `CA atual derivada: ${derivedSheet.armorClass}`,
         `Bônus de proficiência: +${derivedSheet.proficiencyBonus}`,
       ]
@@ -57,7 +61,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
       activeStep={1}
       onStepClick={setCurrentStep}
       characterName={character.name}
-      setCharacterName={(n: string) => setCharacter(prev => ({ ...prev, name: n }))}
+      setCharacterName={(name: string) => setCharacter((prev) => ({ ...prev, name }))}
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       selections={stepSelections}
@@ -71,7 +75,9 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                 <h2 style={{ margin: 0, color: '#f8fafc', fontSize: '1.3rem' }}>Classe</h2>
                 <ContextualPopover label="Impacto agora" title="O que muda imediatamente" variant="chip">
                   <ul className={styles.contextList}>
-                    {immediateImpact.map((item) => <li key={item}>{item}</li>)}
+                    {immediateImpact.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ul>
                 </ContextualPopover>
               </div>
@@ -103,36 +109,18 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                 );
               })}
             </div>
-            <button
-              onClick={onReset}
-              className={styles.resetButton}
-            >
+            <button onClick={onReset} className={styles.resetButton}>
               Novo Personagem
             </button>
           </div>
 
           <div className={styles.detailsColumn}>
             {!selectedClass || !classDetails ? (
-              <div className={styles.placeholder}>
-                Escolha uma classe para revisar detalhes e opções obrigatórias.
-              </div>
+              <div className={styles.placeholder}>Escolha uma classe para revisar detalhes e opções obrigatórias.</div>
             ) : (
               <>
                 <div className={styles.classSummaryCard}>
                   <div className={styles.summaryHeader}>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                        <img src={`/imgs/icone_classe/${selectedClass.id}.png`} alt={selectedClass.name} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
-                        <div>
-                          <div className={styles.sectionHeading}>
-                            <h3 style={{ margin: 0, color: '#fff', fontSize: '1.6rem' }}>{selectedClass.name}</h3>
-                            <ContextualPopover label="Resumo" title="Leitura auxiliar da classe" variant="chip" align="right">
-                              <div className={styles.contextText}>
-                                Revise os traços abaixo para entender proficiências, papel esperado e restrições antes de fechar as escolhas destacadas.
-                              </div>
-                            </ContextualPopover>
-                          </div>
-                          <p style={{ margin: 0, color: '#cbd5e1', fontSize: '0.86rem' }}>{selectedClass.description}</p>
                     <div className={styles.summaryIdentity}>
                       <div className={styles.summaryHeroWrap}>
                         <img src={getClassHeroArtSrc(selectedClass.id)} alt={`Arte de ${selectedClass.name}`} className={styles.summaryHeroArt} />
@@ -142,20 +130,30 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                           <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
                           Classe selecionada
                         </div>
-                        <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
+                        <div className={styles.sectionHeading}>
+                          <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
+                          <ContextualPopover label="Resumo" title="Leitura auxiliar da classe" variant="chip" align="right">
+                            <div className={styles.contextText}>
+                              Revise os traços abaixo para entender proficiências, papel esperado e restrições antes de fechar as escolhas destacadas.
+                            </div>
+                          </ContextualPopover>
+                        </div>
                         <p className={styles.summaryDescription}>{selectedClass.description}</p>
                       </div>
                     </div>
                     <div className={styles.summaryStats}>
-                      <SummaryStat label="PV iniciais" value={String(engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers['constituicao'] ?? 0))} />
+                      <SummaryStat
+                        label="PV iniciais"
+                        value={String(engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers.constituicao ?? 0))}
+                      />
                       <SummaryStat label="Dado de vida" value={getClassHPData(selectedClass.id)?.hitDieLabel || '—'} />
                     </div>
                   </div>
                   <div className={styles.traitsGrid}>
-                    {Object.entries(classDetails.basicTraits).map(([key, val]) => (
+                    {Object.entries(classDetails.basicTraits).map(([key, value]) => (
                       <div key={key} className={styles.traitCard}>
                         <div className={styles.traitLabel}>{key}</div>
-                        <div className={styles.traitValue}>{val}</div>
+                        <div className={styles.traitValue}>{value}</div>
                       </div>
                     ))}
                   </div>
@@ -171,7 +169,9 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                       <div className={styles.contextTextSuccess}>Etapa pronta para avançar.</div>
                     ) : (
                       <ul className={styles.contextList}>
-                        {validationErrors.map((error) => <li key={error}>{error}</li>)}
+                        {validationErrors.map((error) => (
+                          <li key={error}>{error}</li>
+                        ))}
                       </ul>
                     )}
                   </ContextualPopover>

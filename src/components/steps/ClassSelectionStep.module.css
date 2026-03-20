@@ -9,7 +9,6 @@
   display: grid;
   grid-template-columns:
     minmax(clamp(13.5rem, 17vw, 15.5rem), 0.95fr)
-    minmax(clamp(20rem, 34vw, 28rem), 1.9fr);
     minmax(clamp(22rem, 1vw + 24rem, 1fr), 1.8fr);
   grid-template-areas: 'classes details';
   gap: 16px;
@@ -267,14 +266,14 @@
   margin-top: 16px;
 }
 
-@media (max-width: 1320px) {
-  .stepGrid {
-    grid-template-columns:
-      minmax(clamp(13rem, 22vw, 15rem), 0.95fr)
-      minmax(clamp(22rem, 40vw, 34rem), 1.45fr);
-    grid-template-areas: 'classes details';
-  }
 .sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .traitCard {
   background: rgba(0,0,0,0.18);
   border-radius: 10px;
@@ -341,6 +340,15 @@
   font-size: 0.82rem;
 }
 
+@media (max-width: 1320px) {
+  .stepGrid {
+    grid-template-columns:
+      minmax(clamp(13rem, 22vw, 15rem), 0.95fr)
+      minmax(clamp(22rem, 40vw, 34rem), 1.45fr);
+    grid-template-areas: 'classes details';
+  }
+}
+
 @media (max-width: 1100px) {
   .stepGrid {
     grid-template-columns:
@@ -388,7 +396,6 @@
     -webkit-line-clamp: 3;
   }
 
-}
   .summaryIdentity {
     grid-template-columns: minmax(0, 1fr);
   }

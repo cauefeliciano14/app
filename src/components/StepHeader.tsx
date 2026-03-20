@@ -32,13 +32,12 @@ export const StepHeader = ({
     <div className={styles.wrapper}>
       <div className={styles.topRow}>
         {onPrev ? (
-          <button
-            onClick={onPrev}
-            className={styles.btnBack}
-          >
+          <button onClick={onPrev} className={styles.btnBack}>
             &laquo; Voltar
           </button>
-        ) : <div className={styles.spacer} />}
+        ) : (
+          <div className={styles.spacer} />
+        )}
 
         <div className={styles.advanceArea}>
           <button
@@ -51,55 +50,54 @@ export const StepHeader = ({
         </div>
       </div>
 
-      {showName && (
-        <div className="header-name-container">
-          <div
-            className={`profile-placeholder ${portrait ? 'has-image' : ''}`}
-            onClick={onPortraitClick}
-            title="Escolher retrato do personagem"
-          >
-            {portrait && (
-              <img
-                src={`/imgs/portrait_caracter/${portrait}`}
-                alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
-                className="profile-image"
-              />
-            )}
-          </div>
-      <div className="header-name-container">
-        <div
-          className={`profile-placeholder ${portrait ? 'has-image' : ''}`}
+      <div className={styles.identityRow}>
+        <button
+          type="button"
+          className={`${styles.portraitButton} ${portrait ? styles.portraitButtonFilled : ''}`.trim()}
           onClick={onPortraitClick}
           title="Escolher retrato do personagem"
+          aria-label="Escolher retrato do personagem"
         >
-          {portrait && <img src={`/imgs/portrait_caracter/${portrait}`} alt="Portrait" className="profile-image" />}
-        </div>
+          {portrait ? (
+            <img
+              src={`/imgs/portrait_caracter/${portrait}`}
+              alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
+              className={styles.portraitImage}
+            />
+          ) : (
+            <span className={styles.portraitPlaceholder}>Retrato</span>
+          )}
+        </button>
 
-        <div className="name-input-column">
-          <label className="character-name-label">Nome do Personagem</label>
+        <div className={styles.nameColumn}>
+          <label className={styles.characterNameLabel} htmlFor="character-name-input">
+            Nome do Personagem
+          </label>
           <input
+            id="character-name-input"
             type="text"
-            className="character-name-input"
+            className={styles.characterNameInput}
             value={characterName}
             onChange={(e) => setCharacterName(e.target.value)}
             placeholder="Digite o nome..."
           />
-          <div className="suggestions-container">
-            <button className="suggestions-link" onClick={generateNames}>
+          <div className={styles.suggestionsContainer}>
+            <button type="button" className={styles.suggestionsLink} onClick={generateNames}>
               MOSTRAR SUGESTÕES{suggestions.length > 0 ? ':' : ''}
             </button>
 
             {suggestions.length > 0 && (
-              <div className="suggestions-display">
-                {suggestions.map((s, i) => (
-                  <React.Fragment key={s}>
-                    <span
-                      className="suggestion-item"
-                      onClick={() => setCharacterName(s)}
+              <div className={styles.suggestionsDisplay}>
+                {suggestions.map((suggestion, index) => (
+                  <React.Fragment key={suggestion}>
+                    <button
+                      type="button"
+                      className={styles.suggestionItem}
+                      onClick={() => setCharacterName(suggestion)}
                     >
-                      {s}
-                    </span>
-                    {i < suggestions.length - 1 ? <span className="suggestion-separator">•</span> : ''}
+                      {suggestion}
+                    </button>
+                    {index < suggestions.length - 1 ? <span className={styles.suggestionSeparator}>•</span> : null}
                   </React.Fragment>
                 ))}
               </div>

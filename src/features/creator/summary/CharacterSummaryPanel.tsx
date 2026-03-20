@@ -1,15 +1,25 @@
+import { useMemo } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
 import { ContextualPopover } from '../../../components/ui/ContextualPopover';
 import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
+import { ATTRIBUTE_KEYS, type AttributeKey } from '../../../rules/types/CharacterChoices';
 import patterns from '../../../styles/panelPatterns.module.css';
 import styles from './CharacterSummaryPanel.module.css';
 
+const LABELS: Record<AttributeKey, string> = {
+  forca: 'For',
+  destreza: 'Des',
+  constituicao: 'Con',
+  inteligencia: 'Int',
+  sabedoria: 'Sab',
+  carisma: 'Car',
+};
+
 export function CharacterSummaryPanel() {
-  const { character, selectedBackground, derivedSheet, characterLevel } = useCharacter();
+  const { character, selectedBackground, derivedSheet, validationResult, characterLevel } = useCharacter();
   const identityLine = [character.characterClass?.name, selectedBackground?.name, character.species?.name]
     .filter(Boolean)
     .join(' • ');
-  const { derivedSheet, validationResult, characterLevel } = useCharacter();
   const mainPendencies = validationResult.errors.slice(0, 5);
 
   const displayLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
@@ -56,7 +66,7 @@ export function CharacterSummaryPanel() {
       </div>
 
       <div className={patterns.responsiveGrid3}>
-        {ATTRS.map((attr) => (
+        {ATTRIBUTE_KEYS.map((attr) => (
           <div key={attr} className={styles.statCard}>
             <div className={styles.statLabel}>{LABELS[attr]}</div>
             <div className={styles.statValue}>{derivedSheet.finalAttributes[attr] ?? 0}</div>
@@ -74,7 +84,9 @@ export function CharacterSummaryPanel() {
             <div className={styles.issueOk}>Personagem pronto para a ficha final.</div>
           ) : (
             <ul className={styles.popoverList}>
-              {mainPendencies.map((error) => <li key={error}>{error}</li>)}
+              {mainPendencies.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
             </ul>
           )}
         </SummaryContextChip>
@@ -84,7 +96,7 @@ export function CharacterSummaryPanel() {
             <div className={styles.emptyText}>Nenhum idioma extra.</div>
           ) : (
             <div className={patterns.wrapRow}>
-              {derivedSheet.languages.map((item) => (
+              {displayLanguages.map((item) => (
                 <span key={item} className={`${patterns.pill} ${patterns.pillAccent}`.trim()}>
                   {item}
                 </span>
@@ -107,9 +119,6 @@ export function CharacterSummaryPanel() {
           )}
         </SummaryContextChip>
       </div>
-      <SummaryIssues items={mainPendencies} />
-      <SummaryList title="Idiomas" items={displayLanguages} empty="Nenhum idioma extra." />
-      <SummaryList title="Perícias" items={derivedSheet.skillProficiencies} empty="Nenhuma perícia definida." />
     </div>
   );
 }
