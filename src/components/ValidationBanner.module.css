@@ -13,8 +13,14 @@
   margin-bottom: var(--space-xs);
 }
 
-.errorItem {
+.errorItem,
+.moreItems {
   color: var(--color-error-light);
   font-size: 0.82rem;
   line-height: 1.5;
+}
+
+.moreItems {
+  opacity: 0.84;
+  margin-top: 4px;
 }

@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import type { DerivedSheet } from '../../rules/types/DerivedSheet';
 import type { CharacterPlayState } from '../../types/playState';
 import { SheetHeader } from './SheetHeader';
@@ -11,6 +10,7 @@ import { SkillsCard } from './SkillsCard';
 import { ConditionsCard } from './ConditionsCard';
 import { DefensesCard } from './DefensesCard';
 import { SheetTabs } from './SheetTabs';
+import styles from './CharacterSheetPage.module.css';
 
 interface Feature { level: number; name: string; description: string }
 interface Trait { title: string; description: string }
@@ -25,8 +25,6 @@ interface CharacterSheetPageProps {
   derivedSheet: DerivedSheet;
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
-  onGoToEquipment: () => void;
-  onGoToSpells: () => void;
   classFeatures: Feature[];
   speciesTraits: Trait[];
   inventory: InventoryItem[];
@@ -43,37 +41,6 @@ interface CharacterSheetPageProps {
   onEquipShield?: (equipped: boolean) => void;
 }
 
-const pageGridStyle: CSSProperties = {
-  display: 'grid',
-  gap: '16px',
-};
-
-const topRowGridStyle: CSSProperties = {
-  display: 'grid',
-  gap: '16px',
-  alignItems: 'start',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-};
-
-const abilityScoreCellStyle: CSSProperties = {
-  minWidth: 0,
-  gridColumn: 'span 2',
-};
-
-const sideColumnStackStyle: CSSProperties = {
-  display: 'grid',
-  gap: '10px',
-  alignContent: 'start',
-  minWidth: 0,
-};
-
-const secondaryRowGridStyle: CSSProperties = {
-  display: 'grid',
-  gap: '16px',
-  alignItems: 'start',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-};
-
 export function CharacterSheetPage({
   characterName,
   portrait,
@@ -83,8 +50,6 @@ export function CharacterSheetPage({
   derivedSheet,
   playState,
   onUpdatePlayState,
-  onGoToEquipment,
-  onGoToSpells,
   classFeatures,
   speciesTraits,
   inventory,
@@ -101,7 +66,7 @@ export function CharacterSheetPage({
   onEquipShield,
 }: CharacterSheetPageProps) {
   const handleAddCondition = (condition: string) => {
-    onUpdatePlayState(prev => ({
+    onUpdatePlayState((prev) => ({
       ...prev,
       activeConditions: prev.activeConditions.includes(condition)
         ? prev.activeConditions
@@ -110,14 +75,14 @@ export function CharacterSheetPage({
   };
 
   const handleRemoveCondition = (condition: string) => {
-    onUpdatePlayState(prev => ({
+    onUpdatePlayState((prev) => ({
       ...prev,
-      activeConditions: prev.activeConditions.filter(c => c !== condition),
+      activeConditions: prev.activeConditions.filter((c) => c !== condition),
     }));
   };
 
   const handleAddDefense = (defense: string) => {
-    onUpdatePlayState(prev => ({
+    onUpdatePlayState((prev) => ({
       ...prev,
       activeDefenses: prev.activeDefenses.includes(defense)
         ? prev.activeDefenses
@@ -126,16 +91,16 @@ export function CharacterSheetPage({
   };
 
   const handleRemoveDefense = (defense: string) => {
-    onUpdatePlayState(prev => ({
+    onUpdatePlayState((prev) => ({
       ...prev,
-      activeDefenses: prev.activeDefenses.filter(d => d !== defense),
+      activeDefenses: prev.activeDefenses.filter((d) => d !== defense),
     }));
   };
 
   return (
-    <div style={pageGridStyle}>
-      <div style={topRowGridStyle}>
-        <div style={{ minWidth: 0 }}>
+    <div className={styles.page}>
+      <section className={styles.heroGrid}>
+        <div className={styles.heroIdentity}>
           <SheetHeader
             name={characterName}
             portrait={portrait}
@@ -144,23 +109,23 @@ export function CharacterSheetPage({
             level={characterLevel}
           />
         </div>
-        <div style={abilityScoreCellStyle}>
+        <div className={styles.heroAbilities}>
           <AbilityScoreCards
             finalAttributes={derivedSheet.finalAttributes}
             modifiers={derivedSheet.modifiers}
           />
         </div>
-        <div style={{ minWidth: 0 }}>
+        <div className={styles.heroStats}>
           <QuickStatsRow
             derivedSheet={derivedSheet}
             playState={playState}
             onUpdatePlayState={onUpdatePlayState}
           />
         </div>
-      </div>
+      </section>
 
-      <div style={secondaryRowGridStyle}>
-        <div style={sideColumnStackStyle}>
+      <section className={styles.supportGrid}>
+        <div className={styles.supportColumn}>
           <SavingThrowsCard derivedSavingThrows={derivedSheet.derivedSavingThrows} />
           <SensesCard
             passivePerception={derivedSheet.passivePerception}
@@ -168,6 +133,13 @@ export function CharacterSheetPage({
             passiveInsight={derivedSheet.passiveInsight}
             specialSenses={derivedSheet.specialSenses}
           />
+        </div>
+
+        <div className={styles.skillsColumn}>
+          <SkillsCard skills={derivedSheet.skills} />
+        </div>
+
+        <div className={styles.supportColumn}>
           <ProficienciesCard
             skillProficiencies={derivedSheet.skillProficiencies}
             armorProficiencies={derivedSheet.armorProficiencies}
@@ -177,11 +149,7 @@ export function CharacterSheetPage({
           />
         </div>
 
-        <div style={{ minWidth: 0 }}>
-          <SkillsCard skills={derivedSheet.skills} />
-        </div>
-
-        <div style={sideColumnStackStyle}>
+        <div className={styles.supportColumn}>
           <ConditionsCard
             activeConditions={playState.activeConditions}
             onAdd={handleAddCondition}
@@ -194,22 +162,13 @@ export function CharacterSheetPage({
             onRemove={handleRemoveDefense}
           />
         </div>
-      </div>
+      </section>
 
-      <div
-        style={{
-          background: 'rgba(17,18,24,0.4)',
-          border: '1px solid rgba(255,255,255,0.05)',
-          borderRadius: '12px',
-          padding: '16px',
-        }}
-      >
+      <section className={styles.tabsCard}>
         <SheetTabs
           derivedSheet={derivedSheet}
           playState={playState}
           onUpdatePlayState={onUpdatePlayState}
-          onGoToEquipment={onGoToEquipment}
-          onGoToSpells={onGoToSpells}
           classFeatures={classFeatures}
           speciesTraits={speciesTraits}
           inventory={inventory}
@@ -226,7 +185,7 @@ export function CharacterSheetPage({
           onEquipArmor={onEquipArmor}
           onEquipShield={onEquipShield}
         />
-      </div>
+      </section>
     </div>
   );
 }

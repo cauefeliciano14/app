@@ -4,18 +4,6 @@
   gap: 14px;
 }
 
-.jumpLabel {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.jumpCaption {
-  color: var(--text-body);
-  font-size: 0.78rem;
-  font-weight: 600;
-}
-
 .detailList {
   display: flex;
   flex-direction: column;
@@ -27,7 +15,7 @@
   background: var(--surface-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 12px;
+  padding: 14px 12px;
   text-align: left;
 }
 
@@ -47,7 +35,7 @@
 .navLabel {
   color: var(--text-primary);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.98rem;
 }
 
 .stepBadge {

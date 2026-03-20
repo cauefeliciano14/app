@@ -12,7 +12,6 @@ interface InventoryTabProps {
   inventory: InventoryItem[];
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
-  onManageEquipment: () => void;
   equippedArmorId?: string | null;
   hasShieldEquipped?: boolean;
   onEquipArmor?: (armorId: string | null) => void;
@@ -23,7 +22,6 @@ export function InventoryTab({
   inventory,
   playState,
   onUpdatePlayState,
-  onManageEquipment,
   equippedArmorId,
   hasShieldEquipped = false,
   onEquipArmor,
@@ -146,21 +144,6 @@ export function InventoryTab({
         </div>
       )}
 
-      <button
-        onClick={onManageEquipment}
-        style={{
-          background: 'rgba(56,189,248,0.1)',
-          border: '1px solid rgba(56,189,248,0.25)',
-          borderRadius: '8px',
-          color: '#38bdf8',
-          padding: '10px',
-          fontSize: '0.85rem',
-          cursor: 'pointer',
-          fontWeight: 500,
-        }}
-      >
-        Gerenciar Inventário
-      </button>
     </div>
   );
 }

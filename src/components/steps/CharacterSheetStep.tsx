@@ -65,8 +65,6 @@ export const CharacterSheetStep: React.FC = () => {
         derivedSheet={derivedSheet}
         playState={playState}
         onUpdatePlayState={setPlayState}
-        onGoToEquipment={() => setCurrentStep(4)}
-        onGoToSpells={() => setCurrentStep(4)}
         classFeatures={classFeatures}
         speciesTraits={speciesTraits}
         inventory={character.equipment.inventory.map((item: any) => ({

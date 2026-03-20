@@ -152,9 +152,6 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                           <HelpTooltip label="Resumo da classe" title={`Visão rápida de ${selectedClass.name}`} variant="chip" align="right">
                             {selectedClass.description}
                           </HelpTooltip>
-                          <HelpTooltip label="Seleção" title="Ajuda sobre seleção" variant="chip" align="right">
-                            Você pode trocar de classe livremente nesta etapa. As pendências abaixo indicam apenas escolhas ainda não confirmadas para a classe atual.
-                          </HelpTooltip>
                         </div>
                       </div>
                       <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
@@ -189,12 +186,12 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                     <p className={styles.optionsSubtitle}>As pendências já aparecem no topo; aqui ficam só os blocos que ainda precisam da sua ação.</p>
                   </div>
                   <div className={styles.optionsHelpRow}>
-                    <HelpTooltip label={`Pendências · ${validationErrors.length}`} title="Pendências desta etapa" variant="chip" align="right">
-                      {validationErrors[0] ?? 'Nenhuma pendência aberta para a classe selecionada.'}
-                    </HelpTooltip>
-                    <HelpTooltip label={`Blocos abertos · ${pendingChoicesCount}`} title="Blocos com escolhas a concluir" variant="chip" align="right">
-                      Expanda apenas as características com decisão pendente. Quando todas estiverem concluídas, esta etapa poderá avançar sem alertas.
-                    </HelpTooltip>
+                    <span className={styles.optionsCounterChip}>
+                      Pendências · {validationErrors.length}
+                    </span>
+                    <span className={styles.optionsCounterChip}>
+                      Blocos abertos · {pendingChoicesCount}
+                    </span>
                   </div>
                 </div>
 
