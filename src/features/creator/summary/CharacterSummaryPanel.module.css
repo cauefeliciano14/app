@@ -1,3 +1,33 @@
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.portrait {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+}
+
+.name {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
 .statCard {
   background: var(--surface-subtle);
   border-radius: 10px;
@@ -34,27 +64,57 @@
   font-weight: 700;
 }
 
-.detailsSummary {
-  cursor: pointer;
-  list-style: none;
-  padding: 10px 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.contextActions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
-.detailsTitle {
+.contextChipCard {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contextChipHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.contextChipLabel {
   color: var(--text-primary);
+  font-size: 0.82rem;
   font-weight: 700;
 }
 
-.detailsCount {
+.contextChipCount {
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text-muted);
-  font-size: 0.75rem;
 }
 
-.detailsBody {
-  padding: 0 12px 12px;
+.toneAccent {
+  background: rgba(249, 115, 22, 0.18);
+  color: #fdba74;
+}
+
+.toneSuccess {
+  background: rgba(74, 222, 128, 0.18);
+  color: #86efac;
+}
+
+.toneDefault {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
 }
 
 .emptyText {
@@ -67,10 +127,21 @@
   font-size: 0.82rem;
 }
 
-.issueList {
+.popoverList {
   margin: 0;
   padding-left: 18px;
   color: var(--text-body);
   font-size: 0.82rem;
   line-height: 1.5;
+}
+
+@media (max-width: 920px) {
+  .contextActions {
+    grid-template-columns: 1fr;
+  }
+
+  .titleRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
