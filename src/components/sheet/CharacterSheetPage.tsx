@@ -10,45 +10,33 @@ import { SkillsCard } from './SkillsCard';
 import { ConditionsCard } from './ConditionsCard';
 import { DefensesCard } from './DefensesCard';
 import { SheetTabs } from './SheetTabs';
+import styles from './CharacterSheetPage.module.css';
 
 interface Feature { level: number; name: string; description: string }
 interface Trait { title: string; description: string }
 interface InventoryItem { name: string; quantity?: number; notes?: string; cost?: string }
 
 interface CharacterSheetPageProps {
-  // Identity
   characterName: string;
   portrait: string | null;
   speciesName: string;
   className: string;
   characterLevel: number;
-
-  // Derived data
   derivedSheet: DerivedSheet;
-
-  // Live session state
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
-
-  // Navigation
   onGoToEquipment: () => void;
   onGoToSpells: () => void;
-
-  // Raw character data for features/background/inventory tabs
   classFeatures: Feature[];
   speciesTraits: Trait[];
   inventory: InventoryItem[];
   learnedCantrips: string[];
   preparedSpells: string[];
-
-  // Background details
   backgroundName?: string;
   backgroundDescription?: string;
   backgroundSkills?: string[];
   backgroundTool?: string;
   backgroundEquipment?: string;
-
-  // Armor/shield equip state
   equippedArmorId?: string | null;
   hasShieldEquipped?: boolean;
   onEquipArmor?: (armorId: string | null) => void;
@@ -114,10 +102,9 @@ export function CharacterSheetPage({
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* Row 1: Header | Ability Scores | Quick Stats */}
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-        <div style={{ flex: '1 1 200px', minWidth: '200px' }}>
+    <div className={styles.page}>
+      <div className={styles.topRow}>
+        <div className={styles.headerColumn}>
           <SheetHeader
             name={characterName}
             portrait={portrait}
@@ -126,13 +113,13 @@ export function CharacterSheetPage({
             level={characterLevel}
           />
         </div>
-        <div style={{ flex: '2 1 300px' }}>
+        <div className={styles.abilityColumn}>
           <AbilityScoreCards
             finalAttributes={derivedSheet.finalAttributes}
             modifiers={derivedSheet.modifiers}
           />
         </div>
-        <div style={{ flex: '1 1 220px', minWidth: '220px' }}>
+        <div className={styles.statsColumn}>
           <QuickStatsRow
             derivedSheet={derivedSheet}
             playState={playState}
@@ -141,10 +128,8 @@ export function CharacterSheetPage({
         </div>
       </div>
 
-      {/* Row 2: Left column | Skills | Right column */}
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-        {/* Left: Saving Throws + Senses + Proficiencies */}
-        <div style={{ flex: '1 1 200px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div className={styles.contentRow}>
+        <div className={styles.sideColumn}>
           <SavingThrowsCard derivedSavingThrows={derivedSheet.derivedSavingThrows} />
           <SensesCard
             passivePerception={derivedSheet.passivePerception}
@@ -161,13 +146,11 @@ export function CharacterSheetPage({
           />
         </div>
 
-        {/* Center: Skills */}
-        <div style={{ flex: '1 1 200px' }}>
+        <div className={styles.centerColumn}>
           <SkillsCard skills={derivedSheet.skills} />
         </div>
 
-        {/* Right: Conditions + Defenses */}
-        <div style={{ flex: '1 1 200px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div className={styles.sideColumn}>
           <ConditionsCard
             activeConditions={playState.activeConditions}
             onAdd={handleAddCondition}
@@ -182,13 +165,7 @@ export function CharacterSheetPage({
         </div>
       </div>
 
-      {/* Row 3: Tabs */}
-      <div style={{
-        background: 'rgba(17,18,24,0.4)',
-        border: '1px solid rgba(255,255,255,0.05)',
-        borderRadius: '12px',
-        padding: '16px',
-      }}>
+      <div className={styles.tabsCard}>
         <SheetTabs
           derivedSheet={derivedSheet}
           playState={playState}
