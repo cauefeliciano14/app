@@ -3,7 +3,8 @@ import type { DerivedSheet } from '../types/DerivedSheet';
 
 import { getClassHPData } from '../data/classRules';
 import { getBackgroundTalent } from '../data/backgroundRules';
-import { getSpeciesSpeed, getSpecialSenses } from '../data/speciesRules';
+import { getSpeciesLevelOneEffects } from '../data/speciesRules';
+import { applyTalentEffects } from '../data/talentRules';
 
 import {
   getFinalAttributes,
@@ -42,68 +43,83 @@ import {
   deriveUnarmedAttack,
 } from '../calculators/sheet';
 
-// ---------------------------------------------------------------------------
-// deriveSheet — função principal do engine
-// ---------------------------------------------------------------------------
+function addUnique(target: string[], values: string[] = []) {
+  values.forEach((value) => {
+    if (value && !target.includes(value)) target.push(value);
+  });
+}
 
-/**
- * Recebe todas as escolhas do personagem e retorna a ficha derivada completa.
- * Determinística: mesma entrada → mesma saída.
- *
- * Nota: validação agora é separada — use validateChoices() independentemente.
- */
-const DRACONIC_RESISTANCE_BY_LINEAGE: Record<string, string> = {
-  azul: 'Resistência a Elétrico',
-  branco: 'Resistência a Gélido',
-  bronze: 'Resistência a Elétrico',
-  cobre: 'Resistência a Ácido',
-  latas: 'Resistência a Ígneo',
-  negro: 'Resistência a Ácido',
-  ouro: 'Resistência a Ígneo',
-  prata: 'Resistência a Gélido',
-  verde: 'Resistência a Venenoso',
-  vermelho: 'Resistência a Ígneo',
-};
+function normalizeSpeciesChoices(choices: CharacterChoices): Record<string, string> {
+  return {
+    ...(choices.speciesChoices ?? {}),
+    ...(choices.featureChoices ?? {}),
+    skill: choices.speciesChoices?.skill ?? choices.featureChoices?.['humano-skill'] ?? choices.featureChoices?.['elfo-skill'],
+    cantrip: choices.speciesChoices?.cantrip ?? choices.featureChoices?.['elfo-cantrip'],
+    draconato: choices.speciesChoices?.draconato ?? choices.featureChoices?.draconato,
+    elfo: choices.speciesChoices?.elfo ?? choices.speciesLineage ?? choices.featureChoices?.elfo,
+    gnomo: choices.speciesChoices?.gnomo ?? choices.speciesLineage ?? choices.featureChoices?.gnomo,
+    tiferino: choices.speciesChoices?.tiferino ?? choices.speciesLineage ?? choices.featureChoices?.tiferino,
+  };
+}
 
 export function deriveSheet(choices: CharacterChoices): DerivedSheet {
-
-  // Atributos
-  const finalAttributes = getFinalAttributes(
-    choices.baseAttributes,
-    choices.backgroundBonusDistribution
-  );
-  const modifiers = calculateAllModifiers(finalAttributes);
-
   const classId = choices.classId ?? '';
   const backgroundId = choices.backgroundId ?? '';
   const speciesId = choices.speciesId ?? '';
   const level = choices.level ?? 1;
 
-  // Proficiência
   const profBonus = getProficiencyBonus(level);
+  const originTalent = backgroundId ? getBackgroundTalent(backgroundId) ?? undefined : undefined;
+  const humanTalent = speciesId === 'humano' ? (choices.featureChoices['humano-talent'] ?? choices.speciesChoices?.talent) : undefined;
+  const originTalentSelections = originTalent ? choices.talentSelections[originTalent] : undefined;
+  const humanTalentSelections = humanTalent ? choices.talentSelections[humanTalent] : undefined;
 
-  // HP
+  const appliedOriginTalent = applyTalentEffects(originTalent, originTalentSelections, 'background', level, profBonus);
+  const appliedHumanTalent = applyTalentEffects(humanTalent, humanTalentSelections, 'species', level, profBonus);
+  const appliedTalentEffects = [appliedOriginTalent, appliedHumanTalent].filter(Boolean);
+
+  const rawFinalAttributes = getFinalAttributes(
+    choices.baseAttributes,
+    choices.backgroundBonusDistribution
+  );
+
+  const finalAttributes = { ...rawFinalAttributes } as Record<string, number>;
+  for (const appliedTalent of appliedTalentEffects) {
+    for (const [attribute, bonus] of Object.entries(appliedTalent?.attributeBonuses ?? {})) {
+      finalAttributes[attribute] = (finalAttributes[attribute] ?? 0) + (bonus ?? 0);
+    }
+  }
+
+  const modifiers = calculateAllModifiers(finalAttributes);
+
   const conMod = modifiers['constituicao'] ?? 0;
-  const maxHP = classId ? calculateMaxHP(classId, level, conMod) : 0;
+  const speciesChoices = normalizeSpeciesChoices(choices);
+  const speciesEffects = speciesId ? getSpeciesLevelOneEffects(speciesId, speciesChoices) : undefined;
+
+  const speciesHpBonus = (speciesEffects?.maxHpBonusPerLevel ?? 0) * level;
+  const talentHpBonus = appliedTalentEffects.reduce((sum, effect) => sum + (effect?.maxHpBonus ?? 0), 0);
+  const maxHP = (classId ? calculateMaxHP(classId, level, conMod) : 0) + speciesHpBonus + talentHpBonus;
   const hitDie = getClassHPData(classId)?.hitDieLabel ?? '—';
 
-  // Iniciativa
   const dexMod = modifiers['destreza'] ?? 0;
-  const initiative = calculateInitiative(dexMod);
+  const initiativeBase = calculateInitiative(dexMod);
+  const initiativeBonusFromTalents = appliedTalentEffects.reduce((sum, effect) => sum + (effect?.initiativeBonus ?? 0), 0);
+  const initiative = initiativeBase + initiativeBonusFromTalents;
 
-  // Proficiências
   const classProfs = getClassBaseProficiencies(classId);
   const bgProfs = getBackgroundProficiencies(backgroundId);
   const chosenSkills = getChosenSkillProficiencies(classId, choices.featureChoices);
   const merged = mergeProficiencies(classProfs, bgProfs);
 
-  for (const skill of chosenSkills) {
-    if (!merged.skills.includes(skill)) {
-      merged.skills.push(skill);
-    }
+  addUnique(merged.skills, chosenSkills);
+  addUnique(merged.skills, speciesEffects?.skillProficiencies);
+
+  for (const appliedTalent of appliedTalentEffects) {
+    addUnique(merged.skills, appliedTalent?.skillProficiencies);
+    addUnique(merged.tools, appliedTalent?.toolProficiencies);
+    addUnique(merged.savingThrows, appliedTalent?.savingThrowProficiencies);
   }
 
-  // Substituir ferramenta genérica do antecedente pela escolha real
   if (choices.backgroundChoices?.toolProficiency) {
     const chosenTool = choices.backgroundChoices.toolProficiency;
     const bgDefaultTool = bgProfs.tools[0];
@@ -115,7 +131,6 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     }
   }
 
-  // CA
   const wisMod = modifiers['sabedoria'] ?? 0;
   const armorClass = calculateAC({
     dexModifier: dexMod,
@@ -127,60 +142,54 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     armorProficiencies: merged.armorCategories,
   });
 
-  // Velocidade e sentidos (da espécie)
-  const speed = speciesId ? getSpeciesSpeed(speciesId) : '9 metros';
-  const specialSenses = speciesId ? getSpecialSenses(speciesId) : [];
+  const speed = speciesEffects?.speed ?? '9 metros';
+  const specialSenses = [...(speciesEffects?.specialSenses ?? [])];
+  const derivedDefenses = [...(speciesEffects?.derivedDefenses ?? [])];
+  const racialCantrips = [...(speciesEffects?.racialCantrips ?? [])];
+  const bonusCantrips: DerivedSheet['bonusCantrips'] = [];
+  const bonusPreparedSpells: DerivedSheet['bonusPreparedSpells'] = [];
+  const derivedTraits: DerivedSheet['derivedTraits'] = [];
+  const activeTalents: DerivedSheet['activeTalents'] = [];
 
-  // Efeitos de espécie (apenas efeitos sustentados pelos dados e exibidos na ficha)
-  const racialCantrips: string[] = [];
-  const derivedDefenses: string[] = [];
-  if (speciesId && choices.speciesChoices) {
-    // Humano: perícia extra
-    if (speciesId === 'humano' && choices.speciesChoices['skill']) {
-      const extraSkill = choices.speciesChoices['skill'];
-      if (!merged.skills.includes(extraSkill)) {
-        merged.skills.push(extraSkill);
-      }
-    }
-    // Elfo alto-elfo: truque racial (não conta no limite de classe)
-    if (speciesId === 'elfo' && choices.speciesLineage === 'alto-elfo' && choices.speciesChoices['cantrip']) {
-      racialCantrips.push(choices.speciesChoices['cantrip']);
-    }
+  for (const cantrip of racialCantrips) {
+    bonusCantrips.push({ name: cantrip, source: 'species', origin: speciesId });
+  }
+  for (const spell of speciesEffects?.preparedSpells ?? []) {
+    bonusPreparedSpells.push({ name: spell, source: 'species', origin: speciesId });
+  }
+  addUnique(derivedTraits, speciesEffects?.notes);
 
-    // Draconato: resistência permanente conforme a herança dracônica escolhida
-    if (speciesId === 'draconato') {
-      const draconicLineage = choices.speciesChoices['draconato'];
-      const derivedResistance = draconicLineage ? DRACONIC_RESISTANCE_BY_LINEAGE[draconicLineage] : undefined;
-      if (derivedResistance) {
-        derivedDefenses.push(derivedResistance);
-      }
+  for (const appliedTalent of appliedTalentEffects) {
+    if (!appliedTalent) continue;
+    activeTalents.push({
+      name: appliedTalent.name,
+      source: appliedTalent.source,
+      notes: appliedTalent.notes ?? [],
+    });
+    addUnique(derivedDefenses, appliedTalent.derivedDefenses);
+    addUnique(derivedTraits, appliedTalent.notes);
+    for (const cantrip of appliedTalent.cantrips ?? []) {
+      bonusCantrips.push({ name: cantrip, source: 'talent', origin: appliedTalent.name });
+    }
+    for (const spell of appliedTalent.preparedSpells ?? []) {
+      bonusPreparedSpells.push({ name: spell, source: 'talent', origin: appliedTalent.name });
     }
   }
 
-  // Perícias derivadas tipadas
   const skills = deriveSkills(modifiers, profBonus, merged.skills);
-
-  // Salvaguardas derivadas tipadas
   const derivedSavingThrows = deriveSavingThrows(modifiers, profBonus, merged.savingThrows);
-
-  // Passivas
   const { passivePerception, passiveInvestigation, passiveInsight } = derivePassives(skills);
 
-  // Ataques de armas
   const strMod = modifiers['forca'] ?? 0;
-
   const computedWeaponAttacks = [] as DerivedSheet['weaponAttacks'];
+  const unarmedDamageDice = appliedTalentEffects.find((effect) => effect?.unarmedDamageDice)?.unarmedDamageDice;
+  computedWeaponAttacks.push(deriveUnarmedAttack(strMod, profBonus, unarmedDamageDice));
 
-  // Sempre incluir ataque desarmado
-  computedWeaponAttacks.push(deriveUnarmedAttack(strMod, profBonus));
-
-  // Armas do inventário
   for (const weaponName of choices.inventoryWeapons ?? []) {
     const atk = buildWeaponAttack(weaponName, strMod, dexMod, profBonus, merged.weaponCategories);
     if (atk) computedWeaponAttacks.push(atk);
   }
 
-  // Magia
   const casterFlag = classId ? isCaster(classId) : false;
   let spellcastingAbility: string | undefined;
   let spellSaveDC: number | undefined;
@@ -201,15 +210,11 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     cantripsKnown = getCantripsKnown(classId, level);
   }
 
-  // Talento de origem
-  const originTalent = backgroundId ? getBackgroundTalent(backgroundId) ?? undefined : undefined;
-
-  // Idiomas: manter IDs internos do motor; a interface traduz com utilitário próprio.
   const languages = choices.languageSelections ?? [];
 
   return {
     level,
-    finalAttributes: finalAttributes as Record<string, number>,
+    finalAttributes,
     modifiers,
     maxHP,
     hitDie,
@@ -238,11 +243,14 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     preparedSpellCount,
     cantripsKnown,
     racialCantrips,
+    bonusCantrips,
+    bonusPreparedSpells,
     derivedDefenses,
+    derivedTraits,
     originTalent,
+    activeTalents,
   };
 }
 
-// Re-exportar tipos para conveniência
 export type { CharacterChoices } from '../types/CharacterChoices';
 export type { DerivedSheet } from '../types/DerivedSheet';

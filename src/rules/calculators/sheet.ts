@@ -123,12 +123,12 @@ export function derivePassives(skills: DerivedSkill[]): {
 // Ataque Desarmado
 // ---------------------------------------------------------------------------
 
-export function deriveUnarmedAttack(strMod: number, profBonus: number): WeaponAttack {
+export function deriveUnarmedAttack(strMod: number, profBonus: number, damageDice = '1'): WeaponAttack {
   return {
     weaponName: 'Ataque Desarmado',
     attackBonus: strMod + profBonus,
     damageBonus: strMod,
-    damageDice: '1',
+    damageDice,
     damageType: 'Contundente',
     isFinesse: false,
     range: 'Corpo a Corpo',

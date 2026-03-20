@@ -42,6 +42,10 @@ function makeCompleteWarrior(): CharacterChoices {
     featureChoices: {
       'guerreiro-skill-1': 'Atletismo',
       'guerreiro-skill-2': 'Intimidação',
+      'guerreiro-estilo-luta': 'Defensivo',
+      'guerreiro-weapon-mastery-1': 'Espada Longa',
+      'guerreiro-weapon-mastery-2': 'Besta Leve',
+      'guerreiro-weapon-mastery-3': 'Lança',
       toolProficiency: 'Kit de Jogos de Baralho',
       'humano-size': 'Médio',
       'humano-skill': 'Percepção',
@@ -95,6 +99,22 @@ describe('Validação — Etapa Classe', () => {
   it('guerreiro sem escolhas obrigatórias não perde o fluxo mestre-detalhe', () => {
     const r = validateChoices(makeChoices({ classId: 'guerreiro', featureChoices: {} }));
     expect(r.byStep.class.every((e) => !e.includes('não é mais válida'))).toBe(true);
+  });
+
+  it('clerigo taumaturgo exige o truque adicional da feature ativa', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'clerigo',
+      featureChoices: { 'clerigo-ordem-divina': 'Taumaturgo' },
+    }));
+    expect(r.byStep.class.some((e) => e.includes('Truque de Clérigo'))).toBe(true);
+  });
+
+  it('clerigo protetor não exige o truque condicional da feature', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'clerigo',
+      featureChoices: { 'clerigo-ordem-divina': 'Protetor' },
+    }));
+    expect(r.byStep.class.some((e) => e.includes('Truque de Clérigo'))).toBe(false);
   });
 });
 
@@ -435,6 +455,35 @@ describe('Validação explícita de inconsistências em magia e equipamento', ()
     }));
     expect(r.byStep.equipment.some((e) => e.includes('pacote de equipamento de classe'))).toBe(true);
     expect(r.byStep.equipment.some((e) => e.includes('pacote de equipamento de antecedente'))).toBe(true);
+  });
+});
+
+
+describe('Validação simétrica de pacotes A e B', () => {
+  it('bloqueia itens de pacote de classe quando a opção B foi selecionada', () => {
+    const r = validateChoices(makeChoices({
+      classId: 'guerreiro',
+      equipmentChoices: { classOption: 'B', backgroundOption: 'B' },
+      inventory: [{ name: 'Cota de Malha', source: 'class', isStartingGear: true }],
+    }));
+    expect(r.byStep.equipment.some((e) => e.includes('opção B concede apenas ouro inicial'))).toBe(true);
+  });
+
+  it('detecta subescolha faltando no pacote de antecedente', () => {
+    const r = validateChoices(makeChoices({
+      backgroundId: 'soldado',
+      equipmentChoices: { classOption: 'B', backgroundOption: 'A' },
+      inventory: [
+        { name: 'Lança', source: 'bg', isStartingGear: true },
+        { name: 'Arco Curto', source: 'bg', isStartingGear: true },
+        { name: 'Flecha', source: 'bg', isStartingGear: true },
+        { name: 'Kit de Curandeiro', source: 'bg', isStartingGear: true },
+        { name: 'Kit de Jogo', source: 'bg', isStartingGear: true },
+        { name: 'Aljava', source: 'bg', isStartingGear: true },
+        { name: 'Roupas de Viagem', source: 'bg', isStartingGear: true },
+      ],
+    }));
+    expect(r.byStep.equipment.some((e) => e.includes('subescolha faltando no pacote de equipamento de antecedente'))).toBe(true);
   });
 });
 
