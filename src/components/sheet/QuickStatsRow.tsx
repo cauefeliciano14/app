@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import type { DerivedSheet } from '../../rules/types/DerivedSheet';
 import type { CharacterPlayState } from '../../types/playState';
 
@@ -11,6 +12,26 @@ interface QuickStatsRowProps {
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
 }
+
+const statCardsGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '8px',
+  alignItems: 'stretch',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(96px, 1fr))',
+};
+
+const actionRowGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '8px',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+};
+
+const restPanelGridStyle: CSSProperties = {
+  display: 'grid',
+  gap: '6px',
+  alignItems: 'center',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(56px, auto)) minmax(72px, auto) minmax(120px, 1fr) auto',
+};
 
 export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: QuickStatsRowProps) {
   const [hpInput, setHpInput] = useState('');
@@ -93,7 +114,12 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
       borderRadius: '10px',
       padding: '8px 14px',
       textAlign: 'center',
-      minWidth: '70px',
+      minWidth: 0,
+      minHeight: '72px',
+      display: 'grid',
+      alignContent: 'center',
+      justifyItems: 'center',
+      gap: '2px',
     }}>
       <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '2px' }}>
         {label}
@@ -107,7 +133,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       {/* Stat pills row */}
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      <div style={statCardsGridStyle}>
         {statCard('PB', signedMod(derivedSheet.proficiencyBonus), '#38bdf8')}
         {statCard('VEL', derivedSheet.speed, '#4ade80')}
         {statCard('INIC', signedMod(derivedSheet.initiative), '#fbbf24')}
@@ -230,11 +256,10 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
       </div>
 
       {/* Inspiration + Rest buttons row */}
-      <div style={{ display: 'flex', gap: '8px' }}>
+      <div style={actionRowGridStyle}>
         <button
           onClick={() => onUpdatePlayState(prev => ({ ...prev, heroicInspiration: !prev.heroicInspiration }))}
           style={{
-            flex: 1,
             background: playState.heroicInspiration ? 'rgba(167,139,250,0.2)' : 'rgba(17,18,24,0.6)',
             border: `1px solid ${playState.heroicInspiration ? 'rgba(167,139,250,0.5)' : 'rgba(255,255,255,0.07)'}`,
             borderRadius: '8px',
@@ -244,6 +269,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
             cursor: 'pointer',
             fontWeight: 600,
             transition: 'all 0.2s',
+            minHeight: '38px',
           }}
         >
           {playState.heroicInspiration ? '★' : '☆'} Inspiração
@@ -251,7 +277,6 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
         <button
           onClick={() => setShortRestOpen(prev => !prev)}
           style={{
-            flex: 1,
             background: shortRestOpen ? 'rgba(251,191,36,0.15)' : 'rgba(17,18,24,0.6)',
             border: `1px solid ${shortRestOpen ? 'rgba(251,191,36,0.35)' : 'rgba(255,255,255,0.07)'}`,
             borderRadius: '8px',
@@ -259,6 +284,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
             padding: '6px 10px',
             fontSize: '0.75rem',
             cursor: 'pointer',
+            minHeight: '38px',
           }}
         >
           Desc. Curto
@@ -266,7 +292,6 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
         <button
           onClick={handleLongRest}
           style={{
-            flex: 1,
             background: 'rgba(17,18,24,0.6)',
             border: '1px solid rgba(255,255,255,0.07)',
             borderRadius: '8px',
@@ -274,6 +299,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
             padding: '6px 10px',
             fontSize: '0.75rem',
             cursor: 'pointer',
+            minHeight: '38px',
           }}
         >
           Desc. Longo
@@ -294,7 +320,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
           <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginBottom: '8px' }}>
             Dado: {derivedSheet.hitDie} · Mod CON: {conMod >= 0 ? '+' : ''}{conMod}
           </div>
-          <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+          <div style={restPanelGridStyle}>
             <input
               type="number"
               min="1"
@@ -315,7 +341,6 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
             <button
               onClick={handleShortRest}
               style={{
-                flex: 1,
                 background: 'rgba(251,191,36,0.15)',
                 border: '1px solid rgba(251,191,36,0.3)',
                 borderRadius: '6px',
@@ -324,6 +349,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
                 fontSize: '0.8rem',
                 cursor: 'pointer',
                 fontWeight: 600,
+                minHeight: '34px',
               }}
             >
               Recuperar PV
@@ -337,6 +363,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
                 cursor: 'pointer',
                 fontSize: '0.8rem',
                 padding: '4px 6px',
+                minHeight: '34px',
               }}
             >
               ✕
