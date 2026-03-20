@@ -112,8 +112,6 @@ export function CharacterSummaryPanel() {
     [validationResult.byStep],
   );
 
-  const totalPending = pendingItems.reduce((sum, item) => sum + item.count, 0);
-
   const identityFlash = flashedSections.has('identity');
   const attrFlash = flashedSections.has('attributes');
   const skillsFlash = flashedSections.has('skills') || flashedSections.has('languages');
@@ -122,9 +120,6 @@ export function CharacterSummaryPanel() {
     <div className={styles.panel}>
       <div className={styles.headerRow}>
         <div className={styles.sectionTitle}>Resumo</div>
-        {totalPending > 0 && (
-          <span className={styles.pendingBadge}>{totalPending} pendente{totalPending > 1 ? 's' : ''}</span>
-        )}
       </div>
 
       <div className={`${styles.identityCard} ${identityFlash ? styles.flashHighlight : ''}`}>
@@ -137,18 +132,25 @@ export function CharacterSummaryPanel() {
           </div>
           <div className={styles.identityInfo}>
             <div className={styles.identityName}>{character.name || 'Sem nome'}</div>
-            <div className={styles.identityChips}>
-              {character.characterClass?.name
-                ? <span className={styles.chipClass}>{character.characterClass.name}</span>
-                : <span className={styles.chipEmpty}>Classe</span>
-              }
-              {character.species?.name
-                ? <span className={styles.chipSecondary}>{character.species.name}</span>
-                : <span className={styles.chipEmpty}>Espécie</span>
-              }
-            </div>
-            <div className={styles.identityOrigin}>
-              {selectedBackground?.name || <em>Origem não definida</em>}
+            <div className={styles.identityMetaList}>
+              <div className={styles.identityMetaRow}>
+                <span className={styles.identityMetaLabel}>Classe</span>
+                <span className={character.characterClass?.name ? styles.identityMetaValuePrimary : styles.identityMetaValueEmpty}>
+                  {character.characterClass?.name || 'Não definida'}
+                </span>
+              </div>
+              <div className={styles.identityMetaRow}>
+                <span className={styles.identityMetaLabel}>Origem</span>
+                <span className={selectedBackground?.name ? styles.identityMetaValue : styles.identityMetaValueEmpty}>
+                  {selectedBackground?.name || 'Não definida'}
+                </span>
+              </div>
+              <div className={styles.identityMetaRow}>
+                <span className={styles.identityMetaLabel}>Espécie</span>
+                <span className={character.species?.name ? styles.identityMetaValue : styles.identityMetaValueEmpty}>
+                  {character.species?.name || 'Não definida'}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -197,9 +199,12 @@ export function CharacterSummaryPanel() {
       </div>
 
       {pendingItems.length > 0 && (
-        <div className={styles.identityCard}>
+        <div className={`${styles.identityCard} ${styles.pendingCard}`}>
           <div className={styles.cardHeader}>
-            <div className={styles.identityTitle} style={{ marginBottom: 0 }}>Pendências</div>
+            <div>
+              <div className={styles.pendingTitle}>Pendências ({pendingItems.length})</div>
+              <p className={styles.pendingDescription}>Resolva os pontos abaixo para avançar com segurança.</p>
+            </div>
             <span className={styles.pendingHint}>clique para ir</span>
           </div>
           <div className={styles.pendingList}>

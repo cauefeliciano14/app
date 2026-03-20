@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import bgData from '../../data/db.json';
 import classDetailsData from '../../data/classDetails.json';
 import { FeatureExpandable } from '../FeatureExpandable';
-import { ValidationBanner } from '../ValidationBanner';
 import { StepLayout } from './StepLayout';
 import styles from './ClassSelectionStep.module.css';
 import { getClassHPData } from '../../rules/data/classRules';
@@ -151,7 +150,6 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
       impactSection="class"
     >
       <div className={styles.stepRoot}>
-        <ValidationBanner errors={validationErrors} />
         <div className={styles.stepGrid}>
           <div className={styles.classColumn}>
             <div>

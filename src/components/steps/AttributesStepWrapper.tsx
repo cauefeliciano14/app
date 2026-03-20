@@ -1,6 +1,5 @@
 import React from "react";
 import { AttributesStep } from "../AttributesStep";
-import { ValidationBanner } from "../ValidationBanner";
 import { StepLayout } from "./StepLayout";
 import styles from "./StepLayout.module.css";
 import { useCharacter } from "../../context/CharacterContext";
@@ -36,7 +35,6 @@ export const AttributesStepWrapper: React.FC = () => {
       impactSection="attributes"
     >
       <div className={styles.stepContent}>
-        <ValidationBanner errors={validationErrors} />
         <div
           style={{
             marginBottom: "24px",

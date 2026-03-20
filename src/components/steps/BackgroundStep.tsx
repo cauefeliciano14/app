@@ -7,7 +7,6 @@ import {
   countVisibleTalentChoices,
 } from "../TalentChoices";
 import { ToolProficiencyCard } from "../ToolProficiencyCard";
-import { ValidationBanner } from "../ValidationBanner";
 import { StepLayout } from "./StepLayout";
 import styles from "./StepLayout.module.css";
 import { formatDice, getSkillParts } from "../../utils/formatting";
@@ -57,7 +56,6 @@ export const BackgroundStep: React.FC = () => {
       impactSection="background"
     >
       <div className={styles.stepContent}>
-        <ValidationBanner errors={validationErrors} />
         <div className={styles.sectionIntro}>
           <div className={styles.sectionTitleRow}>
             <span className={styles.sectionIcon}>✦</span>
