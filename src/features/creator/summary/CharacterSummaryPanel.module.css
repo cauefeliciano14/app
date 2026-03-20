@@ -1,29 +1,34 @@
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.headerRow,
-.cardHeader,
-.supportRow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
   gap: 10px;
 }
 
-.headerActions {
+.headerRow,
+.cardHeader {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  justify-content: flex-end;
 }
 
 .sectionTitle {
   color: var(--text-primary);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
+}
+
+.pendingBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(249,115,22,0.15);
+  border: 1px solid rgba(249,115,22,0.25);
+  color: #fdba74;
+  font-size: 0.68rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .identityCard,
@@ -39,63 +44,64 @@
 
 .identityTitle {
   color: var(--text-primary);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .identityList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   margin: 0;
 }
 
 .identityRow {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .identityLabel {
   color: var(--text-muted);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .identityValue {
   color: var(--text-primary);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   margin: 0;
 }
 
 .quickFactsGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .summaryPillCard {
-  padding: 10px 12px;
+  padding: 8px 10px;
 }
 
 .pillLabel {
   color: var(--text-muted);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.08em;
 }
 
 .pillValue {
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
 }
 
-.supportingText,
 .emptyState {
   color: var(--text-muted);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   line-height: 1.5;
   margin: 0;
 }
@@ -103,44 +109,68 @@
 .tagList {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   list-style: none;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   padding: 0;
 }
 
 .tagItem {
-  background: rgba(249, 115, 22, 0.12);
-  border: 1px solid rgba(249, 115, 22, 0.28);
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.22);
   border-radius: 999px;
   color: var(--text-primary);
-  font-size: 0.8rem;
-  padding: 6px 10px;
+  font-size: 0.74rem;
+  padding: 4px 9px;
 }
 
-@media (max-width: 920px) {
-  .quickFactsGrid {
-    grid-template-columns: 1fr;
-  }
+.subLabel {
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 10px;
 }
 
-@media (max-width: 640px) {
-  .headerRow,
-  .cardHeader,
-  .supportRow {
-    flex-direction: column;
-  }
+.pendingList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
-  .headerActions {
-    justify-content: flex-start;
-  }
+.pendingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pendingLabel {
+  color: var(--text-secondary, #cbd5e1);
+  font-size: 0.78rem;
+}
+
+.pendingCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: rgba(249,115,22,0.15);
+  border: 1px solid rgba(249,115,22,0.25);
+  color: #fdba74;
+  font-size: 0.68rem;
+  font-weight: 700;
 }
 
 .portraitPreview {
   width: 100%;
-  max-height: 180px;
+  max-height: 160px;
   object-fit: cover;
-  border-radius: 14px;
-  margin-bottom: 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
   border: 1px solid var(--border-subtle);
 }

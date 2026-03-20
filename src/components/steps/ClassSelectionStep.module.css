@@ -224,20 +224,12 @@
 
 
 .summaryTopRow,
-.traitsHeader,
-.optionsHelpRow {
+.traitsHeader {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
-}
-
-.summaryHelpRow {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
 }
 
 .traitsTitle {
@@ -363,7 +355,7 @@
 
 .optionsHeader {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
 }
@@ -374,24 +366,18 @@
   font-size: 1rem;
 }
 
-.optionsSubtitle {
-  margin: 4px 0 0;
-  color: #94a3b8;
-  font-size: 0.8rem;
-}
-
-
 .optionsCounterChip {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
-  padding: 6px 10px;
+  min-height: 24px;
+  padding: 3px 10px;
   border-radius: 999px;
   background: rgba(249,115,22,0.12);
   border: 1px solid rgba(249,115,22,0.2);
   color: #fdba74;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .contextList {

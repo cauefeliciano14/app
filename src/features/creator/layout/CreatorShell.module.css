@@ -1,16 +1,18 @@
 .shellFrame {
-  max-width: 1400px;
+  max-width: 1500px;
+  width: 100%;
 }
 
 .shell {
   display: grid;
   grid-template-columns:
-    minmax(clamp(12.5rem, 15vw, 14.5rem), 0.9fr)
-    minmax(clamp(22rem, 42vw, 34rem), 1.65fr)
-    minmax(clamp(15rem, 19vw, 18rem), 1fr);
-  gap: clamp(16px, 1.8vw, 24px);
+    minmax(200px, 220px)
+    minmax(0, 1fr)
+    minmax(220px, 260px);
+  gap: clamp(12px, 1.4vw, 20px);
   flex: 1;
   min-height: 0;
+  align-items: start;
 }
 
 .sidebar,
@@ -27,6 +29,8 @@
   border-radius: 16px;
   padding: 16px;
   backdrop-filter: blur(12px);
+  position: sticky;
+  top: 16px;
 }
 
 .main {
@@ -45,28 +49,34 @@
   min-height: 0;
 }
 
-@media (max-width: 1380px) {
+@media (max-width: 1280px) {
   .shell {
     grid-template-columns:
-      minmax(clamp(12rem, 18vw, 14rem), 0.85fr)
-      minmax(clamp(24rem, 48vw, 40rem), 1.45fr);
+      minmax(180px, 200px)
+      minmax(0, 1fr)
+      minmax(200px, 240px);
+  }
+}
+
+@media (max-width: 1060px) {
+  .shell {
+    grid-template-columns:
+      minmax(170px, 190px)
+      minmax(0, 1fr);
   }
 
   .summary {
     grid-column: 1 / -1;
+    position: static;
   }
 }
 
-@media (max-width: 1100px) {
-  .shell {
-    grid-template-columns:
-      minmax(clamp(11.5rem, 24vw, 13.5rem), 0.8fr)
-      minmax(clamp(21rem, 1vw + 22rem, 1fr), 1.2fr);
-  }
-}
-
-@media (max-width: 860px) {
+@media (max-width: 780px) {
   .shell {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    position: static;
   }
 }

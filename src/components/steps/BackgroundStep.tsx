@@ -219,6 +219,9 @@ export const BackgroundStep: React.FC = () => {
                   </div>
                 </div>
 
+                {/* Accordions: Talent + Attribute side by side */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px', alignItems: 'start' }}>
+
                 {/* Talent Accordion */}
                 {(() => {
                   const talent = (talentsData.talents as any[]).find(
@@ -699,6 +702,8 @@ export const BackgroundStep: React.FC = () => {
                     )}
                   </div>
                 </details>
+
+                </div>{/* end side-by-side grid */}
               </div>
             ) : (
               <div className={styles.selectionPlaceholder}>

@@ -7,10 +7,11 @@ interface AccordionProps {
   isOpen: boolean;
   onToggle: () => void;
   incomplete?: boolean;
+  maxContentHeight?: number;
   children: React.ReactNode;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({ title, badge, isOpen, onToggle, incomplete, children }) => {
+export const Accordion: React.FC<AccordionProps> = ({ title, badge, isOpen, onToggle, incomplete, maxContentHeight, children }) => {
   const bodyRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | undefined>(undefined);
 
@@ -54,7 +55,10 @@ export const Accordion: React.FC<AccordionProps> = ({ title, badge, isOpen, onTo
         overflow: 'hidden',
         transition: 'max-height 0.25s ease',
       }}>
-        <div ref={bodyRef} style={{ padding: '0 16px 16px 16px' }}>
+        <div ref={bodyRef} style={{
+          padding: '0 16px 16px 16px',
+          ...(maxContentHeight ? { maxHeight: maxContentHeight, overflowY: 'auto' } : {}),
+        }}>
           {children}
         </div>
       </div>

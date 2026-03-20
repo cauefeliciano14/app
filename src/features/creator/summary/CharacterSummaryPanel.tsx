@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
-import { HelpTooltip } from '../../../components/ui/HelpTooltip';
 import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
 import styles from './CharacterSummaryPanel.module.css';
 
@@ -57,20 +56,20 @@ export function CharacterSummaryPanel() {
     [validationResult.byStep],
   );
 
+  const totalPending = pendingItems.reduce((sum, item) => sum + item.count, 0);
+
   return (
     <div className={styles.panel}>
       <div className={styles.headerRow}>
-        <div className={styles.sectionTitle}>Resumo persistente</div>
+        <div className={styles.sectionTitle}>Resumo</div>
+        {totalPending > 0 && (
+          <span className={styles.pendingBadge}>{totalPending} pendente{totalPending > 1 ? 's' : ''}</span>
+        )}
       </div>
 
       <div className={styles.identityCard}>
         <div className={styles.cardHeader}>
-          <div className={styles.identityTitle}>Identidade resumida</div>
-          {character.characterClass?.description ? (
-            <HelpTooltip label="Resumo da classe" title={character.characterClass.name} variant="chip" align="right">
-              {character.characterClass.description}
-            </HelpTooltip>
-          ) : null}
+          <div className={styles.identityTitle}>Identidade</div>
         </div>
 
         {character.portrait ? <img src={character.portrait} alt="Retrato atual do personagem" className={styles.portraitPreview} /> : null}
@@ -92,9 +91,6 @@ export function CharacterSummaryPanel() {
       <div className={styles.identityCard}>
         <div className={styles.cardHeader}>
           <div className={styles.identityTitle}>Atributos finais</div>
-          <HelpTooltip label="Impacto em tempo real" title="Atualização imediata" align="right">
-            Sempre mostramos os atributos finais após bônus de origem e quaisquer efeitos já refletidos pelo engine.
-          </HelpTooltip>
         </div>
         <div className={styles.quickFactsGrid}>
           {coreStats.map(([label, value]) => <SummaryPill key={label} label={String(label)} value={String(value)} />)}
@@ -114,39 +110,31 @@ export function CharacterSummaryPanel() {
           <p className={styles.emptyState}>Nenhuma perícia consolidada ainda.</p>
         )}
 
-        <div className={styles.supportRow}>
-          <div>
-            <div className={styles.identityTitle}>Idiomas conhecidos</div>
-            <p className={styles.supportingText}>Os nomes exibidos já estão localizados para leitura rápida.</p>
-          </div>
-        </div>
-
-        {presentedLanguages.length > 0 ? (
-          <ul className={styles.tagList}>
-            {presentedLanguages.map((language) => <li key={language} className={styles.tagItem}>{language}</li>)}
-          </ul>
-        ) : (
-          <p className={styles.emptyState}>Nenhum idioma adicional selecionado.</p>
+        {presentedLanguages.length > 0 && (
+          <>
+            <div className={styles.subLabel}>Idiomas</div>
+            <ul className={styles.tagList}>
+              {presentedLanguages.map((language) => <li key={language} className={styles.tagItem}>{language}</li>)}
+            </ul>
+          </>
         )}
       </div>
 
-      <div className={styles.identityCard}>
-        <div className={styles.cardHeader}>
-          <div className={styles.identityTitle}>Pendências principais</div>
-        </div>
-
-        {pendingItems.length > 0 ? (
-          <div className={styles.tagList}>
+      {pendingItems.length > 0 && (
+        <div className={styles.identityCard}>
+          <div className={styles.cardHeader}>
+            <div className={styles.identityTitle}>Pendências principais</div>
+          </div>
+          <div className={styles.pendingList}>
             {pendingItems.map((item) => (
-              <span key={item.key} className={styles.tagItem}>
-                {item.label} · {item.count}
-              </span>
+              <div key={item.key} className={styles.pendingRow}>
+                <span className={styles.pendingLabel}>{item.label}</span>
+                <span className={styles.pendingCount}>{item.count}</span>
+              </div>
             ))}
           </div>
-        ) : (
-          <p className={styles.emptyState}>Nenhuma pendência aberta no momento.</p>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

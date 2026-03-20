@@ -569,41 +569,44 @@ export const SpeciesDetails: React.FC<SpeciesDetailsProps> = ({ character, setCh
   return (
     <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '18px' }}>
 
-      {/* Image */}
-      <div ref={imageRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{ height: '300px', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', flexShrink: 0, position: 'relative' }}>
-        <img src={imageSrc} alt={species.name}
-          style={{ width: '115%', height: '115%', objectFit: 'cover', objectPosition: 'center center', transform: `translate(calc(-7.5% + ${parallaxX}px), calc(-7.5% + ${parallaxY}px))`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}
-          onError={(e) => { e.currentTarget.style.display = 'none'; }}
-        />
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '50%', background: 'linear-gradient(to top, rgba(17,18,24,1), transparent)' }} />
-      </div>
+      {/* Hero: image (left) + name/desc/cards (right) */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 200px) 1fr', gap: '18px', alignItems: 'start' }}>
+        {/* Image */}
+        <div ref={imageRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{ aspectRatio: '3/4', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', flexShrink: 0 }}>
+          <img src={imageSrc} alt={species.name}
+            style={{ width: '115%', height: '115%', objectFit: 'cover', objectPosition: 'center center', transform: `translate(calc(-7.5% + ${parallaxX}px), calc(-7.5% + ${parallaxY}px))`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          />
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(17,18,24,1), transparent)' }} />
+        </div>
 
-      {/* Name + description + traits summary */}
-      <div>
-        <h2 style={{ fontSize: '2rem', color: '#fff', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 800 }}>{species.name}</h2>
-        {species.description && (
-          <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.7, margin: '0 0 10px 0' }}>{species.description}</p>
-        )}
-        <p style={{ color: '#64748b', fontSize: '0.85rem', margin: 0 }}>
-          <span style={{ color: '#f97316', fontWeight: 600 }}>Traços de {species.name}:</span>{' '}{traitsListText}
-        </p>
-      </div>
-
-      <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', margin: '0' }} />
-
-      {/* 4 Info Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px' }}>
-        {[
-          ['Tipo de Criatura', species.vitalInfo.type],
-          ['Tamanho', species.vitalInfo.size],
-          ['Deslocamento', species.vitalInfo.speed],
-          ['Visão no Escuro', darkvisionValue],
-        ].map(([label, value]) => (
-          <div key={label} style={infoCardStyle}>
-            <span style={{ fontSize: '0.7rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.8px', fontWeight: 600 }}>{label}</span>
-            <span style={{ fontSize: '0.875rem', color: '#f1f5f9', fontWeight: 500, lineHeight: 1.4 }}>{value}</span>
+        {/* Name + description + traits summary + info cards */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', minWidth: 0 }}>
+          <div>
+            <h2 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', color: '#fff', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 800 }}>{species.name}</h2>
+            {species.description && (
+              <p style={{ color: '#94a3b8', fontSize: '0.88rem', lineHeight: 1.65, margin: '0 0 8px 0' }}>{species.description}</p>
+            )}
+            <p style={{ color: '#64748b', fontSize: '0.82rem', margin: 0 }}>
+              <span style={{ color: '#f97316', fontWeight: 600 }}>Traços de {species.name}:</span>{' '}{traitsListText}
+            </p>
           </div>
-        ))}
+
+          {/* 4 Info Cards — 2×2 grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
+            {[
+              ['Tipo de Criatura', species.vitalInfo.type],
+              ['Tamanho', species.vitalInfo.size],
+              ['Deslocamento', species.vitalInfo.speed],
+              ['Visão no Escuro', darkvisionValue],
+            ].map(([label, value]) => (
+              <div key={label} style={infoCardStyle}>
+                <span style={{ fontSize: '0.68rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.8px', fontWeight: 600 }}>{label}</span>
+                <span style={{ fontSize: '0.84rem', color: '#f1f5f9', fontWeight: 500, lineHeight: 1.4 }}>{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* ── Species-specific + per-trait rendering ── */}

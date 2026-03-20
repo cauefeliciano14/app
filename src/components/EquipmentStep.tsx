@@ -45,13 +45,16 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
 
   // Load class spells
   const [classSpells, setClassSpells] = useState<any[]>([]);
+  const [spellsLoading, setSpellsLoading] = useState(false);
   useEffect(() => {
     if (isCaster && classId) {
+      setSpellsLoading(true);
       import(`../data/spells/${classId}_spells.json`)
-        .then(mod => setClassSpells(mod.default || mod))
-        .catch(() => setClassSpells([]));
+        .then(mod => { setClassSpells(mod.default || mod); setSpellsLoading(false); })
+        .catch(() => { setClassSpells([]); setSpellsLoading(false); });
     } else {
       setClassSpells([]);
+      setSpellsLoading(false);
     }
   }, [classId, isCaster]);
 
@@ -257,6 +260,7 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
             isOpen={openAccordions.starting}
             onToggle={() => toggle('starting')}
             incomplete={!equipmentState.startingEquipmentAdded}
+            maxContentHeight={420}
           >
             <StartingEquipment
               classId={classId}
@@ -339,18 +343,22 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
             isOpen={openAccordions.spellCatalog}
             onToggle={() => toggle('spellCatalog')}
           >
-            <SpellCatalog
-              classId={classId}
-              learnedCantrips={spellsState.learnedCantrips}
-              preparedSpells={spellsState.preparedSpells}
-              onLearnCantrip={handleLearnCantrip}
-              onPrepareSpell={handlePrepareSpell}
-              onRemoveCantrip={handleRemoveCantrip}
-              onRemoveSpell={handleRemoveSpell}
-              allSpells={classSpells}
-              maxCantrips={derivedSheet.cantripsKnown ?? 0}
-              maxPrepared={derivedSheet.preparedSpellCount ?? 0}
-            />
+            {spellsLoading ? (
+              <div style={{ color: '#64748b', fontSize: '0.85rem', padding: '16px 0', textAlign: 'center' }}>Carregando magias…</div>
+            ) : (
+              <SpellCatalog
+                classId={classId}
+                learnedCantrips={spellsState.learnedCantrips}
+                preparedSpells={spellsState.preparedSpells}
+                onLearnCantrip={handleLearnCantrip}
+                onPrepareSpell={handlePrepareSpell}
+                onRemoveCantrip={handleRemoveCantrip}
+                onRemoveSpell={handleRemoveSpell}
+                allSpells={classSpells}
+                maxCantrips={derivedSheet.cantripsKnown ?? 0}
+                maxPrepared={derivedSheet.preparedSpellCount ?? 0}
+              />
+            )}
           </Accordion>
         </div>
       )}
