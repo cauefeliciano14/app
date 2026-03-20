@@ -12,13 +12,10 @@ export interface StepLayoutProps {
   onPrev?: () => void;
   onNext: () => void;
   canAdvance: boolean;
-  activeStep: number;
-  onStepClick?: (step: number) => void;
   characterName: string;
   setCharacterName: (name: string) => void;
   portrait: string | null;
   onPortraitClick: () => void;
-  selections?: Record<number, string>;
   errors?: string[];
   hrMarginBottom?: string;
   impactSection?: ChoiceImpactSection;
@@ -40,7 +37,6 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   onPrev,
   onNext,
   canAdvance,
-  activeStep,
   characterName,
   setCharacterName,
   portrait,
@@ -79,7 +75,7 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   const pendingKeys = ['class', 'background', 'species', 'attributes', 'equipment', 'sheet'];
 
   return (
-    <div className="step-container" aria-label={STEP_LABELS[activeStep] ?? `Etapa ${activeStep}`}>
+    <div className="step-container" aria-label={STEP_LABELS[currentStep + 1] ?? `Etapa ${currentStep + 1}`}>
       <div className={shellClass}>
         <aside
           className={`${shellStyles.sidebar} ${sidebarCollapsed ? shellStyles.sidebarCollapsed : ''}`}

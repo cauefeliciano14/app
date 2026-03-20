@@ -11,7 +11,6 @@ export const AttributesStepWrapper: React.FC = () => {
     setCharacter,
     getAttributeBonus,
     selectedBackground,
-    stepSelections,
     validationResult,
   } = useCharacter();
 
@@ -25,13 +24,10 @@ export const AttributesStepWrapper: React.FC = () => {
       onPrev={() => setCurrentStep(2)}
       onNext={() => setCurrentStep(4)}
       canAdvance={canAdvance}
-      activeStep={4}
-      onStepClick={setCurrentStep}
       characterName={character.name}
       setCharacterName={(n) => setCharacter((prev) => ({ ...prev, name: n }))}
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
-      selections={stepSelections}
       impactSection="attributes"
     >
       <div className={styles.stepContent}>
