@@ -19,6 +19,8 @@
   border-radius: 16px;
   padding: 16px;
   backdrop-filter: blur(12px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .main {
@@ -36,6 +38,7 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
+  overflow: hidden;
 }
 
 @media (max-width: 1180px) {

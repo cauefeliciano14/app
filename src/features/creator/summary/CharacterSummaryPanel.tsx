@@ -47,19 +47,9 @@ export function CharacterSummaryPanel() {
         <SummaryPill label="PV" value={String(derivedSheet.maxHP)} />
       </div>
 
-      <SummaryList title="Idiomas" items={derivedSheet.languages} empty="Nenhum idioma extra." />
-      <SummaryList title="Perícias" items={derivedSheet.skillProficiencies} empty="Nenhuma perícia definida." />
-
-      <div>
-        <div style={{ color: '#f8fafc', fontWeight: 700, marginBottom: '8px' }}>Pendências principais</div>
-        {mainPendencies.length === 0 ? (
-          <div style={{ color: '#4ade80', fontSize: '0.82rem' }}>Personagem pronto para a ficha final.</div>
-        ) : (
-          <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.82rem', lineHeight: 1.5 }}>
-            {mainPendencies.map((error) => <li key={error}>{error}</li>)}
-          </ul>
-        )}
-      </div>
+      <SummaryList title="Idiomas" items={derivedSheet.languages} empty="Nenhum idioma extra." defaultOpen={false} />
+      <SummaryList title="Perícias" items={derivedSheet.skillProficiencies} empty="Nenhuma perícia definida." defaultOpen={false} />
+      <SummaryIssues items={mainPendencies} />
     </div>
   );
 }
@@ -73,21 +63,48 @@ function SummaryPill({ label, value }: { label: string; value: string }) {
   );
 }
 
-function SummaryList({ title, items, empty }: { title: string; items: string[]; empty: string }) {
+function SummaryList({ title, items, empty, defaultOpen = true }: { title: string; items: string[]; empty: string; defaultOpen?: boolean }) {
   return (
-    <div>
-      <div style={{ color: '#f8fafc', fontWeight: 700, marginBottom: '8px' }}>{title}</div>
-      {items.length === 0 ? (
-        <div style={{ color: '#64748b', fontSize: '0.8rem' }}>{empty}</div>
-      ) : (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-          {items.map((item) => (
-            <span key={item} style={{ background: 'rgba(249,115,22,0.12)', border: '1px solid rgba(249,115,22,0.22)', borderRadius: '999px', padding: '4px 8px', fontSize: '0.75rem', color: '#fed7aa' }}>
-              {item}
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
+    <details open={defaultOpen} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px' }}>
+      <summary style={{ cursor: 'pointer', listStyle: 'none', padding: '10px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ color: '#f8fafc', fontWeight: 700 }}>{title}</span>
+        <span style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{items.length}</span>
+      </summary>
+      <div style={{ padding: '0 12px 12px' }}>
+        {items.length === 0 ? (
+          <div style={{ color: '#64748b', fontSize: '0.8rem' }}>{empty}</div>
+        ) : (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+            {items.map((item) => (
+              <span key={item} style={{ background: 'rgba(249,115,22,0.12)', border: '1px solid rgba(249,115,22,0.22)', borderRadius: '999px', padding: '4px 8px', fontSize: '0.75rem', color: '#fed7aa' }}>
+                {item}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </details>
+  );
+}
+
+function SummaryIssues({ items }: { items: string[] }) {
+  return (
+    <details open style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px' }}>
+      <summary style={{ cursor: 'pointer', listStyle: 'none', padding: '10px 12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <span style={{ color: '#f8fafc', fontWeight: 700 }}>Pendências principais</span>
+        <span style={{ color: items.length === 0 ? '#4ade80' : '#fb923c', fontSize: '0.75rem', fontWeight: 700 }}>
+          {items.length === 0 ? 'OK' : items.length}
+        </span>
+      </summary>
+      <div style={{ padding: '0 12px 12px' }}>
+        {items.length === 0 ? (
+          <div style={{ color: '#4ade80', fontSize: '0.82rem' }}>Personagem pronto para a ficha final.</div>
+        ) : (
+          <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.82rem', lineHeight: 1.5 }}>
+            {items.map((error) => <li key={error}>{error}</li>)}
+          </ul>
+        )}
+      </div>
+    </details>
   );
 }
