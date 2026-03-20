@@ -37,19 +37,19 @@
 .detailsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: 12px;
-  margin-top: 4px;
-  align-items: start;
+  gap: 14px;
+  margin-top: 16px;
 }
 
 .metaCard {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(249, 115, 22, 0.15);
-  background: rgba(249, 115, 22, 0.05);
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(30, 32, 45, 0.4);
+  justify-content: center;
 }
 
 .metaCardLabel {

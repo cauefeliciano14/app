@@ -1,24 +1,24 @@
 .placeholderPanel {
   border-style: dashed;
-  border-color: rgba(255,255,255,0.12);
+  border-color: rgba(255, 255, 255, 0.12);
   background: rgba(17, 18, 24, 0.42);
 }
 
 .classSummaryCard {
   border-radius: 18px;
   padding: 18px;
-  background: rgba(255,255,255,0.03);
-  border-color: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.06);
 }
 
 .classMenuButton {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  min-height: 88px;
-  padding: 12px 14px;
+  min-height: 90px;
+  padding: 14px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.07);
   background: rgba(26, 27, 35, 0.8);
@@ -42,6 +42,14 @@
 }
 
 .classMenuIdentity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.classMenuIconAndName {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -76,6 +84,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: auto;
 }
 
 .classMetaChip {
@@ -95,7 +104,7 @@
 .resetButton {
   align-self: flex-start;
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #94a3b8;
 }
 
@@ -106,8 +115,8 @@
   align-items: end;
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
   min-height: 24rem;
 }
 
@@ -129,8 +138,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.68) 38%, rgba(15,23,42,0.16) 100%),
-    linear-gradient(180deg, rgba(15,23,42,0.04) 0%, rgba(15,23,42,0.18) 48%, rgba(15,23,42,0.84) 100%);
+    linear-gradient(90deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.68) 38%, rgba(15, 23, 42, 0.16) 100%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.04) 0%, rgba(15, 23, 42, 0.18) 48%, rgba(15, 23, 42, 0.84) 100%);
 }
 
 .summaryTopRow,
@@ -166,8 +175,8 @@
   padding: 6px 10px;
   border-radius: 999px;
   color: #fdba74;
-  background: rgba(249,115,22,0.14);
-  border: 1px solid rgba(249,115,22,0.22);
+  background: rgba(249, 115, 22, 0.14);
+  border: 1px solid rgba(249, 115, 22, 0.22);
   font-size: 0.74rem;
   font-weight: 600;
 }
@@ -200,10 +209,10 @@
 }
 
 .summaryStat {
-  background: rgba(2,6,23,0.42);
+  background: rgba(2, 6, 23, 0.42);
   backdrop-filter: blur(8px);
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 10px 12px;
   min-width: min(100%, 11rem);
 }
@@ -223,14 +232,23 @@
 .traitsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
-  gap: 10px;
+  gap: 14px;
   margin-top: 16px;
 }
 
 .traitCard {
-  background: rgba(0,0,0,0.18);
+  background: rgba(30, 32, 45, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+
+.traitCardWide {
+  grid-column: span 2;
 }
 
 .traitLabel {
@@ -238,7 +256,7 @@
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .traitValue {
@@ -266,8 +284,8 @@
   min-height: 24px;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(249,115,22,0.12);
-  border: 1px solid rgba(249,115,22,0.2);
+  background: rgba(249, 115, 22, 0.12);
+  border: 1px solid rgba(249, 115, 22, 0.2);
   color: #fdba74;
   font-size: 0.72rem;
   font-weight: 600;
@@ -284,7 +302,7 @@
   }
 
   .summaryHeroOverlay {
-    background: linear-gradient(180deg, rgba(15,23,42,0.14) 0%, rgba(15,23,42,0.5) 48%, rgba(15,23,42,0.9) 100%);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.14) 0%, rgba(15, 23, 42, 0.5) 48%, rgba(15, 23, 42, 0.9) 100%);
   }
 
   .summaryHeroContent {

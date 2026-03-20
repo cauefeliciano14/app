@@ -27,7 +27,7 @@
 
 .supportGrid {
   display: grid;
-  grid-template-columns: minmax(10rem, 0.8fr) minmax(12rem, 1.1fr) minmax(11rem, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: start;
 }
@@ -45,7 +45,7 @@
 
 .tabsCard {
   background: rgba(17, 18, 24, 0.4);
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   padding: 16px;
 }
@@ -61,6 +61,7 @@
 }
 
 @media (max-width: 860px) {
+
   .heroGrid,
   .supportGrid {
     grid-template-columns: minmax(0, 1fr);

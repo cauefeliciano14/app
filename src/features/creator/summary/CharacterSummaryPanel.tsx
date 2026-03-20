@@ -2,6 +2,7 @@ import { useMemo, useRef, useEffect, useState } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
 import { useWizard } from '../../../context/WizardContext';
 import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
+import { FANTASY_NAMES } from '../../../data/fantasyNames';
 import styles from './CharacterSummaryPanel.module.css';
 
 const STEP_LABELS: Record<string, string> = {
@@ -26,8 +27,47 @@ const STEP_INDEX: Record<string, number> = {
 };
 
 export function CharacterSummaryPanel() {
-  const { character, selectedBackground, derivedSheet, characterLevel, validationResult } = useCharacter();
-  const { setCurrentStep } = useWizard();
+  const { character, setCharacter, selectedBackground, derivedSheet, characterLevel, validationResult } = useCharacter();
+  const { setCurrentStep, setIsPortraitModalOpen } = useWizard();
+
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
+
+  const generateAndShow = () => {
+    if (suggestionsOpen) {
+      setSuggestionsOpen(false);
+      return;
+    }
+    const shuffled = [...FANTASY_NAMES].sort(() => 0.5 - Math.random());
+    setSuggestions(shuffled.slice(0, 5));
+    setSuggestionsOpen(true);
+  };
+
+  const pickSuggestion = (name: string) => {
+    setCharacter((prev: any) => ({ ...prev, name }));
+    setSuggestionsOpen(false);
+  };
+
+  useEffect(() => {
+    if (!suggestionsOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(e.target as Node)) {
+        setSuggestionsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [suggestionsOpen]);
+
+  useEffect(() => {
+    if (!suggestionsOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSuggestionsOpen(false);
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [suggestionsOpen]);
 
   // ── Reactive flash detection ───────────────────────────────────────────────
   const prevDerivedRef = useRef<typeof derivedSheet | null>(null);
@@ -124,14 +164,53 @@ export function CharacterSummaryPanel() {
 
       <div className={`${styles.identityCard} ${identityFlash ? styles.flashHighlight : ''}`}>
         <div className={styles.identityHeader}>
-          <div className={styles.identityAvatar}>
+          <button
+            type="button"
+            className={`${styles.identityAvatar} ${character.portrait ? styles.avatarFilled : ''}`.trim()}
+            onClick={() => setIsPortraitModalOpen(true)}
+            aria-label="Escolher retrato do personagem"
+            style={{ cursor: 'pointer', outline: 'none', padding: 0 }}
+          >
             {character.portrait
-              ? <img src={character.portrait} alt="Retrato" className={styles.avatarImg} />
-              : <div className={styles.avatarPlaceholder}>⚔</div>
+              ? <img src={`/imgs/portrait_caracter/${character.portrait}`} alt="Retrato" className={styles.avatarImg} />
+              : <div className={styles.avatarPlaceholder}>+</div>
             }
-          </div>
-          <div className={styles.identityInfo}>
-            <div className={styles.identityName}>{character.name || 'Sem nome'}</div>
+          </button>
+          
+          <div className={styles.identityInfo} style={{ position: 'relative' }}>
+            <div className={styles.nameInputRow} ref={suggestionsRef}>
+              <input
+                type="text"
+                className={styles.characterNameInput}
+                value={character.name || ''}
+                onChange={(e) => setCharacter((prev: any) => ({ ...prev, name: e.target.value }))}
+                placeholder="Nome do personagem"
+                aria-label="Nome do personagem"
+              />
+              <button
+                type="button"
+                className={`${styles.suggestBtn} ${suggestionsOpen ? styles.suggestBtnActive : ''}`}
+                onClick={generateAndShow}
+                title="Sugerir nomes"
+              >
+                ✦
+              </button>
+              {suggestionsOpen && (
+                <div className={styles.suggestionsDropdown} role="listbox">
+                  {suggestions.map((name) => (
+                    <button
+                      key={name}
+                      type="button"
+                      role="option"
+                      className={styles.suggestionItem}
+                      onClick={() => pickSuggestion(name)}
+                    >
+                      {name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <div className={styles.identityMetaList}>
               <div className={styles.identityMetaRow}>
                 <span className={styles.identityMetaLabel}>Classe</span>

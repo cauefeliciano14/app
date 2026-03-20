@@ -18,12 +18,12 @@ const spellIndex: Record<string, SpellDetail> = {};
   spellIndex[s.name] = s;
 });
 
-export const SpellTooltip: React.FC<{ spellName: string; anchorRect?: DOMRect | null }> = ({ spellName, anchorRect }) => {
+export const SpellTooltip: React.FC<{ spellName: string; anchorRect?: DOMRect | null; onClose?: () => void }> = ({ spellName, anchorRect, onClose }) => {
   const spell = spellIndex[spellName];
   if (!spell) return null;
 
   return (
-    <ContextualOverlay anchorRect={anchorRect} width={380} title={spell.name}>
+    <ContextualOverlay anchorRect={anchorRect} width={380} title={spell.name} onClose={onClose}>
       <div style={{ color: '#a1a1aa', fontSize: '0.75rem', fontStyle: 'italic', marginBottom: '10px' }}>
         {spell.level === 'Truque' ? `Truque de ${spell.school}` : `${spell.level}, ${spell.school}`}
       </div>

@@ -49,12 +49,13 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
         </div>
 
         <div className={styles.selectionLayout}>
-          <div className={styles.selectionRail}>
+          <div className={styles.selectionRail} style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
             {speciesData.species.map((sp: any) => {
               const isSelected = character.species?.id === sp.id;
               return (
                 <button
                   key={sp.id}
+                  style={{ minHeight: '44px', padding: '10px 12px' }}
                   type="button"
                   className={`${styles.selectionButton} ${isSelected ? styles.selectionButtonActive : ""}`.trim()}
                   onClick={() => handleSelectSpecies(sp)}

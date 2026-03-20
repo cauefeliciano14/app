@@ -156,7 +156,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
           </p>
         </div>
 
-        <div className={`${layoutStyles.selectionRail} ${layoutStyles.selectionRailWide}`}>
+        <div className={layoutStyles.selectionRail}>
           {bgData.classes.map((cls) => {
             const isSelected = selectedClass?.id === cls.id;
             const cardMeta = getClassCardMeta(cls.id);
@@ -167,18 +167,20 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                 onClick={() => handleSelectClass(cls)}
                 className={`${styles.classMenuButton} ${isSelected ? styles.classMenuButtonSelected : ''}`}
               >
-                <span className={styles.classMenuIdentity}>
-                  <span className={styles.classMenuIconWrap}>
-                    <img src={getClassIconSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardIcon} />
-                  </span>
-                  <span className={styles.classMenuName}>{cls.name}</span>
-                </span>
-                <span className={styles.classMenuMetaRow}>
+                <div className={styles.classMenuIdentity}>
+                  <div className={styles.classMenuIconAndName}>
+                    <span className={styles.classMenuIconWrap}>
+                      <img src={getClassIconSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardIcon} />
+                    </span>
+                    <span className={styles.classMenuName}>{cls.name}</span>
+                  </div>
+                  {cardMeta.hitDie ? <span className={styles.classMetaChip}>{cardMeta.hitDie}</span> : null}
+                </div>
+                <div className={styles.classMenuMetaRow}>
                   {cardMeta.primaryAttribute ? (
                     <span className={styles.classMetaChip}>{cardMeta.primaryAttribute}</span>
                   ) : null}
-                  {cardMeta.hitDie ? <span className={styles.classMetaChip}>{cardMeta.hitDie}</span> : null}
-                </span>
+                </div>
               </button>
             );
           })}
@@ -189,96 +191,99 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
         </button>
 
         <div className={layoutStyles.detailsColumn}>
-            {!selectedClass || !classDetails ? (
-              <div className={`${layoutStyles.placeholderPanel} ${styles.placeholderPanel}`}>Escolha uma classe para revisar detalhes e opções obrigatórias.</div>
-            ) : (
-              <>
-                <div className={`${layoutStyles.summaryCardBase} ${styles.classSummaryCard}`}>
-                  <div className={styles.summaryHeroPanel}>
-                    <div className={styles.summaryHeroWrap}>
-                      <img src={getClassHeroArtSrc(selectedClass.id)} alt={`Arte de ${selectedClass.name}`} className={styles.summaryHeroArt} />
-                      <div className={styles.summaryHeroOverlay} />
-                    </div>
-                    <div className={styles.summaryHeroContent}>
-                      <div className={styles.summaryTopRow}>
-                        <div className={styles.summaryBadge}>
-                          <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
-                          Classe selecionada
-                        </div>
-                      </div>
-                      <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
-                      <p className={styles.summaryDescription}>{selectedClass.description}</p>
-                      <div className={styles.summaryStatsInline}>
-                        <SummaryStat label="Dado de vida" value={getClassHPData(selectedClass.id)?.hitDieLabel || '—'} />
-                        {selectedClassMeta?.primaryAttribute ? (
-                          <SummaryStat label="Atributo-chave" value={selectedClassMeta.primaryAttribute || '—'} />
-                        ) : null}
+          {!selectedClass || !classDetails ? (
+            <div className={`${layoutStyles.placeholderPanel} ${styles.placeholderPanel}`}>Escolha uma classe para revisar detalhes e opções obrigatórias.</div>
+          ) : (
+            <>
+              <div className={`${layoutStyles.summaryCardBase} ${styles.classSummaryCard}`}>
+                <div className={styles.summaryHeroPanel}>
+                  <div className={styles.summaryHeroWrap}>
+                    <img src={getClassHeroArtSrc(selectedClass.id)} alt={`Arte de ${selectedClass.name}`} className={styles.summaryHeroArt} />
+                    <div className={styles.summaryHeroOverlay} />
+                  </div>
+                  <div className={styles.summaryHeroContent}>
+                    <div className={styles.summaryTopRow}>
+                      <div className={styles.summaryBadge}>
+                        <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
+                        Classe selecionada
                       </div>
                     </div>
+                    <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
+                    <p className={styles.summaryDescription}>{selectedClass.description}</p>
+                    <div className={styles.summaryStatsInline}>
+                      <SummaryStat label="Dado de vida" value={getClassHPData(selectedClass.id)?.hitDieLabel || '—'} />
+                      {selectedClassMeta?.primaryAttribute ? (
+                        <SummaryStat label="Atributo-chave" value={selectedClassMeta.primaryAttribute || '—'} />
+                      ) : null}
+                    </div>
                   </div>
-                  <div className={styles.traitsHeader}>
-                    <h4 className={styles.traitsTitle}>Traços-base</h4>
-                  </div>
-                  <div className={styles.traitsGrid}>
-                    {Object.entries(classDetails.basicTraits).map(([key, value]) => (
-                      <div key={key} className={styles.traitCard}>
+                </div>
+                <div className={styles.traitsHeader}>
+                  <h4 className={styles.traitsTitle}>Traços-base</h4>
+                </div>
+                <div className={styles.traitsGrid}>
+                  {Object.entries(classDetails.basicTraits).map(([key, value]) => {
+                    const isWide = key.toLowerCase() === 'equipamento inicial';
+                    return (
+                      <div key={key} className={`${styles.traitCard} ${isWide ? styles.traitCardWide : ''}`}>
                         <div className={styles.traitLabel}>{key}</div>
                         <div className={styles.traitValue}>{value}</div>
                       </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {(skillOptions.length > 0 || otherOptions.length > 0 || activeFeatures.length > 0) && (
+                <>
+                  <div className={styles.optionsHeader}>
+                    <h4 className={styles.optionsTitle}>Escolhas e características</h4>
+                    {validationErrors.length > 0 && (
+                      <span className={styles.optionsCounterChip}>
+                        {validationErrors.length} pendênci{validationErrors.length === 1 ? 'a' : 'as'}
+                      </span>
+                    )}
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {skillOptions.length > 0 && (
+                      <SkillChoicesGroup
+                        options={skillOptions}
+                        choices={character.choices}
+                        onChoiceChange={handleChoiceChange}
+                        allSelections={allSelections}
+                      />
+                    )}
+
+                    {otherOptions.map((opt: any) => (
+                      <FeatureExpandable
+                        key={opt.id}
+                        feature={{ name: opt.name, level: 1, description: opt.description ?? '' }}
+                        needsChoice={!character.choices[opt.id]}
+                        options={[opt]}
+                        choices={character.choices}
+                        onChoiceChange={handleChoiceChange}
+                        allSelections={allSelections}
+                      />
+                    ))}
+
+                    {activeFeatures.map((feature, idx) => (
+                      <FeatureExpandable
+                        key={`${feature.name}-${idx}`}
+                        feature={feature}
+                        needsChoice={feature.options?.some((opt: { id: string }) => !character.choices[opt.id])}
+                        options={feature.options}
+                        choices={character.choices}
+                        onChoiceChange={handleChoiceChange}
+                        allSelections={allSelections}
+                      />
                     ))}
                   </div>
-                </div>
-
-                {(skillOptions.length > 0 || otherOptions.length > 0 || activeFeatures.length > 0) && (
-                  <>
-                    <div className={styles.optionsHeader}>
-                      <h4 className={styles.optionsTitle}>Escolhas e características</h4>
-                      {validationErrors.length > 0 && (
-                        <span className={styles.optionsCounterChip}>
-                          {validationErrors.length} pendênci{validationErrors.length === 1 ? 'a' : 'as'}
-                        </span>
-                      )}
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                      {skillOptions.length > 0 && (
-                        <SkillChoicesGroup
-                          options={skillOptions}
-                          choices={character.choices}
-                          onChoiceChange={handleChoiceChange}
-                          allSelections={allSelections}
-                        />
-                      )}
-
-                      {otherOptions.map((opt: any) => (
-                        <FeatureExpandable
-                          key={opt.id}
-                          feature={{ name: opt.name, level: 1, description: opt.description ?? '' }}
-                          needsChoice={!character.choices[opt.id]}
-                          options={[opt]}
-                          choices={character.choices}
-                          onChoiceChange={handleChoiceChange}
-                          allSelections={allSelections}
-                        />
-                      ))}
-
-                      {activeFeatures.map((feature, idx) => (
-                        <FeatureExpandable
-                          key={`${feature.name}-${idx}`}
-                          feature={feature}
-                          needsChoice={feature.options?.some((opt: { id: string }) => !character.choices[opt.id])}
-                          options={feature.options}
-                          choices={character.choices}
-                          onChoiceChange={handleChoiceChange}
-                          allSelections={allSelections}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-          </div>
+                </>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </StepLayout>
   );

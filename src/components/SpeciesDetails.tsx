@@ -13,9 +13,9 @@ const IMAGE_MAP: Record<string, string> = {
 };
 
 const ALL_SKILLS = [
-  'Acrobacia','Arcanismo','Atletismo','Atuação','Enganação','Furtividade',
-  'História','Intimidação','Intuição','Investigação','Lidar com Animais',
-  'Medicina','Natureza','Percepção','Persuasão','Prestidigitação','Religião','Sobrevivência',
+  'Acrobacia', 'Arcanismo', 'Atletismo', 'Atuação', 'Enganação', 'Furtividade',
+  'História', 'Intimidação', 'Intuição', 'Investigação', 'Lidar com Animais',
+  'Medicina', 'Natureza', 'Percepção', 'Persuasão', 'Prestidigitação', 'Religião', 'Sobrevivência',
 ];
 
 const ATTR_OPTIONS = ['Carisma', 'Inteligência', 'Sabedoria'];
@@ -589,148 +589,158 @@ export const SpeciesDetails: React.FC<SpeciesDetailsProps> = ({ character, setCh
     background: 'rgba(30, 32, 45, 0.4)',
     border: '1px solid rgba(255,255,255,0.06)',
     borderRadius: '10px',
-    padding: '12px 14px',
-    display: 'flex', flexDirection: 'column', gap: '4px',
+    padding: '14px 16px',
+    display: 'flex', flexDirection: 'column', gap: '6px',
+    justifyContent: 'center',
   };
 
   return (
     <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '18px' }}>
 
       {/* Hero: image (left) + name/desc/cards (right) */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 200px) 1fr', gap: '18px', alignItems: 'start' }}>
-        {/* Image */}
-        <div ref={imageRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{ aspectRatio: '3/4', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', flexShrink: 0 }}>
-          <img src={imageSrc} alt={species.name}
-            style={{ width: '115%', height: '115%', objectFit: 'cover', objectPosition: 'center center', transform: `translate(calc(-7.5% + ${parallaxX}px), calc(-7.5% + ${parallaxY}px))`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
-          />
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(17,18,24,1), transparent)' }} />
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(140px, 240px) 1fr', gap: '24px', alignItems: 'stretch' }}>
+        {/* Box 1 (Left Block): Image + 2 Stats */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div ref={imageRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} style={{ aspectRatio: '3/4', borderRadius: '14px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', flexShrink: 0 }}>
+            <img src={imageSrc} alt={species.name}
+              style={{ width: '115%', height: '115%', objectFit: 'cover', objectPosition: 'center center', transform: `translate(calc(-7.5% + ${parallaxX}px), calc(-7.5% + ${parallaxY}px))`, transition: 'transform 0.3s ease-out', willChange: 'transform' }}
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(17,18,24,1), transparent)' }} />
+          </div>
         </div>
 
-        {/* Name + description + traits summary + info cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', minWidth: 0 }}>
-          <div>
-            <h2 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', color: '#fff', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 800 }}>{species.name}</h2>
-            {species.description && (
-              <p style={{ color: '#94a3b8', fontSize: '0.88rem', lineHeight: 1.65, margin: '0 0 8px 0' }}>{species.description}</p>
-            )}
-            <p style={{ color: '#64748b', fontSize: '0.82rem', margin: 0 }}>
-              <span style={{ color: '#f97316', fontWeight: 600 }}>Traços de {species.name}:</span>{' '}{traitsListText}
-            </p>
-          </div>
+        {/* Box 2 (Right Block): Title + Desc + 2 Stats */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: 0 }}>
 
-          {/* 4 Info Cards — 2×2 grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
-            {[
-              ['Tipo de Criatura', species.vitalInfo.type],
-              ['Tamanho', species.vitalInfo.size],
-              ['Deslocamento', species.vitalInfo.speed],
-              ['Visão no Escuro', darkvisionValue],
-            ].map(([label, value]) => (
-              <div key={label} style={infoCardStyle}>
-                <span style={{ fontSize: '0.68rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.8px', fontWeight: 600 }}>{label}</span>
-                <span style={{ fontSize: '0.84rem', color: '#f1f5f9', fontWeight: 500, lineHeight: 1.4 }}>{value}</span>
-              </div>
-            ))}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div>
+              <h2 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', color: '#fff', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 800 }}>{species.name}</h2>
+              {species.description && (
+                <p style={{ color: '#94a3b8', fontSize: '0.88rem', lineHeight: 1.65, margin: '0 0 8px 0' }}>{species.description}</p>
+              )}
+              <p style={{ color: '#64748b', fontSize: '0.82rem', margin: 0 }}>
+                <span style={{ color: '#f97316', fontWeight: 600 }}>Traços de {species.name}:</span>{' '}{traitsListText}
+              </p>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' }}>
+              {[
+                ['Tipo de Criatura', species.vitalInfo.type],
+                ['Tamanho', species.vitalInfo.size],
+                ['Deslocamento', species.vitalInfo.speed],
+                ['Visão no Escuro', darkvisionValue],
+              ].map(([label, value]) => (
+                <div key={label} style={infoCardStyle}>
+                  <span style={{ fontSize: '0.68rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.8px', fontWeight: 600 }}>{label}</span>
+                  <span style={{ fontSize: '0.84rem', color: '#f1f5f9', fontWeight: 500, lineHeight: 1.4 }}>
+                    {label === 'Tamanho' && typeof value === 'string' && value.includes(' ou Pequeno') ? (
+                      <>{value.split(' ou Pequeno')[0]} <br /> ou Pequeno{value.split(' ou Pequeno')[1]}</>
+                    ) : value}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* ── Species-specific + per-trait rendering ── */}
+      {/* ── Bottom Section: Species-specific + per-trait rendering (Full width) ── */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginTop: '4px' }}>
+        {/* Tamanho goes first for species that need it */}
+        {species.id === 'aasimar' && <AasimarTamanho choices={choices} setChoice={setChoice} />}
+        {species.id === 'humano' && <HumanoTamanho choices={choices} setChoice={setChoice} />}
+        {species.id === 'tiferino' && <TiferinoTamanho choices={choices} setChoice={setChoice} />}
 
-      {/* Tamanho goes first for species that need it */}
-      {species.id === 'aasimar' && <AasimarTamanho choices={choices} setChoice={setChoice} />}
-      {species.id === 'humano' && <HumanoTamanho choices={choices} setChoice={setChoice} />}
-      {species.id === 'tiferino' && <TiferinoTamanho choices={choices} setChoice={setChoice} />}
+        {/* Lineage/ancestry sections (before or between traits) */}
+        {species.id === 'aasimar' && species.lineage && <AasimarRevelacao species={species} />}
+        {species.id === 'draconato' && species.lineage && <DraconatoLineage species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'elfo' && species.lineage && <ElfoLinhagem species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'gnomo' && species.lineage && <GnomoLinhagem species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'golias' && species.lineage && <GoliaAncestralidade species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'tiferino' && species.lineage && <TiferinoLegado species={species} choices={choices} setChoice={setChoice} />}
+        {/* Generic lineage (for species without specific component) */}
+        {species.lineage && !['aasimar', 'draconato', 'elfo', 'gnomo', 'golias', 'tiferino'].includes(species.id) && (
+          <GenericLineage species={species} choices={choices} setChoice={setChoice} />
+        )}
 
-      {/* Lineage/ancestry sections (before or between traits) */}
-      {species.id === 'aasimar' && species.lineage && <AasimarRevelacao species={species} />}
-      {species.id === 'draconato' && species.lineage && <DraconatoLineage species={species} choices={choices} setChoice={setChoice} />}
-      {species.id === 'elfo' && species.lineage && <ElfoLinhagem species={species} choices={choices} setChoice={setChoice} />}
-      {species.id === 'gnomo' && species.lineage && <GnomoLinhagem species={species} choices={choices} setChoice={setChoice} />}
-      {species.id === 'golias' && species.lineage && <GoliaAncestralidade species={species} choices={choices} setChoice={setChoice} />}
-      {species.id === 'tiferino' && species.lineage && <TiferinoLegado species={species} choices={choices} setChoice={setChoice} />}
-      {/* Generic lineage (for species without specific component) */}
-      {species.lineage && !['aasimar', 'draconato', 'elfo', 'gnomo', 'golias', 'tiferino'].includes(species.id) && (
-        <GenericLineage species={species} choices={choices} setChoice={setChoice} />
-      )}
+        {/* Per-trait accordions — respects species.json order, injects special components */}
+        {species.racialTraits
+          .filter((t: any) => !excludedTraitNames.includes(t.title))
+          .map((trait: any) => {
+            if (species.id === 'elfo' && trait.title === 'Sentidos Aguçados') {
+              return <ElfoSentidos key={trait.title} choices={choices} setChoice={setChoice} />;
+            }
+            if (species.id === 'humano' && trait.title === 'Hábil') {
+              return <HumanoHabil key={trait.title} choices={choices} setChoice={setChoice} />;
+            }
+            if (species.id === 'humano' && trait.title === 'Versátil') {
+              return <HumanoVersatil key={trait.title} choices={choices} setChoice={setChoice} character={character} setCharacter={setCharacter} />;
+            }
+            return <TraitAccordion key={trait.title} trait={trait} />;
+          })
+        }
 
-      {/* Per-trait accordions — respects species.json order, injects special components */}
-      {species.racialTraits
-        .filter((t: any) => !excludedTraitNames.includes(t.title))
-        .map((trait: any) => {
-          if (species.id === 'elfo' && trait.title === 'Sentidos Aguçados') {
-            return <ElfoSentidos key={trait.title} choices={choices} setChoice={setChoice} />;
-          }
-          if (species.id === 'humano' && trait.title === 'Hábil') {
-            return <HumanoHabil key={trait.title} choices={choices} setChoice={setChoice} />;
-          }
-          if (species.id === 'humano' && trait.title === 'Versátil') {
-            return <HumanoVersatil key={trait.title} choices={choices} setChoice={setChoice} character={character} setCharacter={setCharacter} />;
-          }
-          return <TraitAccordion key={trait.title} trait={trait} />;
-        })
-      }
-
-      {/* Languages accordion */}
-      <details style={{ ...accordionWrap, border: manualLangs.length < 2 ? '1px solid rgba(249,115,22,0.5)' : '1px solid rgba(255,255,255,0.06)' }}>
-        <summary style={summaryBase}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-            {manualLangs.length < 2 && badgeCircle}
-            <span>Idiomas</span>
-          </div>
-          <span style={{ fontSize: '0.75rem', color: manualLangs.length === 2 ? '#10b981' : '#64748b', fontWeight: 400 }}>
-            {manualLangs.length === 2 ? '✓ 2 selecionados' : `${manualLangs.length}/2 escolhidos ▾`}
-          </span>
-        </summary>
-        <div style={{ padding: '0 16px 16px 16px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          <p style={{ margin: 0, fontSize: '0.875rem', color: '#cbd5e1', lineHeight: 1.6 }}>
-            Seu personagem conhece pelo menos três idiomas: <strong style={{ color: '#f1f5f9' }}>Comum</strong> e mais dois idiomas à sua escolha da tabela abaixo.
-          </p>
-          {classLangs.length > 0 && (
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {classLangs.map(l => (
-                <span key={l} style={{ padding: '5px 12px', background: 'rgba(249,115,22,0.15)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: '20px', fontSize: '0.8rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  ✓ {allLangs.find((x: any) => x.id === l)?.name || l}
-                  <span style={{ fontSize: '0.65rem', background: '#f97316', color: '#000', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', fontWeight: 'bold' }}>Da Classe</span>
-                </span>
+        {/* Languages accordion */}
+        <details style={{ ...accordionWrap, border: manualLangs.length < 2 ? '1px solid rgba(249,115,22,0.5)' : '1px solid rgba(255,255,255,0.06)' }}>
+          <summary style={summaryBase}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+              {manualLangs.length < 2 && badgeCircle}
+              <span>Idiomas</span>
+            </div>
+            <span style={{ fontSize: '0.75rem', color: manualLangs.length === 2 ? '#10b981' : '#64748b', fontWeight: 400 }}>
+              {manualLangs.length === 2 ? '✓ 2 selecionados' : `${manualLangs.length}/2 escolhidos ▾`}
+            </span>
+          </summary>
+          <div style={{ padding: '0 16px 16px 16px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <p style={{ margin: 0, fontSize: '0.875rem', color: '#cbd5e1', lineHeight: 1.6 }}>
+              Seu personagem conhece pelo menos três idiomas: <strong style={{ color: '#f1f5f9' }}>Comum</strong> e mais dois idiomas à sua escolha da tabela abaixo.
+            </p>
+            {classLangs.length > 0 && (
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                {classLangs.map(l => (
+                  <span key={l} style={{ padding: '5px 12px', background: 'rgba(249,115,22,0.15)', border: '1px solid rgba(249,115,22,0.3)', borderRadius: '20px', fontSize: '0.8rem', color: '#fff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    ✓ {allLangs.find((x: any) => x.id === l)?.name || l}
+                    <span style={{ fontSize: '0.65rem', background: '#f97316', color: '#000', padding: '2px 6px', borderRadius: '4px', textTransform: 'uppercase', fontWeight: 'bold' }}>Da Classe</span>
+                  </span>
+                ))}
+              </div>
+            )}
+            <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
+                <thead>
+                  <tr><th style={thStyle}>Idioma</th><th style={thStyle}>Origem</th></tr>
+                </thead>
+                <tbody>
+                  {(languagesData.common || []).map((lang: any, i: number) => (
+                    <tr key={lang.id} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
+                      <td style={{ padding: '7px 14px', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#e2e8f0' }}>{lang.name}</td>
+                      <td style={{ padding: '7px 14px', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#94a3b8' }}>{lang.origin}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {([0, 1] as const).map(idx => (
+                <select key={idx} className="premium-select"
+                  value={manualLangs[idx] || ''}
+                  onChange={e => handleLangDropdown(idx, e.target.value)}
+                  style={{ ...selectStyle, border: manualLangs[idx] ? '1px solid rgba(249,115,22,0.5)' : '1px solid rgba(255,255,255,0.15)', color: manualLangs[idx] ? '#fff' : '#64748b' }}
+                >
+                  <option value="">– Escolha um idioma comum –</option>
+                  {selectableLangs
+                    .filter((l: any) => !manualLangs.includes(l.id) || manualLangs[idx] === l.id)
+                    .map((lang: any) => <option key={lang.id} value={lang.id}>{lang.name}</option>)}
+                </select>
               ))}
             </div>
-          )}
-          <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.82rem' }}>
-              <thead>
-                <tr><th style={thStyle}>Idioma</th><th style={thStyle}>Origem</th></tr>
-              </thead>
-              <tbody>
-                {(languagesData.common || []).map((lang: any, i: number) => (
-                  <tr key={lang.id} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
-                    <td style={{ padding: '7px 14px', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#e2e8f0' }}>{lang.name}</td>
-                    <td style={{ padding: '7px 14px', borderBottom: '1px solid rgba(255,255,255,0.04)', color: '#94a3b8' }}>{lang.origin}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div style={{ fontSize: '0.8rem', color: manualLangs.length === 2 ? '#10b981' : '#f97316', textAlign: 'right' }}>
+              {manualLangs.length === 2 ? '✓ 2 idiomas selecionados' : `Escolha mais ${2 - manualLangs.length} idioma${2 - manualLangs.length > 1 ? 's' : ''}`}
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {([0, 1] as const).map(idx => (
-              <select key={idx} className="premium-select"
-                value={manualLangs[idx] || ''}
-                onChange={e => handleLangDropdown(idx, e.target.value)}
-                style={{ ...selectStyle, border: manualLangs[idx] ? '1px solid rgba(249,115,22,0.5)' : '1px solid rgba(255,255,255,0.15)', color: manualLangs[idx] ? '#fff' : '#64748b' }}
-              >
-                <option value="">– Escolha um idioma comum –</option>
-                {selectableLangs
-                  .filter((l: any) => !manualLangs.includes(l.id) || manualLangs[idx] === l.id)
-                  .map((lang: any) => <option key={lang.id} value={lang.id}>{lang.name}</option>)}
-              </select>
-            ))}
-          </div>
-          <div style={{ fontSize: '0.8rem', color: manualLangs.length === 2 ? '#10b981' : '#f97316', textAlign: 'right' }}>
-            {manualLangs.length === 2 ? '✓ 2 idiomas selecionados' : `Escolha mais ${2 - manualLangs.length} idioma${2 - manualLangs.length > 1 ? 's' : ''}`}
-          </div>
-        </div>
-      </details>
+        </details>
+      </div>
 
     </div>
   );

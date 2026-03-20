@@ -17,7 +17,7 @@ const statCardsGridStyle: CSSProperties = {
   display: 'grid',
   gap: '8px',
   alignItems: 'stretch',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(96px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(76px, 1fr))',
 };
 
 const actionRowGridStyle: CSSProperties = {
@@ -111,13 +111,13 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
         background: 'rgba(17, 18, 24, 0.6)',
         border: '1px solid rgba(255,255,255,0.07)',
         borderRadius: '10px',
-        padding: '8px 14px',
+        padding: '10px 14px',
         textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        minHeight: '80px',
         minWidth: 0,
-        minHeight: '72px',
-        display: 'grid',
-        alignContent: 'center',
-        justifyItems: 'center',
         gap: '2px',
       }}
     >

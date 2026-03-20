@@ -46,10 +46,8 @@ export function StepSidebar() {
           let subtitle: string | null = null;
           if (complete) {
             subtitle = 'Concluída';
-          } else if (active && pending === 0) {
+          } else if (active) {
             subtitle = 'Em andamento';
-          } else if (pending > 0) {
-            subtitle = `${pending} pendente${pending > 1 ? 's' : ''}`;
           }
 
           const subtitleClass = complete
