@@ -3,129 +3,79 @@
   flex-direction: column;
   gap: 16px;
   min-height: 0;
+  padding: 0 4px 40px 0;
+  box-sizing: border-box;
 }
 
-.stepGrid {
+.classRail {
   display: grid;
-  grid-template-columns:
-    minmax(clamp(15.5rem, 21vw, 18rem), 1fr)
-    minmax(clamp(22rem, 1vw + 24rem, 1fr), 1.8fr);
-  grid-template-areas: 'classes details';
-  gap: 16px;
-  min-height: 0;
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  align-items: stretch;
 }
 
-.classColumn,
-.detailsColumn {
+.classMenuButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 88px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(26, 27, 35, 0.8);
+  color: #e2e8f0;
+  text-align: left;
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.classMenuButton:hover {
+  transform: translateY(-1px);
+  border-color: rgba(249, 115, 22, 0.45);
+  background: rgba(249, 115, 22, 0.04);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+}
+
+.classMenuButtonSelected {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.16), rgba(249, 115, 22, 0.07));
+  border-color: rgba(249, 115, 22, 0.6);
+  box-shadow: 0 6px 18px rgba(249, 115, 22, 0.12);
+  color: #fff;
+}
+
+.classMenuIdentity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   min-width: 0;
 }
 
-.classColumn {
-  grid-area: classes;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-height: 0;
-}
-
-.classList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  overflow-y: auto;
-  padding-right: 4px;
-}
-
-.classCard {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 0;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.025));
-  text-align: left;
-  overflow: hidden;
-  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
-}
-
-.classCard:hover {
-  transform: translateY(-2px);
-  border-color: rgba(249,115,22,0.28);
-  background: rgba(255,255,255,0.05);
-  box-shadow: 0 14px 30px rgba(15,23,42,0.22);
-}
-
-.classCardSelected {
-  background: linear-gradient(180deg, rgba(249,115,22,0.12), rgba(15,23,42,0.92));
-  border-color: rgba(249,115,22,0.44);
-  box-shadow: 0 16px 36px rgba(15,23,42,0.3);
-}
-
-.classCardArtWrap {
-  position: relative;
-  border-radius: 0;
-  overflow: hidden;
-  aspect-ratio: 16 / 9;
-  background: linear-gradient(180deg, rgba(30,41,59,0.96), rgba(15,23,42,0.96));
-}
-
-.classCardArt {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-  display: block;
-}
-
-.classCardOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15,23,42,0.08) 0%, rgba(15,23,42,0.18) 42%, rgba(15,23,42,0.88) 100%);
-}
-
-.classCardIdentityBadge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
+.classMenuIconWrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 7px;
+  width: 34px;
+  height: 34px;
   border-radius: 999px;
-  background: rgba(15,23,42,0.78);
-  border: 1px solid rgba(255,255,255,0.16);
-  box-shadow: 0 10px 24px rgba(15,23,42,0.38);
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
 }
 
 .classCardIcon {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
-.classCardTitleOnArt {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 12px;
-  color: #fff;
+.classMenuName {
+  font-size: 0.96rem;
   font-weight: 700;
-  font-size: 1.05rem;
   line-height: 1.2;
-  text-shadow: 0 6px 18px rgba(15,23,42,0.75);
 }
 
-.classCardBody {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  min-width: 0;
-  padding: 12px 14px 14px;
-}
-
-.classCardMetaRow {
+.classMenuMetaRow {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -137,48 +87,39 @@
   min-height: 28px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(148,163,184,0.12);
-  border: 1px solid rgba(148,163,184,0.14);
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.14);
   color: #e2e8f0;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
-.classCardDescription {
-  color: #cbd5e1;
-  font-size: 0.79rem;
-  line-height: 1.58;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
 .resetButton {
-  margin-top: auto;
+  align-self: flex-start;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.12);
   color: #94a3b8;
 }
 
 .detailsColumn {
-  grid-area: details;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow-y: auto;
-  padding-right: 8px;
+  min-width: 0;
 }
 
 .placeholder {
-  min-height: 360px;
+  min-height: 10rem;
   border-radius: 16px;
   border: 1px dashed rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #64748b;
+  padding: 24px;
+  text-align: center;
+  background: rgba(17, 18, 24, 0.42);
 }
 
 .classSummaryCard {
@@ -221,7 +162,6 @@
     linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.68) 38%, rgba(15,23,42,0.16) 100%),
     linear-gradient(180deg, rgba(15,23,42,0.04) 0%, rgba(15,23,42,0.18) 48%, rgba(15,23,42,0.84) 100%);
 }
-
 
 .summaryTopRow,
 .traitsHeader {
@@ -317,14 +257,6 @@
   margin-top: 16px;
 }
 
-.sectionHeading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
 .traitCard {
   background: rgba(0,0,0,0.18);
   border-radius: 10px;
@@ -343,14 +275,6 @@
   color: #e2e8f0;
   font-size: 0.84rem;
   line-height: 1.5;
-}
-
-.sideColumn {
-  grid-area: side;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
 }
 
 .optionsHeader {
@@ -380,72 +304,17 @@
   white-space: nowrap;
 }
 
-.contextList {
-  margin: 0;
-  padding-left: 18px;
-  color: #cbd5e1;
-  font-size: 0.82rem;
-  line-height: 1.6;
-}
-
-.contextText {
-  color: #cbd5e1;
-  font-size: 0.82rem;
-  line-height: 1.6;
-}
-
-.contextTextSuccess {
-  color: #4ade80;
-  font-size: 0.82rem;
-}
-
-@media (max-width: 1320px) {
-  .stepGrid {
-    grid-template-columns:
-      minmax(clamp(14rem, 24vw, 16.5rem), 0.98fr)
-      minmax(clamp(22rem, 40vw, 34rem), 1.45fr);
-    grid-template-areas: 'classes details';
-  }
-
-  .summaryHeroPanel {
-    min-height: 22rem;
-  }
-}
-
-@media (max-width: 1100px) {
-  .stepGrid {
-    grid-template-columns:
-      minmax(clamp(13rem, 28vw, 15rem), 0.92fr)
-      minmax(clamp(20rem, 1vw + 22rem, 1fr), 1.35fr);
-  }
-
-  .summaryHeroPanel {
-    min-height: 20rem;
-  }
-}
-
-@media (max-width: 920px) {
-  .stepGrid {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      'classes'
-      'details';
-  }
-
-  .classList,
-  .detailsColumn {
-    overflow: visible;
+@media (max-width: 720px) {
+  .stepRoot {
     padding-right: 0;
   }
-}
 
-@media (max-width: 720px) {
-  .classCardArtWrap {
-    aspect-ratio: 4 / 3;
+  .classRail {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
-  .classCardBody {
-    padding: 12px;
+  .classMenuButton {
+    min-height: 82px;
   }
 
   .summaryHeroPanel {
@@ -453,8 +322,7 @@
   }
 
   .summaryHeroOverlay {
-    background:
-      linear-gradient(180deg, rgba(15,23,42,0.14) 0%, rgba(15,23,42,0.5) 48%, rgba(15,23,42,0.9) 100%);
+    background: linear-gradient(180deg, rgba(15,23,42,0.14) 0%, rgba(15,23,42,0.5) 48%, rgba(15,23,42,0.9) 100%);
   }
 
   .summaryHeroContent {
@@ -463,12 +331,6 @@
 
   .traitsGrid {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .placeholder {
-    min-height: 260px;
-    text-align: center;
-    padding: 24px;
   }
 
   .optionsHeader {
