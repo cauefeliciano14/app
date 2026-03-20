@@ -4,6 +4,15 @@
 }
 
 .shell {
+  --creator-collapsed-rail-size: calc(var(--space-xl) + var(--space-sm));
+  --creator-collapsed-control-size: calc(var(--space-xl) + var(--space-xs));
+  --creator-collapsed-dot-size: calc(var(--space-xl) + var(--space-xs));
+  --creator-collapsed-control-font-size: 0.85rem;
+  --creator-collapsed-dot-font-size: 0.75rem;
+  --creator-collapsed-gap: var(--space-sm);
+  --creator-collapsed-strip-padding: var(--space-xs);
+  --creator-collapsed-panel-padding: 10px var(--space-xs);
+
   display: grid;
   grid-template-columns:
     minmax(200px, 220px)
@@ -18,7 +27,7 @@
 /* ── Collapsible column variants ─────────────────────────────────────────── */
 .shellSidebarCollapsed {
   grid-template-columns:
-    38px
+    var(--creator-collapsed-rail-size)
     minmax(0, 1fr)
     minmax(220px, 260px);
 }
@@ -27,14 +36,14 @@
   grid-template-columns:
     minmax(200px, 220px)
     minmax(0, 1fr)
-    38px;
+    var(--creator-collapsed-rail-size);
 }
 
 .shellBothCollapsed {
   grid-template-columns:
-    38px
+    var(--creator-collapsed-rail-size)
     minmax(0, 1fr)
-    38px;
+    var(--creator-collapsed-rail-size);
 }
 
 /* ── Column base styles ───────────────────────────────────────────────────── */
@@ -76,7 +85,7 @@
 /* ── Collapsed panel state ───────────────────────────────────────────────── */
 .sidebarCollapsed,
 .summaryCollapsed {
-  padding: 10px 4px;
+  padding: var(--creator-collapsed-panel-padding);
   overflow: hidden;
   cursor: pointer;
 }
@@ -87,13 +96,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 30px;
+  min-height: var(--creator-collapsed-control-size);
   background: transparent;
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: var(--creator-collapsed-control-font-size);
   margin-bottom: 10px;
   padding: 0;
   transition: color 0.15s;
@@ -109,21 +118,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: var(--creator-collapsed-gap);
+  padding-inline: var(--creator-collapsed-strip-padding);
 }
 
 .collapsedExpandBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: var(--creator-collapsed-control-size);
+  min-width: var(--creator-collapsed-control-size);
+  height: var(--creator-collapsed-control-size);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: var(--creator-collapsed-control-font-size);
   transition: background 0.15s, color 0.15s;
   padding: 0;
 }
@@ -135,14 +146,17 @@
 }
 
 .collapsedStepDot {
-  width: 22px;
-  height: 22px;
+  width: var(--creator-collapsed-dot-size);
+  min-width: var(--creator-collapsed-dot-size);
+  height: var(--creator-collapsed-dot-size);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.62rem;
+  font-size: var(--creator-collapsed-dot-font-size);
   font-weight: 700;
+  line-height: 1;
+  padding: 0;
 }
 
 .collapsedDotComplete {
