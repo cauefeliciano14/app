@@ -1,7 +1,10 @@
 .shell {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr) 300px;
-  gap: 20px;
+  grid-template-columns:
+    minmax(clamp(12.5rem, 15vw, 14.5rem), 0.9fr)
+    minmax(clamp(22rem, 42vw, 34rem), 1.65fr)
+    minmax(clamp(15rem, 19vw, 18rem), 1fr);
+  gap: clamp(16px, 1.8vw, 24px);
   flex: 1;
   min-height: 0;
 }
@@ -10,6 +13,7 @@
 .summary,
 .main {
   min-height: 0;
+  min-width: 0;
 }
 
 .sidebar,
@@ -24,23 +28,24 @@
 .main {
   display: flex;
   flex-direction: column;
-  min-width: 0;
 }
 
 .mainInner {
   background: rgba(17, 18, 24, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
-  padding: 18px;
+  padding: clamp(16px, 1.8vw, 20px);
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 0;
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1380px) {
   .shell {
-    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-columns:
+      minmax(clamp(12rem, 18vw, 14rem), 0.85fr)
+      minmax(clamp(24rem, 48vw, 40rem), 1.45fr);
   }
 
   .summary {
@@ -48,8 +53,16 @@
   }
 }
 
+@media (max-width: 1100px) {
+  .shell {
+    grid-template-columns:
+      minmax(clamp(11.5rem, 24vw, 13.5rem), 0.8fr)
+      minmax(clamp(21rem, 1vw + 22rem, 1fr), 1.2fr);
+  }
+}
+
 @media (max-width: 860px) {
   .shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
