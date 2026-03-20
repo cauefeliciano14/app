@@ -204,7 +204,7 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
   // Talento de origem
   const originTalent = backgroundId ? getBackgroundTalent(backgroundId) ?? undefined : undefined;
 
-  // Idiomas: mesclando do antecedente + seleções do jogador
+  // Idiomas: manter IDs internos do motor; a interface traduz com utilitário próprio.
   const languages = choices.languageSelections ?? [];
 
   return {

@@ -51,6 +51,21 @@ export const StepHeader = ({
         </div>
       </div>
 
+      {showName && (
+        <div className="header-name-container">
+          <div
+            className={`profile-placeholder ${portrait ? 'has-image' : ''}`}
+            onClick={onPortraitClick}
+            title="Escolher retrato do personagem"
+          >
+            {portrait && (
+              <img
+                src={`/imgs/portrait_caracter/${portrait}`}
+                alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
+                className="profile-image"
+              />
+            )}
+          </div>
       <div className="header-name-container">
         <div
           className={`profile-placeholder ${portrait ? 'has-image' : ''}`}
