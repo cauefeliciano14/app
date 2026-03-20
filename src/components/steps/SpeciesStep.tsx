@@ -75,7 +75,7 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
                 languagesData={languagesData}
               />
             ) : (
-              <div className={styles.selectionPlaceholder}>
+              <div className={`${styles.selectionPlaceholder} ${styles.placeholderPanel}`}>
                 <span
                   style={{
                     fontSize: "2.5rem",

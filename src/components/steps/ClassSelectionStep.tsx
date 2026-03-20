@@ -145,7 +145,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       impactSection="class"
     >
-      <div className={styles.stepRoot}>
+      <div className={layoutStyles.stepRoot}>
         <div className={layoutStyles.sectionIntro}>
           <div className={layoutStyles.sectionTitleRow}>
             <span className={layoutStyles.sectionIcon}>✦</span>
@@ -156,7 +156,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
           </p>
         </div>
 
-        <div className={styles.classRail}>
+        <div className={`${layoutStyles.selectionRail} ${layoutStyles.selectionRailWide}`}>
           {bgData.classes.map((cls) => {
             const isSelected = selectedClass?.id === cls.id;
             const cardMeta = getClassCardMeta(cls.id);
@@ -188,12 +188,12 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
           Novo Personagem
         </button>
 
-        <div className={styles.detailsColumn}>
+        <div className={layoutStyles.detailsColumn}>
             {!selectedClass || !classDetails ? (
-              <div className={styles.placeholder}>Escolha uma classe para revisar detalhes e opções obrigatórias.</div>
+              <div className={`${layoutStyles.placeholderPanel} ${styles.placeholderPanel}`}>Escolha uma classe para revisar detalhes e opções obrigatórias.</div>
             ) : (
               <>
-                <div className={styles.classSummaryCard}>
+                <div className={`${layoutStyles.summaryCardBase} ${styles.classSummaryCard}`}>
                   <div className={styles.summaryHeroPanel}>
                     <div className={styles.summaryHeroWrap}>
                       <img src={getClassHeroArtSrc(selectedClass.id)} alt={`Arte de ${selectedClass.name}`} className={styles.summaryHeroArt} />
