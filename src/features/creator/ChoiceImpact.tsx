@@ -9,6 +9,8 @@ interface ImpactItem {
   text: string;
 }
 
+export type ChoiceImpactSection = 'class' | 'background' | 'species' | 'attributes' | 'equipment';
+
 const SPELL_ATTR_LABELS: Record<string, string> = {
   inteligencia: 'Inteligência',
   sabedoria: 'Sabedoria',
@@ -21,15 +23,15 @@ function modStr(score: number): string {
 }
 
 interface Props {
-  step: number;
+  section: ChoiceImpactSection;
 }
 
-export function ChoiceImpact({ step }: Props) {
-  const { character, derivedSheet } = useCharacter();
+export function ChoiceImpact({ section }: Props) {
+  const { character, selectedBackground, derivedSheet } = useCharacter();
 
   const items = useMemo((): ImpactItem[] | null => {
-    switch (step) {
-      case 0: {
+    switch (section) {
+      case 'class': {
         if (!character.characterClass) return null;
         const classId = character.characterClass.id;
         const hpData = CLASS_HP_DATA[classId];
@@ -57,7 +59,34 @@ export function ChoiceImpact({ step }: Props) {
         return result.slice(0, 6);
       }
 
-      case 2: {
+      case 'background': {
+        if (!selectedBackground) return null;
+        const result: ImpactItem[] = [];
+
+        if (selectedBackground.skillProficiencies?.length > 0) {
+          result.push({
+            icon: '◆',
+            text: `Perícias: ${selectedBackground.skillProficiencies.map((skill: string) => skill.replace(/\s*\([^)]*\)/g, '').trim()).join(', ')}`,
+          });
+        }
+
+        const toolLabel = character.choices.toolProficiency || selectedBackground.toolProficiency;
+        if (toolLabel) {
+          result.push({ icon: '🧰', text: `Ferramenta: ${toolLabel}` });
+        }
+
+        if (selectedBackground.talent) {
+          result.push({ icon: '✦', text: `Talento: ${selectedBackground.talent}` });
+        }
+
+        if (selectedBackground.equipment) {
+          result.push({ icon: '🎒', text: `Equipamento de origem disponível` });
+        }
+
+        return result.length > 0 ? result.slice(0, 4) : null;
+      }
+
+      case 'species': {
         if (!character.species) return null;
         const result: ImpactItem[] = [];
 
@@ -79,7 +108,7 @@ export function ChoiceImpact({ step }: Props) {
         return result.slice(0, 6);
       }
 
-      case 3: {
+      case 'attributes': {
         const { finalAttributes, modifiers, proficiencyBonus } = derivedSheet;
         if (!finalAttributes || Object.keys(finalAttributes).length === 0) return null;
         const result: ImpactItem[] = [];
@@ -98,7 +127,7 @@ export function ChoiceImpact({ step }: Props) {
         return result.slice(0, 5);
       }
 
-      case 4: {
+      case 'equipment': {
         const result: ImpactItem[] = [];
         result.push({ icon: '🛡', text: `CA atual: ${derivedSheet.armorClass}` });
 
@@ -119,7 +148,7 @@ export function ChoiceImpact({ step }: Props) {
       default:
         return null;
     }
-  }, [step, character.characterClass, character.species, derivedSheet]);
+  }, [section, character.characterClass, character.choices.toolProficiency, character.species, derivedSheet, selectedBackground]);
 
   if (!items || items.length === 0) return null;
 

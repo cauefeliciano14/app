@@ -40,6 +40,7 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       selections={stepSelections}
+      impactSection="species"
     >
       <div className={styles.stepContent}>
         <ValidationBanner errors={validationErrors} />

@@ -35,6 +35,7 @@ export const EquipmentStepWrapper: React.FC = () => {
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       selections={stepSelections}
+      impactSection="equipment"
     >
       <div className={styles.stepContent}>
         <ValidationBanner errors={validationErrors} />

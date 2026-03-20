@@ -25,7 +25,14 @@ export function CreatorShell() {
     setPlayState,
     handleResetCharacter,
   } = useCharacter();
-  const { currentStep, setCurrentStep, isPortraitModalOpen, setIsPortraitModalOpen } = useWizard();
+  const {
+    currentStep,
+    setCurrentStep,
+    isPortraitModalOpen,
+    setIsPortraitModalOpen,
+    sidebarCollapsed,
+    summaryCollapsed,
+  } = useWizard();
 
   const [showSaved, setShowSaved] = useState(false);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -37,6 +44,7 @@ export function CreatorShell() {
       character,
       currentStep,
       auxiliaryState: { selectedBackground, attrChoiceMode, attrPlus1, attrPlus2 },
+      shellState: { sidebarCollapsed, summaryCollapsed },
     }));
 
     // Skip the very first save (on mount) to avoid showing "Salvo" on load
@@ -48,7 +56,16 @@ export function CreatorShell() {
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     setShowSaved(true);
     saveTimerRef.current = setTimeout(() => setShowSaved(false), 2200);
-  }, [character, currentStep, selectedBackground, attrChoiceMode, attrPlus1, attrPlus2]);
+  }, [
+    character,
+    currentStep,
+    selectedBackground,
+    attrChoiceMode,
+    attrPlus1,
+    attrPlus2,
+    sidebarCollapsed,
+    summaryCollapsed,
+  ]);
 
   useEffect(() => {
     if (currentStep === 5 && playState.currentHp === 0 && derivedSheet.maxHP > 0) {

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
 import { StepHeader } from '../StepHeader';
 import { ValidationBanner } from '../ValidationBanner';
 import { StepSidebar } from '../../features/creator/navigation/StepSidebar';
 import { CharacterSummaryPanel } from '../../features/creator/summary/CharacterSummaryPanel';
-import { ChoiceImpact } from '../../features/creator/ChoiceImpact';
+import { ChoiceImpact, type ChoiceImpactSection } from '../../features/creator/ChoiceImpact';
 import shellStyles from '../../features/creator/layout/CreatorShell.module.css';
 import styles from './StepLayout.module.css';
 import { useCharacter } from '../../context/CharacterContext';
@@ -22,6 +21,7 @@ export interface StepLayoutProps {
   selections?: Record<number, string>;
   errors?: string[];
   hrMarginBottom?: string;
+  impactSection?: ChoiceImpactSection;
   children: React.ReactNode;
 }
 
@@ -33,8 +33,6 @@ const STEP_LABELS: Record<number, string> = {
   5: 'Equipamento',
   6: 'Ficha',
 };
-
-const IMPACT_STEPS = new Set([0, 2, 3, 4]);
 
 const COLLAPSED_STEP_LABELS = ['Cl', 'Or', 'Es', 'At', 'Eq', 'Fi'];
 
@@ -49,12 +47,18 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   onPortraitClick,
   errors,
   hrMarginBottom = '16px',
+  impactSection,
   children,
 }) => {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [summaryCollapsed, setSummaryCollapsed] = useState(false);
   const { validationResult } = useCharacter();
-  const { currentStep, setCurrentStep } = useWizard();
+  const {
+    currentStep,
+    setCurrentStep,
+    sidebarCollapsed,
+    setSidebarCollapsed,
+    summaryCollapsed,
+    setSummaryCollapsed,
+  } = useWizard();
 
   const shellClass = [
     shellStyles.shell,
@@ -77,8 +81,6 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   return (
     <div className="step-container" aria-label={STEP_LABELS[activeStep] ?? `Etapa ${activeStep}`}>
       <div className={shellClass}>
-
-        {/* ── Sidebar ────────────────────────────────────────────────────── */}
         <aside
           className={`${shellStyles.sidebar} ${sidebarCollapsed ? shellStyles.sidebarCollapsed : ''}`}
         >
@@ -136,7 +138,6 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
           )}
         </aside>
 
-        {/* ── Main ───────────────────────────────────────────────────────── */}
         <main className={shellStyles.main}>
           <div className={shellStyles.mainInner}>
             <StepHeader
@@ -150,12 +151,11 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
             />
             <hr className={styles.separator} style={{ marginBottom: hrMarginBottom }} />
             {errors && errors.length > 0 && <ValidationBanner errors={errors} />}
-            {IMPACT_STEPS.has(activeStep) && <ChoiceImpact step={activeStep} />}
+            {impactSection ? <ChoiceImpact section={impactSection} /> : null}
             <div className={styles.content}>{children}</div>
           </div>
         </main>
 
-        {/* ── Summary ────────────────────────────────────────────────────── */}
         <aside
           className={`${shellStyles.summary} ${summaryCollapsed ? shellStyles.summaryCollapsed : ''}`}
         >
@@ -184,7 +184,6 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
             </>
           )}
         </aside>
-
       </div>
     </div>
   );

@@ -148,6 +148,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
       portrait={character.portrait}
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       selections={stepSelections}
+      impactSection="class"
     >
       <div className={styles.stepRoot}>
         <ValidationBanner errors={validationErrors} />
