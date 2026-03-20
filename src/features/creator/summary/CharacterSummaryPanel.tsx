@@ -14,11 +14,8 @@ const LABELS: Record<(typeof ATTRS)[number], string> = {
 };
 
 export function CharacterSummaryPanel() {
-  const { character, selectedBackground, derivedSheet, validationResult, characterLevel } = useCharacter();
+  const { derivedSheet, validationResult, characterLevel } = useCharacter();
   const mainPendencies = validationResult.errors.slice(0, 5);
-  const identityLine = [character.characterClass?.name, selectedBackground?.name, character.species?.name]
-    .filter(Boolean)
-    .join(' • ');
 
   const quickFacts = useMemo(
     () => [
@@ -33,22 +30,6 @@ export function CharacterSummaryPanel() {
   return (
     <div className={patterns.stackSm}>
       <div className={patterns.sectionTitle}>Resumo persistente</div>
-
-      <div className={styles.header}>
-        <div className={`profile-placeholder ${character.portrait ? 'has-image' : ''} ${styles.portrait}`.trim()}>
-          {character.portrait ? (
-            <img
-              src={`/imgs/portrait_caracter/${character.portrait}`}
-              alt={character.name || 'Retrato'}
-              className="profile-image"
-            />
-          ) : null}
-        </div>
-        <div>
-          <div className={styles.name}>{character.name || 'Sem nome'}</div>
-          <div className={styles.subtitle}>{identityLine || 'Sem identidade principal definida'}</div>
-        </div>
-      </div>
 
       <div className={patterns.responsiveGrid2}>
         {quickFacts.map((fact) => (
