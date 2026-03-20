@@ -511,19 +511,96 @@ button:disabled {
   border-color: var(--border-input) !important;
 }
 
-.class-tooltip {
+.contextual-popover {
   position: relative;
+  display: inline-flex;
+}
+
+.contextual-popover.align-right .contextual-popover-panel {
+  right: 0;
+  left: auto;
+}
+
+.contextual-popover-trigger {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  background: rgba(249, 115, 22, 0.14);
+  color: #fdba74;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0;
+  box-shadow: none;
+}
+
+.contextual-popover-trigger:hover,
+.contextual-popover-trigger:focus-visible {
+  background: rgba(249, 115, 22, 0.22);
+  border-color: rgba(249, 115, 22, 0.45);
+  transform: translateY(-1px);
+}
+
+.contextual-popover-trigger-chip {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+}
+
+.contextual-popover-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: min(320px, 82vw);
+  max-width: min(360px, 82vw);
   background: var(--surface-tooltip);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-accent);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-lg);
   box-shadow:
     var(--shadow-elevated),
     0 0 0 1px var(--border-subtle);
-  text-align: center;
-  animation: tooltipEntrance 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  z-index: var(--z-modal);
+  text-align: left;
+  animation: tooltipEntrance 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: var(--z-tooltip);
+  padding: 12px 14px;
+}
+
+.contextual-popover-title {
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.contextual-popover-body {
+  color: var(--text-body);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.portrait-picker-modal {
+  position: relative;
+  width: min(800px, 92vw);
+  max-height: min(85vh, 860px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
+  animation: tooltipEntrance 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes tooltipEntrance {
@@ -546,7 +623,7 @@ button:disabled {
   }
 }
 
-.tooltip-overlay {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -557,6 +634,10 @@ button:disabled {
   -webkit-backdrop-filter: blur(4px);
   z-index: var(--z-overlay);
   animation: overlayFadeIn 0.4s ease forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 /* Custom Scrollbar */
@@ -602,32 +683,6 @@ details[open] > summary {
 details[open] > summary .accordion-chevron,
 details[open] > summary .summary-chevron {
   transform: rotate(180deg);
-}
-
-/* Modal Details & Summary Animations */
-.class-tooltip details > summary {
-  list-style: none; /* remove default triangle */
-}
-.class-tooltip details > summary::-webkit-details-marker {
-  display: none;
-}
-
-.class-tooltip details[open] {
-  border-color: var(--color-accent) !important;
-  box-shadow:
-    0 0 15px rgba(249, 115, 22, 0.1),
-    inset 0 0 0 1px var(--color-accent) !important;
-  transition: all var(--transition-speed);
-}
-.class-tooltip details > summary .summary-chevron {
-  transition: transform var(--transition-speed);
-}
-.class-tooltip details[open] > summary .summary-chevron {
-  transform: rotate(180deg);
-}
-
-.class-tooltip details[open] > .details-content {
-  animation: slideDownFade 0.3s ease-out forwards;
 }
 
 @keyframes slideDownFade {
@@ -873,6 +928,48 @@ details[open] > summary .summary-chevron {
   opacity: 0.6;
 }
 
+.portrait-picker-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 20px 0;
+}
+
+.portrait-picker-header h2 {
+  color: #f97316;
+  margin-bottom: 8px;
+}
+
+.portrait-picker-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.portrait-picker-close {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-muted);
+  padding: 4px 10px;
+  line-height: 1;
+  font-size: 1.5rem;
+}
+
+.portrait-picker-close:hover {
+  color: var(--text-primary);
+}
+
+.portrait-picker-tip {
+  margin: 0 20px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  color: #fed7aa;
+  font-size: 0.82rem;
+}
+
 /* Portrait Picker Modal Styles */
 .portrait-grid {
   display: grid;
@@ -891,6 +988,8 @@ details[open] > summary .summary-chevron {
   cursor: pointer;
   transition: all 0.2s;
   background: var(--surface-dark);
+  padding: 0;
+  box-shadow: none;
 }
 
 .portrait-item:hover {

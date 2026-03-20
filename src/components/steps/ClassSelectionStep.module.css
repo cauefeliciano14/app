@@ -10,6 +10,7 @@
   grid-template-columns:
     minmax(clamp(13.5rem, 17vw, 15.5rem), 0.95fr)
     minmax(clamp(20rem, 34vw, 28rem), 1.9fr);
+    minmax(clamp(22rem, 1vw + 24rem, 1fr), 1.8fr);
   grid-template-areas: 'classes details';
   gap: 16px;
   min-height: 0;
@@ -32,9 +33,99 @@
 .classList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   overflow-y: auto;
   padding-right: 4px;
+}
+
+.classCard {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 6.4rem) minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  text-align: left;
+  align-items: center;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.classCard:hover {
+  transform: translateY(-1px);
+  border-color: rgba(249,115,22,0.28);
+  background: rgba(255,255,255,0.05);
+}
+
+.classCardSelected {
+  background: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(15,23,42,0.8));
+  border-color: rgba(249,115,22,0.44);
+  box-shadow: 0 10px 26px rgba(15,23,42,0.28);
+}
+
+.classCardArtWrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(180deg, rgba(30,41,59,0.96), rgba(15,23,42,0.96));
+}
+
+.classCardArt {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.classCardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,23,42,0.06) 0%, rgba(15,23,42,0.22) 58%, rgba(15,23,42,0.8) 100%);
+}
+
+.classCardIcon {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 999px;
+  object-fit: contain;
+  background: rgba(15,23,42,0.82);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 8px 18px rgba(15,23,42,0.35);
+}
+
+.classCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.classCardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.classCardTitle {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.98rem;
+  line-height: 1.2;
+}
+
+.classCardDescription {
+  color: #cbd5e1;
+  font-size: 0.77rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .resetButton {
@@ -63,6 +154,13 @@
   color: #64748b;
 }
 
+.classSummaryCard {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 18px;
+}
+
 .summaryHeader {
   display: flex;
   justify-content: space-between;
@@ -70,11 +168,96 @@
   flex-wrap: wrap;
 }
 
+.summaryIdentity {
+  display: grid;
+  grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  flex: 1 1 26rem;
+  min-width: min(100%, 24rem);
+}
+
+.summaryHeroWrap {
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 16rem;
+  background: linear-gradient(180deg, rgba(30,41,59,0.95), rgba(15,23,42,0.95));
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.summaryHeroArt {
+  width: 100%;
+  height: 100%;
+  min-height: 16rem;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.summaryIdentityText {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summaryBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #fdba74;
+  background: rgba(249,115,22,0.12);
+  border: 1px solid rgba(249,115,22,0.18);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.summaryBadgeIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.summaryTitle {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.5rem, 1rem + 1vw, 1.9rem);
+}
+
+.summaryDescription {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  max-width: 60ch;
+}
+
 .summaryStats {
   display: grid;
   grid-template-columns: repeat(2, minmax(clamp(7.5rem, 20vw, 9rem), 1fr));
   gap: 8px;
   min-width: min(100%, 18rem);
+  align-self: start;
+}
+
+.summaryStat {
+  background: rgba(0,0,0,0.18);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.summaryStatLabel {
+  color: #94a3b8;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.summaryStatValue {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .traitsGrid {
@@ -91,6 +274,71 @@
       minmax(clamp(22rem, 40vw, 34rem), 1.45fr);
     grid-template-areas: 'classes details';
   }
+.sectionHeading {
+.traitCard {
+  background: rgba(0,0,0,0.18);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.traitLabel {
+  color: #f97316;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.traitValue {
+  color: #e2e8f0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.sideColumn {
+  grid-area: side;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.optionsHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.optionsTitle {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1rem;
+}
+
+.optionsSubtitle {
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.contextList {
+  margin: 0;
+  padding-left: 18px;
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.contextText {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.contextTextSuccess {
+  color: #4ade80;
+  font-size: 0.82rem;
 }
 
 @media (max-width: 1100px) {
@@ -98,6 +346,14 @@
     grid-template-columns:
       minmax(clamp(12.5rem, 28vw, 15rem), 0.9fr)
       minmax(clamp(20rem, 1vw + 22rem, 1fr), 1.35fr);
+  }
+
+  .classCard {
+    grid-template-columns: minmax(5rem, 5.8rem) minmax(0, 1fr);
+  }
+
+  .summaryIdentity {
+    grid-template-columns: minmax(9rem, 10rem) minmax(0, 1fr);
   }
 
   .summaryStats {
@@ -119,10 +375,29 @@
     overflow: visible;
     padding-right: 0;
   }
-
 }
 
 @media (max-width: 720px) {
+  .classCard {
+    grid-template-columns: minmax(4.6rem, 5.4rem) minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .classCardDescription {
+    -webkit-line-clamp: 3;
+  }
+
+}
+  .summaryIdentity {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .summaryHeroWrap,
+  .summaryHeroArt {
+    min-height: 13rem;
+  }
+
   .summaryStats {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -135,5 +410,9 @@
     min-height: 260px;
     text-align: center;
     padding: 24px;
+  }
+
+  .optionsHeader {
+    flex-direction: column;
   }
 }

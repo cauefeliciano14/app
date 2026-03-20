@@ -3,6 +3,7 @@ import bgData from '../../data/db.json';
 import classDetailsData from '../../data/classDetails.json';
 import { FeatureExpandable } from '../FeatureExpandable';
 import { ValidationBanner } from '../ValidationBanner';
+import { ContextualPopover } from '../ui/ContextualPopover';
 import { StepLayout } from './StepLayout';
 import styles from './ClassSelectionStep.module.css';
 import { calculateMaxHP as engineCalculateMaxHP } from '../../rules/calculators/combat';
@@ -14,6 +15,10 @@ export interface ClassSelectionStepProps {
   onReset: () => void;
   languagesData?: unknown;
 }
+
+const getClassIconSrc = (classId: string) => `/imgs/icone_classe/${classId}.png`;
+const getClassCardArtSrc = (classId: string) => `/imgs/descriçao_classe/${classId}.png`;
+const getClassHeroArtSrc = (classId: string) => `/imgs/${classId}.png`;
 
 export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset, languagesData }) => {
   void languagesData;
@@ -37,6 +42,13 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
     ? (classDetailsData as Record<string, { basicTraits: Record<string, string>; features?: Array<any>; options?: Array<any> }>)[selectedClass.id]
     : null;
   const activeFeatures = (classDetails?.features ?? []).filter((feature) => feature.level <= characterLevel);
+  const immediateImpact = selectedClass
+    ? [
+        `PV máximos agora: ${engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers['constituicao'] ?? 0)}`,
+        `CA atual derivada: ${derivedSheet.armorClass}`,
+        `Bônus de proficiência: +${derivedSheet.proficiencyBonus}`,
+      ]
+    : ['Selecione uma classe para calcular PV, CA e proficiência desta etapa.'];
 
   return (
     <StepLayout
@@ -55,9 +67,16 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
         <div className={styles.stepGrid}>
           <div className={styles.classColumn}>
             <div>
-              <h2 style={{ margin: 0, color: '#f8fafc', fontSize: '1.3rem' }}>Classe</h2>
+              <div className={styles.sectionHeading}>
+                <h2 style={{ margin: 0, color: '#f8fafc', fontSize: '1.3rem' }}>Classe</h2>
+                <ContextualPopover label="Impacto agora" title="O que muda imediatamente" variant="chip">
+                  <ul className={styles.contextList}>
+                    {immediateImpact.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                </ContextualPopover>
+              </div>
               <p style={{ margin: '6px 0 0', color: '#94a3b8', fontSize: '0.84rem' }}>
-                Selecione uma classe para ver tudo o que muda na ficha imediatamente.
+                Escolha uma classe e consulte os detalhes contextuais apenas quando precisar.
               </p>
             </div>
             <div className={styles.classList}>
@@ -67,20 +86,18 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                   <button
                     key={cls.id}
                     onClick={() => handleSelectClass(cls)}
-                    style={{
-                      background: isSelected ? 'rgba(249,115,22,0.16)' : 'rgba(255,255,255,0.03)',
-                      border: isSelected ? '1px solid rgba(249,115,22,0.4)' : '1px solid rgba(255,255,255,0.06)',
-                      borderRadius: '12px',
-                      padding: '12px',
-                      textAlign: 'left',
-                    }}
+                    className={`${styles.classCard} ${isSelected ? styles.classCardSelected : ''}`}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <img src={`/imgs/icone_classe/${cls.id}.png`} alt={cls.name} style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
-                      <div>
-                        <div style={{ color: '#fff', fontWeight: 700 }}>{cls.name}</div>
-                        <div style={{ color: '#94a3b8', fontSize: '0.76rem', lineHeight: 1.4 }}>{cls.description}</div>
+                    <div className={styles.classCardArtWrap}>
+                      <img src={getClassCardArtSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardArt} />
+                      <div className={styles.classCardOverlay} />
+                      <img src={getClassIconSrc(cls.id)} alt="" aria-hidden="true" className={styles.classCardIcon} />
+                    </div>
+                    <div className={styles.classCardBody}>
+                      <div className={styles.classCardTitleRow}>
+                        <div className={styles.classCardTitle}>{cls.name}</div>
                       </div>
+                      <div className={styles.classCardDescription}>{cls.description}</div>
                     </div>
                   </button>
                 );
@@ -101,15 +118,32 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
               </div>
             ) : (
               <>
-                <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '16px', padding: '18px' }}>
+                <div className={styles.classSummaryCard}>
                   <div className={styles.summaryHeader}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                         <img src={`/imgs/icone_classe/${selectedClass.id}.png`} alt={selectedClass.name} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
                         <div>
-                          <h3 style={{ margin: 0, color: '#fff', fontSize: '1.6rem' }}>{selectedClass.name}</h3>
+                          <div className={styles.sectionHeading}>
+                            <h3 style={{ margin: 0, color: '#fff', fontSize: '1.6rem' }}>{selectedClass.name}</h3>
+                            <ContextualPopover label="Resumo" title="Leitura auxiliar da classe" variant="chip" align="right">
+                              <div className={styles.contextText}>
+                                Revise os traços abaixo para entender proficiências, papel esperado e restrições antes de fechar as escolhas destacadas.
+                              </div>
+                            </ContextualPopover>
+                          </div>
                           <p style={{ margin: 0, color: '#cbd5e1', fontSize: '0.86rem' }}>{selectedClass.description}</p>
+                    <div className={styles.summaryIdentity}>
+                      <div className={styles.summaryHeroWrap}>
+                        <img src={getClassHeroArtSrc(selectedClass.id)} alt={`Arte de ${selectedClass.name}`} className={styles.summaryHeroArt} />
+                      </div>
+                      <div className={styles.summaryIdentityText}>
+                        <div className={styles.summaryBadge}>
+                          <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
+                          Classe selecionada
                         </div>
+                        <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
+                        <p className={styles.summaryDescription}>{selectedClass.description}</p>
                       </div>
                     </div>
                     <div className={styles.summaryStats}>
@@ -119,12 +153,28 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                   </div>
                   <div className={styles.traitsGrid}>
                     {Object.entries(classDetails.basicTraits).map(([key, val]) => (
-                      <div key={key} style={{ background: 'rgba(0,0,0,0.18)', borderRadius: '10px', padding: '10px 12px' }}>
-                        <div style={{ color: '#f97316', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>{key}</div>
-                        <div style={{ color: '#e2e8f0', fontSize: '0.84rem', lineHeight: 1.5 }}>{val}</div>
+                      <div key={key} className={styles.traitCard}>
+                        <div className={styles.traitLabel}>{key}</div>
+                        <div className={styles.traitValue}>{val}</div>
                       </div>
                     ))}
                   </div>
+                </div>
+
+                <div className={styles.optionsHeader}>
+                  <div>
+                    <h4 className={styles.optionsTitle}>Escolhas e características</h4>
+                    <p className={styles.optionsSubtitle}>Abra apenas o bloco necessário para concluir a etapa.</p>
+                  </div>
+                  <ContextualPopover label="Pendências" title="O que ainda falta" variant="chip" align="right">
+                    {validationErrors.length === 0 ? (
+                      <div className={styles.contextTextSuccess}>Etapa pronta para avançar.</div>
+                    ) : (
+                      <ul className={styles.contextList}>
+                        {validationErrors.map((error) => <li key={error}>{error}</li>)}
+                      </ul>
+                    )}
+                  </ContextualPopover>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -163,9 +213,9 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
 
 function SummaryStat({ label, value }: { label: string; value: string }) {
   return (
-    <div style={{ background: 'rgba(0,0,0,0.18)', borderRadius: '10px', padding: '10px 12px' }}>
-      <div style={{ color: '#94a3b8', fontSize: '0.68rem', letterSpacing: '0.08em' }}>{label}</div>
-      <div style={{ color: '#fff', fontSize: '1rem', fontWeight: 700 }}>{value}</div>
+    <div className={styles.summaryStat}>
+      <div className={styles.summaryStatLabel}>{label}</div>
+      <div className={styles.summaryStatValue}>{value}</div>
     </div>
   );
 }

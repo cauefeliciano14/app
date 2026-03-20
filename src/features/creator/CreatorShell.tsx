@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import languagesData from '../../data/languages.json';
-import { PORTRAITS } from '../../data/portraits';
 import { CREATION_STORAGE_KEY, CREATION_STATE_VERSION } from '../../utils/persistence';
 import { useCharacter } from '../../context/CharacterContext';
 import { useWizard } from '../../context/WizardContext';
@@ -10,6 +9,7 @@ import { SpeciesStep } from '../../components/steps/SpeciesStep';
 import { AttributesStepWrapper } from '../../components/steps/AttributesStepWrapper';
 import { EquipmentStepWrapper } from '../../components/steps/EquipmentStepWrapper';
 import { CharacterSheetStep } from '../../components/steps/CharacterSheetStep';
+import { PortraitPickerModal } from './portrait/PortraitPickerModal';
 
 export function CreatorShell() {
   const {
@@ -58,6 +58,14 @@ export function CreatorShell() {
       </div>
 
       {isPortraitModalOpen && (
+        <PortraitPickerModal
+          currentPortrait={character.portrait}
+          onClose={() => setIsPortraitModalOpen(false)}
+          onSelect={(portrait) => {
+            setCharacter(prev => ({ ...prev, portrait }));
+            setIsPortraitModalOpen(false);
+          }}
+        />
         <div className="tooltip-overlay" onClick={() => setIsPortraitModalOpen(false)}>
           <div className="class-tooltip" style={{ maxWidth: '800px', width: '90%' }} onClick={(e) => e.stopPropagation()}>
             <div style={{ padding: '20px' }}>
@@ -72,7 +80,7 @@ export function CreatorShell() {
                       setIsPortraitModalOpen(false);
                     }}
                   >
-                    <img src={`/imgs/portrait_caracter/${p}`} alt={p} />
+                    <img src={`/imgs/portrait_caracter/${p}`} alt="Opção de retrato do personagem" />
                   </div>
                 ))}
               </div>
