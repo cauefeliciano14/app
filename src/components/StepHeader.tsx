@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FANTASY_NAMES } from '../data/fantasyNames';
 import styles from './StepHeader.module.css';
+import { HelpTooltip } from './ui/HelpTooltip';
 
 export interface StepHeaderProps {
   onPrev?: () => void;
@@ -51,23 +52,28 @@ export const StepHeader = ({
       </div>
 
       <div className={styles.identityRow}>
-        <button
-          type="button"
-          className={`${styles.portraitButton} ${portrait ? styles.portraitButtonFilled : ''}`.trim()}
-          onClick={onPortraitClick}
-          title="Escolher retrato do personagem"
-          aria-label="Escolher retrato do personagem"
-        >
-          {portrait ? (
-            <img
-              src={`/imgs/portrait_caracter/${portrait}`}
-              alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
-              className={styles.portraitImage}
-            />
-          ) : (
-            <span className={styles.portraitPlaceholder}>Sem retrato</span>
-          )}
-        </button>
+        <div className={styles.portraitColumn}>
+          <button
+            type="button"
+            className={`${styles.portraitButton} ${portrait ? styles.portraitButtonFilled : ''}`.trim()}
+            onClick={onPortraitClick}
+            title="Escolher retrato do personagem"
+            aria-label="Escolher retrato do personagem"
+          >
+            {portrait ? (
+              <img
+                src={`/imgs/portrait_caracter/${portrait}`}
+                alt={characterName ? `Retrato de ${characterName}` : 'Retrato do personagem'}
+                className={styles.portraitImage}
+              />
+            ) : (
+              <span className={styles.portraitPlaceholder}>Sem retrato</span>
+            )}
+          </button>
+          <HelpTooltip label="Retrato" title="Como funciona a seleção" variant="chip">
+            O retrato é opcional e serve apenas para identidade visual. Clique na miniatura para abrir o modal, comparar opções e trocar a imagem quando quiser.
+          </HelpTooltip>
+        </div>
 
         <div className={styles.nameColumn}>
           <label className={styles.characterNameLabel} htmlFor="character-name-input">

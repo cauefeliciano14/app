@@ -91,6 +91,13 @@
   gap: 14px;
 }
 
+.portraitColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
 .portraitButton {
   display: flex;
   align-items: center;

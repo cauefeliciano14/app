@@ -1,3 +1,7 @@
+.shellFrame {
+  max-width: 1400px;
+}
+
 .shell {
   display: grid;
   grid-template-columns:

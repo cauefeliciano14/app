@@ -3,6 +3,7 @@ import bgData from '../../data/db.json';
 import classDetailsData from '../../data/classDetails.json';
 import { FeatureExpandable } from '../FeatureExpandable';
 import { ValidationBanner } from '../ValidationBanner';
+import { HelpTooltip } from '../ui/HelpTooltip';
 import { StepLayout } from './StepLayout';
 import styles from './ClassSelectionStep.module.css';
 import { getClassHPData } from '../../rules/data/classRules';
@@ -59,6 +60,13 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
   const classDetails = selectedClass ? (classDetailsData as Record<string, ClassDetails>)[selectedClass.id] : null;
   const selectedClassMeta = selectedClass ? getClassCardMeta(selectedClass.id) : null;
   const activeFeatures = (classDetails?.features ?? []).filter((feature) => feature.level <= characterLevel);
+  const pendingChoicesCount = [
+    ...(classDetails?.options ?? []),
+    ...activeFeatures.filter((feature) => Array.isArray(feature.options) && feature.options.length > 0),
+  ].filter((item) => {
+    const options = 'id' in item ? [item] : item.options;
+    return options?.some((opt: any) => !character.choices[opt.id]);
+  }).length;
 
   return (
     <StepLayout
@@ -79,9 +87,12 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
             <div>
               <div className={styles.sectionHeading}>
                 <h2 style={{ margin: 0, color: '#f8fafc', fontSize: '1.3rem' }}>Classe</h2>
+                <HelpTooltip label="Impacto imediato" title="O que muda ao trocar a classe" align="right">
+                  Classe define dado de vida, atributo-chave, escolhas obrigatórias e características já ativas para o nível atual. O restante fica acessível sob demanda.
+                </HelpTooltip>
               </div>
               <p style={{ margin: '6px 0 0', color: '#94a3b8', fontSize: '0.84rem' }}>
-                Selecione uma classe para ver tudo o que muda na ficha imediatamente. Consulte os detalhes contextuais apenas quando precisar.
+                Selecione uma classe para ver tudo o que muda na ficha imediatamente. Consulte apenas os detalhes contextuais que fizerem falta durante a decisão.
               </p>
             </div>
             <div className={styles.classList}>
@@ -132,9 +143,19 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                       <div className={styles.summaryHeroOverlay} />
                     </div>
                     <div className={styles.summaryHeroContent}>
-                      <div className={styles.summaryBadge}>
-                        <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
-                        Classe selecionada
+                      <div className={styles.summaryTopRow}>
+                        <div className={styles.summaryBadge}>
+                          <img src={getClassIconSrc(selectedClass.id)} alt="" aria-hidden="true" className={styles.summaryBadgeIcon} />
+                          Classe selecionada
+                        </div>
+                        <div className={styles.summaryHelpRow}>
+                          <HelpTooltip label="Resumo da classe" title={`Visão rápida de ${selectedClass.name}`} variant="chip" align="right">
+                            {selectedClass.description}
+                          </HelpTooltip>
+                          <HelpTooltip label="Seleção" title="Ajuda sobre seleção" variant="chip" align="right">
+                            Você pode trocar de classe livremente nesta etapa. As pendências abaixo indicam apenas escolhas ainda não confirmadas para a classe atual.
+                          </HelpTooltip>
+                        </div>
                       </div>
                       <h3 className={styles.summaryTitle}>{selectedClass.name}</h3>
                       <p className={styles.summaryDescription}>{selectedClass.description}</p>
@@ -145,6 +166,12 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                         ) : null}
                       </div>
                     </div>
+                  </div>
+                  <div className={styles.traitsHeader}>
+                    <h4 className={styles.traitsTitle}>Traços-base</h4>
+                    <HelpTooltip label="Traços-base" title="Quando consultar" align="right">
+                      Estes dados servem como referência curta para comparar classes. Use-os quando precisar confirmar proficiências, recursos centrais e ritmo geral da classe.
+                    </HelpTooltip>
                   </div>
                   <div className={styles.traitsGrid}>
                     {Object.entries(classDetails.basicTraits).map(([key, value]) => (
@@ -159,7 +186,15 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                 <div className={styles.optionsHeader}>
                   <div>
                     <h4 className={styles.optionsTitle}>Escolhas e características</h4>
-                    <p className={styles.optionsSubtitle}>As pendências já aparecem no topo; aqui ficam apenas as escolhas que você ainda precisa abrir.</p>
+                    <p className={styles.optionsSubtitle}>As pendências já aparecem no topo; aqui ficam só os blocos que ainda precisam da sua ação.</p>
+                  </div>
+                  <div className={styles.optionsHelpRow}>
+                    <HelpTooltip label={`Pendências · ${validationErrors.length}`} title="Pendências desta etapa" variant="chip" align="right">
+                      {validationErrors[0] ?? 'Nenhuma pendência aberta para a classe selecionada.'}
+                    </HelpTooltip>
+                    <HelpTooltip label={`Blocos abertos · ${pendingChoicesCount}`} title="Blocos com escolhas a concluir" variant="chip" align="right">
+                      Expanda apenas as características com decisão pendente. Quando todas estiverem concluídas, esta etapa poderá avançar sem alertas.
+                    </HelpTooltip>
                   </div>
                 </div>
 

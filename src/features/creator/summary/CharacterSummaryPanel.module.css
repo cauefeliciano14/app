@@ -4,6 +4,22 @@
   gap: 12px;
 }
 
+.headerRow,
+.cardHeader,
+.supportRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .sectionTitle {
   color: var(--text-primary);
   font-size: 0.95rem;
@@ -105,5 +121,17 @@
 @media (max-width: 920px) {
   .quickFactsGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .headerRow,
+  .cardHeader,
+  .supportRow {
+    flex-direction: column;
+  }
+
+  .headerActions {
+    justify-content: flex-start;
   }
 }
