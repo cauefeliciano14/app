@@ -65,7 +65,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
     ...activeFeatures.filter((feature) => Array.isArray(feature.options) && feature.options.length > 0),
   ].filter((item) => {
     const options = 'id' in item ? [item] : item.options;
-    return options?.some((opt: any) => !character.choices[opt.id]);
+    return options?.some((opt: { id: string }) => !character.choices[opt.id]);
   }).length;
 
   return (
@@ -215,7 +215,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                     <FeatureExpandable
                       key={`${feature.name}-${idx}`}
                       feature={feature}
-                      needsChoice={feature.options?.some((opt: any) => !character.choices[opt.id])}
+                      needsChoice={feature.options?.some((opt: { id: string }) => !character.choices[opt.id])}
                       options={feature.options}
                       choices={character.choices}
                       onChoiceChange={handleChoiceChange}

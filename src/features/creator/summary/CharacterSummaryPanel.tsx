@@ -31,10 +31,20 @@ export function CharacterSummaryPanel() {
     { label: 'PV', value: String(derivedSheet.maxHP) },
   ];
 
-  const presentedLanguages = useMemo(
-    () => getLanguageDisplayNames(derivedSheet.languages),
-    [derivedSheet.languages],
+  const coreStats = useMemo(
+    () => [
+      ['FOR', derivedSheet.finalAttributes.forca],
+      ['DES', derivedSheet.finalAttributes.destreza],
+      ['CON', derivedSheet.finalAttributes.constituicao],
+      ['INT', derivedSheet.finalAttributes.inteligencia],
+      ['SAB', derivedSheet.finalAttributes.sabedoria],
+      ['CAR', derivedSheet.finalAttributes.carisma],
+    ],
+    [derivedSheet.finalAttributes],
   );
+
+  const presentedLanguages = useMemo(() => getLanguageDisplayNames(derivedSheet.languages), [derivedSheet.languages]);
+  const keySkills = useMemo(() => derivedSheet.skillProficiencies.slice(0, 6), [derivedSheet.skillProficiencies]);
 
   const pendingItems = useMemo(
     () => Object.entries(validationResult.byStep)
@@ -58,7 +68,7 @@ export function CharacterSummaryPanel() {
       <div className={styles.headerRow}>
         <div className={styles.sectionTitle}>Resumo persistente</div>
         <HelpTooltip label="O que fica fixo" title="Somente o essencial" align="right">
-          Este painel mantém apenas identidade e números rápidos. Explicações de impacto imediato, pendências detalhadas e ajuda auxiliar agora aparecem sob demanda.
+          Este painel mantém identidade, números rápidos, atributos finais, idiomas, perícias e pendências principais visíveis em todas as etapas.
         </HelpTooltip>
       </div>
 
@@ -75,6 +85,8 @@ export function CharacterSummaryPanel() {
           </div>
         </div>
 
+        {character.portrait ? <img src={character.portrait} alt="Retrato atual do personagem" className={styles.portraitPreview} /> : null}
+
         <dl className={styles.identityList}>
           {identityItems.map((item) => (
             <div key={item.label} className={styles.identityRow}>
@@ -86,16 +98,58 @@ export function CharacterSummaryPanel() {
       </div>
 
       <div className={styles.quickFactsGrid}>
-        {quickFacts.map((fact) => (
-          <SummaryPill key={fact.label} label={fact.label} value={fact.value} />
-        ))}
+        {quickFacts.map((fact) => <SummaryPill key={fact.label} label={fact.label} value={fact.value} />)}
       </div>
 
       <div className={styles.identityCard}>
         <div className={styles.cardHeader}>
-          <div className={styles.identityTitle}>Pendências e apoio contextual</div>
+          <div className={styles.identityTitle}>Atributos finais</div>
+          <HelpTooltip label="Impacto em tempo real" title="Atualização imediata" align="right">
+            Sempre mostramos os atributos finais após bônus de origem e quaisquer efeitos já refletidos pelo engine.
+          </HelpTooltip>
+        </div>
+        <div className={styles.quickFactsGrid}>
+          {coreStats.map(([label, value]) => <SummaryPill key={label} label={String(label)} value={String(value)} />)}
+        </div>
+      </div>
+
+      <div className={styles.identityCard}>
+        <div className={styles.cardHeader}>
+          <div className={styles.identityTitle}>Perícias e idiomas</div>
+          <HelpTooltip label="Leitura rápida" title="Somente o núcleo" align="right">
+            Esta área mostra as proficiências mais importantes para acompanhar o impacto imediato das escolhas sem abrir a ficha completa.
+          </HelpTooltip>
+        </div>
+
+        {keySkills.length > 0 ? (
+          <ul className={styles.tagList}>
+            {keySkills.map((skill) => <li key={skill} className={styles.tagItem}>{skill}</li>)}
+          </ul>
+        ) : (
+          <p className={styles.emptyState}>Nenhuma perícia consolidada ainda.</p>
+        )}
+
+        <div className={styles.supportRow}>
+          <div>
+            <div className={styles.identityTitle}>Idiomas conhecidos</div>
+            <p className={styles.supportingText}>Os nomes exibidos já estão localizados para leitura rápida.</p>
+          </div>
+        </div>
+
+        {presentedLanguages.length > 0 ? (
+          <ul className={styles.tagList}>
+            {presentedLanguages.map((language) => <li key={language} className={styles.tagItem}>{language}</li>)}
+          </ul>
+        ) : (
+          <p className={styles.emptyState}>Nenhum idioma adicional selecionado.</p>
+        )}
+      </div>
+
+      <div className={styles.identityCard}>
+        <div className={styles.cardHeader}>
+          <div className={styles.identityTitle}>Pendências principais</div>
           <HelpTooltip label="Pendências" title="Como ler esta área" align="right">
-            Mostramos apenas a contagem de pendências em aberto. Abra o tooltip de cada item para ver o primeiro alerta e use a navegação lateral para ir direto à etapa correspondente.
+            Mostramos apenas a contagem e a primeira mensagem acionável de cada etapa bloqueada para manter a navegação previsível.
           </HelpTooltip>
         </div>
 
@@ -109,28 +163,6 @@ export function CharacterSummaryPanel() {
           </div>
         ) : (
           <p className={styles.emptyState}>Nenhuma pendência aberta no momento.</p>
-        )}
-
-        <div className={styles.supportRow}>
-          <div>
-            <div className={styles.identityTitle}>Idiomas conhecidos</div>
-            <p className={styles.supportingText}>Os nomes exibidos já estão localizados para leitura rápida.</p>
-          </div>
-          <HelpTooltip label="Idiomas" title="Como interpretar" align="right">
-            O motor mantém IDs internos para validação. Aqui você vê os nomes prontos para leitura; se não houver itens, ainda não existe idioma adicional selecionado.
-          </HelpTooltip>
-        </div>
-
-        {presentedLanguages.length > 0 ? (
-          <ul className={styles.tagList}>
-            {presentedLanguages.map((language) => (
-              <li key={language} className={styles.tagItem}>
-                {language}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className={styles.emptyState}>Nenhum idioma adicional selecionado.</p>
         )}
       </div>
     </div>
