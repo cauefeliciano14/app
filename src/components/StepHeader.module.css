@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: var(--space-sm) 0;
-  margin-bottom: var(--space-md);
+  padding: var(--space-sm) 0 12px;
+  margin: 0 -18px var(--space-md);
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);

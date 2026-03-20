@@ -9,5 +9,13 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  overflow: hidden;
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+  padding: 0 12px 56px 0;
+  box-sizing: border-box;
 }

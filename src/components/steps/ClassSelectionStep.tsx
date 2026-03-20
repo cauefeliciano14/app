@@ -4,6 +4,7 @@ import classDetailsData from '../../data/classDetails.json';
 import { FeatureExpandable } from '../FeatureExpandable';
 import { ValidationBanner } from '../ValidationBanner';
 import { StepLayout } from './StepLayout';
+import styles from './ClassSelectionStep.module.css';
 import { calculateMaxHP as engineCalculateMaxHP } from '../../rules/calculators/combat';
 import { getClassHPData } from '../../rules/data/classRules';
 import { useCharacter } from '../../context/CharacterContext';
@@ -49,17 +50,17 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
       onPortraitClick={() => setIsPortraitModalOpen(true)}
       selections={stepSelections}
     >
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minHeight: 0 }}>
+      <div className={styles.stepRoot}>
         <ValidationBanner errors={validationErrors} />
-        <div style={{ display: 'grid', gridTemplateColumns: '260px minmax(0, 1fr) 260px', gap: '16px', minHeight: 0 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', minHeight: 0 }}>
+        <div className={styles.stepGrid}>
+          <div className={styles.classColumn}>
             <div>
               <h2 style={{ margin: 0, color: '#f8fafc', fontSize: '1.3rem' }}>Classe</h2>
               <p style={{ margin: '6px 0 0', color: '#94a3b8', fontSize: '0.84rem' }}>
                 Selecione uma classe para ver tudo o que muda na ficha imediatamente.
               </p>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', overflowY: 'auto', paddingRight: '4px' }}>
+            <div className={styles.classList}>
               {bgData.classes.map((cls) => {
                 const isSelected = selectedClass?.id === cls.id;
                 return (
@@ -87,21 +88,21 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
             </div>
             <button
               onClick={onReset}
-              style={{ marginTop: 'auto', background: 'transparent', border: '1px solid rgba(255,255,255,0.12)', color: '#94a3b8' }}
+              className={styles.resetButton}
             >
               Novo Personagem
             </button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto', paddingRight: '8px' }}>
+          <div className={styles.detailsColumn}>
             {!selectedClass || !classDetails ? (
-              <div style={{ minHeight: '360px', borderRadius: '16px', border: '1px dashed rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b' }}>
+              <div className={styles.placeholder}>
                 Escolha uma classe para revisar detalhes e opções obrigatórias.
               </div>
             ) : (
               <>
                 <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '16px', padding: '18px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
+                  <div className={styles.summaryHeader}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
                         <img src={`/imgs/icone_classe/${selectedClass.id}.png`} alt={selectedClass.name} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
@@ -111,12 +112,12 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                         </div>
                       </div>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(120px, 1fr))', gap: '8px', minWidth: '260px' }}>
+                    <div className={styles.summaryStats}>
                       <SummaryStat label="PV iniciais" value={String(engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers['constituicao'] ?? 0))} />
                       <SummaryStat label="Dado de vida" value={getClassHPData(selectedClass.id)?.hitDieLabel || '—'} />
                     </div>
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '10px', marginTop: '16px' }}>
+                  <div className={styles.traitsGrid}>
                     {Object.entries(classDetails.basicTraits).map(([key, val]) => (
                       <div key={key} style={{ background: 'rgba(0,0,0,0.18)', borderRadius: '10px', padding: '10px 12px' }}>
                         <div style={{ color: '#f97316', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '4px' }}>{key}</div>
@@ -155,7 +156,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
             )}
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div className={styles.sideColumn}>
             <Panel title="Impacto imediato">
               <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.82rem', lineHeight: 1.6 }}>
                 <li>PV máximos: <strong>{selectedClass ? engineCalculateMaxHP(selectedClass.id, characterLevel, derivedSheet.modifiers['constituicao'] ?? 0) : '—'}</strong></li>

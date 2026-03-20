@@ -1,0 +1,116 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.jumpLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.jumpCaption {
+  color: var(--text-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.details {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-separator);
+  border-radius: 14px;
+}
+
+.summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 14px;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.detailList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: 0 12px 12px;
+}
+
+.navButton {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.navButtonActive {
+  background: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.12);
+}
+
+.navHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.navLabel {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.stepBadge {
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+  font-weight: 700;
+}
+
+.badgeComplete {
+  background: var(--color-success-bg);
+  color: #4ade80;
+}
+
+.badgePending {
+  background: var(--color-accent-subtle);
+  color: #fb923c;
+}
+
+.badgeIdle {
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--text-muted);
+}
+
+.navMeta {
+  color: var(--text-muted);
+  font-size: 0.77rem;
+  line-height: 1.4;
+}
+
+.navMetaActive {
+  color: #fed7aa;
+}
+
+.currentTitle {
+  margin-bottom: 6px;
+}
+
+.currentLabel {
+  color: #fed7aa;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-xs);
+}
+
+.currentMeta {
+  color: var(--text-body);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}

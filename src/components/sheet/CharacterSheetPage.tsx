@@ -11,45 +11,33 @@ import { SkillsCard } from './SkillsCard';
 import { ConditionsCard } from './ConditionsCard';
 import { DefensesCard } from './DefensesCard';
 import { SheetTabs } from './SheetTabs';
+import styles from './CharacterSheetPage.module.css';
 
 interface Feature { level: number; name: string; description: string }
 interface Trait { title: string; description: string }
 interface InventoryItem { name: string; quantity?: number; notes?: string; cost?: string }
 
 interface CharacterSheetPageProps {
-  // Identity
   characterName: string;
   portrait: string | null;
   speciesName: string;
   className: string;
   characterLevel: number;
-
-  // Derived data
   derivedSheet: DerivedSheet;
-
-  // Live session state
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
-
-  // Navigation
   onGoToEquipment: () => void;
   onGoToSpells: () => void;
-
-  // Raw character data for features/background/inventory tabs
   classFeatures: Feature[];
   speciesTraits: Trait[];
   inventory: InventoryItem[];
   learnedCantrips: string[];
   preparedSpells: string[];
-
-  // Background details
   backgroundName?: string;
   backgroundDescription?: string;
   backgroundSkills?: string[];
   backgroundTool?: string;
   backgroundEquipment?: string;
-
-  // Armor/shield equip state
   equippedArmorId?: string | null;
   hasShieldEquipped?: boolean;
   onEquipArmor?: (armorId: string | null) => void;
@@ -150,6 +138,9 @@ export function CharacterSheetPage({
       {/* Row 1: Header | Ability Scores | Quick Stats */}
       <div style={topRowGridStyle}>
         <div style={{ minWidth: 0 }}>
+    <div className={styles.page}>
+      <div className={styles.topRow}>
+        <div className={styles.headerColumn}>
           <SheetHeader
             name={characterName}
             portrait={portrait}
@@ -159,12 +150,14 @@ export function CharacterSheetPage({
           />
         </div>
         <div style={abilityScoreCellStyle}>
+        <div className={styles.abilityColumn}>
           <AbilityScoreCards
             finalAttributes={derivedSheet.finalAttributes}
             modifiers={derivedSheet.modifiers}
           />
         </div>
         <div style={{ minWidth: 0 }}>
+        <div className={styles.statsColumn}>
           <QuickStatsRow
             derivedSheet={derivedSheet}
             playState={playState}
@@ -177,6 +170,8 @@ export function CharacterSheetPage({
       <div style={secondaryRowGridStyle}>
         {/* Left: Saving Throws + Senses + Proficiencies */}
         <div style={sideColumnStackStyle}>
+      <div className={styles.contentRow}>
+        <div className={styles.sideColumn}>
           <SavingThrowsCard derivedSavingThrows={derivedSheet.derivedSavingThrows} />
           <SensesCard
             passivePerception={derivedSheet.passivePerception}
@@ -200,6 +195,11 @@ export function CharacterSheetPage({
 
         {/* Right: Conditions + Defenses */}
         <div style={sideColumnStackStyle}>
+        <div className={styles.centerColumn}>
+          <SkillsCard skills={derivedSheet.skills} />
+        </div>
+
+        <div className={styles.sideColumn}>
           <ConditionsCard
             activeConditions={playState.activeConditions}
             onAdd={handleAddCondition}
@@ -214,13 +214,7 @@ export function CharacterSheetPage({
         </div>
       </div>
 
-      {/* Row 3: Tabs */}
-      <div style={{
-        background: 'rgba(17,18,24,0.4)',
-        border: '1px solid rgba(255,255,255,0.05)',
-        borderRadius: '12px',
-        padding: '16px',
-      }}>
+      <div className={styles.tabsCard}>
         <SheetTabs
           derivedSheet={derivedSheet}
           playState={playState}
