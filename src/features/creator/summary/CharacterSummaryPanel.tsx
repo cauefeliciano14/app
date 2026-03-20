@@ -1,10 +1,19 @@
 import { useMemo } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
+import { HelpTooltip } from '../../../components/ui/HelpTooltip';
 import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
 import styles from './CharacterSummaryPanel.module.css';
 
+const STEP_LABELS: Record<string, string> = {
+  class: 'Classe',
+  background: 'Origem',
+  species: 'Espécie',
+  attributes: 'Atributos',
+  equipment: 'Equipamento',
+};
+
 export function CharacterSummaryPanel() {
-  const { character, selectedBackground, derivedSheet, characterLevel } = useCharacter();
+  const { character, selectedBackground, derivedSheet, characterLevel, validationResult } = useCharacter();
 
   const identityItems = useMemo(
     () => [
@@ -27,12 +36,45 @@ export function CharacterSummaryPanel() {
     [derivedSheet.languages],
   );
 
+  const pendingItems = useMemo(
+    () => Object.entries(validationResult.byStep)
+      .filter(([_, issues]) => issues.length > 0)
+      .map(([key, issues]) => ({
+        key,
+        label: STEP_LABELS[key] ?? key,
+        count: issues.length,
+        sample: issues[0],
+      })),
+    [validationResult.byStep],
+  );
+
+  const classSummary = character.characterClass?.description ?? 'Selecione uma classe para exibir um resumo curto aqui.';
+  const portraitSummary = character.portrait
+    ? 'O retrato atual é apenas visual e pode ser trocado a qualquer momento pela miniatura do cabeçalho.'
+    : 'Escolha um retrato quando quiser definir a identidade visual do personagem. Isso não altera regras nem escolhas mecânicas.';
+
   return (
     <div className={styles.panel}>
-      <div className={styles.sectionTitle}>Resumo persistente</div>
+      <div className={styles.headerRow}>
+        <div className={styles.sectionTitle}>Resumo persistente</div>
+        <HelpTooltip label="O que fica fixo" title="Somente o essencial" align="right">
+          Este painel mantém apenas identidade e números rápidos. Explicações de impacto imediato, pendências detalhadas e ajuda auxiliar agora aparecem sob demanda.
+        </HelpTooltip>
+      </div>
 
       <div className={styles.identityCard}>
-        <div className={styles.identityTitle}>Identidade resumida</div>
+        <div className={styles.cardHeader}>
+          <div className={styles.identityTitle}>Identidade resumida</div>
+          <div className={styles.headerActions}>
+            <HelpTooltip label="Resumo da classe" title={character.characterClass?.name ?? 'Classe não definida'} variant="chip" align="right">
+              {classSummary}
+            </HelpTooltip>
+            <HelpTooltip label="Retrato" title="Ajuda sobre retrato" variant="chip" align="right">
+              {portraitSummary}
+            </HelpTooltip>
+          </div>
+        </div>
+
         <dl className={styles.identityList}>
           {identityItems.map((item) => (
             <div key={item.label} className={styles.identityRow}>
@@ -50,10 +92,35 @@ export function CharacterSummaryPanel() {
       </div>
 
       <div className={styles.identityCard}>
-        <div className={styles.identityTitle}>Idiomas conhecidos</div>
-        <p className={styles.supportingText}>
-          O motor mantém IDs internos; a interface exibe os nomes localizados abaixo.
-        </p>
+        <div className={styles.cardHeader}>
+          <div className={styles.identityTitle}>Pendências e apoio contextual</div>
+          <HelpTooltip label="Pendências" title="Como ler esta área" align="right">
+            Mostramos apenas a contagem de pendências em aberto. Abra o tooltip de cada item para ver o primeiro alerta e use a navegação lateral para ir direto à etapa correspondente.
+          </HelpTooltip>
+        </div>
+
+        {pendingItems.length > 0 ? (
+          <div className={styles.tagList}>
+            {pendingItems.map((item) => (
+              <HelpTooltip key={item.key} label={`${item.label} · ${item.count}`} title={`Pendências em ${item.label}`} variant="chip" align="right">
+                {item.sample}
+              </HelpTooltip>
+            ))}
+          </div>
+        ) : (
+          <p className={styles.emptyState}>Nenhuma pendência aberta no momento.</p>
+        )}
+
+        <div className={styles.supportRow}>
+          <div>
+            <div className={styles.identityTitle}>Idiomas conhecidos</div>
+            <p className={styles.supportingText}>Os nomes exibidos já estão localizados para leitura rápida.</p>
+          </div>
+          <HelpTooltip label="Idiomas" title="Como interpretar" align="right">
+            O motor mantém IDs internos para validação. Aqui você vê os nomes prontos para leitura; se não houver itens, ainda não existe idioma adicional selecionado.
+          </HelpTooltip>
+        </div>
+
         {presentedLanguages.length > 0 ? (
           <ul className={styles.tagList}>
             {presentedLanguages.map((language) => (

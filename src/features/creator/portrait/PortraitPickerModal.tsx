@@ -1,4 +1,5 @@
 import { PORTRAITS } from '../../../data/portraits';
+import { ModalSurface } from '../../../components/ui/ModalSurface';
 
 interface PortraitPickerModalProps {
   currentPortrait: string | null;
@@ -9,8 +10,7 @@ interface PortraitPickerModalProps {
 export function PortraitPickerModal({ currentPortrait, onClose, onSelect }: PortraitPickerModalProps) {
   return (
     <div className="modal-overlay" onClick={onClose} role="presentation">
-      <div
-        className="portrait-picker-modal"
+      <ModalSurface
         role="dialog"
         aria-modal="true"
         aria-labelledby="portrait-picker-title"
@@ -45,7 +45,7 @@ export function PortraitPickerModal({ currentPortrait, onClose, onSelect }: Port
             </button>
           ))}
         </div>
-      </div>
+      </ModalSurface>
     </div>
   );
 }

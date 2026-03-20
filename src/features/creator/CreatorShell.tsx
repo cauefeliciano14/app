@@ -10,6 +10,7 @@ import { AttributesStepWrapper } from '../../components/steps/AttributesStepWrap
 import { EquipmentStepWrapper } from '../../components/steps/EquipmentStepWrapper';
 import { CharacterSheetStep } from '../../components/steps/CharacterSheetStep';
 import { PortraitPickerModal } from './portrait/PortraitPickerModal';
+import styles from './layout/CreatorShell.module.css';
 
 export function CreatorShell() {
   const {
@@ -47,7 +48,7 @@ export function CreatorShell() {
   };
 
   return (
-    <div className="layout-container" style={{ maxWidth: '1400px' }}>
+    <div className={`layout-container ${styles.shellFrame}`}>
       <div className="animate-fade-in" key={currentStep}>
         {currentStep === 0 && <ClassSelectionStep onReset={handleFullReset} languagesData={languagesData} />}
         {currentStep === 1 && <BackgroundStep />}

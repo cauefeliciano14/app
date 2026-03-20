@@ -511,17 +511,17 @@ button:disabled {
   border-color: var(--border-input) !important;
 }
 
-.contextual-popover {
+.help-tooltip {
   position: relative;
   display: inline-flex;
 }
 
-.contextual-popover.align-right .contextual-popover-panel {
+.help-tooltip.align-right .help-tooltip-panel {
   right: 0;
   left: auto;
 }
 
-.contextual-popover-trigger {
+.help-tooltip-trigger {
   width: 28px;
   height: 28px;
   min-width: 28px;
@@ -538,14 +538,14 @@ button:disabled {
   box-shadow: none;
 }
 
-.contextual-popover-trigger:hover,
-.contextual-popover-trigger:focus-visible {
+.help-tooltip-trigger:hover,
+.help-tooltip-trigger:focus-visible {
   background: rgba(249, 115, 22, 0.22);
   border-color: rgba(249, 115, 22, 0.45);
   transform: translateY(-1px);
 }
 
-.contextual-popover-trigger-chip {
+.help-tooltip-trigger-chip {
   width: auto;
   min-width: 0;
   height: auto;
@@ -555,7 +555,7 @@ button:disabled {
   letter-spacing: 0.03em;
 }
 
-.contextual-popover-panel {
+.help-tooltip-panel {
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
@@ -575,20 +575,20 @@ button:disabled {
   padding: 12px 14px;
 }
 
-.contextual-popover-title {
+.help-tooltip-title {
   color: var(--text-primary);
   font-size: 0.82rem;
   font-weight: 700;
   margin-bottom: 6px;
 }
 
-.contextual-popover-body {
+.help-tooltip-body {
   color: var(--text-body);
   font-size: 0.82rem;
   line-height: 1.55;
 }
 
-.portrait-picker-modal {
+.app-modal-surface {
   position: relative;
   width: min(800px, 92vw);
   max-height: min(85vh, 860px);
