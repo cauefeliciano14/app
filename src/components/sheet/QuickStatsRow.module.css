@@ -1,0 +1,268 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.statRow,
+.actionRow,
+.inlineRow,
+.inputRow,
+.deathSavesRow {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.statRow {
+  flex-wrap: wrap;
+}
+
+.statCard {
+  background: rgba(17, 18, 24, 0.6);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: var(--space-sm) 14px;
+  text-align: center;
+  min-width: 70px;
+}
+
+.statLabel {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+.statValue {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.panel {
+  background: rgba(17, 18, 24, 0.6);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.hpHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.hpLabel,
+.panelHeading,
+.deathSaveLabel {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.hpCurrent {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.hpDivider {
+  color: #475569;
+}
+
+.hpMax {
+  font-size: 0.9rem;
+  color: var(--text-body);
+}
+
+.tempValue {
+  font-size: 0.8rem;
+  color: var(--color-info);
+  margin-left: var(--space-xs);
+}
+
+.hpBar {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  margin-bottom: var(--space-sm);
+}
+
+.hpFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width var(--transition-speed) ease;
+}
+
+.input {
+  background: var(--surface-ghost);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.inputSm {
+  width: 60px;
+  font-size: 0.85rem;
+}
+
+.inputMd {
+  width: 80px;
+  font-size: 0.8rem;
+}
+
+.inputXs {
+  width: 56px;
+  font-size: 0.85rem;
+}
+
+.actionButton,
+.toggleButton,
+.closeButton {
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.actionButton {
+  padding: var(--space-xs) 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.healButton {
+  background: rgba(74,222,128,0.15);
+  border: 1px solid rgba(74,222,128,0.3);
+  color: #4ade80;
+}
+
+.damageButton {
+  background: rgba(248,113,113,0.15);
+  border: 1px solid rgba(248,113,113,0.3);
+  color: #f87171;
+}
+
+.tempButton {
+  background: rgba(56,189,248,0.15);
+  border: 1px solid rgba(56,189,248,0.3);
+  color: var(--color-info);
+  font-size: 0.75rem;
+}
+
+.toggleButton {
+  flex: 1;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(17,18,24,0.6);
+  color: var(--text-muted);
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.toggleActiveInspiration {
+  background: rgba(167,139,250,0.2);
+  border-color: rgba(167,139,250,0.5);
+  color: var(--color-magic);
+}
+
+.toggleActiveRest {
+  background: rgba(251,191,36,0.15);
+  border-color: rgba(251,191,36,0.35);
+  color: #fbbf24;
+}
+
+.shortRestPanel {
+  background: rgba(251,191,36,0.07);
+  border: 1px solid rgba(251,191,36,0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.shortRestMeta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.shortRestLabel {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  padding: var(--space-xs) 6px;
+}
+
+.deathPanel {
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.deathDotRow {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.deathDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+}
+
+@media (max-width: 640px) {
+  .actionRow,
+  .inlineRow,
+  .inputRow,
+  .deathSavesRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toggleButton,
+  .actionButton,
+  .closeButton {
+    width: 100%;
+  }
+}
+
+.spacedTop {
+  margin-top: 6px;
+}
+
+.headingWarning {
+  margin-bottom: var(--space-sm);
+  color: #fbbf24;
+}
+
+.headingDanger {
+  margin-bottom: var(--space-sm);
+  color: #f87171;
+}
+
+.alignCenter {
+  align-items: center;
+}
+
+
+.warningButton {
+  flex: 1;
+  color: #fbbf24;
+  background: rgba(251,191,36,0.15);
+  border: 1px solid rgba(251,191,36,0.3);
+}
+
+.deathSaveCaption {
+  margin-bottom: var(--space-xs);
+}

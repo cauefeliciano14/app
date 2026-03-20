@@ -1,5 +1,7 @@
 import { useWizard } from '../../../context/WizardContext';
 import { useCharacter } from '../../../context/CharacterContext';
+import patterns from '../../../styles/panelPatterns.module.css';
+import styles from './StepSidebar.module.css';
 
 const ITEMS = [
   { index: 0, label: 'Classe', key: 'class' },
@@ -26,13 +28,11 @@ export function StepSidebar() {
   const currentItem = ITEMS[currentStep];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      <div style={{ color: '#94a3b8', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
-        Etapas
-      </div>
+    <div className={styles.root}>
+      <div className={patterns.sectionTitle}>Etapas</div>
 
-      <label style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-        <span style={{ color: '#cbd5e1', fontSize: '0.78rem', fontWeight: 600 }}>Ir para etapa</span>
+      <label className={styles.jumpLabel}>
+        <span className={styles.jumpCaption}>Ir para etapa</span>
         <select
           className="premium-select"
           aria-label="Ir para etapa"
@@ -51,52 +51,34 @@ export function StepSidebar() {
         </select>
       </label>
 
-      <details open style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px' }}>
-        <summary style={{ cursor: 'pointer', listStyle: 'none', padding: '12px 14px', color: '#f8fafc', fontWeight: 700 }}>
-          Navegação detalhada
-        </summary>
+      <details open className={styles.details}>
+        <summary className={styles.summary}>Navegação detalhada</summary>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '0 12px 12px' }}>
+        <div className={styles.detailList}>
           {ITEMS.map((item) => {
             const active = currentStep === item.index;
             const pending = pendingMap[item.key];
             const selectedLabel = stepSelections[item.index + 1];
             const complete = item.key === 'sheet' ? validationResult.isValid : Boolean(selectedLabel) && pending === 0;
+            const badgeClass = complete
+              ? styles.badgeComplete
+              : pending > 0
+                ? styles.badgePending
+                : styles.badgeIdle;
 
             return (
               <button
                 key={item.label}
                 onClick={() => setCurrentStep(item.index)}
-                style={{
-                  background: active ? 'rgba(249,115,22,0.14)' : 'rgba(255,255,255,0.03)',
-                  border: active ? '1px solid rgba(249,115,22,0.4)' : '1px solid rgba(255,255,255,0.05)',
-                  borderRadius: '12px',
-                  padding: '12px',
-                  textAlign: 'left',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '4px',
-                  boxShadow: active ? '0 8px 24px rgba(249,115,22,0.12)' : 'none',
-                }}
+                className={`${styles.navButton} ${active ? styles.navButtonActive : ''}`.trim()}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ color: '#f8fafc', fontWeight: 700, fontSize: '0.92rem' }}>{item.label}</span>
-                  <span style={{
-                    minWidth: '24px',
-                    height: '24px',
-                    borderRadius: '999px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: complete ? 'rgba(34,197,94,0.18)' : pending > 0 ? 'rgba(249,115,22,0.18)' : 'rgba(148,163,184,0.12)',
-                    color: complete ? '#4ade80' : pending > 0 ? '#fb923c' : '#94a3b8',
-                    fontSize: '0.75rem',
-                    fontWeight: 700,
-                  }}>
+                <div className={styles.navHeader}>
+                  <span className={styles.navLabel}>{item.label}</span>
+                  <span className={`${patterns.pill} ${styles.stepBadge} ${badgeClass}`.trim()}>
                     {complete ? '✓' : pending > 0 ? pending : item.index + 1}
                   </span>
                 </div>
-                <span style={{ color: active ? '#fed7aa' : '#94a3b8', fontSize: '0.77rem', lineHeight: 1.4 }}>
+                <span className={`${styles.navMeta} ${active ? styles.navMetaActive : ''}`.trim()}>
                   {pending > 0
                     ? `${pending} pendência${pending > 1 ? 's' : ''}`
                     : selectedLabel ?? (item.key === 'sheet' ? 'Revisão final' : 'Pronto para revisar')}
@@ -107,10 +89,10 @@ export function StepSidebar() {
         </div>
       </details>
 
-      <div style={{ background: 'rgba(249,115,22,0.08)', border: '1px solid rgba(249,115,22,0.18)', borderRadius: '14px', padding: '12px 14px' }}>
-        <div style={{ color: '#f8fafc', fontWeight: 700, marginBottom: '6px' }}>Etapa atual</div>
-        <div style={{ color: '#fed7aa', fontSize: '0.9rem', marginBottom: '4px' }}>{currentItem?.label ?? '—'}</div>
-        <div style={{ color: '#cbd5e1', fontSize: '0.8rem', lineHeight: 1.5 }}>
+      <div className={patterns.panelCardAccent}>
+        <div className={`${patterns.panelTitle} ${styles.currentTitle}`.trim()}>Etapa atual</div>
+        <div className={styles.currentLabel}>{currentItem?.label ?? '—'}</div>
+        <div className={styles.currentMeta}>
           {currentItem ? `${pendingMap[currentItem.key]} pendência${pendingMap[currentItem.key] !== 1 ? 's' : ''} nesta etapa.` : 'Selecione uma etapa para continuar.'}
         </div>
       </div>

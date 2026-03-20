@@ -1,0 +1,160 @@
+.stepRoot {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+}
+
+.stepGrid {
+  display: grid;
+  grid-template-columns:
+    minmax(clamp(13.5rem, 17vw, 15.5rem), 0.95fr)
+    minmax(clamp(20rem, 34vw, 28rem), 1.5fr)
+    minmax(clamp(14rem, 18vw, 16rem), 0.9fr);
+  grid-template-areas: 'classes details side';
+  gap: 16px;
+  min-height: 0;
+  align-items: start;
+}
+
+.classColumn,
+.detailsColumn,
+.sideColumn {
+  min-width: 0;
+}
+
+.classColumn {
+  grid-area: classes;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.classList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.resetButton {
+  margin-top: auto;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #94a3b8;
+}
+
+.detailsColumn {
+  grid-area: details;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.placeholder {
+  min-height: 360px;
+  border-radius: 16px;
+  border: 1px dashed rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+}
+
+.summaryHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.summaryStats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(clamp(7.5rem, 20vw, 9rem), 1fr));
+  gap: 8px;
+  min-width: min(100%, 18rem);
+}
+
+.traitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.sideColumn {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (max-width: 1320px) {
+  .stepGrid {
+    grid-template-columns:
+      minmax(clamp(13rem, 22vw, 15rem), 0.95fr)
+      minmax(clamp(22rem, 40vw, 34rem), 1.45fr);
+    grid-template-areas:
+      'classes details'
+      'side side';
+  }
+
+  .sideColumn {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+@media (max-width: 1100px) {
+  .stepGrid {
+    grid-template-columns:
+      minmax(clamp(12.5rem, 28vw, 15rem), 0.9fr)
+      minmax(clamp(20rem, 1vw + 22rem, 1fr), 1.35fr);
+  }
+
+  .summaryStats {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 920px) {
+  .stepGrid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'classes'
+      'details'
+      'side';
+  }
+
+  .classList,
+  .detailsColumn {
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .sideColumn {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .summaryStats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .traitsGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .placeholder {
+    min-height: 260px;
+    text-align: center;
+    padding: 24px;
+  }
+}
