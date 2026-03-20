@@ -2,7 +2,6 @@ import { useState } from 'react';
 import type { CSSProperties } from 'react';
 import type { DerivedSheet } from '../../rules/types/DerivedSheet';
 import type { CharacterPlayState } from '../../types/playState';
-import styles from './QuickStatsRow.module.css';
 
 function signedMod(n: number): string {
   return n >= 0 ? `+${n}` : `${n}`;
@@ -107,26 +106,25 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
   const hpColor = hpPercent > 50 ? '#4ade80' : hpPercent > 25 ? '#fbbf24' : '#f87171';
 
   const statCard = (label: string, value: string, accent?: string) => (
-    <div style={{
-      background: 'rgba(17, 18, 24, 0.6)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '10px',
-      padding: '8px 14px',
-      textAlign: 'center',
-      minWidth: 0,
-      minHeight: '72px',
-      display: 'grid',
-      alignContent: 'center',
-      justifyItems: 'center',
-      gap: '2px',
-    }}>
+    <div
+      style={{
+        background: 'rgba(17, 18, 24, 0.6)',
+        border: '1px solid rgba(255,255,255,0.07)',
+        borderRadius: '10px',
+        padding: '8px 14px',
+        textAlign: 'center',
+        minWidth: 0,
+        minHeight: '72px',
+        display: 'grid',
+        alignContent: 'center',
+        justifyItems: 'center',
+        gap: '2px',
+      }}
+    >
       <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '2px' }}>
         {label}
       </div>
       <div style={{ fontSize: '1.2rem', fontWeight: 700, color: accent ?? '#f1f5f9' }}>
-    <div className={styles.statCard}>
-      <div className={styles.statLabel}>{label}</div>
-      <div className={styles.statValue} style={{ color: accent }}>
         {value}
       </div>
     </div>
@@ -134,10 +132,7 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      {/* Stat pills row */}
       <div style={statCardsGridStyle}>
-    <div className={styles.root}>
-      <div className={styles.statRow}>
         {statCard('PB', signedMod(derivedSheet.proficiencyBonus), '#38bdf8')}
         {statCard('VEL', derivedSheet.speed, '#4ade80')}
         {statCard('INIC', signedMod(derivedSheet.initiative), '#fbbf24')}
@@ -145,53 +140,120 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
         {statCard('DADO DE VIDA', derivedSheet.hitDie, '#f97316')}
       </div>
 
-      <div className={styles.panel}>
-        <div className={styles.hpHeader}>
-          <span className={styles.hpLabel}>PV</span>
-          <span className={styles.hpCurrent} style={{ color: hpColor }}>
+      <div
+        style={{
+          background: 'rgba(17, 18, 24, 0.6)',
+          border: '1px solid rgba(255,255,255,0.07)',
+          borderRadius: '10px',
+          padding: '12px 14px',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em' }}>PV</span>
+          <span style={{ fontSize: '1.3rem', fontWeight: 700, color: hpColor }}>
             {playState.currentHp}
           </span>
-          <span className={styles.hpDivider}>/</span>
-          <span className={styles.hpMax}>{effectiveMaxHP}</span>
+          <span style={{ color: '#475569' }}>/</span>
+          <span style={{ fontSize: '0.9rem', color: '#cbd5e1' }}>{effectiveMaxHP}</span>
           {playState.tempHp > 0 && (
-            <span className={styles.tempValue}>+{playState.tempHp} temp</span>
+            <span style={{ fontSize: '0.8rem', color: '#38bdf8', marginLeft: '4px' }}>
+              +{playState.tempHp} temp
+            </span>
           )}
         </div>
-        <div className={styles.hpBar}>
-          <div className={styles.hpFill} style={{ width: `${Math.min(hpPercent, 100)}%`, background: hpColor }} />
+        <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginBottom: '8px' }}>
+          <div
+            style={{
+              height: '100%',
+              width: `${Math.min(hpPercent, 100)}%`,
+              background: hpColor,
+              borderRadius: '2px',
+              transition: 'width 0.3s ease',
+            }}
+          />
         </div>
-        <div className={styles.inputRow}>
+        <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
           <input
             type="number"
             min="0"
             value={hpInput}
             onChange={e => setHpInput(e.target.value)}
             placeholder="Qtd"
-            className={`${styles.input} ${styles.inputSm}`.trim()}
+            style={{
+              width: '60px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '6px',
+              color: '#f1f5f9',
+              padding: '4px 8px',
+              fontSize: '0.85rem',
+            }}
           />
-          <button onClick={handleHeal} className={`${styles.actionButton} ${styles.healButton}`.trim()}>
+          <button
+            onClick={handleHeal}
+            style={{
+              background: 'rgba(74,222,128,0.15)',
+              border: '1px solid rgba(74,222,128,0.3)',
+              borderRadius: '6px',
+              color: '#4ade80',
+              padding: '4px 10px',
+              fontSize: '0.8rem',
+              cursor: 'pointer',
+              fontWeight: 600,
+            }}
+          >
             Curar
           </button>
-          <button onClick={handleDamage} className={`${styles.actionButton} ${styles.damageButton}`.trim()}>
+          <button
+            onClick={handleDamage}
+            style={{
+              background: 'rgba(248,113,113,0.15)',
+              border: '1px solid rgba(248,113,113,0.3)',
+              borderRadius: '6px',
+              color: '#f87171',
+              padding: '4px 10px',
+              fontSize: '0.8rem',
+              cursor: 'pointer',
+              fontWeight: 600,
+            }}
+          >
             Dano
           </button>
         </div>
-        <div className={`${styles.inlineRow} ${styles.spacedTop} ${styles.alignCenter}`.trim()}>
+        <div style={{ display: 'flex', gap: '6px', alignItems: 'center', marginTop: '6px', flexWrap: 'wrap' }}>
           <input
             type="number"
             min="0"
             value={tempInput}
             onChange={e => setTempInput(e.target.value)}
             placeholder="PV Temp"
-            className={`${styles.input} ${styles.inputMd}`.trim()}
+            style={{
+              width: '80px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: '6px',
+              color: '#f1f5f9',
+              padding: '4px 8px',
+              fontSize: '0.8rem',
+            }}
           />
-          <button onClick={handleSetTemp} className={`${styles.actionButton} ${styles.tempButton}`.trim()}>
+          <button
+            onClick={handleSetTemp}
+            style={{
+              background: 'rgba(56,189,248,0.15)',
+              border: '1px solid rgba(56,189,248,0.3)',
+              borderRadius: '6px',
+              color: '#38bdf8',
+              padding: '4px 10px',
+              fontSize: '0.75rem',
+              cursor: 'pointer',
+            }}
+          >
             Definir PV Temp
           </button>
         </div>
       </div>
 
-      {/* Inspiration + Rest buttons row */}
       <div style={actionRowGridStyle}>
         <button
           onClick={() => onUpdatePlayState(prev => ({ ...prev, heroicInspiration: !prev.heroicInspiration }))}
@@ -207,10 +269,6 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
             transition: 'all 0.2s',
             minHeight: '38px',
           }}
-      <div className={styles.actionRow}>
-        <button
-          onClick={() => onUpdatePlayState(prev => ({ ...prev, heroicInspiration: !prev.heroicInspiration }))}
-          className={`${styles.toggleButton} ${playState.heroicInspiration ? styles.toggleActiveInspiration : ''}`.trim()}
         >
           {playState.heroicInspiration ? '★' : '☆'} Inspiração
         </button>
@@ -242,32 +300,41 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
             minHeight: '38px',
           }}
         >
-          className={`${styles.toggleButton} ${shortRestOpen ? styles.toggleActiveRest : ''}`.trim()}
-        >
-          Desc. Curto
-        </button>
-        <button onClick={handleLongRest} className={styles.toggleButton}>
           Desc. Longo
         </button>
       </div>
 
       {shortRestOpen && (
-        <div className={styles.shortRestPanel}>
-          <div className={`${styles.panelHeading} ${styles.headingWarning}`.trim()}>
+        <div
+          style={{
+            background: 'rgba(251,191,36,0.07)',
+            border: '1px solid rgba(251,191,36,0.25)',
+            borderRadius: '10px',
+            padding: '10px 14px',
+          }}
+        >
+          <div style={{ fontSize: '0.7rem', color: '#fbbf24', fontWeight: 600, marginBottom: '8px', letterSpacing: '0.08em' }}>
             DESCANSO CURTO — DADOS DE VIDA
           </div>
-          <div className={styles.shortRestMeta}>
+          <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginBottom: '8px' }}>
             Dado: {derivedSheet.hitDie} · Mod CON: {conMod >= 0 ? '+' : ''}{conMod}
           </div>
           <div style={restPanelGridStyle}>
-          <div className={`${styles.inlineRow} ${styles.alignCenter}`.trim()}>
             <input
               type="number"
               min="1"
               max="20"
               value={hdCount}
               onChange={e => setHdCount(e.target.value)}
-              className={`${styles.input} ${styles.inputXs}`.trim()}
+              style={{
+                width: '56px',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '6px',
+                color: '#f1f5f9',
+                padding: '4px 8px',
+                fontSize: '0.85rem',
+              }}
             />
             <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>dado(s)</span>
             <button
@@ -298,11 +365,6 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
                 minHeight: '34px',
               }}
             >
-            <span className={styles.shortRestLabel}>dado(s)</span>
-            <button onClick={handleShortRest} className={`${styles.actionButton} ${styles.warningButton}`.trim()}>
-              Recuperar PV
-            </button>
-            <button onClick={() => setShortRestOpen(false)} className={styles.closeButton}>
               ✕
             </button>
           </div>
@@ -310,11 +372,18 @@ export function QuickStatsRow({ derivedSheet, playState, onUpdatePlayState }: Qu
       )}
 
       {playState.currentHp === 0 && (
-        <div className={styles.deathPanel}>
-          <div className={`${styles.panelHeading} ${styles.headingDanger}`.trim()}>
+        <div
+          style={{
+            background: 'rgba(248,113,113,0.08)',
+            border: '1px solid rgba(248,113,113,0.25)',
+            borderRadius: '10px',
+            padding: '10px 14px',
+          }}
+        >
+          <div style={{ fontSize: '0.7rem', color: '#f87171', fontWeight: 600, marginBottom: '8px', letterSpacing: '0.08em' }}>
             SALVAGUARDAS DA MORTE
           </div>
-          <div className={styles.deathSavesRow}>
+          <div style={{ display: 'flex', gap: '14px' }}>
             <DeathSaveRow
               label="Sucessos"
               count={playState.deathSaves.successes}
@@ -350,14 +419,21 @@ function DeathSaveRow({
 }) {
   return (
     <div>
-      <div className={`${styles.deathSaveLabel} ${styles.deathSaveCaption}`.trim()}>{label}</div>
-      <div className={styles.deathDotRow}>
+      <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 600, marginBottom: '6px' }}>{label}</div>
+      <div style={{ display: 'flex', gap: '6px' }}>
         {Array.from({ length: max }, (_, i) => (
           <button
             key={i}
             onClick={() => onChange(count === i + 1 ? i : i + 1)}
-            className={styles.deathDot}
-            style={{ border: `2px solid ${color}`, background: i < count ? color : 'transparent' }}
+            style={{
+              width: '20px',
+              height: '20px',
+              borderRadius: '50%',
+              border: `2px solid ${color}`,
+              background: i < count ? color : 'transparent',
+              cursor: 'pointer',
+              padding: 0,
+            }}
           />
         ))}
       </div>
