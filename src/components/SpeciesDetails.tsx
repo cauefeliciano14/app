@@ -652,36 +652,7 @@ export const SpeciesDetails: React.FC<SpeciesDetailsProps> = ({ character, setCh
         {species.id === 'humano' && <HumanoTamanho choices={choices} setChoice={setChoice} />}
         {species.id === 'tiferino' && <TiferinoTamanho choices={choices} setChoice={setChoice} />}
 
-        {/* Lineage/ancestry sections (before or between traits) */}
-        {species.id === 'aasimar' && species.lineage && <AasimarRevelacao species={species} />}
-        {species.id === 'draconato' && species.lineage && <DraconatoLineage species={species} choices={choices} setChoice={setChoice} />}
-        {species.id === 'elfo' && species.lineage && <ElfoLinhagem species={species} choices={choices} setChoice={setChoice} />}
-        {species.id === 'gnomo' && species.lineage && <GnomoLinhagem species={species} choices={choices} setChoice={setChoice} />}
-        {species.id === 'golias' && species.lineage && <GoliaAncestralidade species={species} choices={choices} setChoice={setChoice} />}
-        {species.id === 'tiferino' && species.lineage && <TiferinoLegado species={species} choices={choices} setChoice={setChoice} />}
-        {/* Generic lineage (for species without specific component) */}
-        {species.lineage && !['aasimar', 'draconato', 'elfo', 'gnomo', 'golias', 'tiferino'].includes(species.id) && (
-          <GenericLineage species={species} choices={choices} setChoice={setChoice} />
-        )}
-
-        {/* Per-trait accordions — respects species.json order, injects special components */}
-        {species.racialTraits
-          .filter((t: any) => !excludedTraitNames.includes(t.title))
-          .map((trait: any) => {
-            if (species.id === 'elfo' && trait.title === 'Sentidos Aguçados') {
-              return <ElfoSentidos key={trait.title} choices={choices} setChoice={setChoice} />;
-            }
-            if (species.id === 'humano' && trait.title === 'Hábil') {
-              return <HumanoHabil key={trait.title} choices={choices} setChoice={setChoice} />;
-            }
-            if (species.id === 'humano' && trait.title === 'Versátil') {
-              return <HumanoVersatil key={trait.title} choices={choices} setChoice={setChoice} character={character} setCharacter={setCharacter} />;
-            }
-            return <TraitAccordion key={trait.title} trait={trait} />;
-          })
-        }
-
-        {/* Languages accordion */}
+        {/* Languages accordion (moved up for better visibility) */}
         <details style={{ ...accordionWrap, border: manualLangs.length < 2 ? '1px solid rgba(249,115,22,0.5)' : '1px solid rgba(255,255,255,0.06)' }}>
           <summary style={summaryBase}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
@@ -740,6 +711,36 @@ export const SpeciesDetails: React.FC<SpeciesDetailsProps> = ({ character, setCh
             </div>
           </div>
         </details>
+
+        {/* Lineage/ancestry sections (before or between traits) */}
+        {species.id === 'aasimar' && species.lineage && <AasimarRevelacao species={species} />}
+        {species.id === 'draconato' && species.lineage && <DraconatoLineage species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'elfo' && species.lineage && <ElfoLinhagem species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'gnomo' && species.lineage && <GnomoLinhagem species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'golias' && species.lineage && <GoliaAncestralidade species={species} choices={choices} setChoice={setChoice} />}
+        {species.id === 'tiferino' && species.lineage && <TiferinoLegado species={species} choices={choices} setChoice={setChoice} />}
+        {/* Generic lineage (for species without specific component) */}
+        {species.lineage && !['aasimar', 'draconato', 'elfo', 'gnomo', 'golias', 'tiferino'].includes(species.id) && (
+          <GenericLineage species={species} choices={choices} setChoice={setChoice} />
+        )}
+
+        {/* Per-trait accordions — respects species.json order, injects special components */}
+        {species.racialTraits
+          .filter((t: any) => !excludedTraitNames.includes(t.title))
+          .map((trait: any) => {
+            if (species.id === 'elfo' && trait.title === 'Sentidos Aguçados') {
+              return <ElfoSentidos key={trait.title} choices={choices} setChoice={setChoice} />;
+            }
+            if (species.id === 'humano' && trait.title === 'Hábil') {
+              return <HumanoHabil key={trait.title} choices={choices} setChoice={setChoice} />;
+            }
+            if (species.id === 'humano' && trait.title === 'Versátil') {
+              return <HumanoVersatil key={trait.title} choices={choices} setChoice={setChoice} character={character} setCharacter={setCharacter} />;
+            }
+            return <TraitAccordion key={trait.title} trait={trait} />;
+          })
+        }
+
       </div>
 
     </div>

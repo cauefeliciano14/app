@@ -19,6 +19,9 @@ export interface StepLayoutProps {
   errors?: string[];
   hrMarginBottom?: string;
   impactSection?: ChoiceImpactSection;
+  hideSidebar?: boolean;
+  hideSummary?: boolean;
+  hideHeader?: boolean;
   children: React.ReactNode;
 }
 
@@ -44,6 +47,9 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   errors,
   hrMarginBottom = '16px',
   impactSection,
+  hideSidebar,
+  hideSummary,
+  hideHeader,
   children,
 }) => {
   const { validationResult } = useCharacter();
@@ -56,11 +62,14 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
     setSummaryCollapsed,
   } = useWizard();
 
+  const isSheetStep = currentStep === 5;
+
   const shellClass = [
     shellStyles.shell,
-    sidebarCollapsed && summaryCollapsed ? shellStyles.shellBothCollapsed :
-      sidebarCollapsed ? shellStyles.shellSidebarCollapsed :
-        summaryCollapsed ? shellStyles.shellSummaryCollapsed : '',
+    sidebarCollapsed && summaryCollapsed && !isSheetStep ? shellStyles.shellBothCollapsed :
+      sidebarCollapsed && !isSheetStep ? shellStyles.shellSidebarCollapsed :
+        summaryCollapsed && !isSheetStep ? shellStyles.shellSummaryCollapsed : '',
+    isSheetStep ? shellStyles.shellFullSheet : '',
   ].filter(Boolean).join(' ');
 
   const pendingMap: Record<string, number> = {
@@ -77,113 +86,121 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   return (
     <div className="step-container" aria-label={STEP_LABELS[currentStep + 1] ?? `Etapa ${currentStep + 1}`}>
       <div className={shellClass}>
-        <aside
-          className={`${shellStyles.sidebar} ${sidebarCollapsed ? shellStyles.sidebarCollapsed : ''}`}
-        >
-          {sidebarCollapsed ? (
-            <div className={shellStyles.collapsedStrip}>
-              <button
-                className={shellStyles.collapsedExpandBtn}
-                onClick={() => setSidebarCollapsed(false)}
-                title="Expandir etapas"
-                aria-label="Expandir barra de etapas"
-              >
-                ›
-              </button>
-              {COLLAPSED_STEP_LABELS.map((abbr, i) => {
-                const pk = pendingKeys[i];
-                const pending = pendingMap[pk] ?? 0;
-                const complete = pk === 'sheet'
-                  ? validationResult.isValid
-                  : pending === 0 && i < currentStep;
-                const active = currentStep === i;
+        {(!hideSidebar && !isSheetStep) && (
+          <aside
+            className={`${shellStyles.sidebar} ${sidebarCollapsed ? shellStyles.sidebarCollapsed : ''}`}
+          >
+            {sidebarCollapsed ? (
+              <div className={shellStyles.collapsedStrip}>
+                <button
+                  className={shellStyles.collapsedExpandBtn}
+                  onClick={() => setSidebarCollapsed(false)}
+                  title="Expandir etapas"
+                  aria-label="Expandir barra de etapas"
+                >
+                  ›
+                </button>
+                {COLLAPSED_STEP_LABELS.map((abbr, i) => {
+                  const pk = pendingKeys[i];
+                  const pending = pendingMap[pk] ?? 0;
+                  const complete = pk === 'sheet'
+                    ? validationResult.isValid
+                    : pending === 0 && i < currentStep;
+                  const active = currentStep === i;
 
-                const dotClass = active
-                  ? shellStyles.collapsedDotActive
-                  : complete
-                    ? shellStyles.collapsedDotComplete
-                    : pending > 0
-                      ? shellStyles.collapsedDotPending
-                      : shellStyles.collapsedDotIdle;
+                  const dotClass = active
+                    ? shellStyles.collapsedDotActive
+                    : complete
+                      ? shellStyles.collapsedDotComplete
+                      : pending > 0
+                        ? shellStyles.collapsedDotPending
+                        : shellStyles.collapsedDotIdle;
 
-                return (
-                  <button
-                    key={i}
-                    className={`${shellStyles.collapsedStepDot} ${dotClass}`}
-                    onClick={() => setCurrentStep(i)}
-                    title={`Ir para etapa ${i + 1}`}
-                    aria-label={`Etapa ${i + 1}`}
-                  >
-                    {complete ? '✓' : pending > 0 ? pending : abbr}
-                  </button>
-                );
-              })}
-            </div>
-          ) : (
-            <>
-              <button
-                className={shellStyles.collapseToggle}
-                onClick={() => setSidebarCollapsed(true)}
-                title="Recolher etapas"
-                aria-label="Recolher barra de etapas"
-              >
-                ‹
-              </button>
-              <StepSidebar />
-              {impactSection && (
-                <div style={{ marginTop: '14px' }}>
-                  <ChoiceImpact section={impactSection} />
-                </div>
-              )}
-            </>
-          )}
-        </aside>
+                  return (
+                    <button
+                      key={i}
+                      className={`${shellStyles.collapsedStepDot} ${dotClass}`}
+                      onClick={() => setCurrentStep(i)}
+                      title={`Ir para etapa ${i + 1}`}
+                      aria-label={`Etapa ${i + 1}`}
+                    >
+                      {complete ? '✓' : pending > 0 ? pending : abbr}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              <>
+                <button
+                  className={shellStyles.collapseToggle}
+                  onClick={() => setSidebarCollapsed(true)}
+                  title="Recolher etapas"
+                  aria-label="Recolher barra de etapas"
+                >
+                  ‹
+                </button>
+                <StepSidebar />
+                {impactSection && (
+                  <div style={{ marginTop: '14px' }}>
+                    <ChoiceImpact section={impactSection} />
+                  </div>
+                )}
+              </>
+            )}
+          </aside>
+        )}
 
-        <main className={shellStyles.main}>
-          <div className={shellStyles.mainInner}>
-            <StepHeader
-              onPrev={onPrev}
-              onNext={onNext}
-              canAdvance={canAdvance}
-              characterName={characterName}
-              setCharacterName={setCharacterName}
-              portrait={portrait}
-              onPortraitClick={onPortraitClick}
-            />
-            <hr className={styles.separator} style={{ marginBottom: hrMarginBottom }} />
+        <main className={`${shellStyles.main} ${isSheetStep ? shellStyles.mainFullSheet : ''}`}>
+          <div className={`${shellStyles.mainInner} ${hideHeader ? styles.mainInnerNoHeader : ''} ${isSheetStep ? styles.mainInnerFullSheet : ''}`}>
+            {!hideHeader && (
+              <>
+                <StepHeader
+                  onPrev={onPrev}
+                  onNext={onNext}
+                  canAdvance={canAdvance}
+                  characterName={characterName}
+                  setCharacterName={setCharacterName}
+                  portrait={portrait}
+                  onPortraitClick={onPortraitClick}
+                />
+                <hr className={styles.separator} style={{ marginBottom: hrMarginBottom }} />
+              </>
+            )}
             {errors && errors.length > 0 && <ValidationBanner errors={errors} />}
             <div className={styles.content}>{children}</div>
           </div>
         </main>
 
-        <aside
-          className={`${shellStyles.summary} ${summaryCollapsed ? shellStyles.summaryCollapsed : ''}`}
-        >
-          {summaryCollapsed ? (
-            <div className={shellStyles.collapsedStrip}>
-              <button
-                className={shellStyles.collapsedExpandBtn}
-                onClick={() => setSummaryCollapsed(false)}
-                title="Expandir resumo"
-                aria-label="Expandir painel de resumo"
-              >
-                ‹
-              </button>
-            </div>
-          ) : (
-            <>
-              <button
-                className={shellStyles.collapseToggle}
-                onClick={() => setSummaryCollapsed(true)}
-                title="Recolher resumo"
-                aria-label="Recolher painel de resumo"
-              >
-                ›
-              </button>
-              <CharacterSummaryPanel />
-            </>
-          )}
-        </aside>
+        {(!hideSummary && !isSheetStep) && (
+          <aside
+            className={`${shellStyles.summary} ${summaryCollapsed ? shellStyles.summaryCollapsed : ''}`}
+          >
+            {summaryCollapsed ? (
+              <div className={shellStyles.collapsedStrip}>
+                <button
+                  className={shellStyles.collapsedExpandBtn}
+                  onClick={() => setSummaryCollapsed(false)}
+                  title="Expandir resumo"
+                  aria-label="Expandir painel de resumo"
+                >
+                  ‹
+                </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  className={shellStyles.collapseToggle}
+                  onClick={() => setSummaryCollapsed(true)}
+                  title="Recolher resumo"
+                  aria-label="Recolher painel de resumo"
+                >
+                  ›
+                </button>
+                <CharacterSummaryPanel />
+              </>
+            )}
+          </aside>
+        )}
       </div>
     </div>
   );

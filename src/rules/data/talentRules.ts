@@ -15,6 +15,7 @@ export interface AppliedTalentEffect {
   maxHpBonus?: number;
   unarmedDamageDice?: string;
   attributeBonuses?: Partial<Record<AttributeKey, number>>;
+  spellcastingAbility?: AttributeKey;
 }
 
 const ATTRIBUTE_LABEL_TO_KEY: Record<string, AttributeKey> = {
@@ -81,6 +82,10 @@ export function applyTalentEffects(
     case 'Iniciado em Magia':
       effect.cantrips?.push(selections?.cantrip1 ?? '', selections?.cantrip2 ?? '');
       if (selections?.level1Spell) effect.preparedSpells?.push(selections.level1Spell);
+      if (selections?.spellcastingAbility) {
+        const abilityKey = ATTRIBUTE_LABEL_TO_KEY[selections.spellcastingAbility];
+        if (abilityKey) effect.spellcastingAbility = abilityKey;
+      }
       effect.notes?.push('1 magia de 1º círculo preparada pelo talento (1 uso grátis por Descanso Longo).');
       break;
     case 'Músico':

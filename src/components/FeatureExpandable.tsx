@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import weaponsData from '../data/weapons.json';
 import { CANTRIPS_BY_LIST } from '../data/talentChoiceConfig';
-import { SpellTooltip } from './SpellTooltip';
+import { SpellDetailsAccordion } from './SpellDetailsAccordion';
 
 export interface FeatureExpandableProps {
   feature: any;
@@ -32,8 +32,6 @@ export const FeatureExpandable = ({
   const [showMore, setShowMore] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [needsTruncation, setNeedsTruncation] = useState(false);
-  const [hoveredSpell, setHoveredSpell] = useState<string | null>(null);
-  const [hoveredSpellRect, setHoveredSpellRect] = useState<DOMRect | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -241,16 +239,7 @@ export const FeatureExpandable = ({
                 )}
 
                 {opt.isSpell && choices?.[opt.id] && (
-                  <div
-                    style={{ position: 'relative', display: 'inline-block', marginTop: '6px' }}
-                    onMouseEnter={(e) => { setHoveredSpell(opt.id); setHoveredSpellRect(e.currentTarget.getBoundingClientRect()); }}
-                    onMouseLeave={() => { setHoveredSpell(null); setHoveredSpellRect(null); }}
-                  >
-                    <span style={{ color: '#38bdf8', fontSize: '0.78rem', cursor: 'help', borderBottom: '1px dotted #38bdf8' }}>
-                      Detalhes da Magia
-                    </span>
-                    {hoveredSpell === opt.id && <SpellTooltip spellName={choices[opt.id]} anchorRect={hoveredSpellRect} />}
-                  </div>
+                  <SpellDetailsAccordion spellName={choices[opt.id]} />
                 )}
               </div>
             );

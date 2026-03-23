@@ -4,7 +4,7 @@ import talentsData from "../../data/talents.json";
 import {
   TalentChoiceSection,
   checkTalentComplete,
-  countVisibleTalentChoices,
+  countPendingTalentChoices,
 } from "../TalentChoices";
 import { ToolProficiencyCard } from "../ToolProficiencyCard";
 import { StepLayout } from "./StepLayout";
@@ -174,23 +174,21 @@ export const BackgroundStep: React.FC = () => {
                             </span>
                             <span className={bgStyles.summaryMeta}>
                               {(() => {
-                                const visible = countVisibleTalentChoices(
+                                const pending = countPendingTalentChoices(
                                   selectedBackground.talent,
                                   character.talentSelections[
                                     selectedBackground.talent
                                   ],
                                 );
-                                return visible > 0 ? (
-                                  <span
-                                    className={
-                                      isTalentChoicesComplete
-                                        ? bgStyles.summaryMetaMuted
-                                        : bgStyles.summaryMetaAccent
-                                    }
-                                  >
-                                    {visible} Escolha{visible > 1 ? "s" : ""} —
+                                return pending > 0 ? (
+                                  <span className={bgStyles.summaryMetaAccent}>
+                                    {pending} pendência{pending > 1 ? "s" : ""} —
                                   </span>
-                                ) : null;
+                                ) : (
+                                  <span className={bgStyles.summaryMetaMuted}>
+                                    Concluído —
+                                  </span>
+                                );
                               })()}
                               <span className={bgStyles.summaryMetaMuted}>
                                 Talento de Origem

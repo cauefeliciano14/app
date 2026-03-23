@@ -21,6 +21,11 @@
   box-sizing: border-box;
 }
 
+:global(.mainInnerFullSheet) .stepRoot,
+:global(.mainInnerFullSheet) .stepContent {
+  padding: 0;
+}
+
 .sectionIntro {
   display: flex;
   flex-direction: column;

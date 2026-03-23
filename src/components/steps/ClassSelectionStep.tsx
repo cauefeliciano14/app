@@ -38,19 +38,27 @@ function getClassCardMeta(classId: string) {
   };
 }
 
-function isSkillChoiceOption(opt: any): boolean {
-  const name: string = (opt.name ?? '').toLowerCase();
-  return name.includes('perícia') || name.includes('pericia') || name.includes('skill');
+function getGroupTitle(name: string): string {
+  const lower = name.toLowerCase();
+  if (lower.includes('perícia') || lower.includes('pericia') || lower.includes('skill')) return 'Escolhas de Perícias';
+  if (lower.includes('instrumento')) return 'Escolha de Instrumentos Musicais';
+  if (lower.includes('maestria')) return 'Escolhas de Maestria em Arma';
+  if (lower.includes('equipamento')) return 'Escolha de Equipamento';
+  
+  if (lower.startsWith('escolha uma ')) return 'Escolhas de ' + name.slice(12) + 's';
+  if (lower.startsWith('escolha um ')) return 'Escolhas de ' + name.slice(11) + 's';
+  return name;
 }
 
-interface SkillChoicesGroupProps {
+interface GroupedChoicesProps {
+  title: string;
   options: any[];
   choices: Record<string, string>;
   onChoiceChange: (id: string, val: string) => void;
   allSelections?: string[];
 }
 
-function SkillChoicesGroup({ options, choices, onChoiceChange, allSelections }: SkillChoicesGroupProps) {
+function GroupedChoices({ title, options, choices, onChoiceChange, allSelections }: GroupedChoicesProps) {
   const [open, setOpen] = useState(false);
   const allComplete = options.every(opt => !!choices[opt.id]);
 
@@ -70,7 +78,7 @@ function SkillChoicesGroup({ options, choices, onChoiceChange, allSelections }: 
             <div style={{ width: '18px', height: '18px', borderRadius: '50%', backgroundColor: '#f97316', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.75rem', flexShrink: 0, boxShadow: '0 0 8px rgba(249,115,22,0.4)' }} title="Ação Necessária">!</div>
           )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', textAlign: 'left' }}>
-            <span style={{ color: '#cbd5e1', fontSize: '1rem', fontWeight: '500' }}>Escolhas de Perícias</span>
+            <span style={{ color: '#cbd5e1', fontSize: '1rem', fontWeight: '500' }}>{title}</span>
             <span style={{ fontSize: '0.7rem', color: !allComplete ? '#f97316' : '#64748b' }}>
               {options.length} Escolha{options.length > 1 ? 's' : ''} — Nível 1
             </span>
@@ -130,10 +138,16 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
   const selectedClassMeta = selectedClass ? getClassCardMeta(selectedClass.id) : null;
   const activeFeatures = (classDetails?.features ?? []).filter((feature) => feature.level <= characterLevel);
 
-  // Split options into skill choices (grouped) and others
+  // Group all top-level options by their name
   const allOptions = classDetails?.options ?? [];
-  const skillOptions = allOptions.filter(isSkillChoiceOption);
-  const otherOptions = allOptions.filter((opt: any) => !isSkillChoiceOption(opt));
+  const groupedOptions = React.useMemo(() => {
+    const groups: Record<string, any[]> = {};
+    for (const opt of allOptions) {
+      if (!groups[opt.name]) groups[opt.name] = [];
+      groups[opt.name].push(opt);
+    }
+    return Object.values(groups);
+  }, [allOptions]);
 
   return (
     <StepLayout
@@ -234,7 +248,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                 </div>
               </div>
 
-              {(skillOptions.length > 0 || otherOptions.length > 0 || activeFeatures.length > 0) && (
+              {(groupedOptions.length > 0 || activeFeatures.length > 0) && (
                 <>
                   <div className={styles.optionsHeader}>
                     <h4 className={styles.optionsTitle}>Escolhas e características</h4>
@@ -246,26 +260,35 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {skillOptions.length > 0 && (
-                      <SkillChoicesGroup
-                        options={skillOptions}
-                        choices={character.choices}
-                        onChoiceChange={handleChoiceChange}
-                        allSelections={allSelections}
-                      />
-                    )}
-
-                    {otherOptions.map((opt: any) => (
-                      <FeatureExpandable
-                        key={opt.id}
-                        feature={{ name: opt.name, level: 1, description: opt.description ?? '' }}
-                        needsChoice={!character.choices[opt.id]}
-                        options={[opt]}
-                        choices={character.choices}
-                        onChoiceChange={handleChoiceChange}
-                        allSelections={allSelections}
-                      />
-                    ))}
+                    {groupedOptions.map((group) => {
+                      // If there's multiple of the same option or if we want to group them anyway
+                      // we use GroupedChoices to display them cleanly.
+                      if (group.length > 1 || getGroupTitle(group[0].name) !== group[0].name) {
+                        return (
+                          <GroupedChoices
+                            key={group[0].name}
+                            title={getGroupTitle(group[0].name)}
+                            options={group}
+                            choices={character.choices}
+                            onChoiceChange={handleChoiceChange}
+                            allSelections={allSelections}
+                          />
+                        );
+                      } else {
+                        // Fallback to FeatureExpandable if it's a single unique option that doesn't fit standard groupings
+                        return (
+                          <FeatureExpandable
+                            key={group[0].id}
+                            feature={{ name: group[0].name, level: 1, description: group[0].description ?? '' }}
+                            needsChoice={!character.choices[group[0].id]}
+                            options={group}
+                            choices={character.choices}
+                            onChoiceChange={handleChoiceChange}
+                            allSelections={allSelections}
+                          />
+                        );
+                      }
+                    })}
 
                     {activeFeatures.map((feature, idx) => (
                       <FeatureExpandable

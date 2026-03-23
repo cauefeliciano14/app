@@ -67,19 +67,20 @@ export function InventoryTab({
       ) : (
         <div style={{
           background: 'rgba(17,18,24,0.6)',
-          border: '1px solid rgba(255,255,255,0.07)',
-          borderRadius: '10px',
+          border: 'none',
+          borderRadius: '4px',
           overflow: 'hidden',
         }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 40px 60px 80px 80px',
-            padding: '8px 14px',
-            background: 'rgba(255,255,255,0.03)',
+            gridTemplateColumns: '1fr 40px 60px 84px 84px',
+            padding: '4px 8px',
+            background: 'transparent',
             borderBottom: '1px solid rgba(255,255,255,0.05)',
+            gap: '8px'
           }}>
-            {['ITEM', 'QTD', 'CUSTO', 'EQUIPADO', 'SINTON.'].map(h => (
-              <div key={h} style={{ fontSize: '0.6rem', color: '#64748b', fontWeight: 600, letterSpacing: '0.08em' }}>
+            {['ITEM', 'QTD', 'CUSTO', 'EQUIP.', 'SINTONIZ.'].map(h => (
+              <div key={h} style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 800 }}>
                 {h}
               </div>
             ))}
@@ -95,48 +96,51 @@ export function InventoryTab({
             return (
               <div key={i} style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 40px 60px 80px 80px',
-                padding: '8px 14px',
+                gridTemplateColumns: '1fr 40px 60px 84px 84px',
+                padding: '8px',
                 borderBottom: i < inventory.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
                 alignItems: 'center',
+                gap: '8px'
               }}>
                 <div>
-                  <div style={{ fontSize: '0.88rem', color: '#f1f5f9' }}>{item.name}</div>
+                  <div style={{ fontSize: '0.85rem', color: '#f1f5f9', fontWeight: 700 }}>{item.name}</div>
                   {item.notes && (
-                    <div style={{ fontSize: '0.72rem', color: '#475569', marginTop: '1px' }}>{item.notes}</div>
+                    <div style={{ fontSize: '0.70rem', color: '#64748b', marginTop: '1px' }}>{item.notes}</div>
                   )}
                 </div>
-                <div style={{ fontSize: '0.85rem', color: '#94a3b8' }}>{item.quantity ?? 1}</div>
+                <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{item.quantity ?? 1}</div>
                 <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{item.cost ?? '—'}</div>
                 <button
                   onClick={() => toggleEquipped(item.name)}
                   style={{
-                    background: isEquipped ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
-                    border: `1px solid ${isEquipped ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                    borderRadius: '5px',
-                    color: isEquipped ? '#a78bfa' : '#64748b',
+                    background: isEquipped ? '#991b1b' : 'transparent',
+                    border: `1px solid ${isEquipped ? '#991b1b' : '#7f1d1d'}`,
+                    borderRadius: '4px',
+                    color: isEquipped ? '#ffffff' : '#94a3b8',
                     padding: '3px 8px',
-                    fontSize: '0.72rem',
+                    fontSize: '0.65rem',
+                    fontWeight: 700,
                     cursor: 'pointer',
-                    width: '68px',
+                    width: '74px',
                   }}
                 >
-                  {isEquipped ? 'Equipado' : 'Equipar'}
+                  {isEquipped ? 'EQUIPADO' : 'EQUIPAR'}
                 </button>
                 <button
                   onClick={() => toggleAttuned(item.name)}
                   style={{
-                    background: isAttuned ? 'rgba(251,191,36,0.15)' : 'rgba(255,255,255,0.04)',
-                    border: `1px solid ${isAttuned ? 'rgba(251,191,36,0.35)' : 'rgba(255,255,255,0.07)'}`,
-                    borderRadius: '5px',
-                    color: isAttuned ? '#fbbf24' : '#64748b',
+                    background: isAttuned ? '#b45309' : 'transparent',
+                    border: `1px solid ${isAttuned ? '#b45309' : '#7f1d1d'}`,
+                    borderRadius: '4px',
+                    color: isAttuned ? '#ffffff' : '#94a3b8',
                     padding: '3px 8px',
-                    fontSize: '0.72rem',
+                    fontSize: '0.65rem',
+                    fontWeight: 700,
                     cursor: 'pointer',
-                    width: '68px',
+                    width: '82px',
                   }}
                 >
-                  {isAttuned ? 'Sinton.' : 'Sintonizar'}
+                  {isAttuned ? 'SINTONIZ.' : 'SINTONIZAR'}
                 </button>
               </div>
             );

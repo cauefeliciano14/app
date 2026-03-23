@@ -30,41 +30,21 @@ export function DefensesCard({ derivedDefenses = [], activeDefenses, onAdd, onRe
   };
 
   return (
-    <div style={{
-      background: 'rgba(17,18,24,0.6)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '10px',
-      padding: '12px 14px',
-    }}>
-      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '8px' }}>
-        DEFESAS E RESISTÊNCIAS
-      </div>
-
-      {derivedDefenses.length > 0 && (
-        <div style={{ marginBottom: '8px' }}>
-          <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '4px' }}>
-            DERIVADAS
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      
+      {/* Lista combinada de defesas para simplificar o layout conforme referência "Normal" ou pills */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+        {derivedDefenses.map(d => (
+          <div key={d} style={{
+            background: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: '12px',
+            padding: '2px 8px',
+          }}>
+            <span style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>{d}</span>
           </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-            {derivedDefenses.map(d => (
-              <div key={d} style={{
-                background: 'rgba(74,222,128,0.12)',
-                border: '1px solid rgba(74,222,128,0.3)',
-                borderRadius: '6px',
-                padding: '2px 8px',
-              }}>
-                <span style={{ fontSize: '0.8rem', color: '#4ade80' }}>{d}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        ))}
 
-      {activeDefenses.length === 0 && derivedDefenses.length === 0 && (
-        <div style={{ fontSize: '0.8rem', color: '#475569', marginBottom: '8px' }}>Nenhuma</div>
-      )}
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '8px' }}>
         {activeDefenses.map(d => (
           <div key={d} style={{
             display: 'flex',
@@ -72,16 +52,16 @@ export function DefensesCard({ derivedDefenses = [], activeDefenses, onAdd, onRe
             gap: '4px',
             background: 'rgba(56,189,248,0.12)',
             border: '1px solid rgba(56,189,248,0.3)',
-            borderRadius: '6px',
+            borderRadius: '12px',
             padding: '2px 8px',
           }}>
-            <span style={{ fontSize: '0.8rem', color: '#38bdf8' }}>{d}</span>
+            <span style={{ fontSize: '0.75rem', color: '#f1f5f9' }}>{d}</span>
             <button
               onClick={() => onRemove(d)}
               style={{
                 background: 'none',
                 border: 'none',
-                color: '#38bdf8',
+                color: '#94a3b8',
                 cursor: 'pointer',
                 padding: '0 2px',
                 fontSize: '0.7rem',
@@ -92,6 +72,10 @@ export function DefensesCard({ derivedDefenses = [], activeDefenses, onAdd, onRe
             </button>
           </div>
         ))}
+        
+        {activeDefenses.length === 0 && derivedDefenses.length === 0 && (
+          <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Adicionar defesas...</div>
+        )}
       </div>
 
       <div style={{ display: 'flex', gap: '6px', marginBottom: '4px' }}>

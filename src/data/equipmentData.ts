@@ -128,14 +128,20 @@ export const backgroundEquipment: Record<string, EquipmentPackage> = {
   }
 };
 
-export const getEquipmentForClass = (classId: string) => classEquipment[classId] || {
-  optionA: { items: [], gold: 0, description: "" },
-  optionB: { gold: 0, description: "" }
+export const getEquipmentForClass = (classId: string) => {
+  const normalizedId = classId.toLowerCase();
+  return classEquipment[normalizedId] || {
+    optionA: { items: [], gold: 0, description: "" },
+    optionB: { gold: 0, description: "" }
+  };
 };
 
-export const getEquipmentForBackground = (bgId: string) => backgroundEquipment[bgId] || {
-  optionA: { items: [], gold: 0, description: "" },
-  optionB: { gold: 0, description: "" }
+export const getEquipmentForBackground = (bgId: string) => {
+  const normalizedId = bgId.toLowerCase();
+  return backgroundEquipment[normalizedId] || {
+    optionA: { items: [], gold: 0, description: "" },
+    optionB: { gold: 0, description: "" }
+  };
 };
 
 export const kitContents: Record<string, string> = {

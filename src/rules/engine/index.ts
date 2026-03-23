@@ -209,6 +209,15 @@ export function deriveSheet(choices: CharacterChoices): DerivedSheet {
     spellSlots = getSpellSlots(classId, level) ?? undefined;
     preparedSpellCount = getPreparedSpellCount(classId, level, abilityMod);
     cantripsKnown = getCantripsKnown(classId, level);
+  } else {
+    // Check if any talent provides spellcasting (like Iniciado em Magia)
+    const talentWithSpells = appliedTalentEffects.find(t => t?.spellcastingAbility);
+    if (talentWithSpells && talentWithSpells.spellcastingAbility) {
+      spellcastingAbility = talentWithSpells.spellcastingAbility;
+      const abilityMod = modifiers[spellcastingAbility] ?? 0;
+      spellSaveDC = calculateSpellSaveDC(abilityMod, profBonus);
+      spellAttackBonus = calculateSpellAttackBonus(abilityMod, profBonus);
+    }
   }
 
   const languages = choices.languageSelections ?? [];

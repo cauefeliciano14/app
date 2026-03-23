@@ -11,6 +11,7 @@ import { EquipmentStepWrapper } from '../../components/steps/EquipmentStepWrappe
 import { CharacterSheetStep } from '../../components/steps/CharacterSheetStep';
 import { PortraitPickerModal } from './portrait/PortraitPickerModal';
 import styles from './layout/CreatorShell.module.css';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function CreatorShell() {
   const {
@@ -81,14 +82,22 @@ export function CreatorShell() {
   return (
     <div className={`layout-container ${styles.shellFrame}`}>
       {showSaved && <div className="saved-indicator">● Salvo</div>}
-      <div className="animate-fade-in" key={currentStep}>
-        {currentStep === 0 && <ClassSelectionStep onReset={handleFullReset} languagesData={languagesData} />}
-        {currentStep === 1 && <BackgroundStep />}
-        {currentStep === 2 && <SpeciesStep languagesData={languagesData} />}
-        {currentStep === 3 && <AttributesStepWrapper />}
-        {currentStep === 4 && <EquipmentStepWrapper />}
-        {currentStep === 5 && <CharacterSheetStep />}
-      </div>
+      <AnimatePresence>
+        <motion.div
+          key={currentStep}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+        >
+          {currentStep === 0 && <ClassSelectionStep onReset={handleFullReset} languagesData={languagesData} />}
+          {currentStep === 1 && <BackgroundStep />}
+          {currentStep === 2 && <SpeciesStep languagesData={languagesData} />}
+          {currentStep === 3 && <AttributesStepWrapper />}
+          {currentStep === 4 && <EquipmentStepWrapper />}
+          {currentStep === 5 && <CharacterSheetStep />}
+        </motion.div>
+      </AnimatePresence>
 
       {isPortraitModalOpen && (
         <PortraitPickerModal

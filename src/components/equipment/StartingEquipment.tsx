@@ -31,8 +31,6 @@ export const StartingEquipment: React.FC<StartingEquipmentProps> = ({
     setSubChoices({});
   };
 
-  const canCommit = tempClassOption !== null || tempBgOption !== null;
-
   // Find items that need sub-choices
   const getItemsNeedingChoices = (items: string[]): string[] => {
     return items.filter(item => itemSubChoices[item]);
@@ -40,6 +38,14 @@ export const StartingEquipment: React.FC<StartingEquipmentProps> = ({
 
   const classItemsNeedingChoices = tempClassOption === 'A' ? getItemsNeedingChoices(classEq.optionA.items) : [];
   const bgItemsNeedingChoices = tempBgOption === 'A' ? getItemsNeedingChoices(bgEq.optionA.items) : [];
+
+  const pendingClassChoices = classItemsNeedingChoices.filter(item => !subChoices[`class-${item}`]);
+  const pendingBgChoices = bgItemsNeedingChoices.filter(item => !subChoices[`bg-${item}`]);
+
+  const canCommit = tempClassOption !== null && 
+                    tempBgOption !== null && 
+                    pendingClassChoices.length === 0 && 
+                    pendingBgChoices.length === 0;
 
   // Find kit items in option A to show contents
   const getKitItems = (items: string[]): string[] => {

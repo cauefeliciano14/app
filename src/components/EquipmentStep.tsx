@@ -36,7 +36,18 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
   });
 
   const toggle = (key: keyof typeof openAccordions) => {
-    setOpenAccordions(prev => ({ ...prev, [key]: !prev[key] }));
+    setOpenAccordions(prev => {
+      const newValue = !prev[key];
+      const next = { ...prev, [key]: newValue };
+
+      if (key === 'prepared' && newValue) {
+        next.spellCatalog = false;
+      } else if (key === 'spellCatalog' && newValue) {
+        next.prepared = false;
+      }
+
+      return next;
+    });
   };
 
   const equipmentState = character.equipment;

@@ -105,20 +105,19 @@ export function SpellsTab({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div style={{
         display: 'flex',
-        gap: '12px',
+        gap: '24px',
         flexWrap: 'wrap',
-        background: 'rgba(17,18,24,0.6)',
-        border: '1px solid rgba(255,255,255,0.07)',
-        borderRadius: '10px',
-        padding: '12px 14px',
+        background: 'transparent',
+        padding: '8px',
+        borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
-        <StatPill label="Atributo" value={ABILITY_LABELS[derivedSheet.spellcastingAbility ?? ''] ?? '—'} />
-        <StatPill label="Bônus de Ataque" value={signedMod(derivedSheet.spellAttackBonus ?? 0)} />
-        <StatPill label="CD de Resistência" value={String(derivedSheet.spellSaveDC ?? 0)} />
-        <StatPill label="Magias Preparadas" value={String(derivedSheet.preparedSpellCount ?? 0)} />
-        <StatPill label="Truques de Classe" value={String(derivedSheet.cantripsKnown ?? 0)} />
-        {bonusCantrips.length > 0 && <StatPill label="Truques Extra" value={String(bonusCantrips.length)} />}
-        {bonusPreparedSpells.length > 0 && <StatPill label="Magias Extra" value={String(bonusPreparedSpells.length)} />}
+        <StatPill label="ATRIBUTO DE CONJURAÇÃO" value={ABILITY_LABELS[derivedSheet.spellcastingAbility ?? ''] ?? '—'} />
+        <StatPill label="CD DE MAGIA" value={String(derivedSheet.spellSaveDC ?? 0)} />
+        <StatPill label="BÔNUS DE ATAQUE MÁGICO" value={signedMod(derivedSheet.spellAttackBonus ?? 0)} />
+        <StatPill label="MAGIAS PREPARADAS" value={String(derivedSheet.preparedSpellCount ?? 0)} />
+        <StatPill label="TRUQUES CONHECIDOS" value={String(derivedSheet.cantripsKnown ?? 0)} />
+        {bonusCantrips.length > 0 && <StatPill label="TRUQUES EXTRAS" value={String(bonusCantrips.length)} />}
+        {bonusPreparedSpells.length > 0 && <StatPill label="MAGIAS EXTRAS" value={String(bonusPreparedSpells.length)} />}
       </div>
 
       {slotLevels.length > 0 && (
@@ -256,9 +255,9 @@ export function SpellsTab({
 
 function StatPill({ label, value }: { label: string; value: string }) {
   return (
-    <div style={{ textAlign: 'center', minWidth: '80px' }}>
-      <div style={{ fontSize: '0.65rem', color: '#64748b', marginBottom: '2px' }}>{label}</div>
-      <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f1f5f9' }}>{value}</div>
+    <div style={{ textAlign: 'left', minWidth: '80px' }}>
+      <div style={{ fontSize: '0.65rem', color: '#94a3b8', marginBottom: '2px', fontWeight: 800 }}>{label}</div>
+      <div style={{ fontSize: '1.2rem', fontWeight: 900, color: '#f1f5f9' }}>{value}</div>
     </div>
   );
 }
@@ -281,8 +280,9 @@ function SpellList({
   return (
     <div style={{
       background: 'rgba(17,18,24,0.6)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '10px',
+      border: 'none',
+      borderLeft: `2px solid ${accent}`,
+      borderRadius: '4px',
       padding: '12px 14px',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px', alignItems: 'center', marginBottom: subtitle ? '4px' : '8px' }}>
@@ -406,24 +406,28 @@ function SpellList({
 
 function filterPillStyle(active: boolean) {
   return {
-    background: active ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
-    border: `1px solid ${active ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
-    borderRadius: '20px',
-    color: active ? '#a78bfa' : '#94a3b8',
-    padding: '4px 12px',
-    fontSize: '0.78rem',
+    background: active ? '#991b1b' : 'transparent',
+    border: 'none',
+    borderRadius: '4px',
+    color: active ? '#ffffff' : '#94a3b8',
+    padding: '4px 8px',
+    fontSize: '0.7rem',
+    fontWeight: 800,
     cursor: 'pointer',
+    transition: 'background 0.2s',
   } as const;
 }
 
 function slotButtonStyle(enabled: boolean, background: string, border: string, color: string) {
   return {
     background: enabled ? background : 'rgba(255,255,255,0.03)',
-    border: `1px solid ${border}`,
-    borderRadius: '5px',
+    border: `1px solid ${enabled ? border : '#7f1d1d'}`,
+    borderRadius: '4px',
     color: enabled ? color : '#475569',
     padding: '2px 8px',
-    fontSize: '0.7rem',
+    fontSize: '0.65rem',
+    fontWeight: 700,
+    textTransform: 'uppercase',
     cursor: enabled ? 'pointer' : 'default',
   } as const;
 }

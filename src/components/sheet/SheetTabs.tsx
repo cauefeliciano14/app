@@ -15,9 +15,9 @@ const TABS: Array<{ id: TabId; label: string }> = [
   { id: 'actions',    label: 'Ações' },
   { id: 'spells',     label: 'Magias' },
   { id: 'inventory',  label: 'Inventário' },
-  { id: 'features',   label: 'Características' },
+  { id: 'features',   label: 'Características e Traços' },
   { id: 'background', label: 'Antecedente' },
-  { id: 'notes',      label: 'Anotações' },
+  { id: 'notes',      label: 'Notas' },
   { id: 'extras',     label: 'Extras' },
 ];
 
@@ -29,14 +29,12 @@ interface SheetTabsProps {
   derivedSheet: DerivedSheet;
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
-  // Character raw data for features/background tabs
   classFeatures: Feature[];
   speciesTraits: Trait[];
   inventory: InventoryItem[];
   learnedCantrips: string[];
   preparedSpells: string[];
   characterLevel: number;
-  // Armor/shield equip state
   equippedArmorId?: string | null;
   hasShieldEquipped?: boolean;
   onEquipArmor?: (armorId: string | null) => void;
@@ -75,30 +73,31 @@ export function SheetTabs({
       {/* Tab bar */}
       <div style={{
         display: 'flex',
-        gap: '2px',
+        gap: '24px',
         overflowX: 'auto',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
         marginBottom: '16px',
-        paddingBottom: '1px',
+        paddingBottom: '8px',
+        paddingLeft: '8px'
       }}>
         {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             style={{
-              background: activeTab === tab.id ? 'rgba(167,139,250,0.15)' : 'transparent',
+              background: 'transparent',
               border: 'none',
-              borderBottom: `2px solid ${activeTab === tab.id ? '#a78bfa' : 'transparent'}`,
-              color: activeTab === tab.id ? '#a78bfa' : '#64748b',
-              padding: '8px 14px',
-              fontSize: '0.82rem',
-              fontWeight: activeTab === tab.id ? 600 : 400,
+              borderBottom: activeTab === tab.id ? '2px solid #dc2626' : '2px solid transparent',
+              color: activeTab === tab.id ? '#f1f5f9' : '#94a3b8',
+              padding: '0 0 4px 0',
+              fontSize: '0.95rem',
+              fontWeight: activeTab === tab.id ? 800 : 600,
               cursor: 'pointer',
               whiteSpace: 'nowrap',
-              transition: 'all 0.15s',
+              transition: 'all 0.1s',
             }}
           >
-            {tab.label}
+            {tab.label.toUpperCase()}
           </button>
         ))}
       </div>

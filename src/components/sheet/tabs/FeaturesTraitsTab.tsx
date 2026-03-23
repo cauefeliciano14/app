@@ -41,32 +41,36 @@ export function FeaturesTraitsTab({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {activeFeatures.length > 0 && (
         <Section title="CARACTERÍSTICAS DE CLASSE">
-          {activeFeatures.map((f, i) => (
-            <FeatureEntry key={i} title={f.name} badge={`Nível ${f.level}`} description={f.description} />
-          ))}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {activeFeatures.map((f, i) => (
+              <FeatureEntry key={i} title={f.name} badge={`Nível ${f.level}`} description={f.description} />
+            ))}
+          </div>
         </Section>
       )}
 
       {speciesTraits.length > 0 && (
         <Section title="TRAÇOS DE ESPÉCIE">
-          {speciesTraits.map((t, i) => (
-            <FeatureEntry key={i} title={t.title} description={t.description} />
-          ))}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {speciesTraits.map((t, i) => (
+              <FeatureEntry key={i} title={t.title} description={t.description} />
+            ))}
+          </div>
         </Section>
       )}
 
       {(activeTalents.length > 0 || originTalent) && (
-        <Section title="TALENTOS APLICADOS">
+        <Section title="FEITAS/TALENTOS APLICADOS">
           {activeTalents.map((talent) => (
             <div key={`${talent.source}-${talent.name}`} style={{ marginBottom: '10px' }}>
-              <div style={{ fontSize: '0.88rem', color: '#f1f5f9', fontWeight: 600 }}>
+              <div style={{ fontSize: '0.85rem', color: '#f1f5f9', fontWeight: 700 }}>
                 {talent.name}
-                <span style={{ color: '#64748b', fontSize: '0.74rem', marginLeft: '8px' }}>
-                  {talent.source === 'background' ? 'Antecedente' : 'Espécie'}
+                <span style={{ color: '#64748b', fontSize: '0.65rem', marginLeft: '8px', fontWeight: 600 }}>
+                  {talent.source === 'background' ? 'ANTECEDENTE' : 'ESPÉCIE'}
                 </span>
               </div>
               {talent.notes.length > 0 && (
-                <ul style={{ margin: '6px 0 0 18px', color: '#94a3b8', fontSize: '0.82rem', lineHeight: 1.5 }}>
+                <ul style={{ margin: '4px 0 0 16px', color: '#94a3b8', fontSize: '0.8rem', lineHeight: 1.5 }}>
                   {talent.notes.map((note) => <li key={note}>{note}</li>)}
                 </ul>
               )}
@@ -80,7 +84,7 @@ export function FeaturesTraitsTab({
 
       {derivedTraits.length > 0 && (
         <Section title="EFEITOS DERIVADOS">
-          <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.84rem', lineHeight: 1.6 }}>
+          <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.8rem', lineHeight: 1.6 }}>
             {derivedTraits.map((trait) => <li key={trait}>{trait}</li>)}
           </ul>
         </Section>
@@ -88,18 +92,18 @@ export function FeaturesTraitsTab({
 
       {backgroundName && (
         <Section title="ANTECEDENTE">
-          <div style={{ fontSize: '0.88rem', color: '#f1f5f9', marginBottom: '6px', fontWeight: 500 }}>
+          <div style={{ fontSize: '0.88rem', color: '#f1f5f9', marginBottom: '6px', fontWeight: 700 }}>
             {backgroundName}
           </div>
           {backgroundSkills && backgroundSkills.length > 0 && (
-            <div style={{ fontSize: '0.82rem', color: '#94a3b8' }}>
-              <span style={{ color: '#64748b' }}>Perícias: </span>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+              <span style={{ color: '#64748b', fontWeight: 700 }}>Perícias: </span>
               {backgroundSkills.join(', ')}
             </div>
           )}
           {backgroundTool && (
-            <div style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '4px' }}>
-              <span style={{ color: '#64748b' }}>Ferramenta: </span>
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '4px' }}>
+              <span style={{ color: '#64748b', fontWeight: 700 }}>Ferramentas: </span>
               {backgroundTool}
             </div>
           )}
@@ -119,11 +123,12 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <div style={{
       background: 'rgba(17,18,24,0.6)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '10px',
+      border: 'none',
+      borderLeft: '2px solid #991b1b',
+      borderRadius: '4px',
       padding: '12px 14px',
     }}>
-      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '10px' }}>
+      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 800, letterSpacing: '0.08em', marginBottom: '10px' }}>
         {title}
       </div>
       {children}
@@ -137,9 +142,13 @@ function FeatureEntry({ title, badge, description }: { title: string; badge?: st
   const shown = expanded || !long ? description : description.slice(0, 120) + '…';
 
   return (
-    <div style={{ marginBottom: '10px' }}>
+    <div style={{ 
+      background: 'rgba(255,255,255,0.02)',
+      borderRadius: '4px',
+      padding: '8px'
+    }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
-        <span style={{ fontSize: '0.88rem', color: '#f1f5f9', fontWeight: 600 }}>{title}</span>
+        <span style={{ fontSize: '0.85rem', color: '#f1f5f9', fontWeight: 700 }}>{title}</span>
         {badge && (
           <span style={{
             fontSize: '0.65rem',
@@ -153,7 +162,7 @@ function FeatureEntry({ title, badge, description }: { title: string; badge?: st
           </span>
         )}
       </div>
-      <div style={{ fontSize: '0.82rem', color: '#94a3b8', lineHeight: 1.5 }}>
+      <div style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.5 }}>
         {shown}
         {long && (
           <button
@@ -161,13 +170,14 @@ function FeatureEntry({ title, badge, description }: { title: string; badge?: st
             style={{
               background: 'none',
               border: 'none',
-              color: '#a78bfa',
+              color: '#991b1b',
+              fontWeight: 700,
               cursor: 'pointer',
               padding: '0 4px',
-              fontSize: '0.78rem',
+              fontSize: '0.75rem',
             }}
           >
-            {expanded ? 'Menos' : 'Mais'}
+            {expanded ? 'MENOS' : 'MAIS'}
           </button>
         )}
       </div>

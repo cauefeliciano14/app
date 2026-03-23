@@ -1,7 +1,7 @@
 export interface CustomAction {
   id: string;
   name: string;
-  type: 'action' | 'bonus' | 'reaction' | 'other';
+  type: 'action' | 'bonus' | 'reaction' | 'other' | 'limited';
   description: string;
 }
 

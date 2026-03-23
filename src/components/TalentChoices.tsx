@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TALENT_CHOICES_CONFIG, type TalentField } from '../data/talentChoiceConfig';
-import { SpellTooltip } from './SpellTooltip';
+import { SpellDetailsAccordion } from './SpellDetailsAccordion';
 
 // --- Funções exportadas ---
 
@@ -94,7 +94,6 @@ interface TalentChoiceFieldProps {
 }
 
 const TalentChoiceField: React.FC<TalentChoiceFieldProps> = ({ field, selections, onChange, allSelections }) => {
-  const [hovering, setHovering] = useState(false);
   const currentValue = selections[field.key] || "";
   
   // Lógica de dependência
@@ -200,24 +199,9 @@ const TalentChoiceField: React.FC<TalentChoiceFieldProps> = ({ field, selections
         </p>
       )}
 
-      {/* Detalhes da magia selecionada com tooltip no hover */}
+      {/* Detalhes da magia selecionada em accordion */}
       {isSpellField && (
-        <div
-          style={{ position: 'relative', display: 'inline-block', marginTop: '4px' }}
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-        >
-          <span style={{
-            color: '#38bdf8',
-            fontSize: '0.78rem',
-            cursor: 'help',
-            borderBottom: '1px dotted #38bdf8',
-            transition: 'color 0.2s',
-          }}>
-            Detalhes da Magia
-          </span>
-          {hovering && <SpellTooltip spellName={currentValue} />}
-        </div>
+        <SpellDetailsAccordion spellName={currentValue} />
       )}
     </div>
   );

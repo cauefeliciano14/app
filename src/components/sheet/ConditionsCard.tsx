@@ -20,21 +20,12 @@ export function ConditionsCard({ activeConditions, onAdd, onRemove }: Conditions
   };
 
   return (
-    <div style={{
-      background: 'rgba(17,18,24,0.6)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '10px',
-      padding: '12px 14px',
-    }}>
-      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '8px' }}>
-        CONDIÇÕES ATIVAS
-      </div>
-
-      {activeConditions.length === 0 && (
-        <div style={{ fontSize: '0.8rem', color: '#475569', marginBottom: '8px' }}>Nenhuma</div>
-      )}
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '8px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+        {activeConditions.length === 0 && (
+          <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Adicionar ativas...</div>
+        )}
         {activeConditions.map(c => (
           <div key={c} style={{
             display: 'flex',
@@ -42,10 +33,10 @@ export function ConditionsCard({ activeConditions, onAdd, onRemove }: Conditions
             gap: '4px',
             background: 'rgba(248,113,113,0.15)',
             border: '1px solid rgba(248,113,113,0.3)',
-            borderRadius: '6px',
+            borderRadius: '12px',
             padding: '2px 8px',
           }}>
-            <span style={{ fontSize: '0.8rem', color: '#f87171' }}>{c}</span>
+            <span style={{ fontSize: '0.75rem', color: '#f1f5f9' }}>{c}</span>
             <button
               onClick={() => onRemove(c)}
               style={{

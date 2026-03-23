@@ -46,6 +46,10 @@
     var(--creator-collapsed-rail-size);
 }
 
+.shellFullSheet {
+  display: block;
+}
+
 /* ── Column base styles ───────────────────────────────────────────────────── */
 .sidebar,
 .summary,
@@ -80,6 +84,19 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
+}
+
+/* Modificadores para Tela Cheia (Ficha) */
+.mainFullSheet {
+  margin: calc(-1 * clamp(12px, 1.4vw, 20px));
+  margin-top: -16px;
+}
+
+.mainInnerFullSheet {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 /* ── Collapsed panel state ───────────────────────────────────────────────── */

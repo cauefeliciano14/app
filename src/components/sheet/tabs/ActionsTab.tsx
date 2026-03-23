@@ -2,15 +2,16 @@ import { useState } from 'react';
 import type { WeaponAttack } from '../../../rules/types/DerivedSheet';
 import type { CharacterPlayState, CustomAction } from '../../../types/playState';
 
-type FilterId = 'all' | 'attack' | 'action' | 'bonus' | 'reaction' | 'other';
+type FilterId = 'all' | 'attack' | 'action' | 'bonus' | 'reaction' | 'other' | 'limited';
 
 const FILTERS: Array<{ id: FilterId; label: string }> = [
-  { id: 'all',      label: 'Tudo' },
-  { id: 'attack',   label: 'Ataques' },
-  { id: 'action',   label: 'Ação' },
-  { id: 'bonus',    label: 'Ação Bônus' },
-  { id: 'reaction', label: 'Reação' },
-  { id: 'other',    label: 'Outro' },
+  { id: 'all',      label: 'TODAS' },
+  { id: 'attack',   label: 'ATAQUE' },
+  { id: 'action',   label: 'AÇÃO' },
+  { id: 'bonus',    label: 'AÇÃO BÔNUS' },
+  { id: 'reaction', label: 'REAÇÃO' },
+  { id: 'other',    label: 'OUTRO' },
+  { id: 'limited',  label: 'USO LIMITADO' },
 ];
 
 const TYPE_LABELS: Record<string, string> = {
@@ -63,20 +64,23 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: Acti
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      {/* Filter pills */}
-      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+      
+      {/* Filter Menu Bar (Dashboard Style) */}
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '8px' }}>
         {FILTERS.map(f => (
           <button
             key={f.id}
             onClick={() => setFilter(f.id)}
             style={{
-              background: filter === f.id ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.04)',
-              border: `1px solid ${filter === f.id ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
-              borderRadius: '20px',
-              color: filter === f.id ? '#a78bfa' : '#94a3b8',
-              padding: '4px 12px',
-              fontSize: '0.78rem',
+              background: filter === f.id ? '#991b1b' : 'transparent',
+              border: 'none',
+              borderRadius: '4px',
+              color: filter === f.id ? '#ffffff' : '#94a3b8',
+              padding: '4px 8px',
+              fontSize: '0.7rem',
+              fontWeight: 800,
               cursor: 'pointer',
+              transition: 'background 0.2s',
             }}
           >
             {f.label}
@@ -88,19 +92,20 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: Acti
       {filteredAttacks.length > 0 && (
         <div style={{
           background: 'rgba(17,18,24,0.6)',
-          border: '1px solid rgba(255,255,255,0.07)',
-          borderRadius: '10px',
+          border: 'none',
+          borderRadius: '4px',
           overflow: 'hidden',
         }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 80px 80px 80px',
-            padding: '8px 14px',
-            background: 'rgba(255,255,255,0.03)',
+            gridTemplateColumns: 'minmax(120px, 1fr) 60px 60px 80px',
+            padding: '2px 8px 4px 8px',
+            background: 'transparent',
             borderBottom: '1px solid rgba(255,255,255,0.05)',
+            gap: '8px'
           }}>
-            {['NOME', 'ALCANCE', 'ATAQUE', 'DANO'].map(h => (
-              <div key={h} style={{ fontSize: '0.6rem', color: '#64748b', fontWeight: 600, letterSpacing: '0.08em' }}>
+            {['ATAQUE', 'ALCANCE', 'ACERTO/CD', 'DANO'].map((h, i) => (
+              <div key={h} style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 800, textAlign: i > 0 ? 'center' : 'left' }}>
                 {h}
               </div>
             ))}
@@ -108,26 +113,40 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: Acti
           {filteredAttacks.map((atk, i) => (
             <div key={i} style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 80px 80px 80px',
-              padding: '10px 14px',
+              gridTemplateColumns: 'minmax(120px, 1fr) 60px 60px 80px',
+              padding: '8px',
               borderBottom: i < filteredAttacks.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
               alignItems: 'center',
+              gap: '8px'
             }}>
               <div>
-                <div style={{ fontSize: '0.9rem', color: '#f1f5f9', fontWeight: 500 }}>{atk.weaponName}</div>
+                <div style={{ fontSize: '0.85rem', color: '#f1f5f9', fontWeight: 700 }}>{atk.weaponName}</div>
                 {atk.properties.length > 0 && (
-                  <div style={{ fontSize: '0.7rem', color: '#475569', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.65rem', color: '#64748b' }}>
                     {atk.properties.join(', ')}
                   </div>
                 )}
               </div>
-              <div style={{ fontSize: '0.85rem', color: '#94a3b8' }}>{atk.range}</div>
-              <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#38bdf8' }}>
-                {signedMod(atk.attackBonus)}
+              <div style={{ fontSize: '0.75rem', color: '#94a3b8', textAlign: 'center' }}>{atk.range}</div>
+              
+              <div style={{ textAlign: 'center' }}>
+                <span style={{ 
+                  display: 'inline-block',
+                  border: '1px solid #991b1b',
+                  borderRadius: '20px',
+                  padding: '1px 8px',
+                  fontSize: '0.8rem', 
+                  fontWeight: 900, 
+                  color: '#f1f5f9',
+                  background: 'rgba(0,0,0,0.5)'
+                }}>
+                  {signedMod(atk.attackBonus)}
+                </span>
               </div>
-              <div style={{ fontSize: '0.85rem', color: '#fbbf24' }}>
+              
+              <div style={{ fontSize: '0.75rem', color: '#f1f5f9', textAlign: 'center', border: '1px solid #7f1d1d', background: 'rgba(0,0,0,0.4)', borderRadius: '4px', padding: '2px 0' }}>
                 {atk.damageDice !== '1' ? atk.damageDice : '1'}{atk.damageBonus !== 0 ? ` ${signedMod(atk.damageBonus)}` : ''}
-                <span style={{ fontSize: '0.7rem', color: '#475569', marginLeft: '4px' }}>{atk.damageType}</span>
+                <span style={{ fontSize: '0.65rem', color: '#94a3b8', marginLeft: '4px' }}>{atk.damageType.substring(0,3)}</span>
               </div>
             </div>
           ))}

@@ -10,38 +10,52 @@ interface SavingThrowsCardProps {
 
 export function SavingThrowsCard({ derivedSavingThrows }: SavingThrowsCardProps) {
   return (
-    <div style={{
-      background: 'rgba(17,18,24,0.6)',
-      border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: '10px',
-      padding: '12px 14px',
-    }}>
-      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '8px' }}>
-        SALVAGUARDAS
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        {derivedSavingThrows.map(st => (
-          <div key={st.attribute} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-              border: `2px solid ${st.proficient ? '#a78bfa' : 'rgba(255,255,255,0.15)'}`,
-              background: st.proficient ? '#a78bfa' : 'transparent',
-              flexShrink: 0,
-            }} />
-            <span style={{ fontSize: '0.85rem', color: '#94a3b8', flex: 1 }}>{st.label}</span>
-            <span style={{
-              fontSize: '0.9rem',
-              fontWeight: 600,
-              color: st.proficient ? '#a78bfa' : '#cbd5e1',
-              minWidth: '28px',
-              textAlign: 'right',
+    <div style={{ padding: '8px 4px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 12px' }}>
+        {derivedSavingThrows.map(st => {
+          const isProf = st.proficient;
+          const shortLabel = st.label.substring(0, 3).toUpperCase();
+          
+          return (
+            <div key={st.attribute} style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'space-between',
+              position: 'relative',
+              height: '36px',
             }}>
-              {signedMod(st.modifier)}
-            </span>
-          </div>
-        ))}
+              {/* Hexagon Border Hack Horizontal */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                background: isProf ? '#991b1b' : '#7f1d1d',
+                clipPath: 'polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%)',
+                zIndex: 1,
+              }} />
+              <div style={{
+                position: 'absolute',
+                inset: '2px',
+                background: 'rgba(14, 14, 18, 0.95)',
+                clipPath: 'polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%)',
+                zIndex: 2,
+              }} />
+
+              <div style={{ position: 'relative', zIndex: 3, display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center', padding: '0 14px' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#f1f5f9' }}>
+                  {shortLabel}
+                </span>
+                
+                <div style={{
+                  color: isProf ? '#f87171' : '#e2e8f0',
+                  fontSize: '1rem',
+                  fontWeight: 900
+                }}>
+                  {signedMod(st.modifier)}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

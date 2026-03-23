@@ -16,8 +16,9 @@ export function ExtrasTab({ extras, onUpdateExtras }: ExtrasTabProps) {
         placeholder="Extras, contadores, companions…"
         style={{
           background: 'rgba(17,18,24,0.6)',
-          border: '1px solid rgba(255,255,255,0.07)',
-          borderRadius: '10px',
+          border: 'none',
+          borderLeft: '2px solid #991b1b',
+          borderRadius: '4px',
           color: '#f1f5f9',
           fontSize: '0.88rem',
           lineHeight: 1.6,
