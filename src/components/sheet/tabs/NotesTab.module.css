@@ -1,0 +1,269 @@
+/* NotesTab — D&D Beyond Underdark (refatorado com seções de identidade) */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Sub-navigation ── */
+.subNav {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border-faint);
+  padding-bottom: 8px;
+}
+
+.subNavBtn {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  padding: 5px 12px;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.subNavBtn:hover {
+  background: var(--color-primary-faint);
+  color: var(--text-secondary);
+}
+
+.subNavBtnActive {
+  background: var(--color-primary-subtle);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-primary-light);
+  padding: 5px 12px;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+/* ── Identity Grid ── */
+.identityGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.card {
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.cardWide {
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  grid-column: 1 / -1;
+}
+
+.cardTitle {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+/* ── Trait Grid (aparência, detalhes) ── */
+.traitGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.traitItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.traitLabel {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.traitValue {
+  font-size: 0.82rem;
+  color: var(--text-bright);
+  font-weight: 600;
+}
+
+/* ── Personality Blocks ── */
+.personBlock {
+  margin-bottom: 8px;
+}
+
+.personBlock:last-child {
+  margin-bottom: 0;
+}
+
+.personLabel {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--color-primary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.personText {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* ── Backstory ── */
+.backstoryText {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+/* ── Notes textarea ── */
+.hint {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.textarea {
+  background: var(--surface-inset);
+  border: none;
+  border-left: 2px solid var(--border-theme);
+  border-radius: 4px;
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  padding: 12px 14px;
+  resize: vertical;
+  min-height: 200px;
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: var(--text-faint);
+}
+
+/* ── Personality 2-col grid ── */
+.personalityGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .personalityGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Editable inputs ── */
+.traitInput,
+.traitSelect {
+  width: 100%;
+  background: var(--surface-input-alt);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  font-size: 0.78rem;
+  padding: 4px 7px;
+  outline: none;
+  transition: border-color var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.traitInput:focus,
+.traitSelect:focus {
+  border-color: var(--color-primary);
+}
+
+.traitSelect option {
+  background: var(--surface-base);
+}
+
+.personTextarea {
+  width: 100%;
+  background: var(--surface-row-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  padding: 6px 8px;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast);
+}
+
+.personTextarea:focus {
+  border-color: var(--color-primary);
+}
+
+.personTextarea::placeholder {
+  color: var(--text-faint);
+}
+
+.backstoryTextarea {
+  width: 100%;
+  background: var(--surface-row-hover);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.65;
+  padding: 10px 12px;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast);
+}
+
+.backstoryTextarea:focus {
+  border-color: var(--color-primary);
+}
+
+.backstoryTextarea::placeholder {
+  color: var(--text-faint);
+}
+
+/* ── Empty hint ── */
+.emptyHint {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .identityGrid {
+    grid-template-columns: 1fr;
+  }
+}

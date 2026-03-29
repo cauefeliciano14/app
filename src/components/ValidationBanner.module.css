@@ -15,7 +15,7 @@
 }
 
 .title {
-  color: #f87171;
+  color: var(--color-error-vivid);
   font-weight: 600;
   font-size: 0.85rem;
 }
@@ -43,9 +43,9 @@
 }
 
 .toggleButton {
-  border: 1px solid rgba(248, 113, 113, 0.28);
-  background: rgba(248, 113, 113, 0.1);
-  color: #fecaca;
+  border: 1px solid var(--color-error-border-strong);
+  background: var(--color-error-bg-hover);
+  color: var(--color-error-pale);
   border-radius: 999px;
   padding: 6px 10px;
   font-size: 0.75rem;
@@ -55,7 +55,7 @@
 }
 
 .toggleButton:hover {
-  background: rgba(248, 113, 113, 0.16);
+  background: var(--color-error-btn-hover);
 }
 
 .moreItems {

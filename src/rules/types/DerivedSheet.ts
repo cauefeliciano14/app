@@ -27,7 +27,19 @@ export interface DerivedSkill {
   attribute: string;
   modifier: number;
   proficient: boolean;
+  expertise: boolean;
+  halfProficient: boolean;
+  /** Modificador base do atributo (sem proficiência) */
+  baseAbilityMod: number;
+  /** Valor numérico do bônus de proficiência aplicado (0, half, full, ou double) */
+  proficiencyValue: number;
 }
+
+export interface AttributeBreakdownRow {
+  label: string;
+  value: number;
+}
+
 
 export interface DerivedSavingThrow {
   label: string;
@@ -56,6 +68,8 @@ export interface DerivedSheet {
   // Atributos
   finalAttributes: Record<string, number>;
   modifiers: Record<string, number>;
+  /** Breakdown de como cada atributo foi calculado (base + bônus) */
+  attributeBreakdowns: Record<string, AttributeBreakdownRow[]>;
 
   // Combate
   maxHP: number;
@@ -64,8 +78,9 @@ export interface DerivedSheet {
   armorClass: number;
   proficiencyBonus: number;
 
-  // Velocidade e sentidos
+  // Velocidade, tamanho e sentidos
   speed: string;
+  creatureSize: string;
   specialSenses: string[];
 
   // Proficiências e idiomas (valores internos usados pelo motor de regras)
@@ -107,4 +122,13 @@ export interface DerivedSheet {
   // Talentos/benefícios aplicados no motor
   originTalent?: string;
   activeTalents: ActiveTalentSummary[];
+
+  /** Se a classe concede Expertise neste nível e quantas perícias pode ter */
+  classGrantsExpertise: boolean;
+  expertiseCount: number;
+  /** Se a classe concede Jack of All Trades neste nível (Bardo nv 2+) */
+  jackOfAllTrades: boolean;
+
+  /** Breakdown de níveis por classe (multiclasse) */
+  classLevels?: Array<{ classId: string; className: string; level: number }>;
 }

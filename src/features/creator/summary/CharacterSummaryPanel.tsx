@@ -2,7 +2,12 @@ import { useMemo, useRef, useEffect, useState } from 'react';
 import { useCharacter } from '../../../context/CharacterContext';
 import { useWizard } from '../../../context/WizardContext';
 import { getLanguageDisplayNames } from '../../../utils/languagePresentation';
+import { ATTR_ABBR } from '../../../utils/attributeConstants';
 import { FANTASY_NAMES } from '../../../data/fantasyNames';
+import { HelpTooltip } from '../../../components/ui/HelpTooltip';
+import { alignmentsData } from '../../../data/alignmentsData';
+import { IdentityFieldsPanel } from './IdentityFieldsPanel';
+import { TimelinePanel } from '../../../components/TimelinePanel';
 import styles from './CharacterSummaryPanel.module.css';
 
 const STEP_LABELS: Record<string, string> = {
@@ -11,11 +16,6 @@ const STEP_LABELS: Record<string, string> = {
   species: 'Espécie',
   attributes: 'Atributos',
   equipment: 'Equipamento',
-};
-
-const ATTR_ABBREV: Record<string, string> = {
-  forca: 'FOR', destreza: 'DES', constituicao: 'CON',
-  inteligencia: 'INT', sabedoria: 'SAB', carisma: 'CAR',
 };
 
 const STEP_INDEX: Record<string, number> = {
@@ -110,9 +110,9 @@ export function CharacterSummaryPanel() {
 
   // ── Data ──────────────────────────────────────────────────────────────────
   const quickFacts = [
-    { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1), flash: false },
-    { label: 'CA', value: String(derivedSheet.armorClass), flash: flashedSections.has('ca') },
-    { label: 'PV', value: String(derivedSheet.maxHP), flash: flashedSections.has('hp') },
+    { label: 'Nível', value: String(characterLevel ?? derivedSheet.level ?? 1), flash: false, tooltip: null },
+    { label: 'CA', value: String(derivedSheet.armorClass), flash: flashedSections.has('ca'), tooltip: 'Classe de Armadura: determina a dificuldade de acertar ataques contra você. Baseada em armadura, escudo e modificador de Destreza.' },
+    { label: 'PV', value: String(derivedSheet.maxHP), flash: flashedSections.has('hp'), tooltip: 'Pontos de Vida: a quantidade de dano que seu personagem pode receber antes de cair. Baseado no Dado de Vida da classe + modificador de Constituição.' },
   ];
 
   const coreStats = useMemo(
@@ -136,7 +136,7 @@ export function CharacterSummaryPanel() {
     () => derivedSheet.skills
       .filter(s => s.proficient)
       .slice(0, 6)
-      .map(s => `${s.label} (${ATTR_ABBREV[s.attribute] ?? s.attribute.slice(0, 3).toUpperCase()})`),
+      .map(s => `${s.label} (${ATTR_ABBR[s.attribute] ?? s.attribute.slice(0, 3).toUpperCase()})`),
     [derivedSheet.skills],
   );
 
@@ -230,6 +230,20 @@ export function CharacterSummaryPanel() {
                   {character.species?.name || 'Não definida'}
                 </span>
               </div>
+              <div className={styles.identityMetaRow}>
+                <span className={styles.identityMetaLabel}>Alinhamento</span>
+                <select
+                  className={styles.alignmentSelect}
+                  value={character.alignment ?? ''}
+                  onChange={e => setCharacter((prev: any) => ({ ...prev, alignment: e.target.value || null }))}
+                  aria-label="Alinhamento do personagem"
+                >
+                  <option value="">— Escolher —</option>
+                  {alignmentsData.map(a => (
+                    <option key={a.id} value={a.title}>{a.title}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -237,7 +251,7 @@ export function CharacterSummaryPanel() {
 
       <div className={styles.quickFactsGrid}>
         {quickFacts.map((fact) => (
-          <SummaryPill key={fact.label} label={fact.label} value={fact.value} flash={fact.flash} />
+          <SummaryPill key={fact.label} label={fact.label} value={fact.value} flash={fact.flash} tooltip={fact.tooltip} />
         ))}
       </div>
 
@@ -277,6 +291,75 @@ export function CharacterSummaryPanel() {
         )}
       </div>
 
+      <details className={styles.identityCard}>
+        <summary className={styles.quickSheetSummary}>
+          <span className={styles.identityTitle}>Ficha Rápida</span>
+          <span className={styles.quickSheetChevron}>▾</span>
+        </summary>
+        <div className={styles.quickSheetBody}>
+          <div className={styles.quickSheetRow}>
+            <span className={styles.quickSheetLabel}>PV Máx</span>
+            <span className={styles.quickSheetValue}>
+              {derivedSheet.hitDie} + {derivedSheet.modifiers?.constituicao >= 0 ? '+' : ''}{derivedSheet.modifiers?.constituicao ?? 0} = <strong>{derivedSheet.maxHP}</strong>
+            </span>
+          </div>
+          <div className={styles.quickSheetRow}>
+            <span className={styles.quickSheetLabel}>CA</span>
+            <span className={styles.quickSheetValue}><strong>{derivedSheet.armorClass}</strong></span>
+          </div>
+          <div className={styles.quickSheetRow}>
+            <span className={styles.quickSheetLabel}>Iniciativa</span>
+            <span className={styles.quickSheetValue}>{derivedSheet.initiative >= 0 ? '+' : ''}{derivedSheet.initiative}</span>
+          </div>
+          <div className={styles.quickSheetRow}>
+            <span className={styles.quickSheetLabel}>Prof. Bonus</span>
+            <span className={styles.quickSheetValue}>+{derivedSheet.proficiencyBonus}</span>
+          </div>
+          <div className={styles.quickSheetRow}>
+            <span className={styles.quickSheetLabel}>Deslocamento</span>
+            <span className={styles.quickSheetValue}>{derivedSheet.speed || '9 m'}</span>
+          </div>
+          {derivedSheet.isCaster && derivedSheet.spellSaveDC != null && (
+            <>
+              <div className={styles.quickSheetDivider} />
+              <div className={styles.quickSheetRow}>
+                <span className={styles.quickSheetLabel}>CD Magia</span>
+                <span className={styles.quickSheetValue}>{derivedSheet.spellSaveDC}</span>
+              </div>
+              <div className={styles.quickSheetRow}>
+                <span className={styles.quickSheetLabel}>Ataque Magia</span>
+                <span className={styles.quickSheetValue}>{derivedSheet.spellAttackBonus != null && derivedSheet.spellAttackBonus >= 0 ? '+' : ''}{derivedSheet.spellAttackBonus}</span>
+              </div>
+            </>
+          )}
+          {derivedSheet.specialSenses.length > 0 && (
+            <>
+              <div className={styles.quickSheetDivider} />
+              <div className={styles.quickSheetRow}>
+                <span className={styles.quickSheetLabel}>Sentidos</span>
+                <span className={styles.quickSheetValue}>{derivedSheet.specialSenses.join(', ')}</span>
+              </div>
+            </>
+          )}
+        </div>
+      </details>
+
+      <details className={styles.identityCard}>
+        <summary className={styles.quickSheetSummary}>
+          <span className={styles.identityTitle}>Histórico</span>
+          <span className={styles.quickSheetChevron}>▾</span>
+        </summary>
+        <div style={{ paddingTop: '8px' }}>
+          <TimelinePanel />
+        </div>
+      </details>
+
+      {/* ── Campos de Identidade (colapsáveis) ── */}
+      <IdentityFieldsPanel
+        character={character}
+        onUpdateCharacter={setCharacter}
+      />
+
       {pendingItems.length > 0 && (
         <div className={`${styles.identityCard} ${styles.pendingCard}`}>
           <div className={styles.cardHeader}>
@@ -307,10 +390,17 @@ export function CharacterSummaryPanel() {
   );
 }
 
-function SummaryPill({ label, value, flash }: { label: string; value: string; flash?: boolean }) {
+function SummaryPill({ label, value, flash, tooltip }: { label: string; value: string; flash?: boolean; tooltip?: string | null }) {
   return (
     <div className={`${styles.summaryPillCard} ${flash ? styles.flashHighlight : ''}`}>
-      <div className={styles.pillLabel}>{label}</div>
+      <div className={styles.pillLabelRow}>
+        <span className={styles.pillLabel}>{label}</span>
+        {tooltip && (
+          <HelpTooltip label={label} title={label}>
+            {tooltip}
+          </HelpTooltip>
+        )}
+      </div>
       <div className={styles.pillValue}>{value}</div>
     </div>
   );

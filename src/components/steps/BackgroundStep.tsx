@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import backgroundsData from "../../data/backgrounds.json";
 import talentsData from "../../data/talents.json";
 import {
@@ -13,6 +13,9 @@ import bgStyles from "./BackgroundStep.module.css";
 import { formatDice, getSkillParts } from "../../utils/formatting";
 import { useCharacter, ATTR_METADATA } from "../../context/CharacterContext";
 import { useWizard } from "../../context/WizardContext";
+import { isSynergy } from "../../data/classSynergies";
+import { RecommendedBadge } from "../ui/RecommendedBadge";
+import { ComparisonModal } from "../ComparisonModal";
 
 export const BackgroundStep: React.FC = () => {
   const detailsRef = useRef<HTMLDivElement | null>(null);
@@ -39,6 +42,42 @@ export const BackgroundStep: React.FC = () => {
   const validationErrors = validationResult.byStep.background;
   const canAdvance = validationErrors.length === 0;
 
+  // ── Comparison mode ──
+  const [compareMode, setCompareMode] = useState(false);
+  const [compareIds, setCompareIds] = useState<[string | null, string | null]>([null, null]);
+  const [compareOpen, setCompareOpen] = useState(false);
+
+  const handleCompareClick = (bgId: string) => {
+    if (!compareMode) return;
+    setCompareIds(prev => {
+      if (prev[0] === bgId) return [null, prev[1]];
+      if (prev[1] === bgId) return [prev[0], null];
+      if (!prev[0]) return [bgId, prev[1]];
+      if (!prev[1]) {
+        setTimeout(() => setCompareOpen(true), 0);
+        return [prev[0], bgId];
+      }
+      return [bgId, null];
+    });
+  };
+
+  const buildBgComparison = (bgId: string | null) => {
+    if (!bgId) return null;
+    const bg = (backgroundsData.backgrounds as any[]).find((b: any) => b.id === bgId);
+    if (!bg) return null;
+    const talent = (talentsData.talents as any[]).find((t: any) => bg.talent === t.name || bg.talent?.startsWith(t.name));
+    return {
+      name: bg.name,
+      rows: [
+        { label: 'Perícias', value: bg.skillProficiencies?.join(', ') || '—' },
+        { label: 'Ferramenta', value: bg.toolProficiency || '—' },
+        { label: 'Atributos', value: bg.attributeValues?.map((a: string) => ATTR_METADATA[a]?.full || a).join(', ') || '—' },
+        { label: 'Talento', value: bg.talent || '—' },
+        { label: 'Benefícios', value: talent?.benefits?.slice(0, 2).join('; ') || '—' },
+      ],
+    };
+  };
+
   return (
     <StepLayout
       onPrev={() => setCurrentStep(0)}
@@ -63,16 +102,34 @@ export const BackgroundStep: React.FC = () => {
           </p>
         </div>
 
+        <button
+          onClick={() => { setCompareMode(m => !m); setCompareIds([null, null]); }}
+          style={{
+            padding: '6px 14px', fontSize: '0.78rem', fontWeight: 600, borderRadius: '8px', cursor: 'pointer',
+            border: compareMode ? '1px solid rgba(212,160,23,0.4)' : '1px solid rgba(255,255,255,0.1)',
+            background: compareMode ? 'rgba(212,160,23,0.12)' : 'transparent',
+            color: compareMode ? '#d4a017' : '#94a3b8',
+            alignSelf: 'flex-start', marginBottom: '4px',
+          }}
+        >
+          {compareMode ? '✕ Sair da comparação' : '⚖ Comparar origens'}
+        </button>
+
         <div className={styles.selectionLayout}>
           <div className={styles.selectionRail}>
             {(backgroundsData.backgrounds as any[]).map((bg: any) => {
               const isSelected = selectedBackground?.id === bg.id;
+              const isComparing = compareMode && (compareIds[0] === bg.id || compareIds[1] === bg.id);
               return (
                 <button
                   key={bg.id}
                   type="button"
-                  className={`${styles.selectionButton} ${isSelected ? styles.selectionButtonActive : ""}`.trim()}
+                  className={`${styles.selectionButton} ${isSelected || isComparing ? styles.selectionButtonActive : ""}`.trim()}
                   onClick={() => {
+                    if (compareMode) {
+                      handleCompareClick(bg.id);
+                      return;
+                    }
                     setSelectedBackground(bg);
                     requestAnimationFrame(() => {
                       detailsRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -87,6 +144,7 @@ export const BackgroundStep: React.FC = () => {
                   }}
                 >
                   <span className={styles.selectionButtonName}>{bg.name}</span>
+                  {isSynergy(character.characterClass?.id, bg.id) && !isSelected && <RecommendedBadge />}
                   {isSelected && <span className={styles.selectionButtonMarker}>✓</span>}
                 </button>
               );
@@ -430,14 +488,23 @@ export const BackgroundStep: React.FC = () => {
             ) : (
               <div className={`${styles.selectionPlaceholder} ${styles.placeholderPanel}`}>
                 <span className={bgStyles.placeholderIcon}>📖</span>
+                <p className={bgStyles.placeholderTitle}>Nenhuma origem selecionada</p>
                 <p className={bgStyles.placeholderText}>
-                  Selecione um antecedente para ver os detalhes
+                  Escolha um antecedente ao lado para ver bônus de atributo, talentos e proficiências de ferramentas.
                 </p>
               </div>
             )}
           </div>
         </div>
       </div>
+
+      <ComparisonModal
+        isOpen={compareOpen}
+        onClose={() => { setCompareOpen(false); setCompareIds([null, null]); }}
+        title="Comparação de Origens"
+        itemA={buildBgComparison(compareIds[0])}
+        itemB={buildBgComparison(compareIds[1])}
+      />
     </StepLayout>
   );
 };

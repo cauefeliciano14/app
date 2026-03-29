@@ -1,0 +1,61 @@
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: var(--border-separator);
+  border-radius: 1px;
+}
+
+.entry {
+  position: relative;
+  padding: 6px 0 6px 12px;
+}
+
+.dot {
+  position: absolute;
+  left: -17px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2px solid var(--surface-card);
+}
+
+.dotClass { background: var(--color-primary); }
+.dotBackground { background: var(--color-accent); }
+.dotSpecies { background: var(--color-success); }
+.dotAttribute { background: var(--color-dice); }
+.dotEquipment { background: var(--color-indigo-light); }
+.dotName { background: var(--color-accent-warm); }
+.dotPortrait { background: var(--color-pink); }
+
+.description {
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.time {
+  color: var(--text-dim);
+  font-size: 0.62rem;
+  margin-top: 2px;
+}
+
+.empty {
+  color: var(--text-dim);
+  font-size: 0.74rem;
+  font-style: italic;
+  padding: 4px 0;
+}

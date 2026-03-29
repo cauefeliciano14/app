@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { DerivedSheet } from '../../rules/types/DerivedSheet';
 import type { CharacterPlayState } from '../../types/playState';
+import type { WeaponAttack } from '../../rules/types/DerivedSheet';
+import type { CharacterAppearance, PersonalityTraits, CharacterIdentityUpdate } from '../../types/character';
 import { ActionsTab } from './tabs/ActionsTab';
 import { SpellsTab } from './tabs/SpellsTab';
 import { InventoryTab } from './tabs/InventoryTab';
@@ -8,6 +10,7 @@ import { FeaturesTraitsTab } from './tabs/FeaturesTraitsTab';
 import { BackgroundTab } from './tabs/BackgroundTab';
 import { NotesTab } from './tabs/NotesTab';
 import { ExtrasTab } from './tabs/ExtrasTab';
+import styles from './SheetTabs.module.css';
 
 type TabId = 'actions' | 'spells' | 'inventory' | 'features' | 'background' | 'notes' | 'extras';
 
@@ -34,6 +37,7 @@ interface SheetTabsProps {
   inventory: InventoryItem[];
   learnedCantrips: string[];
   preparedSpells: string[];
+  onUpdatePreparedSpells?: (spells: string[]) => void;
   characterLevel: number;
   equippedArmorId?: string | null;
   hasShieldEquipped?: boolean;
@@ -44,6 +48,19 @@ interface SheetTabsProps {
   backgroundSkills?: string[];
   backgroundTool?: string;
   backgroundEquipment?: string;
+  onAttackClick?: (attack: WeaponAttack) => void;
+  currency?: { cp: number; sp: number; ep: number; gp: number; pp: number };
+  onUpdateCurrency?: (currency: { cp: number; sp: number; ep: number; gp: number; pp: number }) => void;
+  /** Campos de identidade para NotesTab */
+  backstory?: string;
+  appearance?: CharacterAppearance;
+  personalityTraits?: PersonalityTraits;
+  faith?: string;
+  lifestyle?: string;
+  organizations?: string;
+  alignment?: string | null;
+  onUpdateIdentity?: (update: CharacterIdentityUpdate) => void;
+  classId?: string;
 }
 
 export function SheetTabs({
@@ -55,6 +72,7 @@ export function SheetTabs({
   inventory,
   learnedCantrips,
   preparedSpells,
+  onUpdatePreparedSpells,
   characterLevel,
   backgroundName,
   backgroundDescription,
@@ -65,37 +83,30 @@ export function SheetTabs({
   hasShieldEquipped,
   onEquipArmor,
   onEquipShield,
+  onAttackClick,
+  currency,
+  onUpdateCurrency,
+  backstory,
+  appearance,
+  personalityTraits,
+  faith,
+  lifestyle,
+  organizations,
+  alignment,
+  onUpdateIdentity,
+  classId,
 }: SheetTabsProps) {
   const [activeTab, setActiveTab] = useState<TabId>('actions');
 
   return (
     <div>
       {/* Tab bar */}
-      <div style={{
-        display: 'flex',
-        gap: '24px',
-        overflowX: 'auto',
-        borderBottom: '1px solid rgba(255,255,255,0.1)',
-        marginBottom: '16px',
-        paddingBottom: '8px',
-        paddingLeft: '8px'
-      }}>
+      <div className={styles.tabBar}>
         {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              borderBottom: activeTab === tab.id ? '2px solid #dc2626' : '2px solid transparent',
-              color: activeTab === tab.id ? '#f1f5f9' : '#94a3b8',
-              padding: '0 0 4px 0',
-              fontSize: '0.95rem',
-              fontWeight: activeTab === tab.id ? 800 : 600,
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              transition: 'all 0.1s',
-            }}
+            className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
           >
             {tab.label.toUpperCase()}
           </button>
@@ -103,11 +114,13 @@ export function SheetTabs({
       </div>
 
       {/* Tab content */}
+      <div className={styles.tabContent} key={activeTab}>
       {activeTab === 'actions' && (
         <ActionsTab
           weaponAttacks={derivedSheet.weaponAttacks}
           playState={playState}
           onUpdatePlayState={onUpdatePlayState}
+          onAttackClick={onAttackClick}
         />
       )}
       {activeTab === 'spells' && (
@@ -117,6 +130,7 @@ export function SheetTabs({
           onUpdatePlayState={onUpdatePlayState}
           learnedCantrips={learnedCantrips}
           preparedSpells={preparedSpells}
+          onUpdatePreparedSpells={onUpdatePreparedSpells}
         />
       )}
       {activeTab === 'inventory' && (
@@ -128,6 +142,9 @@ export function SheetTabs({
           hasShieldEquipped={hasShieldEquipped}
           onEquipArmor={onEquipArmor}
           onEquipShield={onEquipShield}
+          currency={currency}
+          onUpdateCurrency={onUpdateCurrency}
+          carryingCapacity={(derivedSheet.finalAttributes?.forca ?? 10) * 7.5}
         />
       )}
       {activeTab === 'features' && (
@@ -157,14 +174,27 @@ export function SheetTabs({
         <NotesTab
           notes={playState.notes}
           onUpdateNotes={notes => onUpdatePlayState(prev => ({ ...prev, notes }))}
+          backstory={backstory}
+          appearance={appearance}
+          personalityTraits={personalityTraits}
+          faith={faith}
+          lifestyle={lifestyle}
+          organizations={organizations}
+          alignment={alignment}
+          onUpdateIdentity={onUpdateIdentity}
         />
       )}
       {activeTab === 'extras' && (
         <ExtrasTab
           extras={playState.extras}
           onUpdateExtras={extras => onUpdatePlayState(prev => ({ ...prev, extras }))}
+          playState={playState}
+          onUpdatePlayState={onUpdatePlayState}
+          classId={classId}
+          characterLevel={characterLevel}
         />
       )}
+      </div>
     </div>
   );
 }

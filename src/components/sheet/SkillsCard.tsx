@@ -1,80 +1,114 @@
 import type { DerivedSkill } from '../../rules/types/DerivedSheet';
+import { signedMod } from '../../utils/format';
+import { ATTR_ABBR } from '../../utils/attributeConstants';
+import { CalculationTooltip } from '../ui/CalculationTooltip';
+import styles from './SkillsCard.module.css';
 
-const ATTR_ABBR: Record<string, string> = {
-  forca: 'FOR', destreza: 'DES', constituicao: 'CON',
-  inteligencia: 'INT', sabedoria: 'SAB', carisma: 'CAR',
+const ATTR_NAMES: Record<string, string> = {
+  forca: 'Força', destreza: 'Destreza', constituicao: 'Constituição',
+  inteligencia: 'Inteligência', sabedoria: 'Sabedoria', carisma: 'Carisma',
 };
 
-function signedMod(n: number): string {
-  return n >= 0 ? `+${n}` : `${n}`;
+function buildSkillBreakdown(skill: DerivedSkill) {
+  const rows: Array<{ label: string; value: number | string }> = [
+    { label: `Mod. ${ATTR_NAMES[skill.attribute] ?? skill.attribute}`, value: skill.baseAbilityMod },
+  ];
+  if (skill.proficiencyValue > 0) {
+    const profLabel = skill.expertise
+      ? 'Expertise (×2)'
+      : skill.halfProficient
+        ? 'Jack of All Trades (½)'
+        : 'Proficiência';
+    rows.push({ label: profLabel, value: skill.proficiencyValue });
+  }
+  return rows;
 }
 
 interface SkillsCardProps {
   skills: DerivedSkill[];
+  onSkillClick?: (skill: DerivedSkill) => void;
+  expertiseSkills?: string[];
+  onToggleExpertise?: (skillLabel: string) => void;
+  canGrantExpertise?: boolean;
+  expertiseCount?: number;
 }
 
-export function SkillsCard({ skills }: SkillsCardProps) {
+export function SkillsCard({
+  skills,
+  onSkillClick,
+  expertiseSkills = [],
+  onToggleExpertise,
+  canGrantExpertise = false,
+  expertiseCount = 0,
+}: SkillsCardProps) {
+  const usedExpertise = expertiseSkills.length;
+  const remainingExpertise = expertiseCount - usedExpertise;
+
   return (
     <div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        
-        {/* Helper Header Line */}
-        <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '8px', paddingRight: '12px', marginBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px' }}>
-          <span style={{ fontSize: '0.65rem', color: '#94a3b8', width: '38px', letterSpacing: '0.05em' }}>PROF</span>
-          <span style={{ fontSize: '0.65rem', color: '#94a3b8', width: '40px', letterSpacing: '0.05em' }}>MOD</span>
-          <span style={{ fontSize: '0.65rem', color: '#94a3b8', flex: 1, letterSpacing: '0.05em' }}>PERÍCIA</span>
-          <span style={{ fontSize: '0.65rem', color: '#94a3b8', width: '44px', textAlign: 'center', letterSpacing: '0.05em' }}>BÔNUS</span>
+      {canGrantExpertise && (
+        <div className={styles.expertiseHeader}>
+          <span className={styles.expertiseLabel}>EXPERTISE</span>
+          <span className={styles.expertiseCount}>
+            {usedExpertise}/{expertiseCount} selecionadas
+          </span>
         </div>
+      )}
 
-        {skills.map(skill => (
-          <div key={skill.label} style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            padding: '4px 8px',
-            background: 'transparent',
-            borderBottom: '1px solid rgba(255,255,255,0.03)',
-          }}>
-            
-            {/* Prof Circle */}
-            <div style={{ width: '38px', display: 'flex', justifyContent: 'center' }}>
-              <div style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                border: skill.proficient ? 'none' : '2px solid rgba(255,255,255,0.2)',
-                background: skill.proficient ? '#dc2626' : 'transparent',
-                boxShadow: skill.proficient ? '0 0 10px rgba(220, 38, 38, 0.8)' : 'none',
-              }} />
-            </div>
-            
-            {/* Attribute Base (gray) */}
-            <span style={{ fontSize: '0.75rem', color: '#64748b', width: '40px', fontWeight: 800 }}>
-              {ATTR_ABBR[skill.attribute] ?? skill.attribute}
-            </span>
-            
-            {/* Skill Name */}
-            <span style={{ fontSize: '0.9rem', color: '#e2e8f0', flex: 1, fontWeight: 700 }}>
-              {skill.label}
-            </span>
-            
-            {/* Bonus Box (Red Outline) */}
-            <div style={{
-              width: '44px',
-              border: '1px solid #7f1d1d',
-              borderRadius: '4px',
-              background: 'rgba(0,0,0,0.6)',
-              textAlign: 'center',
-              padding: '4px 0',
-              fontSize: '1rem',
-              fontWeight: 900,
-              color: '#f1f5f9'
-            }}>
+      <div className={styles.headerRow}>
+        <span className={styles.headerProf}>PROF</span>
+        <span className={styles.headerMod}>MOD</span>
+        <span className={styles.headerSkill}>PERÍCIA</span>
+        <span className={styles.headerBonus}>BÔNUS</span>
+      </div>
+
+      {skills.map(skill => (
+        <div
+          key={skill.label}
+          className={styles.skillRow}
+          onClick={() => onSkillClick?.(skill)}
+          role={onSkillClick ? 'button' : undefined}
+          tabIndex={onSkillClick ? 0 : undefined}
+          onKeyDown={onSkillClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onSkillClick(skill); } : undefined}
+        >
+          <div className={styles.profCol}>
+            {skill.expertise ? (
+              <div
+                className={`${styles.profDot} ${styles.profDotExpertise}`}
+                title="Expertise"
+                onClick={canGrantExpertise ? (e) => { e.stopPropagation(); onToggleExpertise?.(skill.label); } : undefined}
+                role={canGrantExpertise ? 'button' : undefined}
+              />
+            ) : skill.proficient ? (
+              <div
+                className={`${styles.profDot} ${styles.profDotFilled}`}
+                title={canGrantExpertise && remainingExpertise > 0 ? 'Clique para adicionar Expertise' : undefined}
+                onClick={canGrantExpertise && remainingExpertise > 0 ? (e) => { e.stopPropagation(); onToggleExpertise?.(skill.label); } : undefined}
+                role={canGrantExpertise && remainingExpertise > 0 ? 'button' : undefined}
+              />
+            ) : skill.halfProficient ? (
+              <div className={`${styles.profDot} ${styles.profDotHalf}`} title="Jack of All Trades (½ proficiência)" />
+            ) : (
+              <div className={`${styles.profDot} ${styles.profDotEmpty}`} />
+            )}
+          </div>
+          <span className={styles.attrLabel}>
+            {ATTR_ABBR[skill.attribute] ?? skill.attribute}
+          </span>
+          <span className={`${styles.skillName} ${skill.expertise ? styles.skillNameExpertise : ''}`}>
+            {skill.label}
+          </span>
+          <CalculationTooltip
+            title={skill.label}
+            breakdown={buildSkillBreakdown(skill)}
+            total={skill.modifier}
+          >
+            <div className={`${styles.bonusBox} ${skill.expertise ? styles.bonusBoxExpertise : ''}`}>
               {signedMod(skill.modifier)}
             </div>
-            
-          </div>
-        ))}
-      </div>
+          </CalculationTooltip>
+        </div>
+      ))}
     </div>
   );
 }

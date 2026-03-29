@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { deriveSheet } from '../rules/engine/index';
 import { validateChoices } from '../rules/engine/validation';
 import type { CharacterChoices, BackgroundBonusDistribution } from '../rules/types/CharacterChoices';
@@ -10,25 +10,28 @@ import type { Character, Selection } from '../types/character';
 import { DEFAULT_CHARACTER } from '../types/character';
 import { BACKGROUNDS_WITH_TOOL_SELECTOR } from '../data/backgroundToolSelectors';
 import { normalizeFeatureChoices } from '../utils/characterNormalization';
-import { loadCreationState, CREATION_STORAGE_KEY } from '../utils/persistence';
+import {
+  loadCreationState,
+  CREATION_STORAGE_KEY,
+  type SavedCharacter,
+  saveCharacter,
+  getActiveCharacterId,
+  setActiveCharacterId
+} from '../utils/persistence';
 import { sanitizeEquipmentState } from '../rules/utils/equipment';
 
+import { ATTR_META } from '../utils/attributeConstants';
+
 // ---------------------------------------------------------------------------
-// ATTR_METADATA constant
+// ATTR_METADATA constant (re-export para backward-compat)
 // ---------------------------------------------------------------------------
-export const ATTR_METADATA: Record<string, { full: string; desc: string }> = {
-  forca: { full: 'Força', desc: 'Poder físico e força bruta.' },
-  destreza: { full: 'Destreza', desc: 'Agilidade, reflexos e equilíbrio.' },
-  constituicao: { full: 'Constituição', desc: 'Resistência, saúde e vitalidade.' },
-  inteligencia: { full: 'Inteligência', desc: 'Raciocínio, memória e conhecimento.' },
-  sabedoria: { full: 'Sabedoria', desc: 'Percepção, intuição e sintonização.' },
-  carisma: { full: 'Carisma', desc: 'Personalidade, influência e persuasão.' },
-};
+export const ATTR_METADATA = ATTR_META;
 
 // ---------------------------------------------------------------------------
 // Context value type
 // ---------------------------------------------------------------------------
 interface CharacterContextValue {
+  activeCharacterId: string | null;
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
   selectedBackground: any;
@@ -53,8 +56,13 @@ interface CharacterContextValue {
   handleChoiceChange: (featureId: string, choiceName: string) => void;
   handleTalentSelectionChange: (talentName: string, selections: Record<string, string>) => void;
   handleResetCharacter: () => void;
+  handleLoadCharacter: (saved: SavedCharacter) => void;
   handleSelectClass: (cls: Selection) => void;
   getAttributeBonus: (attr: string) => number;
+  undo: () => void;
+  redo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
 }
 
 const CharacterContext = createContext<CharacterContextValue | null>(null);
@@ -64,13 +72,21 @@ const CharacterContext = createContext<CharacterContextValue | null>(null);
 // ---------------------------------------------------------------------------
 export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const savedState = React.useMemo(() => loadCreationState(), []);
+  
+  const initialActiveId = React.useMemo(() => getActiveCharacterId(), []);
+  const [activeCharacterId, setLocalActiveCharacterId] = useState<string | null>(initialActiveId);
+
+  const updateActiveCharacterId = useCallback((id: string | null) => {
+    setLocalActiveCharacterId(id);
+    setActiveCharacterId(id);
+  }, []);
 
   const [character, setCharacter] = useState<Character>(savedState?.character ?? DEFAULT_CHARACTER);
   const [selectedBackground, setSelectedBackground] = useState<any>(savedState?.auxiliaryState?.selectedBackground ?? null);
   const [attrChoiceMode, setAttrChoiceMode] = useState<'' | 'triple' | 'double'>(savedState?.auxiliaryState?.attrChoiceMode ?? '');
   const [attrPlus1, setAttrPlus1] = useState(savedState?.auxiliaryState?.attrPlus1 ?? '');
   const [attrPlus2, setAttrPlus2] = useState(savedState?.auxiliaryState?.attrPlus2 ?? '');
-  const [characterLevel, setCharacterLevel] = useState(1);
+  const [characterLevel, setCharacterLevel] = useState(savedState?.auxiliaryState?.characterLevel ?? 1);
   const [playState, setPlayState] = useState<CharacterPlayState>(() => {
     try {
       const saved = localStorage.getItem('dnd_play_state');
@@ -79,6 +95,67 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       return DEFAULT_PLAY_STATE;
     }
   });
+
+  // -------------------------------------------------------------------------
+  // Undo / Redo
+  // -------------------------------------------------------------------------
+  const MAX_UNDO = 30;
+  const undoStack = useRef<Character[]>([]);
+  const redoStack = useRef<Character[]>([]);
+  const isUndoRedoAction = useRef(false);
+  const prevCharRef = useRef<Character>(character);
+
+  useEffect(() => {
+    if (isUndoRedoAction.current) {
+      isUndoRedoAction.current = false;
+      prevCharRef.current = character;
+      return;
+    }
+    if (prevCharRef.current !== character) {
+      undoStack.current = [...undoStack.current.slice(-(MAX_UNDO - 1)), prevCharRef.current];
+      redoStack.current = [];
+      prevCharRef.current = character;
+    }
+  }, [character]);
+
+  const [, forceRender] = useState(0);
+
+  const undo = useCallback(() => {
+    if (undoStack.current.length === 0) return;
+    const prev = undoStack.current[undoStack.current.length - 1];
+    undoStack.current = undoStack.current.slice(0, -1);
+    redoStack.current = [...redoStack.current, character];
+    isUndoRedoAction.current = true;
+    setCharacter(prev);
+    forceRender(n => n + 1);
+  }, [character, setCharacter]);
+
+  const redo = useCallback(() => {
+    if (redoStack.current.length === 0) return;
+    const next = redoStack.current[redoStack.current.length - 1];
+    redoStack.current = redoStack.current.slice(0, -1);
+    undoStack.current = [...undoStack.current, character];
+    isUndoRedoAction.current = true;
+    setCharacter(next);
+    forceRender(n => n + 1);
+  }, [character, setCharacter]);
+
+  const canUndo = undoStack.current.length > 0;
+  const canRedo = redoStack.current.length > 0;
+
+  // Ctrl+Z / Ctrl+Shift+Z global shortcuts
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey) || e.key.toLowerCase() !== 'z') return;
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) return;
+      e.preventDefault();
+      if (e.shiftKey) redo();
+      else undo();
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [undo, redo]);
 
   // -------------------------------------------------------------------------
   // Derived memos
@@ -153,9 +230,13 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       featureChoices: featureChoicesNormalized,
       characterDetails: { name: character.name, portrait: character.portrait },
       level: characterLevel,
+      classLevels: character.classLevels && character.classLevels.length > 0
+        ? character.classLevels
+        : classId ? [{ classId, className: character.characterClass?.name ?? '', level: characterLevel }] : undefined,
     };
   }, [
     character.characterClass,
+    character.classLevels,
     character.species,
     character.attributes,
     character.equipment,
@@ -172,7 +253,10 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     characterLevel,
   ]);
 
-  const derivedSheet = React.useMemo(() => deriveSheet(choices), [choices]);
+  const derivedSheet = React.useMemo(
+    () => deriveSheet(choices, playState.expertiseSkills ?? [], playState.attunedItemIds ?? []),
+    [choices, playState.expertiseSkills, playState.attunedItemIds]
+  );
   const validationResult = React.useMemo(() => validateChoices(choices), [choices]);
 
   const allSelections = React.useMemo(() => {
@@ -188,15 +272,18 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     ].filter(Boolean) as string[];
   }, [character.choices, character.talentSelections, selectedBackground, character.languages]);
 
-  const stepSelections: Record<number, string> = {};
-  if (character.characterClass?.name) stepSelections[1] = character.characterClass.name;
-  if (selectedBackground?.name) stepSelections[2] = selectedBackground.name;
-  if (character.species?.name) stepSelections[3] = character.species.name;
+  const stepSelections: Record<number, string> = React.useMemo(() => {
+    const s: Record<number, string> = {};
+    if (character.characterClass?.name) s[1] = character.characterClass.name;
+    if (selectedBackground?.name) s[2] = selectedBackground.name;
+    if (character.species?.name) s[3] = character.species.name;
+    return s;
+  }, [character.characterClass, selectedBackground, character.species]);
 
   // -------------------------------------------------------------------------
   // Handlers
   // -------------------------------------------------------------------------
-  const getAttributeBonus = (attr: string) => {
+  const getAttributeBonus = useCallback((attr: string) => {
     let bonus = 0;
     if (attrChoiceMode === 'triple') {
       if (selectedBackground?.attributeValues.includes(attr)) bonus += 1;
@@ -205,14 +292,14 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (attr === attrPlus2) bonus += 2;
     }
     return bonus;
-  };
+  }, [attrChoiceMode, selectedBackground, attrPlus1, attrPlus2]);
 
-  const handleSelect = <K extends keyof Character>(field: K, value: Character[K]) => {
+  const handleSelect = useCallback(<K extends keyof Character>(field: K, value: Character[K]) => {
     setCharacter(prev => ({ ...prev, [field]: value }));
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleSelectSpecies = (sp: any) => {
+  const handleSelectSpecies = useCallback((sp: any) => {
     setCharacter(prev => {
       const prevId = prev.species?.id;
       const newChoices = { ...prev.choices };
@@ -225,9 +312,9 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       return { ...prev, species: sp, choices: newChoices, languages: autoLangs };
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
-  const handleChoiceChange = (featureId: string, choiceName: string) => {
+  const handleChoiceChange = useCallback((featureId: string, choiceName: string) => {
     setCharacter(prev => ({
       ...prev,
       choices: {
@@ -235,9 +322,9 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         [featureId]: choiceName
       }
     }));
-  };
+  }, []);
 
-  const handleTalentSelectionChange = (talentName: string, selections: Record<string, string>) => {
+  const handleTalentSelectionChange = useCallback((talentName: string, selections: Record<string, string>) => {
     setCharacter(prev => ({
       ...prev,
       talentSelections: {
@@ -245,22 +332,44 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         [talentName]: selections
       }
     }));
-  };
+  }, []);
 
-  const handleSelectClass = (cls: Selection) => {
+  const handleSelectClass = useCallback((cls: Selection) => {
     handleSelect('characterClass', cls);
-  };
+  }, [handleSelect]);
 
-  const handleResetCharacter = () => {
+  const handleResetCharacter = useCallback(() => {
     setCharacter(DEFAULT_CHARACTER);
     setSelectedBackground(null);
     setAttrChoiceMode('');
     setAttrPlus1('');
     setAttrPlus2('');
+    setCharacterLevel(1);
     setPlayState(DEFAULT_PLAY_STATE);
+    updateActiveCharacterId(null);
     localStorage.removeItem(CREATION_STORAGE_KEY);
     localStorage.removeItem('dnd_play_state');
-  };
+  }, [updateActiveCharacterId]);
+
+  const handleLoadCharacter = useCallback((saved: SavedCharacter) => {
+    updateActiveCharacterId(saved.id);
+    if (saved.creationSnapshot) {
+      const snap = saved.creationSnapshot;
+      setCharacter(snap.character ?? DEFAULT_CHARACTER);
+      const aux = snap.auxiliaryState ?? {};
+      setSelectedBackground(aux.selectedBackground ?? null);
+      setAttrChoiceMode(aux.attrChoiceMode ?? '');
+      setAttrPlus1(aux.attrPlus1 ?? '');
+      setAttrPlus2(aux.attrPlus2 ?? '');
+      setCharacterLevel(aux.characterLevel ?? 1);
+      // Persist to localStorage so engine picks it up
+      localStorage.setItem(CREATION_STORAGE_KEY, JSON.stringify({ ...snap, version: 1 }));
+    }
+    if (saved.playState) {
+      setPlayState(saved.playState);
+      localStorage.setItem('dnd_play_state', JSON.stringify(saved.playState));
+    }
+  }, [updateActiveCharacterId]);
 
   // -------------------------------------------------------------------------
   // Effects
@@ -299,9 +408,64 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }, [character.characterClass?.id]);
 
   // -------------------------------------------------------------------------
+  // Auto-Generate ID for new characters
+  // -------------------------------------------------------------------------
+  useEffect(() => {
+    if (!activeCharacterId && character.characterClass) {
+      updateActiveCharacterId(crypto.randomUUID());
+    }
+  }, [activeCharacterId, character.characterClass, updateActiveCharacterId]);
+
+  // -------------------------------------------------------------------------
+  // Auto-Save character to multi-character storage
+  // -------------------------------------------------------------------------
+  useEffect(() => {
+    // We only auto-save if an ID is active
+    if (!activeCharacterId) return;
+
+    // Throttle slightly if needed, but for now we'll just save on every typical character state change
+    const name = character.name || 'Herói sem Nome';
+    const classNameStr = character.characterClass?.name || 'Aventureiro';
+    const speciesNameStr = character.species?.name || 'Convidado';
+
+    const saved: SavedCharacter = {
+      id: activeCharacterId,
+      name,
+      className: classNameStr,
+      speciesName: speciesNameStr,
+      level: characterLevel,
+      portrait: character.portrait,
+      savedAt: Date.now(),
+      creationSnapshot: {
+        character,
+        currentStep: 0, // Currently step is pushed from WizardContext, but we fallback
+        auxiliaryState: {
+          selectedBackground,
+          attrChoiceMode,
+          attrPlus1,
+          attrPlus2,
+        }
+      },
+      playState: playState
+    };
+
+    saveCharacter(saved);
+  }, [
+    activeCharacterId,
+    character,
+    characterLevel,
+    selectedBackground,
+    attrChoiceMode,
+    attrPlus1,
+    attrPlus2,
+    playState
+  ]);
+
+  // -------------------------------------------------------------------------
   // Context value
   // -------------------------------------------------------------------------
-  const value: CharacterContextValue = {
+  const value: CharacterContextValue = React.useMemo(() => ({
+    activeCharacterId,
     character,
     setCharacter,
     selectedBackground,
@@ -326,9 +490,21 @@ export const CharacterProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     handleChoiceChange,
     handleTalentSelectionChange,
     handleResetCharacter,
+    handleLoadCharacter,
     handleSelectClass,
     getAttributeBonus,
-  };
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+  }), [
+    activeCharacterId, character, selectedBackground, attrChoiceMode, attrPlus1, attrPlus2,
+    characterLevel, playState, choices, derivedSheet, validationResult,
+    allSelections, stepSelections, handleSelect, handleSelectSpecies,
+    handleChoiceChange, handleTalentSelectionChange, handleResetCharacter,
+    handleLoadCharacter, handleSelectClass, getAttributeBonus,
+    undo, redo, canUndo, canRedo
+  ]);
 
   return <CharacterContext.Provider value={value}>{children}</CharacterContext.Provider>;
 };

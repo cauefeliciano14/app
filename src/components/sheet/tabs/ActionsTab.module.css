@@ -1,0 +1,433 @@
+/* ActionsTab — D&D Beyond Underdark */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Filter bar */
+.filterBar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.filterBtn {
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: var(--text-dim);
+  padding: 3px 8px;
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.filterBtn:hover {
+  background: var(--color-primary-subtle);
+}
+
+.filterBtnActive {
+  composes: filterBtn;
+  background: var(--color-primary);
+  color: var(--text-white);
+}
+
+.filterBtnActive:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Attack table */
+.attackTable {
+  background: var(--surface-inset);
+  border: none;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+}
+
+.attackHeader {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 60px 60px 80px;
+  padding: 2px 8px 4px 8px;
+  background: transparent;
+  border-bottom: 1px solid var(--border-faint);
+  gap: 8px;
+}
+
+.attackHeaderCell {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 800;
+  letter-spacing: var(--label-spacing);
+}
+
+.attackHeaderCellCenter {
+  composes: attackHeaderCell;
+  text-align: center;
+}
+
+.attackRow {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 60px 60px 80px;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-faint);
+  transition: background var(--transition-fast);
+}
+
+.attackRow:hover {
+  background: var(--surface-subtle-hover);
+}
+
+.attackRow:last-child {
+  border-bottom: none;
+}
+
+.weaponName {
+  font-size: 0.85rem;
+  color: var(--text-bright);
+  font-weight: 700;
+}
+
+.weaponProps {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+.attackRange {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.attackBonus {
+  display: inline-block;
+  border: 1px solid var(--border-theme);
+  border-radius: 20px;
+  padding: 1px 8px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: var(--text-bright);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.damageDice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-bright);
+  text-align: center;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-card);
+  border-radius: 3px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+.damageType {
+  font-family: var(--font-label);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-transform: capitalize;
+}
+
+/* Custom actions */
+.customList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.customCard {
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.customName {
+  font-size: 0.88rem;
+  color: var(--text-bright);
+  font-weight: 600;
+}
+
+.customType {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  color: var(--color-magic);
+  background: var(--color-magic-bg);
+  border: 1px solid var(--color-magic-border);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.customDesc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+
+.removeBtn:hover {
+  color: var(--color-primary-light);
+}
+
+.emptyText {
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 16px;
+}
+
+/* Add custom action form */
+.formCard {
+  background: var(--surface-inset);
+  border: 1px solid var(--color-magic-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formTitle {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--color-magic);
+  font-weight: 600;
+  letter-spacing: var(--label-spacing);
+}
+
+.formInput {
+  background: var(--surface-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  padding: 6px 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.formInput:focus {
+  border-color: var(--color-magic);
+}
+
+.formSelect {
+  composes: formInput;
+}
+
+.formTextarea {
+  composes: formInput;
+  resize: vertical;
+  font-size: 0.82rem;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+}
+
+.formSubmitBtn {
+  flex: 1;
+  background: var(--color-magic-bg);
+  border: 1px solid var(--color-magic-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-magic);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.formSubmitBtn:hover {
+  background: var(--color-indigo-bg-hover);
+}
+
+.formSubmitBtn:disabled {
+  background: var(--surface-row-alt);
+  border-color: var(--border-subtle);
+  color: var(--text-faint);
+  cursor: default;
+}
+
+.formCancelBtn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.formCancelBtn:hover {
+  border-color: var(--border-default);
+  color: var(--text-secondary);
+}
+
+.addBtn {
+  background: var(--surface-row-alt);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-dim);
+  padding: 8px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.addBtn:hover {
+  background: var(--color-primary-subtle);
+  border-color: var(--border-theme);
+  color: var(--text-secondary);
+}
+
+/* Limited uses */
+.usesRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.usesLabel {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.usesDots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.useDotFilled {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.useDotEmpty {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-faint);
+  background: transparent;
+}
+
+.usesCount {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-width: 28px;
+}
+
+.useBtn {
+  padding: 2px 8px;
+  background: rgba(var(--color-primary-rgb, 99 102 241) / 0.15);
+  border: 1px solid var(--border-theme);
+  border-radius: 4px;
+  color: var(--color-primary-light);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.useBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.restoreBtn {
+  composes: useBtn;
+  background: var(--color-success-bg-subtle);
+  border-color: var(--color-success-border-subtle);
+  color: var(--color-success-vivid);
+}
+
+.restoreBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.resetBadge {
+  font-family: var(--font-label);
+  font-size: 0.55rem;
+  padding: 1px 5px;
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  border-radius: 3px;
+  color: var(--color-warning);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.formRow {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 780px) {
+  .attackHeader, .attackRow {
+    grid-template-columns: minmax(80px, 1fr) 50px 50px 70px;
+    gap: 4px;
+    padding: 6px;
+  }
+  .weaponName { font-size: 0.78rem; }
+  .attackRange { font-size: 0.68rem; }
+}
+
+@media (max-width: 480px) {
+  .attackHeader, .attackRow {
+    grid-template-columns: minmax(80px, 1fr) 50px 70px;
+  }
+  .attackRange { display: none; }
+  .attackHeaderCellCenter:nth-child(2) { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filterBtn,
+  .filterBtnActive,
+  .addBtn,
+  .formSubmitBtn,
+  .formCancelBtn,
+  .equipBtn,
+  .equipBtnActive {
+    transition: none;
+  }
+}

@@ -516,7 +516,8 @@ interface SpeciesDetailsProps {
   languagesData: any;
 }
 
-export const SpeciesDetails: React.FC<SpeciesDetailsProps> = ({ character, setCharacter, species, languagesData }) => {
+export const SpeciesDetails = React.memo(
+  ({ character, setCharacter, species, languagesData }: SpeciesDetailsProps) => {
   if (!species) return null;
 
   const imageRef = useRef<HTMLDivElement>(null);
@@ -745,4 +746,11 @@ export const SpeciesDetails: React.FC<SpeciesDetailsProps> = ({ character, setCh
 
     </div>
   );
-};
+}, (prev, next) => {
+  return (
+    prev.species?.id === next.species?.id &&
+    prev.character.choices === next.character.choices &&
+    prev.character.languages === next.character.languages &&
+    prev.character.talentSelections === next.character.talentSelections
+  );
+});

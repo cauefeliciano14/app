@@ -1,0 +1,59 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.classRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  background: var(--surface-glass);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+  color: inherit;
+  font-family: inherit;
+}
+.classRow:hover:not(:disabled) {
+  background: var(--color-primary-subtle);
+  border-color: var(--border-theme);
+}
+
+.classRow.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.className {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.classDesc {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.prereq {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: var(--label-spacing);
+}
+
+.prereqMet {
+  color: var(--color-success-vivid);
+}
+
+.prereqFail {
+  color: var(--color-error);
+}

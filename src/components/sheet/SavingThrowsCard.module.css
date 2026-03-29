@@ -1,0 +1,64 @@
+.container {
+  padding: 4px 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  padding: 4px 8px;
+  border: 1px solid var(--border-theme-dark);
+  border-radius: var(--radius-xs);
+  background: var(--surface-card);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.row:hover {
+  border-color: var(--color-primary-light);
+  background: var(--surface-subtle-hover);
+}
+
+.rowProficient {
+  border-color: var(--border-theme);
+}
+
+.label {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  min-width: 28px;
+}
+
+.labelProficient {
+  color: var(--color-primary-light);
+  background: var(--color-primary-subtle);
+  padding: 1px 4px;
+  border-radius: var(--radius-xs);
+}
+
+.value {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  min-width: 24px;
+  text-align: right;
+}
+
+.valueProficient {
+  color: var(--color-proficient);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row { transition: none; }
+}

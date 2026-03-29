@@ -1,0 +1,149 @@
+.headerRow {
+  display: flex;
+  align-items: center;
+  padding: 0 8px 8px 8px;
+  margin-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: var(--label-weight);
+  letter-spacing: var(--label-spacing);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.headerProf { width: 38px; }
+.headerMod { width: 40px; }
+.headerSkill { flex: 1; }
+.headerBonus { width: 44px; text-align: center; }
+
+.skillRow {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border-faint);
+  transition: background var(--transition-fast);
+  cursor: pointer;
+}
+
+.skillRow:hover {
+  background: var(--surface-subtle-hover);
+}
+
+.profCol {
+  width: 38px;
+  display: flex;
+  justify-content: center;
+}
+
+.profDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.profDotEmpty {
+  border: 1.5px solid var(--text-faint);
+  background: transparent;
+}
+
+.profDotFilled {
+  background: var(--color-primary);
+  border: none;
+}
+
+.profDotHalf {
+  background: var(--color-primary);
+  border: none;
+  opacity: 0.5;
+}
+
+.profDotExpertise {
+  width: 8px;
+  height: 8px;
+  background: var(--color-expertise);
+  border: 1.5px solid var(--color-expertise-border);
+  box-shadow: 0 0 4px var(--color-expertise-glow);
+  cursor: pointer;
+}
+
+.attrLabel {
+  font-family: var(--font-label);
+  font-size: var(--label-size);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  width: 40px;
+}
+
+.skillName {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.bonusBox {
+  width: 44px;
+  border: 1px solid var(--border-theme-dark);
+  border-radius: var(--radius-xs);
+  background: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  padding: 4px 0;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.bonusBoxExpertise {
+  border-color: var(--color-expertise-border);
+  background: rgba(251, 191, 36, 0.08);
+  color: var(--color-expertise);
+}
+
+.skillNameExpertise {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.expertiseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  margin-bottom: var(--space-sm);
+  background: var(--color-warning-bg);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: var(--radius-xs);
+}
+
+.expertiseLabel {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--label-spacing);
+  color: var(--color-expertise);
+}
+
+.expertiseCount {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 780px) {
+  .headerProf, .profCol { width: 28px; }
+  .headerMod, .attrLabel { width: 32px; font-size: 0.6rem; }
+  .headerBonus, .bonusBox { width: 38px; }
+  .skillName { font-size: 0.75rem; }
+  .skillRow { padding: 3px 6px; }
+  .headerRow { padding: 0 6px 6px 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skillRow { transition: none; }
+}

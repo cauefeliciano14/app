@@ -1,0 +1,167 @@
+/* FeaturesTraitsTab — D&D Beyond Underdark */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emptyText {
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 24px;
+}
+
+/* Section wrapper */
+.section {
+  background: rgba(17, 18, 24, 0.6);
+  border: none;
+  border-left: 2px solid var(--border-theme);
+  border-radius: 4px;
+  padding: 12px 14px;
+}
+
+.sectionTitle {
+  font-family: var(--font-label);
+  font-size: var(--label-size);
+  color: var(--text-muted);
+  font-weight: 800;
+  letter-spacing: var(--label-spacing);
+  margin-bottom: 10px;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Feature Entry */
+.featureEntry {
+  background: var(--surface-row-alt);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.featureHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.featureTitle {
+  font-size: 0.85rem;
+  color: var(--text-bright);
+  font-weight: 700;
+}
+
+.featureBadge {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--color-magic);
+  background: var(--color-magic-bg);
+  border: 1px solid var(--color-magic-border);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.featureDesc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.moreBtn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-family: var(--font-label);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 4px;
+  font-size: 0.75rem;
+}
+
+.moreBtn:hover {
+  color: var(--color-primary-light);
+}
+
+/* Talent entry */
+.talentEntry {
+  margin-bottom: 10px;
+}
+
+.talentName {
+  font-size: 0.85rem;
+  color: var(--text-bright);
+  font-weight: 700;
+}
+
+.talentSource {
+  color: var(--text-dim);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  margin-left: 8px;
+  font-weight: 600;
+}
+
+.talentNotes {
+  margin: 4px 0 0 16px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* Derived traits */
+.derivedList {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-body);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+/* Background in features */
+.bgName {
+  font-size: 0.88rem;
+  color: var(--text-bright);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.bgDetail {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.bgDetailMargin {
+  composes: bgDetail;
+  margin-top: 4px;
+}
+
+.bgDetailLabel {
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+.originTalent {
+  font-size: 0.88rem;
+  color: var(--text-bright);
+  font-weight: 500;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 7px 12px;
+  background: var(--surface-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  box-sizing: border-box;
+}
+.searchInput:focus { border-color: var(--color-magic); }
+.searchInput::placeholder { color: var(--text-faint); }

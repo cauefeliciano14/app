@@ -18,9 +18,11 @@
 }
 
 /* ── Sizes ── */
-.sizeMd {
-  padding: 10px 20px;
-  font-size: 1rem;
+.sizeXs {
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  gap: var(--space-xs);
 }
 
 .sizeSm {
@@ -28,10 +30,20 @@
   font-size: 0.85rem;
 }
 
-/* ── Variant: Primary ── */
+.sizeMd {
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.sizeLg {
+  padding: 12px 32px;
+  font-size: 1.05rem;
+}
+
+/* ── Variant: Primary (solid red) ── */
 .variantPrimary {
   background: var(--color-primary);
-  color: #fff;
+  color: var(--text-white);
 }
 
 .variantPrimary:hover:not(:disabled) {
@@ -40,7 +52,7 @@
   box-shadow: var(--shadow-glow-primary);
 }
 
-/* ── Variant: Ghost ── */
+/* ── Variant: Ghost (transparent, subtle border) ── */
 .variantGhost {
   background: transparent;
   border: 1px solid var(--border-input-hover);
@@ -50,10 +62,10 @@
 .variantGhost:hover:not(:disabled) {
   background: var(--surface-subtle-hover);
   border-color: rgba(255, 255, 255, 0.4);
-  color: #fff;
+  color: var(--text-white);
 }
 
-/* ── Variant: Danger ── */
+/* ── Variant: Danger (destructive red) ── */
 .variantDanger {
   background: var(--color-error-btn-bg);
   color: var(--color-error-light);
@@ -61,12 +73,26 @@
 }
 
 .variantDanger:hover:not(:disabled) {
-  background: rgba(239, 68, 68, 0.35);
+  background: var(--color-error-btn-hover);
   border-color: var(--color-error);
   transform: translateY(-1px);
 }
 
-/* ── Variant: Accent ── */
+/* ── Variant: Danger Solid ── */
+.variantDangerSolid {
+  background: var(--color-danger-gradient);
+  border: 1px solid var(--color-error-border-strong);
+  color: var(--text-white);
+  font-weight: 700;
+}
+
+.variantDangerSolid:hover:not(:disabled) {
+  background: var(--color-danger-gradient-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-danger);
+}
+
+/* ── Variant: Accent (gold) ── */
 .variantAccent {
   background: var(--color-accent-subtle);
   color: var(--color-accent-light);
@@ -78,6 +104,112 @@
   border-color: var(--color-accent);
   box-shadow: var(--shadow-glow-accent);
   transform: translateY(-1px);
+}
+
+/* ── Variant: Orange (warm accent) ── */
+.variantOrange {
+  background: var(--color-orange-subtle);
+  color: var(--color-accent-warm-light);
+  border: 1px solid var(--color-orange-border);
+}
+
+.variantOrange:hover:not(:disabled) {
+  background: var(--color-orange-bg-hover);
+  border-color: var(--color-orange-border-strong);
+  box-shadow: var(--shadow-glow-orange);
+  transform: translateY(-1px);
+}
+
+/* ── Variant: Magic (purple) ── */
+.variantMagic {
+  background: var(--color-magic-bg);
+  color: var(--color-magic);
+  border: 1px solid var(--color-magic-border);
+}
+
+.variantMagic:hover:not(:disabled) {
+  background: rgba(167, 139, 250, 0.3);
+  border-color: var(--color-magic);
+}
+
+/* ── Variant: Indigo (character manager style) ── */
+.variantIndigo {
+  background: var(--color-indigo-bg);
+  color: var(--color-indigo-light);
+  border: 1px solid var(--color-indigo-border);
+}
+
+.variantIndigo:hover:not(:disabled) {
+  background: var(--color-indigo-bg-hover);
+}
+
+/* ── Variant: Success (green) ── */
+.variantSuccess {
+  background: var(--color-success-bg);
+  color: var(--color-success-vivid);
+  border: 1px solid var(--color-success-border);
+}
+
+.variantSuccess:hover:not(:disabled) {
+  background: rgba(74, 222, 128, 0.15);
+  border-color: var(--color-success-vivid);
+}
+
+/* ── Variant: Subtle (minimal) ── */
+.variantSubtle {
+  background: var(--surface-row-alt);
+  border: 1px solid var(--border-default);
+  color: var(--text-muted);
+}
+
+.variantSubtle:hover:not(:disabled) {
+  background: var(--color-primary-subtle);
+  color: var(--text-secondary);
+}
+
+/* ── Variant: Link (text-only) ── */
+.variantLink {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  padding: 0;
+  font-weight: 700;
+}
+
+.variantLink:hover:not(:disabled) {
+  color: var(--color-primary-light);
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Shape Modifiers ── */
+.shapePill {
+  border-radius: var(--radius-pill);
+}
+
+.shapeCircle {
+  border-radius: 50%;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+/* ── Label Style (uppercase, condensed) ── */
+.labelStyle {
+  font-family: var(--font-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ── Full Width ── */
+.fullWidth {
+  width: 100%;
+}
+
+/* ── Dashed Border ── */
+.dashed {
+  border-style: dashed;
 }
 
 /* ── Disabled (all variants) ── */

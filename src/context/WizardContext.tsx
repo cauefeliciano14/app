@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from 'react';
+import React, { createContext, useContext, useMemo, useCallback, useState } from 'react';
 import { loadCreationState } from '../utils/persistence';
 
 interface WizardContextValue {
@@ -23,24 +23,30 @@ export const WizardProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [sidebarCollapsed, setSidebarCollapsed] = useState(savedState?.shellState?.sidebarCollapsed ?? false);
   const [summaryCollapsed, setSummaryCollapsed] = useState(savedState?.shellState?.summaryCollapsed ?? false);
 
-  const goToStep = (n: number) => {
+  const goToStep = useCallback((n: number) => {
     setCurrentStep(n);
-  };
+  }, []);
+
+  const value = useMemo(() => ({
+    currentStep,
+    setCurrentStep,
+    isPortraitModalOpen,
+    setIsPortraitModalOpen,
+    sidebarCollapsed,
+    setSidebarCollapsed,
+    summaryCollapsed,
+    setSummaryCollapsed,
+    goToStep,
+  }), [
+    currentStep,
+    isPortraitModalOpen,
+    sidebarCollapsed,
+    summaryCollapsed,
+    goToStep,
+  ]);
 
   return (
-    <WizardContext.Provider
-      value={{
-        currentStep,
-        setCurrentStep,
-        isPortraitModalOpen,
-        setIsPortraitModalOpen,
-        sidebarCollapsed,
-        setSidebarCollapsed,
-        summaryCollapsed,
-        setSummaryCollapsed,
-        goToStep,
-      }}
-    >
+    <WizardContext.Provider value={value}>
       {children}
     </WizardContext.Provider>
   );

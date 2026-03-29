@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './DefensesCard.module.css';
 
 const COMMON_DEFENSES = [
   'Resistência a Fogo', 'Resistência a Frio', 'Resistência a Raio',
@@ -30,67 +31,29 @@ export function DefensesCard({ derivedDefenses = [], activeDefenses, onAdd, onRe
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      
-      {/* Lista combinada de defesas para simplificar o layout conforme referência "Normal" ou pills */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+    <div className={styles.container}>
+      <div className={styles.pillList}>
         {derivedDefenses.map(d => (
-          <div key={d} style={{
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '12px',
-            padding: '2px 8px',
-          }}>
-            <span style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>{d}</span>
-          </div>
+          <div key={d} className={styles.pillDerived}>{d}</div>
         ))}
 
         {activeDefenses.map(d => (
-          <div key={d} style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            background: 'rgba(56,189,248,0.12)',
-            border: '1px solid rgba(56,189,248,0.3)',
-            borderRadius: '12px',
-            padding: '2px 8px',
-          }}>
-            <span style={{ fontSize: '0.75rem', color: '#f1f5f9' }}>{d}</span>
-            <button
-              onClick={() => onRemove(d)}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#94a3b8',
-                cursor: 'pointer',
-                padding: '0 2px',
-                fontSize: '0.7rem',
-                lineHeight: 1,
-              }}
-            >
-              ✕
-            </button>
+          <div key={d} className={styles.pillActive}>
+            <span className={styles.pillActiveText}>{d}</span>
+            <button onClick={() => onRemove(d)} className={styles.removeBtn}>✕</button>
           </div>
         ))}
-        
+
         {activeDefenses.length === 0 && derivedDefenses.length === 0 && (
-          <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Adicionar defesas...</div>
+          <div className={styles.emptyText}>Adicionar defesas...</div>
         )}
       </div>
 
-      <div style={{ display: 'flex', gap: '6px', marginBottom: '4px' }}>
+      <div className={styles.addRow}>
         <select
           value={selected}
           onChange={e => { setSelected(e.target.value); setCustom(''); }}
-          style={{
-            flex: 1,
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '6px',
-            color: selected ? '#f1f5f9' : '#64748b',
-            padding: '4px 8px',
-            fontSize: '0.78rem',
-          }}
+          className={styles.select}
         >
           <option value="">Defesa comum…</option>
           {available.map(d => (
@@ -100,15 +63,7 @@ export function DefensesCard({ derivedDefenses = [], activeDefenses, onAdd, onRe
         <button
           onClick={handleAdd}
           disabled={!selected && !custom.trim()}
-          style={{
-            background: 'rgba(56,189,248,0.12)',
-            border: '1px solid rgba(56,189,248,0.3)',
-            borderRadius: '6px',
-            color: (selected || custom.trim()) ? '#38bdf8' : '#475569',
-            padding: '4px 10px',
-            fontSize: '0.8rem',
-            cursor: (selected || custom.trim()) ? 'pointer' : 'default',
-          }}
+          className={styles.addBtn}
         >
           +
         </button>
@@ -118,16 +73,7 @@ export function DefensesCard({ derivedDefenses = [], activeDefenses, onAdd, onRe
         onChange={e => { setCustom(e.target.value); setSelected(''); }}
         onKeyDown={e => e.key === 'Enter' && handleAdd()}
         placeholder="Ou escreva defesa personalizada…"
-        style={{
-          width: '100%',
-          boxSizing: 'border-box',
-          background: 'rgba(255,255,255,0.04)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '6px',
-          color: '#f1f5f9',
-          padding: '4px 8px',
-          fontSize: '0.78rem',
-        }}
+        className={styles.customInput}
       />
     </div>
   );

@@ -1,0 +1,92 @@
+/* ── Print / PDF styles ── */
+@media print {
+  /* Hide interactive elements */
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    display: none !important;
+  }
+
+  /* Allow textareas to show their content as plain text */
+  .printableTextarea {
+    display: block !important;
+    border: none !important;
+    resize: none !important;
+    overflow: visible !important;
+    height: auto !important;
+    white-space: pre-wrap;
+  }
+
+  /* Remove backgrounds and shadows for clean print */
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Page settings */
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+  }
+
+  /* Keep sheet readable */
+  .page {
+    animation: none !important;
+  }
+
+  /* Force visible borders for structure */
+  .redBox,
+  [class*="redBox"],
+  [class*="card"],
+  [class*="Card"] {
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    page-break-inside: avoid;
+  }
+
+  /* Hide sidebar, modals, overlays */
+  [class*="sidebar"],
+  [class*="Sidebar"],
+  [class*="modal"],
+  [class*="Modal"],
+  [class*="overlay"],
+  [class*="Overlay"],
+  [class*="restBtn"],
+  [class*="advantageToggle"],
+  [class*="xpRow"],
+  [class*="tabBar"],
+  [class*="filterBar"] {
+    display: none !important;
+  }
+
+  /* Keep tab content always visible in print */
+  [class*="tabContent"] > * {
+    display: block !important;
+  }
+
+  /* Layout adjustments */
+  [class*="mainGrid"] {
+    display: block !important;
+  }
+
+  [class*="colLeft"],
+  [class*="colRight"] {
+    width: 100% !important;
+    float: none !important;
+  }
+
+  /* Proficiency dots: use text fallback */
+  [class*="profDotFilled"]::after { content: "●"; }
+  [class*="profDotEmpty"]::after  { content: "○"; }
+  [class*="profDotExpertise"]::after { content: "◆"; }
+}

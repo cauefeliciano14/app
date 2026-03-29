@@ -1,0 +1,25 @@
+/* ProficienciesCard — D&D Beyond Underdark */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-bright);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.sectionItems {
+  font-size: 0.82rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}

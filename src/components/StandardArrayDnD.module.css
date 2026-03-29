@@ -1,0 +1,181 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modeToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-end;
+}
+
+.modeToggleLabel {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modeToggleBtn {
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modeToggleBtn:hover {
+  border-color: var(--color-accent-border);
+  color: var(--text-secondary);
+}
+
+.modeToggleBtnActive {
+  composes: modeToggleBtn;
+  background: var(--color-accent-subtle);
+  border-color: var(--color-accent-border);
+  color: var(--color-accent);
+}
+
+/* ── Pool de valores ─────────────────────────── */
+
+.pool {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  min-height: 50px;
+  padding: 12px 16px;
+  background: var(--surface-inset-deep);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.poolLabel {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 4px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-subtle);
+  border: 2px solid var(--color-accent-border);
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: grab;
+  user-select: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.chip:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-glow-accent);
+}
+
+.chip:active {
+  cursor: grabbing;
+}
+
+.poolEmpty {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-style: italic;
+}
+
+/* ── Slots de atributo ───────────────────────── */
+
+.slotsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--border-subtle);
+  background: var(--surface-inset);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+  min-height: 90px;
+}
+
+.slotOver {
+  composes: slot;
+  border-color: var(--color-accent);
+  background: var(--color-accent-bg-hover);
+}
+
+.slotFilled {
+  composes: slot;
+  border-style: solid;
+  border-color: var(--border-default);
+}
+
+.slotHeader {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.slotIcon {
+  font-size: 0.85rem;
+}
+
+.slotAbbr {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.slotValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.slotValue:hover {
+  color: var(--color-error);
+}
+
+.slotEmpty {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-faint);
+}
+
+.slotHint {
+  font-size: 0.62rem;
+  color: var(--text-dim);
+}
+
+@media (max-width: 480px) {
+  .slotsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip:hover { transform: none; }
+}

@@ -1,5 +1,7 @@
+import { useMemo } from 'react';
 import { useWizard } from '../../../context/WizardContext';
 import { useCharacter } from '../../../context/CharacterContext';
+import { useSound } from '../../../context/SoundContext';
 import patterns from '../../../styles/panelPatterns.module.css';
 import styles from './StepSidebar.module.css';
 
@@ -12,9 +14,12 @@ const ITEMS = [
   { index: 5, label: 'Ficha', key: 'sheet' },
 ] as const;
 
+const STEP_KEYS = ['class', 'background', 'species', 'attributes', 'equipment'] as const;
+
 export function StepSidebar() {
   const { currentStep, setCurrentStep } = useWizard();
   const { validationResult } = useCharacter();
+  const { soundEnabled, toggleSound } = useSound();
 
   const pendingMap = {
     class: validationResult.byStep.class.length,
@@ -25,9 +30,35 @@ export function StepSidebar() {
     sheet: validationResult.errors.length,
   };
 
+  const completionInfo = useMemo(() => {
+    const completedSteps = STEP_KEYS.filter(key => pendingMap[key] === 0).length;
+    const total = STEP_KEYS.length;
+    const percent = Math.round((completedSteps / total) * 100);
+    return { completedSteps, total, percent };
+  }, [
+    pendingMap.class, pendingMap.background, pendingMap.species,
+    pendingMap.attributes, pendingMap.equipment,
+  ]);
+
   return (
     <div className={styles.root}>
       <div className={patterns.sectionTitle}>Etapas</div>
+
+      {/* ── Progress bar ── */}
+      <div className={styles.progressSection}>
+        <div className={styles.progressHeader}>
+          <span className={styles.progressLabel}>
+            {completionInfo.percent === 100 ? 'Pronto!' : `${completionInfo.completedSteps}/${completionInfo.total} etapas`}
+          </span>
+          <span className={styles.progressPercent}>{completionInfo.percent}%</span>
+        </div>
+        <div className={styles.progressTrack}>
+          <div
+            className={`${styles.progressFill} ${completionInfo.percent === 100 ? styles.progressFillComplete : ''}`}
+            style={{ width: `${completionInfo.percent}%` }}
+          />
+        </div>
+      </div>
 
       <div className={styles.detailList}>
         {ITEMS.map((item) => {
@@ -75,6 +106,16 @@ export function StepSidebar() {
           );
         })}
       </div>
+
+      <button
+        type="button"
+        onClick={toggleSound}
+        className={styles.soundToggle}
+        title={soundEnabled ? 'Desativar sons' : 'Ativar sons'}
+        aria-label={soundEnabled ? 'Desativar sons' : 'Ativar sons'}
+      >
+        {soundEnabled ? '🔊' : '🔇'} Sons {soundEnabled ? 'on' : 'off'}
+      </button>
     </div>
   );
 }

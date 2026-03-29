@@ -8,6 +8,9 @@ import layoutStyles from './StepLayout.module.css';
 import { getClassHPData } from '../../rules/data/classRules';
 import { useCharacter } from '../../context/CharacterContext';
 import { useWizard } from '../../context/WizardContext';
+import { isClassSynergyForBg } from '../../data/classSynergies';
+import { RecommendedBadge } from '../ui/RecommendedBadge';
+import { ComparisonModal } from '../ComparisonModal';
 
 export interface ClassSelectionStepProps {
   onReset: () => void;
@@ -128,6 +131,7 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
     handleChoiceChange,
     allSelections,
     validationResult,
+    selectedBackground,
   } = useCharacter();
   const { setCurrentStep, setIsPortraitModalOpen } = useWizard();
 
@@ -137,6 +141,42 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
   const classDetails = selectedClass ? (classDetailsData as Record<string, ClassDetails>)[selectedClass.id] : null;
   const selectedClassMeta = selectedClass ? getClassCardMeta(selectedClass.id) : null;
   const activeFeatures = (classDetails?.features ?? []).filter((feature) => feature.level <= characterLevel);
+
+  // ── Comparison mode ──
+  const [compareMode, setCompareMode] = useState(false);
+  const [compareIds, setCompareIds] = useState<[string | null, string | null]>([null, null]);
+  const [compareOpen, setCompareOpen] = useState(false);
+
+  const handleCompareClick = (classId: string) => {
+    if (!compareMode) return;
+    setCompareIds(prev => {
+      if (prev[0] === classId) return [null, prev[1]];
+      if (prev[1] === classId) return [prev[0], null];
+      if (!prev[0]) return [classId, prev[1]];
+      if (!prev[1]) {
+        setTimeout(() => setCompareOpen(true), 0);
+        return [prev[0], classId];
+      }
+      return [classId, null];
+    });
+  };
+
+  const buildComparisonItem = (classId: string | null) => {
+    if (!classId) return null;
+    const cls = bgData.classes.find((c: any) => c.id === classId);
+    if (!cls) return null;
+    const details = (classDetailsData as Record<string, ClassDetails>)[classId];
+    const meta = getClassCardMeta(classId);
+    const traits = details?.basicTraits ?? {};
+    return {
+      name: cls.name,
+      rows: [
+        { label: 'Dado de Vida', value: meta.hitDie || '—' },
+        { label: 'Atributo Primário', value: meta.primaryAttribute || '—' },
+        ...Object.entries(traits).map(([k, v]) => ({ label: k, value: v })),
+      ],
+    };
+  };
 
   // Group all top-level options by their name
   const allOptions = classDetails?.options ?? [];
@@ -178,8 +218,8 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
               <button
                 key={cls.id}
                 type="button"
-                onClick={() => handleSelectClass(cls)}
-                className={`${styles.classMenuButton} ${isSelected ? styles.classMenuButtonSelected : ''}`}
+                onClick={() => { if (compareMode) { handleCompareClick(cls.id); } else { handleSelectClass(cls); } }}
+                className={`${styles.classMenuButton} ${isSelected ? styles.classMenuButtonSelected : ''} ${compareMode && (compareIds[0] === cls.id || compareIds[1] === cls.id) ? styles.classMenuButtonSelected : ''}`}
               >
                 <div className={styles.classMenuIdentity}>
                   <div className={styles.classMenuIconAndName}>
@@ -194,19 +234,37 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
                   {cardMeta.primaryAttribute ? (
                     <span className={styles.classMetaChip}>{cardMeta.primaryAttribute}</span>
                   ) : null}
+                  {isClassSynergyForBg(selectedBackground?.id, cls.id) && !isSelected && <RecommendedBadge />}
                 </div>
               </button>
             );
           })}
         </div>
 
-        <button onClick={onReset} className={styles.resetButton}>
-          Novo Personagem
-        </button>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <button onClick={onReset} className={styles.resetButton}>
+            Novo Personagem
+          </button>
+          <button
+            onClick={() => { setCompareMode(m => !m); setCompareIds([null, null]); }}
+            style={{
+              padding: '6px 14px', fontSize: '0.78rem', fontWeight: 600, borderRadius: '8px', cursor: 'pointer',
+              border: compareMode ? '1px solid rgba(212,160,23,0.4)' : '1px solid rgba(255,255,255,0.1)',
+              background: compareMode ? 'rgba(212,160,23,0.12)' : 'transparent',
+              color: compareMode ? '#d4a017' : '#94a3b8',
+            }}
+          >
+            {compareMode ? '✕ Sair da comparação' : '⚖ Comparar classes'}
+          </button>
+        </div>
 
         <div className={layoutStyles.detailsColumn}>
           {!selectedClass || !classDetails ? (
-            <div className={`${layoutStyles.placeholderPanel} ${styles.placeholderPanel}`}>Escolha uma classe para revisar detalhes e opções obrigatórias.</div>
+            <div className={`${layoutStyles.placeholderPanel} ${styles.placeholderPanel}`}>
+              <span className={styles.placeholderIcon}>⚔️</span>
+              <p className={styles.placeholderTitle}>Nenhuma classe selecionada</p>
+              <p className={styles.placeholderHint}>Escolha uma classe ao lado para ver atributos primários, dados de vida e habilidades exclusivas.</p>
+            </div>
           ) : (
             <>
               <div className={`${layoutStyles.summaryCardBase} ${styles.classSummaryCard}`}>
@@ -308,6 +366,14 @@ export const ClassSelectionStep: React.FC<ClassSelectionStepProps> = ({ onReset,
           )}
         </div>
       </div>
+
+      <ComparisonModal
+        isOpen={compareOpen}
+        onClose={() => { setCompareOpen(false); setCompareIds([null, null]); }}
+        title="Comparação de Classes"
+        itemA={buildComparisonItem(compareIds[0])}
+        itemB={buildComparisonItem(compareIds[1])}
+      />
     </StepLayout>
   );
 };

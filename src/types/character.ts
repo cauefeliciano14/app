@@ -5,11 +5,36 @@ export interface Selection {
   [key: string]: any;
 }
 
+/** Aparência física do personagem */
+export interface CharacterAppearance {
+  height: string;
+  weight: string;
+  eyeColor: string;
+  hairColor: string;
+  skinColor: string;
+}
+
+/** Traços de personalidade (PHB 2024) */
+export interface PersonalityTraits {
+  traits: string;
+  ideals: string;
+  bonds: string;
+  flaws: string;
+}
+
 export interface Character {
   name: string;
   portrait: string | null;
+  alignment: string | null;
+  faith: string;
+  lifestyle: string;
+  appearance: CharacterAppearance;
+  personalityTraits: PersonalityTraits;
+  backstory: string;
+  organizations: string;
   species: Selection | null;
   characterClass: Selection | null;
+  classLevels?: Array<{ classId: string; className: string; level: number }>;
   choices: Record<string, string>;
   talentSelections: Record<string, Record<string, string>>;
   languages: string[];
@@ -42,9 +67,38 @@ export interface Character {
   };
 }
 
+/** Partial update for identity-only fields (used in NotesTab edit callbacks) */
+export interface CharacterIdentityUpdate {
+  alignment?: string | null;
+  faith?: string;
+  lifestyle?: string;
+  backstory?: string;
+  organizations?: string;
+  appearance?: Partial<CharacterAppearance>;
+  personalityTraits?: Partial<PersonalityTraits>;
+}
+
 export const DEFAULT_CHARACTER: Character = {
   name: '',
   portrait: null,
+  alignment: null,
+  faith: '',
+  lifestyle: '',
+  appearance: {
+    height: '',
+    weight: '',
+    eyeColor: '',
+    hairColor: '',
+    skinColor: '',
+  },
+  personalityTraits: {
+    traits: '',
+    ideals: '',
+    bonds: '',
+    flaws: '',
+  },
+  backstory: '',
+  organizations: '',
   species: null,
   characterClass: null,
   choices: {},

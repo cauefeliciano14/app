@@ -1,0 +1,671 @@
+/* InventoryTab — D&D Beyond Underdark */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Currency Section ── */
+.currencySection {
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.currencyTitle {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: var(--label-spacing);
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.currencyGrid {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.coinCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 52px;
+}
+
+.coinIcon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.coinValue {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-bright);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  min-width: 36px;
+  text-align: center;
+}
+
+.coinValue:hover {
+  border-color: var(--border-theme);
+  background: var(--color-primary-faint);
+}
+
+.coinInput {
+  width: 48px;
+  background: var(--surface-input);
+  border: 1px solid var(--border-theme);
+  border-radius: 4px;
+  color: var(--text-bright);
+  padding: 2px 4px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  text-align: center;
+  font-weight: 700;
+}
+
+.coinLabel {
+  font-family: var(--font-label);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  text-transform: uppercase;
+}
+
+.emptyText {
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 24px;
+}
+
+.table {
+  background: var(--surface-inset);
+  border: none;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 40px 60px 84px 84px;
+  padding: 4px 8px;
+  background: transparent;
+  border-bottom: 1px solid var(--border-faint);
+  gap: 8px;
+}
+
+.tableHeaderCell {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 800;
+  letter-spacing: var(--label-spacing);
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 40px 60px 84px 84px;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.itemName {
+  font-size: 0.85rem;
+  color: var(--text-bright);
+  font-weight: 700;
+}
+
+.itemNotes {
+  font-size: 0.70rem;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
+
+.itemQty {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.itemCost {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* Toggle buttons */
+.equipBtn {
+  background: transparent;
+  border: 1px solid var(--border-theme-dark);
+  border-radius: 4px;
+  color: var(--text-muted);
+  padding: 3px 8px;
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 74px;
+  transition: all var(--transition-fast);
+}
+
+.equipBtnActive {
+  composes: equipBtn;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--text-white);
+}
+
+.attuneBtn {
+  background: transparent;
+  border: 1px solid var(--border-theme-dark);
+  border-radius: 4px;
+  color: var(--text-muted);
+  padding: 3px 8px;
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 82px;
+  transition: all var(--transition-fast);
+}
+
+.attuneBtnActive {
+  composes: attuneBtn;
+  background: var(--color-attunement);
+  border-color: var(--color-attunement);
+  color: var(--text-white);
+}
+
+/* Total gold display */
+.totalGold {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-align: right;
+  margin-top: 8px;
+}
+
+/* Weight Section */
+.weightSection {
+  background: var(--surface-inset-deep);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.weightHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weightLabel {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--label-spacing);
+  color: var(--text-dim);
+}
+
+.weightValue {
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.weightBar {
+  width: 100%;
+  height: 6px;
+  background: var(--surface-input);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.weightBarFill {
+  height: 100%;
+  transition: width var(--transition-medium);
+}
+
+.weightWarning {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--color-error);
+  text-align: right;
+  letter-spacing: var(--label-spacing);
+}
+
+/* Table title */
+.tableTitle {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--label-spacing);
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+/* Sheet items (manually added) */
+.sheetItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheetItemRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: var(--surface-inset-deep);
+  border: 1px solid var(--border-faint);
+  border-radius: 6px;
+}
+
+.sheetItemInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.itemWeight {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  color: var(--text-faint);
+  background: var(--surface-input-alt);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.sheetItemQtyCtrl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sheetItemQty {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  min-width: 20px;
+  text-align: center;
+}
+
+.qtyBtn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--border-theme-dark);
+  background: var(--surface-row-alt);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.qtyBtn:hover { background: var(--color-primary-subtle); color: var(--text-primary); }
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+  flex-shrink: 0;
+}
+.removeBtn:hover { color: var(--color-primary-light); }
+
+/* Add item form */
+.addItemForm {
+  background: var(--surface-inset);
+  border: 1px solid var(--color-magic-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addItemTitle {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--color-magic);
+  font-weight: 700;
+  letter-spacing: var(--label-spacing);
+}
+
+.formRow {
+  display: flex;
+  gap: 8px;
+}
+
+.formInput {
+  background: var(--surface-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  padding: 6px 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  width: 100%;
+}
+.formInput:focus { border-color: var(--color-magic); }
+
+.formActions {
+  display: flex;
+  gap: 8px;
+}
+
+.formSubmitBtn {
+  flex: 1;
+  background: var(--color-magic-bg);
+  border: 1px solid var(--color-magic-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-magic);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.formSubmitBtn:hover { background: var(--color-indigo-bg-hover); }
+.formSubmitBtn:disabled { background: var(--surface-row-alt); border-color: var(--border-subtle); color: var(--text-faint); cursor: default; }
+
+.formCancelBtn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.formCancelBtn:hover { border-color: var(--border-default); }
+
+.addBtn {
+  background: var(--surface-row-alt);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-dim);
+  padding: 8px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.addBtn:hover {
+  background: var(--color-primary-subtle);
+  border-color: var(--border-theme);
+  color: var(--text-secondary);
+}
+
+/* Attunement slots indicator */
+.attunementSlots {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-theme);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
+/* ── Search and Filters ── */
+.searchFilterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  background: var(--surface-card);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.searchRow {
+  display: flex;
+  width: 100%;
+}
+
+.searchInput {
+  flex: 1;
+  background: var(--surface-input);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-primary-light);
+}
+
+.filterBar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  background: var(--surface-dark);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filterBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.filterBtnActive {
+  background: var(--color-primary-subtle);
+  border: 1px solid var(--border-theme);
+  color: var(--color-primary-light);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* ── Tables ── */
+.attunementLabel {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: var(--label-spacing);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.attunementDots {
+  display: flex;
+  gap: 4px;
+}
+
+.slotFilled {
+  color: var(--color-attunement);
+  font-size: 0.75rem;
+}
+
+.slotEmpty {
+  color: var(--border-subtle);
+  font-size: 0.75rem;
+}
+
+.attunementCount {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  margin-left: auto;
+}
+
+.attuneBtnDisabled {
+  composes: attuneBtn;
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Containers ── */
+.containerSection {
+  background: var(--surface-inset-deep);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.containerHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--surface-glass);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.containerIcon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.containerName {
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  flex: 1;
+}
+
+.containerCapacity {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: var(--label-spacing);
+}
+
+.containerEmpty {
+  padding: 10px 14px;
+  color: var(--text-faint);
+  font-size: 0.78rem;
+  font-style: italic;
+}
+
+.containerPresets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.containerPresetBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 14px;
+  background: var(--surface-row-alt);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.containerPresetBtn:hover {
+  background: var(--color-primary-subtle);
+  border-color: var(--border-theme);
+}
+
+.containerPresetCap {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  letter-spacing: var(--label-spacing);
+}
+
+.moveSelect {
+  background: var(--surface-input);
+  border: 1px solid var(--border-default);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  padding: 2px 4px;
+  cursor: pointer;
+  max-width: 90px;
+}
+
+@media (max-width: 780px) {
+  .tableHeader, .tableRow {
+    grid-template-columns: 1fr 36px 48px 68px 68px;
+    gap: 4px;
+    padding: 6px;
+  }
+  .equipBtn, .equipBtnActive { width: 62px; font-size: 0.58rem; padding: 2px 4px; }
+  .attuneBtn, .attuneBtnActive, .attuneBtnDisabled { width: 62px; font-size: 0.58rem; padding: 2px 4px; }
+  .currencyGrid { gap: 6px; }
+  .coinCard { min-width: 44px; }
+}
+
+@media (max-width: 480px) {
+  .tableHeader, .tableRow {
+    grid-template-columns: 1fr 32px 60px;
+  }
+  .tableHeaderCell:nth-child(3),
+  .tableHeaderCell:nth-child(5) { display: none; }
+  .itemCost { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .equipBtn,
+  .equipBtnActive,
+  .attuneBtn,
+  .attuneBtnActive,
+  .addBtn {
+    transition: none;
+  }
+}

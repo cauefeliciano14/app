@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface-card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--border-subtle);
+}
+
+.portrait {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--surface-dark), var(--surface-elevated));
+  border: 2px solid var(--border-theme);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.portraitImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.meta {
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  letter-spacing: 0.03em;
+}
+
+.sizeBadge {
+  display: inline-block;
+  background: rgba(197, 49, 49, 0.12);
+  border: 1px solid rgba(197, 49, 49, 0.3);
+  border-radius: 4px;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-primary-light);
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+
+.metaSub {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  color: var(--color-primary-light);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}

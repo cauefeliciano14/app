@@ -22,6 +22,8 @@ export interface StepLayoutProps {
   hideSidebar?: boolean;
   hideSummary?: boolean;
   hideHeader?: boolean;
+  isResetMode?: boolean;
+  onReset?: () => void;
   children: React.ReactNode;
 }
 
@@ -50,6 +52,8 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
   hideSidebar,
   hideSummary,
   hideHeader,
+  isResetMode,
+  onReset,
   children,
 }) => {
   const { validationResult } = useCharacter();
@@ -162,6 +166,8 @@ export const StepLayout: React.FC<StepLayoutProps> = ({
                   setCharacterName={setCharacterName}
                   portrait={portrait}
                   onPortraitClick={onPortraitClick}
+                  isResetMode={isResetMode}
+                  onReset={onReset}
                 />
                 <hr className={styles.separator} style={{ marginBottom: hrMarginBottom }} />
               </>

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { WeaponAttack } from '../../../rules/types/DerivedSheet';
 import type { CharacterPlayState, CustomAction } from '../../../types/playState';
+import { signedMod } from '../../../utils/format';
+import styles from './ActionsTab.module.css';
 
 type FilterId = 'all' | 'attack' | 'action' | 'bonus' | 'reaction' | 'other' | 'limited';
 
@@ -15,25 +17,28 @@ const FILTERS: Array<{ id: FilterId; label: string }> = [
 ];
 
 const TYPE_LABELS: Record<string, string> = {
-  action: 'Ação', bonus: 'Ação Bônus', reaction: 'Reação', other: 'Outro',
+  action: 'Ação', bonus: 'Ação Bônus', reaction: 'Reação', other: 'Outro', limited: 'Uso Limitado',
 };
 
-function signedMod(n: number): string {
-  return n >= 0 ? `+${n}` : `${n}`;
-}
+const RESET_LABELS: Record<string, string> = {
+  short: 'Descanso Curto', long: 'Descanso Longo',
+};
 
 interface ActionsTabProps {
   weaponAttacks: WeaponAttack[];
   playState: CharacterPlayState;
   onUpdatePlayState: (updater: (prev: CharacterPlayState) => CharacterPlayState) => void;
+  onAttackClick?: (attack: WeaponAttack) => void;
 }
 
-export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: ActionsTabProps) {
+export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState, onAttackClick }: ActionsTabProps) {
   const [filter, setFilter] = useState<FilterId>('all');
   const [showForm, setShowForm] = useState(false);
   const [formName, setFormName] = useState('');
   const [formType, setFormType] = useState<CustomAction['type']>('action');
   const [formDesc, setFormDesc] = useState('');
+  const [formMaxUses, setFormMaxUses] = useState('');
+  const [formResetOn, setFormResetOn] = useState<'short' | 'long'>('long');
 
   const filteredAttacks = filter === 'all' || filter === 'attack' ? weaponAttacks : [];
   const filteredCustom = playState.customActions.filter(
@@ -42,17 +47,19 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: Acti
 
   const handleAddCustom = () => {
     if (!formName.trim()) return;
+    const maxUses = parseInt(formMaxUses, 10) || undefined;
     const newAction: CustomAction = {
       id: `ca-${Date.now()}`,
       name: formName.trim(),
       type: formType,
       description: formDesc.trim(),
+      maxUses,
+      usesSpent: 0,
+      resetOn: maxUses ? formResetOn : undefined,
     };
     onUpdatePlayState(prev => ({ ...prev, customActions: [...prev.customActions, newAction] }));
-    setFormName('');
-    setFormDesc('');
-    setFormType('action');
-    setShowForm(false);
+    setFormName(''); setFormDesc(''); setFormType('action');
+    setFormMaxUses(''); setShowForm(false);
   };
 
   const handleRemoveCustom = (id: string) => {
@@ -62,26 +69,35 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: Acti
     }));
   };
 
+  const handleSpendUse = (id: string) => {
+    onUpdatePlayState(prev => ({
+      ...prev,
+      customActions: prev.customActions.map(a =>
+        a.id === id && a.maxUses !== undefined
+          ? { ...a, usesSpent: Math.min((a.usesSpent ?? 0) + 1, a.maxUses) }
+          : a
+      ),
+    }));
+  };
+
+  const handleRestoreUse = (id: string) => {
+    onUpdatePlayState(prev => ({
+      ...prev,
+      customActions: prev.customActions.map(a =>
+        a.id === id ? { ...a, usesSpent: Math.max(0, (a.usesSpent ?? 0) - 1) } : a
+      ),
+    }));
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      
-      {/* Filter Menu Bar (Dashboard Style) */}
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '8px' }}>
+    <div className={styles.container}>
+      {/* Filter bar */}
+      <div className={styles.filterBar}>
         {FILTERS.map(f => (
           <button
             key={f.id}
             onClick={() => setFilter(f.id)}
-            style={{
-              background: filter === f.id ? '#991b1b' : 'transparent',
-              border: 'none',
-              borderRadius: '4px',
-              color: filter === f.id ? '#ffffff' : '#94a3b8',
-              padding: '4px 8px',
-              fontSize: '0.7rem',
-              fontWeight: 800,
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-            }}
+            className={filter === f.id ? styles.filterBtnActive : styles.filterBtn}
           >
             {f.label}
           </button>
@@ -90,63 +106,36 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: Acti
 
       {/* Weapon attacks table */}
       {filteredAttacks.length > 0 && (
-        <div style={{
-          background: 'rgba(17,18,24,0.6)',
-          border: 'none',
-          borderRadius: '4px',
-          overflow: 'hidden',
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(120px, 1fr) 60px 60px 80px',
-            padding: '2px 8px 4px 8px',
-            background: 'transparent',
-            borderBottom: '1px solid rgba(255,255,255,0.05)',
-            gap: '8px'
-          }}>
-            {['ATAQUE', 'ALCANCE', 'ACERTO/CD', 'DANO'].map((h, i) => (
-              <div key={h} style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 800, textAlign: i > 0 ? 'center' : 'left' }}>
-                {h}
-              </div>
-            ))}
+        <div className={styles.attackTable}>
+          <div className={styles.attackHeader}>
+            <div className={styles.attackHeaderCell}>ATAQUE</div>
+            <div className={styles.attackHeaderCellCenter}>ALCANCE</div>
+            <div className={styles.attackHeaderCellCenter}>ACERTO/CD</div>
+            <div className={styles.attackHeaderCellCenter}>DANO</div>
           </div>
           {filteredAttacks.map((atk, i) => (
-            <div key={i} style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(120px, 1fr) 60px 60px 80px',
-              padding: '8px',
-              borderBottom: i < filteredAttacks.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
-              alignItems: 'center',
-              gap: '8px'
-            }}>
+            <div
+              key={i}
+              className={styles.attackRow}
+              onClick={() => onAttackClick?.(atk)}
+              role={onAttackClick ? 'button' : undefined}
+              tabIndex={onAttackClick ? 0 : undefined}
+              onKeyDown={onAttackClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onAttackClick(atk); } : undefined}
+              style={onAttackClick ? { cursor: 'pointer' } : undefined}
+            >
               <div>
-                <div style={{ fontSize: '0.85rem', color: '#f1f5f9', fontWeight: 700 }}>{atk.weaponName}</div>
+                <div className={styles.weaponName}>{atk.weaponName}</div>
                 {atk.properties.length > 0 && (
-                  <div style={{ fontSize: '0.65rem', color: '#64748b' }}>
-                    {atk.properties.join(', ')}
-                  </div>
+                  <div className={styles.weaponProps}>{atk.properties.join(', ')}</div>
                 )}
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#94a3b8', textAlign: 'center' }}>{atk.range}</div>
-              
+              <div className={styles.attackRange}>{atk.range}</div>
               <div style={{ textAlign: 'center' }}>
-                <span style={{ 
-                  display: 'inline-block',
-                  border: '1px solid #991b1b',
-                  borderRadius: '20px',
-                  padding: '1px 8px',
-                  fontSize: '0.8rem', 
-                  fontWeight: 900, 
-                  color: '#f1f5f9',
-                  background: 'rgba(0,0,0,0.5)'
-                }}>
-                  {signedMod(atk.attackBonus)}
-                </span>
+                <span className={styles.attackBonus}>{signedMod(atk.attackBonus)}</span>
               </div>
-              
-              <div style={{ fontSize: '0.75rem', color: '#f1f5f9', textAlign: 'center', border: '1px solid #7f1d1d', background: 'rgba(0,0,0,0.4)', borderRadius: '4px', padding: '2px 0' }}>
+              <div className={styles.damageDice}>
                 {atk.damageDice !== '1' ? atk.damageDice : '1'}{atk.damageBonus !== 0 ? ` ${signedMod(atk.damageBonus)}` : ''}
-                <span style={{ fontSize: '0.65rem', color: '#94a3b8', marginLeft: '4px' }}>{atk.damageType.substring(0,3)}</span>
+                <span className={styles.damageType}>{atk.damageType.substring(0, 3)}</span>
               </div>
             </div>
           ))}
@@ -155,168 +144,125 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState }: Acti
 
       {/* Custom actions */}
       {filteredCustom.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          {filteredCustom.map(ca => (
-            <div key={ca.id} style={{
-              background: 'rgba(17,18,24,0.6)',
-              border: '1px solid rgba(255,255,255,0.07)',
-              borderRadius: '10px',
-              padding: '10px 14px',
-              display: 'flex',
-              gap: '10px',
-              alignItems: 'flex-start',
-            }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '3px' }}>
-                  <span style={{ fontSize: '0.88rem', color: '#f1f5f9', fontWeight: 600 }}>{ca.name}</span>
-                  <span style={{
-                    fontSize: '0.62rem',
-                    color: '#a78bfa',
-                    background: 'rgba(167,139,250,0.1)',
-                    border: '1px solid rgba(167,139,250,0.2)',
-                    borderRadius: '4px',
-                    padding: '1px 6px',
-                  }}>
-                    {TYPE_LABELS[ca.type] ?? ca.type}
-                  </span>
+        <div className={styles.customList}>
+          {filteredCustom.map(ca => {
+            const remaining = ca.maxUses !== undefined ? ca.maxUses - (ca.usesSpent ?? 0) : null;
+            return (
+              <div key={ca.id} className={styles.customCard}>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '3px', flexWrap: 'wrap' }}>
+                    <span className={styles.customName}>{ca.name}</span>
+                    <span className={styles.customType}>{TYPE_LABELS[ca.type] ?? ca.type}</span>
+                    {ca.resetOn && (
+                      <span className={styles.resetBadge}>{RESET_LABELS[ca.resetOn]}</span>
+                    )}
+                  </div>
+                  {ca.description && <div className={styles.customDesc}>{ca.description}</div>}
+                  {ca.maxUses !== undefined && (
+                    <div className={styles.usesRow}>
+                      <span className={styles.usesLabel}>Usos:</span>
+                      <div className={styles.usesDots}>
+                        {Array.from({ length: ca.maxUses }, (_, i) => (
+                          <div
+                            key={i}
+                            className={i < (remaining ?? 0) ? styles.useDotFilled : styles.useDotEmpty}
+                          />
+                        ))}
+                      </div>
+                      <span className={styles.usesCount}>{remaining}/{ca.maxUses}</span>
+                      <button
+                        onClick={() => handleSpendUse(ca.id)}
+                        disabled={(remaining ?? 0) <= 0}
+                        className={styles.useBtn}
+                      >
+                        Usar
+                      </button>
+                      <button
+                        onClick={() => handleRestoreUse(ca.id)}
+                        disabled={(ca.usesSpent ?? 0) <= 0}
+                        className={styles.restoreBtn}
+                      >
+                        Restaurar
+                      </button>
+                    </div>
+                  )}
                 </div>
-                {ca.description && (
-                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.5 }}>{ca.description}</div>
-                )}
+                <button onClick={() => handleRemoveCustom(ca.id)} className={styles.removeBtn}>✕</button>
               </div>
-              <button
-                onClick={() => handleRemoveCustom(ca.id)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: '#475569',
-                  cursor: 'pointer',
-                  fontSize: '0.75rem',
-                  padding: '2px 4px',
-                  flexShrink: 0,
-                }}
-              >
-                ✕
-              </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
       {filteredAttacks.length === 0 && filteredCustom.length === 0 && (
-        <div style={{ color: '#475569', fontSize: '0.85rem', textAlign: 'center', padding: '16px' }}>
-          Nenhuma ação nesta categoria.
-        </div>
+        <div className={styles.emptyText}>Nenhuma ação nesta categoria.</div>
       )}
 
       {/* Add custom action */}
       {showForm ? (
-        <div style={{
-          background: 'rgba(17,18,24,0.6)',
-          border: '1px solid rgba(167,139,250,0.2)',
-          borderRadius: '10px',
-          padding: '12px 14px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '8px',
-        }}>
-          <div style={{ fontSize: '0.65rem', color: '#a78bfa', fontWeight: 600, letterSpacing: '0.08em' }}>
-            NOVA AÇÃO PERSONALIZADA
-          </div>
+        <div className={styles.formCard}>
+          <div className={styles.formTitle}>NOVA AÇÃO PERSONALIZADA</div>
           <input
             value={formName}
             onChange={e => setFormName(e.target.value)}
             placeholder="Nome da ação"
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '6px',
-              color: '#f1f5f9',
-              padding: '6px 10px',
-              fontSize: '0.85rem',
-              outline: 'none',
-            }}
+            className={styles.formInput}
           />
           <select
             value={formType}
             onChange={e => setFormType(e.target.value as CustomAction['type'])}
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '6px',
-              color: '#f1f5f9',
-              padding: '6px 10px',
-              fontSize: '0.85rem',
-            }}
+            className={styles.formSelect}
           >
             <option value="action">Ação</option>
             <option value="bonus">Ação Bônus</option>
             <option value="reaction">Reação</option>
             <option value="other">Outro</option>
+            <option value="limited">Uso Limitado</option>
           </select>
+          <div className={styles.formRow}>
+            <input
+              type="number"
+              min="0"
+              value={formMaxUses}
+              onChange={e => setFormMaxUses(e.target.value)}
+              placeholder="Usos máx. (opcional)"
+              className={styles.formInput}
+              style={{ flex: 1 }}
+            />
+            {formMaxUses && parseInt(formMaxUses, 10) > 0 && (
+              <select
+                value={formResetOn}
+                onChange={e => setFormResetOn(e.target.value as 'short' | 'long')}
+                className={styles.formSelect}
+                style={{ flex: 1 }}
+              >
+                <option value="short">Desc. Curto</option>
+                <option value="long">Desc. Longo</option>
+              </select>
+            )}
+          </div>
           <textarea
             value={formDesc}
             onChange={e => setFormDesc(e.target.value)}
             placeholder="Descrição (opcional)"
             rows={2}
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '6px',
-              color: '#f1f5f9',
-              padding: '6px 10px',
-              fontSize: '0.82rem',
-              resize: 'vertical',
-              outline: 'none',
-            }}
+            className={styles.formTextarea}
           />
-          <div style={{ display: 'flex', gap: '8px' }}>
+          <div className={styles.formActions}>
             <button
               onClick={handleAddCustom}
               disabled={!formName.trim()}
-              style={{
-                flex: 1,
-                background: formName.trim() ? 'rgba(167,139,250,0.2)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${formName.trim() ? 'rgba(167,139,250,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                borderRadius: '6px',
-                color: formName.trim() ? '#a78bfa' : '#475569',
-                padding: '6px 12px',
-                fontSize: '0.82rem',
-                cursor: formName.trim() ? 'pointer' : 'default',
-                fontWeight: 600,
-              }}
+              className={styles.formSubmitBtn}
             >
               Adicionar
             </button>
-            <button
-              onClick={() => setShowForm(false)}
-              style={{
-                background: 'none',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '6px',
-                color: '#64748b',
-                padding: '6px 12px',
-                fontSize: '0.82rem',
-                cursor: 'pointer',
-              }}
-            >
+            <button onClick={() => setShowForm(false)} className={styles.formCancelBtn}>
               Cancelar
             </button>
           </div>
         </div>
       ) : (
-        <button
-          onClick={() => setShowForm(true)}
-          style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px dashed rgba(255,255,255,0.12)',
-            borderRadius: '8px',
-            color: '#64748b',
-            padding: '8px',
-            fontSize: '0.82rem',
-            cursor: 'pointer',
-          }}
-        >
+        <button onClick={() => setShowForm(true)} className={styles.addBtn}>
           ＋ Ação Personalizada
         </button>
       )}

@@ -1,0 +1,170 @@
+/* IdentityFieldsPanel — campos de identidade no painel de resumo */
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldGroup {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  padding: 10px 12px;
+  transition: border-color 0.2s;
+}
+
+.fieldGroup:focus-within {
+  border-color: var(--color-accent);
+}
+
+.groupTitle {
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.groupIcon {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.fieldRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.fieldRow:last-child {
+  margin-bottom: 0;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fieldLabel {
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fieldInput {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-input);
+  border-radius: 0;
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-family: var(--font-body);
+  padding: 2px 0;
+  outline: none;
+  transition: border-color 0.18s;
+  width: 100%;
+}
+
+.fieldInput::placeholder {
+  color: var(--text-faint);
+  font-size: 0.72rem;
+}
+
+.fieldInput:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+.fieldSelect {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  padding: 3px 6px;
+  cursor: pointer;
+  transition: border-color 0.18s;
+  width: 100%;
+}
+
+.fieldSelect:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
+
+.fieldSelect option {
+  background: var(--surface-card);
+  color: var(--text-body);
+}
+
+.fieldTextarea {
+  background: rgba(17, 18, 24, 0.4);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  padding: 6px 8px;
+  resize: vertical;
+  min-height: 48px;
+  outline: none;
+  transition: border-color 0.18s;
+  width: 100%;
+}
+
+.fieldTextarea::placeholder {
+  color: var(--text-faint);
+  font-size: 0.72rem;
+}
+
+.fieldTextarea:focus {
+  border-color: var(--color-accent);
+}
+
+/* Collapsible group */
+.collapsibleSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  padding: 0;
+}
+
+.collapsibleSummary::-webkit-details-marker {
+  display: none;
+}
+
+.chevron {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  transition: transform var(--transition-fast) ease;
+}
+
+details[open] > .collapsibleSummary .chevron {
+  transform: rotate(180deg);
+}
+
+.collapsibleBody {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filledIndicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-light);
+  flex-shrink: 0;
+}

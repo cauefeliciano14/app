@@ -57,20 +57,42 @@ export const D6_CONDITIONS: string[] = [
 /**
  * Retorna lista tipada de 18 perícias com valor calculado e flag de proficiência.
  * skillProficiencies usa labels como "Atletismo", "Percepção".
+ * expertiseSkills: perícias com Expertise (proficiência dupla).
+ * jackOfAllTrades: se true, adiciona metade do bônus de proficiência (arredondado para baixo)
+ *   às perícias em que o personagem NÃO é proficiente (feature do Bardo nível 2+).
  */
 export function deriveSkills(
   modifiers: Record<string, number>,
   proficiencyBonus: number,
-  skillProficiencies: string[]
+  skillProficiencies: string[],
+  expertiseSkills: string[] = [],
+  jackOfAllTrades = false
 ): DerivedSkill[] {
+  const halfProf = Math.floor(proficiencyBonus / 2);
   return ALL_SKILLS.map(({ label, attribute }) => {
     const attrMod = modifiers[attribute] ?? 0;
     const proficient = skillProficiencies.includes(label);
+    const expertise = proficient && expertiseSkills.includes(label);
+    const halfProficient = !proficient && jackOfAllTrades;
+
+    let bonus = 0;
+    if (expertise) {
+      bonus = proficiencyBonus * 2;
+    } else if (proficient) {
+      bonus = proficiencyBonus;
+    } else if (halfProficient) {
+      bonus = halfProf;
+    }
+
     return {
       label,
       attribute,
-      modifier: attrMod + (proficient ? proficiencyBonus : 0),
+      modifier: attrMod + bonus,
       proficient,
+      expertise,
+      halfProficient,
+      baseAbilityMod: attrMod,
+      proficiencyValue: bonus,
     };
   });
 }

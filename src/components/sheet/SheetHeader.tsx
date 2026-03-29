@@ -1,3 +1,5 @@
+import type { ClassLevel } from '../../types/multiclass';
+import styles from './SheetHeader.module.css';
 
 interface SheetHeaderProps {
   name: string;
@@ -5,49 +7,45 @@ interface SheetHeaderProps {
   speciesName: string;
   className: string;
   level: number;
+  creatureSize?: string;
+  alignment?: string | null;
+  subclassName?: string;
+  classLevels?: ClassLevel[];
 }
 
-export function SheetHeader({ name, portrait, speciesName, className, level }: SheetHeaderProps) {
+export function SheetHeader({
+  name, portrait, speciesName, className, level, creatureSize, alignment, subclassName, classLevels,
+}: SheetHeaderProps) {
+  /** Extrai apenas o rótulo curto do tamanho (ex: "Médio" de "Médio (1,2-2,1m)") */
+  const sizeLabel = creatureSize?.split('(')[0]?.trim() ?? '';
+
+  const isMulticlass = classLevels && classLevels.length > 1;
+  const classDisplay = isMulticlass
+    ? classLevels.map(cl => `${cl.className} ${cl.level}`).join(' / ')
+    : `${className || '—'}${subclassName ? ` (${subclassName})` : ''}`;
+
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '16px',
-      background: 'rgba(17, 18, 24, 0.6)',
-      borderRadius: '12px',
-      padding: '16px',
-      border: '1px solid rgba(255,255,255,0.07)',
-    }}>
-      <div style={{
-        width: '64px',
-        height: '64px',
-        borderRadius: '50%',
-        background: 'linear-gradient(135deg, #1e1f2e, #2a2b3d)',
-        border: '2px solid rgba(167,139,250,0.4)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '2rem',
-        flexShrink: 0,
-        overflow: 'hidden',
-      }}>
+    <div className={styles.container}>
+      <div className={styles.portrait}>
         {portrait ? (
           <img
             src={`/imgs/portrait_caracter/${portrait}`}
             alt={name || 'Retrato'}
-            style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }}
+            className={styles.portraitImg}
           />
         ) : (
           '🧙'
         )}
       </div>
       <div>
-        <div style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f1f5f9', lineHeight: 1.2 }}>
-          {name || 'Sem Nome'}
+        <div className={styles.name}>{name || 'Sem Nome'}</div>
+        <div className={styles.meta}>
+          Nível {level} &nbsp;·&nbsp; {speciesName || '—'} &nbsp;·&nbsp; {classDisplay}
+          {sizeLabel && <>&nbsp;·&nbsp;<span className={styles.sizeBadge}>{sizeLabel}</span></>}
         </div>
-        <div style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '4px' }}>
-          Nível {level} &nbsp;·&nbsp; {speciesName || '—'} &nbsp;·&nbsp; {className || '—'}
-        </div>
+        {alignment && (
+          <div className={styles.metaSub}>{alignment}</div>
+        )}
       </div>
     </div>
   );

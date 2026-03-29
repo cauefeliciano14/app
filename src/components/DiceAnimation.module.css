@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 120px;
+  flex: 0 0 auto;
+  background: var(--color-orange-bg);
+  border: 2px solid var(--color-orange-glow);
+  border-radius: 10px;
+  padding: 12px 10px;
+  height: 110px;
+}
+
+.diceRow {
+  display: flex;
+  gap: 4px;
+}
+
+.die {
+  width: 26px;
+  height: 26px;
+  border-radius: 5px;
+  background: var(--color-dice);
+  color: var(--text-white);
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: diceFlip 0.12s step-end infinite;
+  font-variant-numeric: tabular-nums;
+}
+
+.die:nth-child(2) { animation-delay: 0.03s; }
+.die:nth-child(3) { animation-delay: 0.06s; }
+.die:nth-child(4) { animation-delay: 0.09s; }
+
+@keyframes diceFlip {
+  0%   { content: ''; }
+  16%  { transform: rotateX(15deg); }
+  33%  { transform: rotateX(-10deg); }
+  50%  { transform: rotateX(8deg); }
+  66%  { transform: rotateX(-5deg); }
+  83%  { transform: rotateX(3deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+.label {
+  font-size: 0.72rem;
+  color: var(--color-accent-warm);
+  font-weight: 600;
+  animation: pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .die { animation: none; }
+  .label { animation: none; }
+}

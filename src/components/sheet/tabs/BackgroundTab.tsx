@@ -1,3 +1,4 @@
+import styles from './BackgroundTab.module.css';
 
 interface BackgroundTabProps {
   backgroundName?: string;
@@ -17,53 +18,42 @@ export function BackgroundTab({
   originTalent,
 }: BackgroundTabProps) {
   if (!backgroundName) {
-    return (
-      <div style={{ color: '#475569', fontSize: '0.85rem', textAlign: 'center', padding: '24px' }}>
-        Nenhum antecedente selecionado.
-      </div>
-    );
+    return <div className={styles.emptyText}>Nenhum antecedente selecionado.</div>;
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      <div style={{
-        background: 'rgba(17,18,24,0.6)',
-        border: 'none',
-        borderLeft: '2px solid #991b1b',
-        borderRadius: '4px',
-        padding: '12px 14px',
-      }}>
-        <div style={{ fontSize: '1rem', fontWeight: 800, color: '#f1f5f9', marginBottom: '8px', textTransform: 'uppercase' }}>
-          {backgroundName}
-        </div>
+    <div className={styles.container}>
+      <div className={styles.section}>
+        <div className={styles.title}>{backgroundName}</div>
         {backgroundDescription && (
-          <div style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.6, marginBottom: '16px' }}>
-            {backgroundDescription}
-          </div>
+          <div className={styles.description}>{backgroundDescription}</div>
         )}
 
         {backgroundSkills && backgroundSkills.length > 0 && (
-          <InfoRow label="SKILLS" value={backgroundSkills.join(', ')} />
+          <div className={styles.infoRow}>
+            <span className={styles.infoLabel}>SKILLS</span>
+            <span className={styles.infoValue}>{backgroundSkills.join(', ')}</span>
+          </div>
         )}
         {backgroundTool && (
-          <InfoRow label="TOOLS" value={backgroundTool} />
+          <div className={styles.infoRow}>
+            <span className={styles.infoLabel}>TOOLS</span>
+            <span className={styles.infoValue}>{backgroundTool}</span>
+          </div>
         )}
         {backgroundEquipment && (
-          <InfoRow label="EQUIPMENT" value={backgroundEquipment} />
+          <div className={styles.infoRow}>
+            <span className={styles.infoLabel}>EQUIPMENT</span>
+            <span className={styles.infoValue}>{backgroundEquipment}</span>
+          </div>
         )}
         {originTalent && (
-          <InfoRow label="ORIGIN FEAT" value={originTalent} accent="#a78bfa" />
+          <div className={styles.infoRow}>
+            <span className={styles.infoLabel}>ORIGIN FEAT</span>
+            <span className={styles.infoValueAccent}>{originTalent}</span>
+          </div>
         )}
       </div>
-    </div>
-  );
-}
-
-function InfoRow({ label, value, accent }: { label: string; value: string; accent?: string }) {
-  return (
-    <div style={{ display: 'flex', gap: '8px', marginBottom: '6px', alignItems: 'flex-start' }}>
-      <span style={{ fontSize: '0.78rem', color: '#64748b', minWidth: '110px', flexShrink: 0, fontWeight: 700 }}>{label}</span>
-      <span style={{ fontSize: '0.85rem', color: accent ?? '#cbd5e1' }}>{value}</span>
     </div>
   );
 }

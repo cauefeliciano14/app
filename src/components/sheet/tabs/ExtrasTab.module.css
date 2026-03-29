@@ -1,0 +1,275 @@
+/* ExtrasTab — D&D Beyond Underdark */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionTitle {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--label-spacing);
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border-faint);
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.textarea {
+  background: var(--surface-inset);
+  border: none;
+  border-left: 2px solid var(--border-theme);
+  border-radius: 4px;
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  padding: 12px 14px;
+  resize: vertical;
+  min-height: 140px;
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: var(--text-faint);
+}
+
+/* Counter list */
+.counterList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.counterCard {
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.counterTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.counterName {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  flex: 1;
+}
+
+.counterReset {
+  font-family: var(--font-label);
+  font-size: 0.58rem;
+  padding: 1px 5px;
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  border-radius: 3px;
+  color: var(--color-warning);
+  text-transform: uppercase;
+}
+
+.counterResetBtn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 2px 4px;
+  line-height: 1;
+}
+.counterResetBtn:hover { color: var(--color-success-vivid); }
+
+.counterRemoveBtn {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 2px 4px;
+}
+.counterRemoveBtn:hover { color: var(--color-primary-light); }
+
+.counterDots {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.dotFilled {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.dotFilled:hover { transform: scale(1.2); }
+
+.dotEmpty {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-faint);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.1s;
+}
+.dotEmpty:hover { border-color: var(--color-primary); }
+
+.counterControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counterBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border-theme);
+  background: var(--color-primary-subtle);
+  color: var(--color-primary-light);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.counterBtn:disabled { opacity: 0.4; cursor: default; }
+.counterBtn:not(:disabled):hover { background: var(--color-primary); color: var(--text-white); }
+
+.counterValue {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  min-width: 40px;
+  text-align: center;
+}
+
+.counterMax {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+/* Counter form */
+.counterForm {
+  background: var(--surface-inset);
+  border: 1px solid var(--color-magic-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formRow {
+  display: flex;
+  gap: 8px;
+}
+
+.formInput {
+  background: var(--surface-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  padding: 6px 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  width: 100%;
+}
+.formInput:focus { border-color: var(--color-magic); }
+
+.formSelect {
+  composes: formInput;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+}
+
+.formSubmitBtn {
+  flex: 1;
+  background: var(--color-magic-bg);
+  border: 1px solid var(--color-magic-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-magic);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.formSubmitBtn:hover { background: var(--color-indigo-bg-hover); }
+.formSubmitBtn:disabled { background: var(--surface-row-alt); border-color: var(--border-subtle); color: var(--text-faint); cursor: default; }
+
+.formCancelBtn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  padding: 6px 12px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.formCancelBtn:hover { border-color: var(--border-default); color: var(--text-secondary); }
+
+.addBtn {
+  background: var(--surface-row-alt);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-dim);
+  padding: 8px;
+  font-family: var(--font-label);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.addBtn:hover {
+  background: var(--color-primary-subtle);
+  border-color: var(--border-theme);
+  color: var(--text-secondary);
+}
+
+.addClassBtn {
+  background: var(--color-primary-faint);
+  border: 1px dashed var(--color-primary-subtle);
+  border-radius: var(--radius-md);
+  color: var(--color-primary-light);
+  padding: 8px 12px;
+  font-family: var(--font-label);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: capitalize;
+}
+
+.addClassBtn:hover {
+  background: var(--color-primary-subtle);
+  border-color: var(--color-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dotFilled, .dotEmpty { transition: none; }
+  .addBtn { transition: none; }
+}

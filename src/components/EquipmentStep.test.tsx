@@ -39,6 +39,7 @@ const baseDerivedSheet: DerivedSheet = {
   derivedDefenses: [],
   derivedTraits: [],
   activeTalents: [],
+  creatureSize: 'Medium',
 };
 
 function createCharacter(equipmentOverrides: Record<string, any> = {}) {

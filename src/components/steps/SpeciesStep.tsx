@@ -80,14 +80,18 @@ export const SpeciesStep: React.FC<SpeciesStepProps> = ({ languagesData }) => {
                 <span
                   style={{
                     fontSize: "2.5rem",
-                    marginBottom: "12px",
+                    marginBottom: "8px",
                     opacity: 0.5,
+                    filter: "grayscale(0.3)",
                   }}
                 >
                   👤
                 </span>
-                <p style={{ margin: 0 }}>
-                  Selecione uma espécie para ver os detalhes
+                <p style={{ margin: "0 0 4px", color: "var(--text-secondary)", fontSize: "0.95rem", fontWeight: 600 }}>
+                  Nenhuma espécie selecionada
+                </p>
+                <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "0.82rem", lineHeight: 1.5, maxWidth: "28rem" }}>
+                  Escolha uma espécie ao lado para ver traços raciais, linhagens e idiomas disponíveis.
                 </p>
               </div>
             )}

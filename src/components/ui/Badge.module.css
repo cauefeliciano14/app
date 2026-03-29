@@ -18,13 +18,13 @@
 /* ── Variant: Warning (orange "!") ── */
 .variantWarning {
   background: var(--color-accent);
-  color: #000;
+  color: var(--surface-dark);
   box-shadow: 0 0 8px var(--color-accent-glow);
 }
 
 /* ── Variant: Info (blue) ── */
 .variantInfo {
   background: var(--color-info);
-  color: #000;
+  color: var(--surface-dark);
   box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
 }

@@ -1,0 +1,89 @@
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.bone {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* ---- variant: catalog ---- */
+.catalogRow {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.catalogTitle {
+  composes: bone;
+  height: 14px;
+  width: 35%;
+  margin-bottom: var(--space-xs);
+}
+
+.catalogName {
+  composes: bone;
+  height: 16px;
+  flex: 0 0 30%;
+}
+
+.catalogDesc {
+  composes: bone;
+  height: 14px;
+  flex: 1;
+}
+
+.catalogBadge {
+  composes: bone;
+  height: 14px;
+  width: 48px;
+  border-radius: var(--radius-pill);
+}
+
+/* ---- variant: card ---- */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-sm);
+}
+
+.cardItem {
+  composes: bone;
+  height: 90px;
+  border-radius: var(--radius-md);
+}
+
+/* ---- variant: list ---- */
+.listRow {
+  composes: bone;
+  height: 18px;
+  width: 100%;
+}
+
+.listRowShort {
+  composes: bone;
+  height: 18px;
+  width: 60%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bone { animation: none; }
+}

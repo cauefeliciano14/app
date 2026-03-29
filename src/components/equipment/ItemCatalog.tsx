@@ -62,8 +62,11 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
   const [showMagic, setShowMagic] = useState(true);
   const [showCommon, setShowCommon] = useState(true);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
+  const [rarityFilter, setRarityFilter] = useState('todos');
 
   const allItems = useMemo(buildAllItems, []);
+
+  const RARITY_FILTERS = ['todos', 'comum', 'incomum', 'raro', 'muito raro', 'lendário', 'artefato'];
 
   const filtered = useMemo(() => {
     return allItems.filter(item => {
@@ -71,9 +74,11 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
       if (searchQuery && !item.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
       if (!showMagic && item.isMagic) return false;
       if (!showCommon && !item.isMagic) return false;
+      if (rarityFilter !== 'todos' && item.isMagic && item.rarity !== rarityFilter) return false;
+      if (rarityFilter !== 'todos' && !item.isMagic) return false;
       return true;
     });
-  }, [allItems, activeFilter, searchQuery, showMagic, showCommon]);
+  }, [allItems, activeFilter, searchQuery, showMagic, showCommon, rarityFilter]);
 
   const rarityColor = (rarity: string) => {
     const map: Record<string, string> = {
@@ -152,6 +157,34 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
         </label>
       </div>
 
+      {/* Rarity filter pills */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+        {RARITY_FILTERS.map(r => {
+          const isActive = rarityFilter === r;
+          const color = r === 'todos' ? 'var(--text-dim)' : rarityColor(r);
+          return (
+            <button
+              key={r}
+              onClick={() => setRarityFilter(r)}
+              style={{
+                padding: '3px 10px',
+                borderRadius: '12px',
+                fontSize: '0.72rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                border: isActive ? `1px solid ${color}` : '1px solid rgba(255,255,255,0.08)',
+                background: isActive ? `${color}18` : 'transparent',
+                color: isActive ? color : 'var(--text-faint)',
+                transition: 'all var(--transition-fast)',
+                textTransform: 'capitalize',
+              }}
+            >
+              {r}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Count */}
       <div style={{ color: 'var(--text-faint)', fontSize: '0.8rem' }}>{filtered.length} itens encontrados</div>
 
@@ -169,9 +202,22 @@ export const ItemCatalog: React.FC<ItemCatalogProps> = ({ onAddItem }) => {
                   <span style={{ color: 'var(--text-bright)', fontSize: '0.88rem', fontWeight: 500 }}>{item.name}</span>
                   <span style={{ color: 'var(--text-faint)', fontSize: '0.72rem', flexShrink: 0 }}>{item.type}</span>
                   {item.isMagic && item.rarity && (
-                    <span style={{ color: rarityColor(item.rarity), fontSize: '0.7rem', fontWeight: 600, flexShrink: 0 }}>
+                    <span style={{
+                      color: rarityColor(item.rarity),
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      flexShrink: 0,
+                      background: `${rarityColor(item.rarity)}18`,
+                      border: `1px solid ${rarityColor(item.rarity)}40`,
+                      borderRadius: '4px',
+                      padding: '1px 6px',
+                      textTransform: 'capitalize',
+                    }}>
                       {item.rarity}
                     </span>
+                  )}
+                  {item.isMagic && item.attunement && (
+                    <span title={item.attunement} style={{ fontSize: '0.72rem', color: '#b45309', flexShrink: 0 }}>S</span>
                   )}
                 </div>
                 <button

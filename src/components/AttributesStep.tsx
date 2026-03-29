@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { calculateModifier, roll4d6DropLowest, calculateTotalPointCost, applyBackgroundBonus } from '../utils/attributeUtils';
+import { ATTR_KEYS, ATTR_META } from '../utils/attributeConstants';
 import classAttributeSuggestions from '../data/classAttributeSuggestions';
+import { StandardArrayDnD } from './StandardArrayDnD';
+import { DiceAnimation } from './DiceAnimation';
+import { useSound } from '../context/SoundContext';
 
-const ATTR_KEYS = ['forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma'];
-
-const ATTR_META: Record<string, { full: string; abbr: string; icon: string }> = {
-  forca:        { full: 'Força',        abbr: 'FOR', icon: '⚔️' },
-  destreza:     { full: 'Destreza',     abbr: 'DES', icon: '🏹' },
-  constituicao: { full: 'Constituição', abbr: 'CON', icon: '🛡️' },
-  inteligencia: { full: 'Inteligência', abbr: 'INT', icon: '📖' },
-  sabedoria:    { full: 'Sabedoria',    abbr: 'SAB', icon: '🦉' },
-  carisma:      { full: 'Carisma',      abbr: 'CAR', icon: '✨' },
-};
 
 const STD_VALUES = [15, 14, 13, 12, 10, 8];
 
@@ -40,9 +34,12 @@ interface AttributesStepProps {
   selectedBackground: any;
 }
 
-export const AttributesStep: React.FC<AttributesStepProps> = ({ character, setCharacter, getAttributeBonus, selectedBackground }) => {
+export const AttributesStep = React.memo(
+  ({ character, setCharacter, getAttributeBonus, selectedBackground }: AttributesStepProps) => {
   const attrs = character.attributes;
   const [rollingSlots, setRollingSlots] = useState<Set<number>>(new Set());
+  const [useDragMode, setUseDragMode] = useState(true);
+  const { playSound } = useSound();
 
   // Sync background bonuses whenever they change
   useEffect(() => {
@@ -111,6 +108,7 @@ export const AttributesStep: React.FC<AttributesStepProps> = ({ character, setCh
 
   const handleRollSlot = (slotIdx: number) => {
     setRollingSlots(prev => new Set([...prev, slotIdx]));
+    playSound('dice-roll');
     setTimeout(() => {
       const result = roll4d6DropLowest();
       setCharacter((prev: any) => {
@@ -231,29 +229,51 @@ export const AttributesStep: React.FC<AttributesStepProps> = ({ character, setCh
         const usedVals = (attr: string) =>
           ATTR_KEYS.filter(k => k !== attr && attrs.base[k] !== 0).map(k => attrs.base[k]);
         return (
-          <div style={{ background: 'rgba(17,18,24,0.6)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: '12px', padding: '16px', overflowX: 'auto' }}>
-            <div style={{ minWidth: '480px' }}>
-              <ColHeaders />
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
-                {ATTR_KEYS.map(attr => (
-                  <select
-                    key={attr}
-                    className="premium-select"
-                    value={attrs.base[attr] || 0}
-                    onChange={e => updateBase({ ...attrs.base, [attr]: Number(e.target.value) })}
-                    style={{ width: '100%', textAlign: 'center' }}
-                  >
-                    <option value={0}>--</option>
-                    {STD_VALUES.map(v => (
-                      <option key={v} value={v} disabled={usedVals(attr).includes(v)}>
-                        {v}
-                      </option>
-                    ))}
-                  </select>
-                ))}
-              </div>
-              <TotalRow />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '6px', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Modo:</span>
+              <button
+                onClick={() => setUseDragMode(true)}
+                style={{ padding: '4px 10px', fontSize: '0.72rem', fontWeight: 600, border: '1px solid', borderColor: useDragMode ? 'rgba(212,160,23,0.4)' : 'rgba(255,255,255,0.08)', borderRadius: '999px', background: useDragMode ? 'rgba(212,160,23,0.12)' : 'transparent', color: useDragMode ? '#d4a017' : '#75838b', cursor: 'pointer' }}
+              >
+                Arrastar
+              </button>
+              <button
+                onClick={() => setUseDragMode(false)}
+                style={{ padding: '4px 10px', fontSize: '0.72rem', fontWeight: 600, border: '1px solid', borderColor: !useDragMode ? 'rgba(212,160,23,0.4)' : 'rgba(255,255,255,0.08)', borderRadius: '999px', background: !useDragMode ? 'rgba(212,160,23,0.12)' : 'transparent', color: !useDragMode ? '#d4a017' : '#75838b', cursor: 'pointer' }}
+              >
+                Selecionar
+              </button>
             </div>
+
+            {useDragMode ? (
+              <StandardArrayDnD base={attrs.base} onUpdate={updateBase} />
+            ) : (
+              <div style={{ background: 'rgba(17,18,24,0.6)', border: '1px solid rgba(249,115,22,0.2)', borderRadius: '12px', padding: '16px', overflowX: 'auto' }}>
+                <div style={{ minWidth: '480px' }}>
+                  <ColHeaders />
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '8px' }}>
+                    {ATTR_KEYS.map(attr => (
+                      <select
+                        key={attr}
+                        className="premium-select"
+                        value={attrs.base[attr] || 0}
+                        onChange={e => updateBase({ ...attrs.base, [attr]: Number(e.target.value) })}
+                        style={{ width: '100%', textAlign: 'center' }}
+                      >
+                        <option value={0}>--</option>
+                        {STD_VALUES.map(v => (
+                          <option key={v} value={v} disabled={usedVals(attr).includes(v)}>
+                            {v}
+                          </option>
+                        ))}
+                      </select>
+                    ))}
+                  </div>
+                  <TotalRow />
+                </div>
+              </div>
+            )}
           </div>
         );
       })()}
@@ -303,12 +323,7 @@ export const AttributesStep: React.FC<AttributesStepProps> = ({ character, setCh
                 const isRolling = rollingSlots.has(slotIdx);
 
                 if (isRolling) {
-                  return (
-                    <div key={slotIdx} style={{ minWidth: '120px', flex: '0 0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '4px', background: 'rgba(249,115,22,0.08)', border: '2px solid rgba(249,115,22,0.4)', borderRadius: '10px', padding: '12px 10px', height: '110px' }}>
-                      <span className="dice-rolling" style={{ fontSize: '2rem' }}>🎲</span>
-                      <span style={{ fontSize: '0.72rem', color: '#f97316', fontWeight: 600 }}>Rolando...</span>
-                    </div>
-                  );
+                  return <DiceAnimation key={slotIdx} diceCount={4} />;
                 }
 
                 if (roll) {
@@ -513,4 +528,11 @@ export const AttributesStep: React.FC<AttributesStepProps> = ({ character, setCh
       )}
     </div>
   );
-};
+}, (prev, next) => {
+  return (
+    prev.getAttributeBonus === next.getAttributeBonus &&
+    prev.selectedBackground?.id === next.selectedBackground?.id &&
+    prev.character.attributes === next.character.attributes &&
+    prev.character.characterClass?.id === next.character.characterClass?.id
+  );
+});

@@ -1,30 +1,52 @@
 .placeholderPanel {
   border-style: dashed;
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-default);
   background: rgba(17, 18, 24, 0.42);
 }
 
+.placeholderIcon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+  opacity: 0.5;
+  filter: grayscale(0.3);
+}
+
+.placeholderTitle {
+  margin: 0 0 var(--space-xs);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.placeholderHint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  max-width: 28rem;
+}
+
 .classSummaryCard {
-  border-radius: 18px;
+  border-radius: var(--radius-2xl);
   padding: 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.06);
+  background: var(--surface-glass);
+  border-color: var(--surface-glass-hover);
 }
 
 .classMenuButton {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-lg) / 2;
   width: 100%;
   min-height: 90px;
   padding: 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(26, 27, 35, 0.8);
-  color: #e2e8f0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-ghost);
+  background: var(--surface-selection);
+  color: var(--text-slate);
   text-align: left;
-  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+  transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 .classMenuButton:hover {
@@ -35,10 +57,10 @@
 }
 
 .classMenuButtonSelected {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.16), rgba(249, 115, 22, 0.07));
-  border-color: rgba(249, 115, 22, 0.6);
+  background: var(--surface-selection-active);
+  border-color: var(--color-orange-border-strong);
   box-shadow: 0 6px 18px rgba(249, 115, 22, 0.12);
-  color: #fff;
+  color: var(--text-white);
 }
 
 .classMenuIdentity {
@@ -62,9 +84,9 @@
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(15, 23, 42, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--border-slate);
   flex-shrink: 0;
 }
 
@@ -83,7 +105,7 @@
 .classMenuMetaRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-sm);
   margin-top: auto;
 }
 
@@ -92,10 +114,10 @@
   align-items: center;
   min-height: 28px;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: rgba(148, 163, 184, 0.12);
-  border: 1px solid rgba(148, 163, 184, 0.14);
-  color: #e2e8f0;
+  border: 1px solid var(--border-slate);
+  color: var(--text-slate);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -104,8 +126,8 @@
 .resetButton {
   align-self: flex-start;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #94a3b8;
+  border: 1px solid var(--border-default);
+  color: var(--text-slate-muted);
 }
 
 .summaryHeroPanel {
@@ -114,8 +136,8 @@
   grid-template-columns: minmax(0, 1fr);
   align-items: end;
   overflow: hidden;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
   background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
   min-height: 24rem;
 }
@@ -152,8 +174,8 @@
 }
 
 .traitsTitle {
-  margin: 16px 0 0;
-  color: #f8fafc;
+  margin: var(--space-md) 0 0;
+  color: var(--text-bright);
   font-size: 0.95rem;
 }
 
@@ -162,7 +184,7 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-lg) / 2;
   max-width: min(34rem, 100%);
   padding: clamp(1rem, 1.4vw, 1.5rem);
 }
@@ -170,12 +192,12 @@
 .summaryBadge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-sm);
   width: fit-content;
   padding: 6px 10px;
-  border-radius: 999px;
-  color: #fdba74;
-  background: rgba(249, 115, 22, 0.14);
+  border-radius: var(--radius-pill);
+  color: var(--color-accent-warm-light);
+  background: var(--color-orange-subtle);
   border: 1px solid rgba(249, 115, 22, 0.22);
   font-size: 0.74rem;
   font-weight: 600;
@@ -189,13 +211,13 @@
 
 .summaryTitle {
   margin: 0;
-  color: #fff;
+  color: var(--text-white);
   font-size: clamp(1.7rem, 1rem + 1.2vw, 2.25rem);
 }
 
 .summaryDescription {
   margin: 0;
-  color: #e2e8f0;
+  color: var(--text-slate);
   font-size: 0.95rem;
   line-height: 1.72;
   max-width: 58ch;
@@ -205,26 +227,26 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding-top: 4px;
+  padding-top: var(--space-xs);
 }
 
 .summaryStat {
   background: rgba(2, 6, 23, 0.42);
   backdrop-filter: blur(8px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
   padding: 10px 12px;
   min-width: min(100%, 11rem);
 }
 
 .summaryStatLabel {
-  color: #94a3b8;
+  color: var(--text-slate-muted);
   font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--label-spacing);
 }
 
 .summaryStatValue {
-  color: #fff;
+  color: var(--text-white);
   font-size: 1rem;
   font-weight: 700;
 }
@@ -233,12 +255,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
   gap: 14px;
-  margin-top: 16px;
+  margin-top: var(--space-md);
 }
 
 .traitCard {
   background: rgba(30, 32, 45, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-separator);
   border-radius: 10px;
   padding: 14px 16px;
   display: flex;
@@ -252,15 +274,15 @@
 }
 
 .traitLabel {
-  color: #f97316;
+  color: var(--color-accent-warm);
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--label-spacing);
   margin-bottom: 0;
 }
 
 .traitValue {
-  color: #e2e8f0;
+  color: var(--text-slate);
   font-size: 0.84rem;
   line-height: 1.5;
 }
@@ -269,12 +291,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-lg) / 2;
 }
 
 .optionsTitle {
   margin: 0;
-  color: #f8fafc;
+  color: var(--text-bright);
   font-size: 1rem;
 }
 
@@ -283,37 +305,26 @@
   align-items: center;
   min-height: 24px;
   padding: 3px 10px;
-  border-radius: 999px;
-  background: rgba(249, 115, 22, 0.12);
+  border-radius: var(--radius-pill);
+  background: var(--color-orange-bg-hover);
   border: 1px solid rgba(249, 115, 22, 0.2);
-  color: #fdba74;
+  color: var(--color-accent-warm-light);
   font-size: 0.72rem;
   font-weight: 600;
   white-space: nowrap;
 }
 
 @media (max-width: 720px) {
-  .classMenuButton {
-    min-height: 82px;
-  }
-
-  .summaryHeroPanel {
-    min-height: 18rem;
-  }
-
+  .classMenuButton { min-height: 82px; }
+  .summaryHeroPanel { min-height: 18rem; }
   .summaryHeroOverlay {
     background: linear-gradient(180deg, rgba(15, 23, 42, 0.14) 0%, rgba(15, 23, 42, 0.5) 48%, rgba(15, 23, 42, 0.9) 100%);
   }
+  .summaryHeroContent { max-width: 100%; }
+  .traitsGrid { grid-template-columns: minmax(0, 1fr); }
+  .optionsHeader { flex-direction: column; }
+}
 
-  .summaryHeroContent {
-    max-width: 100%;
-  }
-
-  .traitsGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .optionsHeader {
-    flex-direction: column;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .classMenuButton { transition: none; }
 }

@@ -1,114 +1,213 @@
 /* ═══════════════════════════════════════════════════
-   Design Tokens — Single source of truth for the app
+   Design Tokens — D&D Beyond Underdark Theme
+   Single source of truth for the app
    ═══════════════════════════════════════════════════ */
 
 :root {
-  /* ── Colors: Primary (purple) ── */
-  --color-primary: #9d4edd;
-  --color-primary-hover: #7b2cbf;
-  --color-primary-light: #e0aaff;
-  --color-primary-glow: rgba(157, 78, 221, 0.4);
-  --color-primary-subtle: rgba(157, 78, 221, 0.15);
+  /* ── Colors: Primary (D&D Red) ── */
+  --color-primary: #C53131;
+  --color-primary-hover: #a82828;
+  --color-primary-dark: #8b2222;
+  --color-primary-light: #ff6b6b;
+  --color-primary-glow: rgba(197, 49, 49, 0.4);
+  --color-primary-subtle: rgba(197, 49, 49, 0.15);
+  --color-primary-faint: rgba(197, 49, 49, 0.08);
 
-  /* ── Colors: Accent (orange) ── */
-  --color-accent: #f97316;
-  --color-accent-hover: #ea580c;
-  --color-accent-light: #fdba74;
-  --color-accent-glow: rgba(249, 115, 22, 0.4);
-  --color-accent-subtle: rgba(249, 115, 22, 0.15);
-  --color-accent-bg: rgba(249, 115, 22, 0.05);
-  --color-accent-bg-hover: rgba(249, 115, 22, 0.1);
-  --color-accent-border: rgba(249, 115, 22, 0.3);
-  --color-accent-border-strong: rgba(249, 115, 22, 0.5);
+  /* ── Colors: Accent (gold/orange) ── */
+  --color-accent: #d4a017;
+  --color-accent-hover: #b8860b;
+  --color-accent-light: #f0d060;
+  --color-accent-warm: #f97316;
+  --color-accent-warm-light: #fdba74;
+  --color-accent-warm-pale: #fed7aa;
+  --color-accent-glow: rgba(212, 160, 23, 0.4);
+  --color-accent-subtle: rgba(212, 160, 23, 0.15);
+  --color-accent-bg: rgba(212, 160, 23, 0.05);
+  --color-accent-bg-hover: rgba(212, 160, 23, 0.1);
+  --color-accent-border: rgba(212, 160, 23, 0.3);
+  --color-accent-border-strong: rgba(212, 160, 23, 0.5);
+  --color-orange-subtle: rgba(249, 115, 22, 0.15);
+  --color-orange-glow: rgba(249, 115, 22, 0.4);
+  --color-orange-bg: rgba(249, 115, 22, 0.08);
+  --color-orange-bg-hover: rgba(249, 115, 22, 0.12);
+  --color-orange-border: rgba(249, 115, 22, 0.25);
+  --color-orange-border-strong: rgba(249, 115, 22, 0.55);
 
   /* ── Semantic Colors ── */
   --color-error: #ef4444;
+  --color-error-vivid: #f87171;
+  --color-error-pale: #fecaca;
   --color-error-light: #fca5a5;
   --color-error-bg: rgba(239, 68, 68, 0.08);
+  --color-error-bg-hover: rgba(239, 68, 68, 0.16);
   --color-error-border: rgba(239, 68, 68, 0.25);
+  --color-error-border-strong: rgba(239, 68, 68, 0.6);
   --color-error-btn-bg: rgba(239, 68, 68, 0.2);
+  --color-error-btn-hover: rgba(239, 68, 68, 0.35);
+  --color-danger-gradient: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  --color-danger-gradient-hover: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
 
   --color-success: #22c55e;
+  --color-success-vivid: #4ade80;
   --color-success-light: #86efac;
   --color-success-bg: rgba(34, 197, 94, 0.2);
+  --color-success-bg-subtle: rgba(34, 197, 94, 0.12);
   --color-success-border: rgba(34, 197, 94, 0.4);
+  --color-success-border-subtle: rgba(34, 197, 94, 0.25);
 
   --color-info: #38bdf8;
   --color-info-light: #93c5fd;
+  --color-info-bg: rgba(56, 189, 248, 0.15);
+  --color-info-border: rgba(56, 189, 248, 0.3);
 
   --color-magic: #a78bfa;
+  --color-magic-vivid: #c084fc;
+  --color-magic-deep: #a855f7;
   --color-magic-bg: rgba(167, 139, 250, 0.2);
+  --color-magic-bg-subtle: rgba(167, 139, 250, 0.08);
+  --color-magic-bg-deep: rgba(168, 85, 247, 0.12);
   --color-magic-border: rgba(167, 139, 250, 0.4);
+  --color-magic-border-subtle: rgba(167, 139, 250, 0.25);
+  --color-magic-border-deep: rgba(168, 85, 247, 0.35);
 
-  /* ── Surfaces ── */
-  --surface-base: #0f0c1b;
-  --surface-card: rgba(30, 25, 45, 0.6);
-  --surface-elevated: rgba(40, 30, 60, 0.75);
-  --surface-input: rgba(20, 15, 30, 0.8);
-  --surface-input-hover: rgba(30, 25, 45, 0.9);
-  --surface-overlay: rgba(10, 5, 20, 0.7);
-  --surface-tooltip: rgba(25, 15, 35, 0.95);
-  --surface-dark: #120f20;
-  --surface-dark-alt: #0a0815;
-  --surface-subtle: rgba(157, 78, 221, 0.04);
-  --surface-subtle-hover: rgba(157, 78, 221, 0.08);
-  --surface-ghost: rgba(157, 78, 221, 0.05);
-  --surface-row-alt: rgba(157, 78, 221, 0.02);
-  --surface-accordion: rgba(40, 30, 60, 0.4);
-  --surface-header: rgba(15, 12, 27, 0.9);
-  --surface-name-container: rgba(15, 12, 27, 0.4);
+  --color-warning: #fbbf24;
+  --color-warning-bg: rgba(251, 191, 36, 0.1);
+  --color-warning-bg-hover: rgba(251, 191, 36, 0.15);
+  --color-warning-border: rgba(251, 191, 36, 0.25);
+  --color-warning-border-strong: rgba(251, 191, 36, 0.3);
+
+  --color-indigo: #6366f1;
+  --color-indigo-light: #a78bfa;
+  --color-indigo-bg: rgba(99, 102, 241, 0.15);
+  --color-indigo-bg-hover: rgba(99, 102, 241, 0.25);
+  --color-indigo-border: rgba(99, 102, 241, 0.3);
+
+  --color-attunement: #b45309;
+  --color-expertise: #fbbf24;
+  --color-expertise-border: #f59e0b;
+  --color-expertise-glow: rgba(251, 191, 36, 0.38);
+  --color-proficient: #96bf6b;
+
+  /* ── HP Colors ── */
+  --color-hp-positive: #00c797;
+  --color-hp-positive-bg: rgba(0, 199, 151, 0.1);
+  --color-hp-positive-border: rgba(0, 199, 151, 0.25);
+  --color-hp-negative: #c53131;
+
+  /* ── Dice ── */
+  --color-dice: #3b82f6;
+  --color-pink: #ec4899;
+
+  /* ── Surfaces (D&D Beyond Underdark) ── */
+  --surface-base: #1a1e23;
+  --surface-card: rgba(35, 43, 47, 0.85);
+  --surface-elevated: rgba(42, 52, 58, 0.9);
+  --surface-inset: rgba(17, 18, 24, 0.6);
+  --surface-inset-deep: rgba(17, 18, 24, 0.5);
+  --surface-input: rgba(20, 25, 30, 0.8);
+  --surface-input-hover: rgba(30, 38, 45, 0.9);
+  --surface-input-alt: rgba(255, 255, 255, 0.05);
+  --surface-overlay: rgba(10, 14, 18, 0.7);
+  --surface-overlay-heavy: rgba(0, 0, 0, 0.7);
+  --surface-tooltip: rgba(22, 28, 34, 0.95);
+  --surface-dark: #12181c;
+  --surface-dark-alt: #0e1317;
+  --surface-subtle: rgba(197, 49, 49, 0.04);
+  --surface-subtle-hover: rgba(197, 49, 49, 0.08);
+  --surface-ghost: rgba(197, 49, 49, 0.05);
+  --surface-row-alt: rgba(255, 255, 255, 0.02);
+  --surface-row-hover: rgba(255, 255, 255, 0.04);
+  --surface-accordion: rgba(35, 43, 47, 0.4);
+  --surface-header: rgba(18, 24, 28, 0.9);
+  --surface-name-container: rgba(18, 24, 28, 0.4);
+  --surface-glass: rgba(255, 255, 255, 0.03);
+  --surface-glass-hover: rgba(255, 255, 255, 0.06);
+  --surface-selection: rgba(26, 27, 35, 0.8);
+  --surface-selection-active: linear-gradient(135deg, rgba(249, 115, 22, 0.16), rgba(249, 115, 22, 0.07));
 
   /* ── Borders ── */
-  --border-default: rgba(157, 78, 221, 0.2);
-  --border-subtle: rgba(157, 78, 221, 0.1);
-  --border-faint: rgba(157, 78, 221, 0.05);
-  --border-input: rgba(157, 78, 221, 0.3);
-  --border-input-hover: rgba(157, 78, 221, 0.5);
-  --border-accent: rgba(249, 115, 22, 0.5);
-  --border-accent-subtle: rgba(249, 115, 22, 0.15);
-  --border-primary: rgba(157, 78, 221, 0.5);
-  --border-separator: rgba(157, 78, 221, 0.08);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-faint: rgba(255, 255, 255, 0.04);
+  --border-ghost: rgba(255, 255, 255, 0.07);
+  --border-input: rgba(255, 255, 255, 0.18);
+  --border-input-hover: rgba(255, 255, 255, 0.3);
+  --border-accent: rgba(212, 160, 23, 0.5);
+  --border-accent-subtle: rgba(212, 160, 23, 0.15);
+  --border-primary: rgba(197, 49, 49, 0.5);
+  --border-separator: rgba(255, 255, 255, 0.06);
+  --border-theme: #C53131;
+  --border-theme-dark: #8b2222;
+  --border-slate: rgba(148, 163, 184, 0.14);
 
   /* ── Text ── */
-  --text-primary: #f8f9fa;
-  --text-secondary: #e2e8f0;
-  --text-muted: #adb5bd;
-  --text-dim: #94a3b8;
-  --text-faint: #64748b;
-  --text-bright: #f1f5f9;
-  --text-body: #cbd5e1;
+  --text-primary: #f0f2f5;
+  --text-secondary: #c8cfd5;
+  --text-muted: #a2acb2;
+  --text-dim: #75838b;
+  --text-faint: #525c63;
+  --text-bright: #f9fafa;
+  --text-body: #c4cbce;
+  --text-white: #ffffff;
+  --text-slate: #e2e8f0;
+  --text-slate-muted: #94a3b8;
+  --text-slate-dim: #64748b;
+
+  /* ── Typography ── */
+  --font-body: 'Roboto', Helvetica, sans-serif;
+  --font-heading: 'Cinzel', Georgia, serif;
+  --font-label: 'Roboto Condensed', Helvetica, sans-serif;
+  --font-mono: 'Fira Code', Consolas, monospace;
+  --label-size: 0.6875rem;
+  --label-spacing: 0.08em;
+  --label-weight: 700;
 
   /* ── Spacing Scale ── */
+  --space-2xs: 2px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 32px;
+  --space-2xl: 48px;
 
   /* ── Border Radii ── */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 18px;
   --radius-pill: 9999px;
 
   /* ── Z-Index Scale ── */
   --z-sticky: 50;
+  --z-sidebar: 998;
+  --z-sidebar-overlay: 999;
   --z-overlay: 900;
   --z-modal-backdrop: 950;
   --z-modal: 1000;
   --z-tooltip: 1100;
 
   /* ── Shadows ── */
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --shadow-elevated: 0 20px 50px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-glow-accent: 0 0 10px rgba(249, 115, 22, 0.4);
-  --shadow-glow-primary: 0 4px 12px rgba(157, 78, 221, 0.4);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-glow-accent: 0 0 10px rgba(212, 160, 23, 0.4);
+  --shadow-glow-primary: 0 4px 12px rgba(197, 49, 49, 0.4);
+  --shadow-glow-orange: 0 0 10px rgba(249, 115, 22, 0.4);
   --shadow-input: 0 4px 12px rgba(0, 0, 0, 0.2);
-  --shadow-focus-accent: 0 0 0 2px rgba(249, 115, 22, 0.15);
+  --shadow-focus-accent: 0 0 0 2px rgba(212, 160, 23, 0.15);
+  --shadow-focus-orange: 0 0 0 2px rgba(249, 115, 22, 0.1);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-hover-lg: 0 8px 20px rgba(0, 0, 0, 0.2);
+  --shadow-danger: 0 4px 16px rgba(239, 68, 68, 0.3);
 
   /* ── Transitions ── */
   --transition-speed: 0.3s;
   --transition-fast: 0.15s;
   --transition-base: 0.25s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1);
 }

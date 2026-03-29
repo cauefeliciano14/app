@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ActiveTalentSummary } from '../../../rules/types/DerivedSheet';
+import styles from './FeaturesTraitsTab.module.css';
 
 interface Feature {
   level: number;
@@ -35,24 +36,42 @@ export function FeaturesTraitsTab({
   backgroundTool,
   characterLevel,
 }: FeaturesTraitsTabProps) {
+  const [searchText, setSearchText] = useState('');
   const activeFeatures = classFeatures.filter(f => f.level <= characterLevel);
+  const q = searchText.toLowerCase();
+
+  const filterFeatures = (features: Feature[]) =>
+    q ? features.filter(f => f.name.toLowerCase().includes(q) || f.description.toLowerCase().includes(q)) : features;
+  const filterTraits = (traits: Trait[]) =>
+    q ? traits.filter(t => t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q)) : traits;
+
+  const filteredFeatures = filterFeatures(activeFeatures);
+  const filteredTraits = filterTraits(speciesTraits);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {activeFeatures.length > 0 && (
+    <div className={styles.container}>
+      <input
+        type="text"
+        value={searchText}
+        onChange={e => setSearchText(e.target.value)}
+        placeholder="Buscar características…"
+        className={styles.searchInput}
+      />
+
+      {filteredFeatures.length > 0 && (
         <Section title="CARACTERÍSTICAS DE CLASSE">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {activeFeatures.map((f, i) => (
+          <div className={styles.featureList}>
+            {filteredFeatures.map((f, i) => (
               <FeatureEntry key={i} title={f.name} badge={`Nível ${f.level}`} description={f.description} />
             ))}
           </div>
         </Section>
       )}
 
-      {speciesTraits.length > 0 && (
+      {filteredTraits.length > 0 && (
         <Section title="TRAÇOS DE ESPÉCIE">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {speciesTraits.map((t, i) => (
+          <div className={styles.featureList}>
+            {filteredTraits.map((t, i) => (
               <FeatureEntry key={i} title={t.title} description={t.description} />
             ))}
           </div>
@@ -62,29 +81,29 @@ export function FeaturesTraitsTab({
       {(activeTalents.length > 0 || originTalent) && (
         <Section title="FEITAS/TALENTOS APLICADOS">
           {activeTalents.map((talent) => (
-            <div key={`${talent.source}-${talent.name}`} style={{ marginBottom: '10px' }}>
-              <div style={{ fontSize: '0.85rem', color: '#f1f5f9', fontWeight: 700 }}>
+            <div key={`${talent.source}-${talent.name}`} className={styles.talentEntry}>
+              <div className={styles.talentName}>
                 {talent.name}
-                <span style={{ color: '#64748b', fontSize: '0.65rem', marginLeft: '8px', fontWeight: 600 }}>
+                <span className={styles.talentSource}>
                   {talent.source === 'background' ? 'ANTECEDENTE' : 'ESPÉCIE'}
                 </span>
               </div>
               {talent.notes.length > 0 && (
-                <ul style={{ margin: '4px 0 0 16px', color: '#94a3b8', fontSize: '0.8rem', lineHeight: 1.5 }}>
+                <ul className={styles.talentNotes}>
                   {talent.notes.map((note) => <li key={note}>{note}</li>)}
                 </ul>
               )}
             </div>
           ))}
           {activeTalents.length === 0 && originTalent && (
-            <div style={{ fontSize: '0.88rem', color: '#f1f5f9', fontWeight: 500 }}>{originTalent}</div>
+            <div className={styles.originTalent}>{originTalent}</div>
           )}
         </Section>
       )}
 
       {derivedTraits.length > 0 && (
         <Section title="EFEITOS DERIVADOS">
-          <ul style={{ margin: 0, paddingLeft: '18px', color: '#cbd5e1', fontSize: '0.8rem', lineHeight: 1.6 }}>
+          <ul className={styles.derivedList}>
             {derivedTraits.map((trait) => <li key={trait}>{trait}</li>)}
           </ul>
         </Section>
@@ -92,28 +111,24 @@ export function FeaturesTraitsTab({
 
       {backgroundName && (
         <Section title="ANTECEDENTE">
-          <div style={{ fontSize: '0.88rem', color: '#f1f5f9', marginBottom: '6px', fontWeight: 700 }}>
-            {backgroundName}
-          </div>
+          <div className={styles.bgName}>{backgroundName}</div>
           {backgroundSkills && backgroundSkills.length > 0 && (
-            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
-              <span style={{ color: '#64748b', fontWeight: 700 }}>Perícias: </span>
+            <div className={styles.bgDetail}>
+              <span className={styles.bgDetailLabel}>Perícias: </span>
               {backgroundSkills.join(', ')}
             </div>
           )}
           {backgroundTool && (
-            <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '4px' }}>
-              <span style={{ color: '#64748b', fontWeight: 700 }}>Ferramentas: </span>
+            <div className={styles.bgDetailMargin}>
+              <span className={styles.bgDetailLabel}>Ferramentas: </span>
               {backgroundTool}
             </div>
           )}
         </Section>
       )}
 
-      {activeFeatures.length === 0 && speciesTraits.length === 0 && !originTalent && activeTalents.length === 0 && derivedTraits.length === 0 && (
-        <div style={{ color: '#475569', fontSize: '0.85rem', textAlign: 'center', padding: '24px' }}>
-          Nenhuma característica disponível.
-        </div>
+      {filteredFeatures.length === 0 && filteredTraits.length === 0 && !originTalent && activeTalents.length === 0 && derivedTraits.length === 0 && (
+        <div className={styles.emptyText}>Nenhuma característica disponível.</div>
       )}
     </div>
   );
@@ -121,16 +136,8 @@ export function FeaturesTraitsTab({
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div style={{
-      background: 'rgba(17,18,24,0.6)',
-      border: 'none',
-      borderLeft: '2px solid #991b1b',
-      borderRadius: '4px',
-      padding: '12px 14px',
-    }}>
-      <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 800, letterSpacing: '0.08em', marginBottom: '10px' }}>
-        {title}
-      </div>
+    <div className={styles.section}>
+      <div className={styles.sectionTitle}>{title}</div>
       {children}
     </div>
   );
@@ -142,41 +149,15 @@ function FeatureEntry({ title, badge, description }: { title: string; badge?: st
   const shown = expanded || !long ? description : description.slice(0, 120) + '…';
 
   return (
-    <div style={{ 
-      background: 'rgba(255,255,255,0.02)',
-      borderRadius: '4px',
-      padding: '8px'
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
-        <span style={{ fontSize: '0.85rem', color: '#f1f5f9', fontWeight: 700 }}>{title}</span>
-        {badge && (
-          <span style={{
-            fontSize: '0.65rem',
-            color: '#a78bfa',
-            background: 'rgba(167,139,250,0.1)',
-            border: '1px solid rgba(167,139,250,0.2)',
-            borderRadius: '4px',
-            padding: '1px 6px',
-          }}>
-            {badge}
-          </span>
-        )}
+    <div className={styles.featureEntry}>
+      <div className={styles.featureHeader}>
+        <span className={styles.featureTitle}>{title}</span>
+        {badge && <span className={styles.featureBadge}>{badge}</span>}
       </div>
-      <div style={{ fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.5 }}>
+      <div className={styles.featureDesc}>
         {shown}
         {long && (
-          <button
-            onClick={() => setExpanded(prev => !prev)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#991b1b',
-              fontWeight: 700,
-              cursor: 'pointer',
-              padding: '0 4px',
-              fontSize: '0.75rem',
-            }}
-          >
+          <button onClick={() => setExpanded(prev => !prev)} className={styles.moreBtn}>
             {expanded ? 'MENOS' : 'MAIS'}
           </button>
         )}

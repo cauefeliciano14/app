@@ -1,0 +1,572 @@
+/* SpellsTab — D&D Beyond Underdark */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emptyText {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-faint);
+  font-size: 0.9rem;
+}
+
+/* Stat pills row */
+.statsRow {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: transparent;
+  padding: 8px;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.statPill {
+  text-align: left;
+  min-width: 80px;
+}
+
+.statPillLabel {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+  font-weight: 800;
+  letter-spacing: var(--label-spacing);
+}
+
+.statPillValue {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--text-bright);
+}
+
+/* Spell slot tracker */
+.slotsCard {
+  background: var(--surface-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.slotsTitle {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: var(--label-spacing);
+  margin-bottom: 10px;
+}
+
+.slotsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slotRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slotLevel {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 60px;
+}
+
+.slotDots {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.slotDot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-magic-border);
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.slotDotFilled {
+  composes: slotDot;
+  background: var(--color-magic-border);
+}
+
+.slotCount {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  min-width: 40px;
+}
+
+.slotBtn {
+  font-family: var(--font-label);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.slotSpendBtn {
+  composes: slotBtn;
+  background: var(--color-error-bg-hover);
+  border: 1px solid var(--color-error-border-strong);
+  color: var(--color-error-vivid);
+}
+
+.slotSpendBtn:disabled {
+  background: var(--surface-row-alt);
+  border-color: var(--border-theme-dark);
+  color: var(--text-faint);
+  cursor: default;
+}
+
+.slotRestoreBtn {
+  composes: slotBtn;
+  background: var(--color-success-bg-subtle);
+  border: 1px solid var(--color-success-border-subtle);
+  color: var(--color-success-vivid);
+}
+
+.slotRestoreBtn:disabled {
+  background: var(--surface-row-alt);
+  border-color: var(--border-theme-dark);
+  color: var(--text-faint);
+  cursor: default;
+}
+
+/* Circle filter */
+.filterBar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.filterBtn:hover {
+  background: var(--color-primary-subtle);
+}
+
+.filterBtnActive {
+  composes: filterBtn;
+  background: var(--color-primary);
+  color: var(--text-white);
+}
+
+/* Spell list section */
+.spellSection {
+  background: var(--surface-inset);
+  border: none;
+  border-left: 2px solid var(--accent, var(--color-magic));
+  border-radius: var(--radius-xs);
+  padding: 12px 14px;
+}
+
+.spellSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.spellSectionTitle {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: var(--label-spacing);
+}
+
+.spellSectionSubtitle {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.spellBadge {
+  border-radius: var(--radius-pill);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+}
+
+.spellGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.spellPill {
+  border-radius: var(--radius-sm);
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform 0.1s;
+}
+
+.spellPill:hover {
+  transform: translateY(-1px);
+}
+
+/* Expanded spell card */
+.spellExpanded {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.spellExpandedHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.spellExpandedName {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.spellExpandedMeta {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.collapseBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-body);
+  cursor: pointer;
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  font-weight: 600;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.collapseBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-white);
+}
+
+.spellDetails {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  font-size: 0.78rem;
+  background: var(--surface-row-alt);
+  border: 1px solid var(--border-faint);
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+}
+
+.spellDetailLabel {
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.spellDetailValue {
+  color: var(--text-secondary);
+}
+
+.spellDescription {
+  color: var(--text-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.spellNotFound {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── Spell Tags (Ritual / Concentração) ── */
+.spellTags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tagRitual {
+  background: var(--color-info-bg);
+  border: 1px solid var(--color-info-border);
+  color: var(--color-info);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tagConcentration {
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  color: var(--color-warning);
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tagRitualSmall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-info-bg);
+  color: var(--color-info);
+  font-size: 0.55rem;
+  font-weight: 800;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.tagConcentrationSmall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-warning-bg-hover);
+  color: var(--color-warning);
+  font-size: 0.55rem;
+  font-weight: 800;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.emptySpells {
+  color: var(--text-faint);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filterBtn,
+  .filterBtnActive,
+  .slotDot,
+  .slotDotFilled,
+  .slotBtn,
+  .spellPill,
+  .collapseBtn {
+    transition: none;
+  }
+  .spellPill:hover {
+    transform: none;
+  }
+}
+
+/* Search row */
+.searchRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 7px 12px;
+  background: var(--surface-input);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+}
+.searchInput:focus { border-color: var(--color-magic); }
+.searchInput::placeholder { color: var(--text-faint); }
+
+.addSpellBtn {
+  padding: 6px 12px;
+  background: var(--color-magic-bg);
+  border: 1px solid var(--color-magic-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-magic);
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition-fast);
+}
+.addSpellBtn:hover { background: var(--color-indigo-bg-hover); }
+
+/* Add spell panel */
+.addSpellPanel {
+  background: var(--surface-inset);
+  border: 1px solid var(--color-magic-border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.addSpellResults {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.addSpellResult {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.addSpellResult:hover { background: var(--color-magic-bg); }
+
+.addSpellName {
+  font-size: 0.85rem;
+  color: var(--text-bright);
+  font-weight: 500;
+}
+
+.addSpellMeta {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  color: var(--text-dim);
+}
+
+/* Unprepare button */
+.unprepareBtn {
+  padding: 2px 8px;
+  background: var(--color-error-bg-hover);
+  border: 1px solid var(--color-error-border-strong);
+  border-radius: var(--radius-xs);
+  color: var(--color-error-vivid);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.unprepareBtn:hover { background: var(--color-error-btn-hover); }
+
+/* ── Concentration banner ── */
+.concentrationBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  background: var(--color-magic-bg-deep);
+  border: 1px solid var(--color-magic-border-deep);
+  border-radius: 6px;
+}
+
+.concentrationIcon {
+  color: var(--color-magic-deep);
+  font-size: 0.9rem;
+  animation: concentrationPulse 2s ease-in-out infinite;
+}
+
+@keyframes concentrationPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.concentrationText {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.concentrationText strong {
+  color: var(--color-magic-vivid);
+}
+
+.concentrationEndBtn {
+  padding: 3px 10px;
+  background: var(--color-magic-bg-deep);
+  border: 1px solid var(--color-magic-border-deep);
+  border-radius: var(--radius-xs);
+  color: var(--color-magic-vivid);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.concentrationEndBtn:hover { background: var(--color-magic-bg-deep); }
+
+/* ── Concentrate button on spells ── */
+.concentratingBtn {
+  padding: 2px 8px;
+  background: var(--color-magic-bg-subtle);
+  border: 1px solid var(--color-magic-border-deep);
+  border-radius: var(--radius-xs);
+  color: var(--color-magic-deep);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.concentratingBtn:hover { background: var(--color-magic-bg-deep); }
+
+.concentratingActiveBtn {
+  padding: 2px 8px;
+  background: var(--color-magic-bg-deep);
+  border: 1px solid var(--color-magic-border-deep);
+  border-radius: var(--radius-xs);
+  color: var(--color-magic-vivid);
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.concentratingActiveBtn:hover { background: var(--color-magic-bg-subtle); }

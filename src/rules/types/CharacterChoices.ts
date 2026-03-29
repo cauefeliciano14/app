@@ -23,6 +23,7 @@ export interface ValidationInventoryItem {
 export interface CharacterChoices {
   level?: number;
   classId: string | null;
+  classLevels?: Array<{ classId: string; className: string; level: number }>;
   backgroundId: string | null;
   speciesId: string | null;
   speciesLineage?: string;

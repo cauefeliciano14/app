@@ -142,7 +142,14 @@
       {
         "name": "Subclasse de Bárbaro",
         "level": 3,
-        "description": "<p>Você adquire uma <strong>subclasse de Bárbaro</strong> à sua escolha. As subclasses <em>Trilha da Árvore do Mundo, Trilha do Berserker, Trilha do Coração Selvagem</em> e <em>Trilha do Fanático</em> estão detalhadas após a descrição desta classe. Uma subclasse é uma especialização que lhe concede características em determinados níveis de Bárbaro. Durante toda sua jornada, você adquire cada característica da sua subclasse que corresponda ao seu nível de Bárbaro ou inferior.</p>"
+        "description": "<p>Você adquire uma <strong>subclasse de Bárbaro</strong> à sua escolha. As subclasses <em>Trilha da Árvore do Mundo, Trilha do Berserker, Trilha do Coração Selvagem</em> e <em>Trilha do Fanático</em> estão detalhadas após a descrição desta classe. Uma subclasse é uma especialização que lhe concede características em determinados níveis de Bárbaro. Durante toda sua jornada, você adquire cada característica da sua subclasse que corresponda ao seu nível de Bárbaro ou inferior.</p>",
+        "options": [
+          {
+            "id": "barbaro-subclasse",
+            "name": "Escolha uma Subclasse de Bárbaro",
+            "choices": ["Trilha da Árvore do Mundo", "Trilha do Berserker", "Trilha do Coração Selvagem", "Trilha do Fanático"]
+          }
+        ]
       },
       {
         "name": "Aumento no Valor de Atributo",
@@ -333,6 +340,13 @@
       {
         "name": "Subclasse de Bardo",
         "level": 3,
+        "options": [
+          {
+            "id": "bardo-subclasse",
+            "name": "Escolha uma Subclasse de Bardo",
+            "choices": ["Colégio da Bravura", "Colégio da Dança", "Colégio do Conhecimento", "Colégio do Glamour"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Bardo à sua escolha. As subclasses Colégio da Bravura, Colégio da Dança, Colégio do Conhecimento e Colégio do Glamour são detalhadas após a descrição desta classe. Uma subclasse é uma especialização que lhe concede características em determinados níveis de Bardo. Durante toda sua jornada, você adquire cada característica de sua subclasse que corresponda ao seu nível de Bardo ou inferior.</p><p>O Repertório do Bardo</p><p>Seu Bardo bate um tambor enquanto entoa os feitos de heróis antigos? Dedilha um alaúde enquanto canta canções românticas? Realiza árias de poder comovente? Recita monólogos dramáticos de tragédias clássicas? Usa o ritmo de uma dança folclórica para coordenar o movimento dos aliados em batalha? Compõe poemas curtos e ousados?</p><p>Ao interpretar um Bardo, considere o estilo de apresentação artística que você prefere, os humores que pode evocar e os temas que inspiram suas próprias criações. Seus poemas são inspirados por momentos de beleza natural ou são reflexões sombrias sobre o luto? Você prefere hinos elevados ou canções animadas de taberna? É atraído por lamentos pelos que pereceram ou por celebrações de alegria? Dança baladas alegres ou realiza coreografias interpretativas elaboradas? Foca em um estilo de apresentação ou busca dominar todos?</p>"
       },
       {
@@ -450,6 +464,13 @@
       {
         "name": "Subclasse de Bruxo",
         "level": 3,
+        "options": [
+          {
+            "id": "bruxo-subclasse",
+            "name": "Escolha uma Subclasse de Bruxo",
+            "choices": ["Patrono Arquifada", "Patrono Celestial", "Patrono Grande Antigo", "Patrono Ínfero"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Bruxo à sua escolha. As subclasses Patrono Arquifada, Patrono Celestial, Patrono Grande Antigo e Patrono Ínfero estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Bruxo. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Bruxo ou menor.</p>"
       },
       {
@@ -552,6 +573,13 @@
       {
         "name": "Subclasse de Clérigo",
         "level": 3,
+        "options": [
+          {
+            "id": "clerigo-subclasse",
+            "name": "Escolha uma Subclasse de Clérigo",
+            "choices": ["Domínio da Guerra", "Domínio da Luz", "Domínio da Trapaça", "Domínio da Vida"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Clérigo à sua escolha. Uma subclasse é uma especialização que lhe concede características em determinados níveis de Clérigo. As subclasses Domínio da Guerra, Domínio da Luz, Domínio da Trapaça e Domínio da Vida estão detalhadas após a descrição desta classe. Para o resto de sua jornada, você recebe cada uma das características de sua subclasse que são de seu nível de Clérigo ou menor.</p>"
       },
       {
@@ -681,6 +709,13 @@
       {
         "name": "Subclasse de Druida",
         "level": 3,
+        "options": [
+          {
+            "id": "druida-subclasse",
+            "name": "Escolha uma Subclasse de Druida",
+            "choices": ["Círculo da Lua", "Círculo da Terra", "Círculo das Estrelas", "Círculo do Mar"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Druida à sua escolha. As subclasses Círculo da Lua, Círculo da Terra, Círculo das Estrelas e Círculo do Mar são detalhadas a seguir neste capítulo. Uma subclasse é uma especialidade que lhe concede características em determinados níveis de Druida. Durante toda sua jornada, você recebe cada uma das características de sua subclasse que são de seu nível de Druida ou inferior.</p>"
       },
       {
@@ -781,6 +816,13 @@
       {
         "name": "Subclasse de Feiticeiro",
         "level": 3,
+        "options": [
+          {
+            "id": "feiticeiro-subclasse",
+            "name": "Escolha uma Subclasse de Feiticeiro",
+            "choices": ["Feitiçaria Aberrante", "Feitiçaria Dracônica", "Feitiçaria Mecânica", "Feitiçaria Selvagem"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Feiticeiro à sua escolha.As subclasses Feitiçaria Aberrante, Feitiçaria Dracônica, Feitiçaria Mecânica, Feitiçaria Selvagem estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Feiticeiro. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Feiticeiro ou menor.</p>"
       },
       {
@@ -976,7 +1018,31 @@
       {
         "name": "Estilo de Luta",
         "level": 2,
-        "description": "<p>Você adquire um talento Estilo de Luta à sua escolha. Em vez de escolher um desses talentos, você pode escolher a opção abaixo.</p><p><strong>Combatente Druídico.</strong> Você aprende dois truques de Druida à sua escolha. Fagulha Estelar e Orientação são recomendados. Os truques escolhidos contam como magias de Guardião para você, e Sabedoria é seu atributo de conjuração para eles. Sempre que você atingir um nível de Guardião, pode substituir um desses truques por outro truque de Druida.</p>"
+        "description": "<p>Você adquire um talento Estilo de Luta à sua escolha. Em vez de escolher um desses talentos, você pode escolher a opção abaixo.</p><p><strong>Combatente Druídico.</strong> Você aprende dois truques de Druida à sua escolha. Fagulha Estelar e Orientação são recomendados. Os truques escolhidos contam como magias de Guardião para você, e Sabedoria é seu atributo de conjuração para eles. Sempre que você atingir um nível de Guardião, pode substituir um desses truques por outro truque de Druida.</p>",
+        "options": [
+          {
+            "id": "guardiao-estilo-luta",
+            "name": "Escolha um Estilo de Luta",
+            "choices": [
+              "Arquearia",
+              "Combate com Armas de Arremesso",
+              "Combate com Duas Armas",
+              "Combate Desarmado",
+              "Defensivo",
+              "Duelismo",
+              "Combatente Druídico"
+            ],
+            "choiceDetails": {
+              "Arquearia": "Você recebe um bônus de <strong>+2 nas jogadas de ataque com armas à Distância</strong>.",
+              "Combate com Armas de Arremesso": "Ao atingir com ataque à distância usando arma com propriedade Arremesso, obtém <strong>+2 na jogada de dano</strong>.",
+              "Combate com Duas Armas": "Ao realizar ataque adicional com arma Leve, pode <strong>adicionar o modificador de atributo ao dano</strong> desse ataque.",
+              "Combate Desarmado": "Ao atingir com Ataque Desarmado, pode causar dano Contundente de <strong>1d6 + modificador de Força</strong> (1d8 se sem arma ou Escudo). No início de cada turno, pode causar 1d4 de dano Contundente a criatura Imobilizada por você.",
+              "Defensivo": "Enquanto usar armadura Leve, Média ou Pesada, recebe <strong>+1 na Classe de Armadura</strong>.",
+              "Duelismo": "Ao segurar arma Corpo a Corpo em uma mão e nenhuma outra arma, recebe <strong>+2 nas jogadas de dano</strong> dessa arma.",
+              "Combatente Druídico": "Você aprende dois truques de Druida à sua escolha. Fagulha Estelar e Orientação são recomendados. Os truques escolhidos contam como magias de Guardião para você, e Sabedoria é seu atributo de conjuração para eles."
+            }
+          }
+        ]
       },
       {
         "name": "Explorador Hábil",
@@ -986,6 +1052,13 @@
       {
         "name": "Subclasse de Guardião",
         "level": 3,
+        "options": [
+          {
+            "id": "guardiao-subclasse",
+            "name": "Escolha uma Subclasse de Guardião",
+            "choices": ["Andarilho Feérico", "Caçador", "Senhor das Feras", "Vigilante das Sombras"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Guardião à sua escolha. As subclasses Andarilho Feérico, Caçador, Senhor das Feras e Vigilante das Sombras estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Guardião. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Guardião ou menor.</p>"
       },
       {
@@ -1284,6 +1357,13 @@
       {
         "name": "Subclasse de Guerreiro",
         "level": 3,
+        "options": [
+          {
+            "id": "guerreiro-subclasse",
+            "name": "Escolha uma Subclasse de Guerreiro",
+            "choices": ["Campeão", "Cavaleiro Místico", "Combatente Psíquico", "Mestre da Batalha"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Guerreiro à sua escolha. As subclasses Campeão, Cavaleiro Místico, Combatente Psíquico e Mestre da Batalha estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Guerreiro. Pelo resto de sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Guerreiro ou menor.</p>"
       },
       {
@@ -1524,6 +1604,13 @@
       {
         "name": "Subclasse de Ladino",
         "level": 3,
+        "options": [
+          {
+            "id": "ladino-subclasse",
+            "name": "Escolha uma Subclasse de Ladino",
+            "choices": ["Adaga Espiritual", "Assassino", "Ladrão", "Trapaceiro Arcano"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Ladino à sua escolha. As subclasses Adaga Espiritual, Assassino, Ladrão e Trapaceiro Arcano estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Ladino. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Ladino ou menor.</p>"
       },
       {
@@ -1646,6 +1733,13 @@
       {
         "name": "Subclasse de Mago",
         "level": 3,
+        "options": [
+          {
+            "id": "mago-subclasse",
+            "name": "Escolha uma Subclasse de Mago",
+            "choices": ["Abjurador", "Adivinhador", "Evocador", "Ilusionista"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Mago à sua escolha. As subclasses Abjurador, Adivinhador, Evocador e Ilusionista estão detalhadas após a descrição desta classe.Uma subclasse é uma especialidade que concede a você características em determinados níveis de Mago. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Mago ou menor.</p>"
       },
       {
@@ -1761,6 +1855,13 @@
       {
         "name": "Subclasse de Monge",
         "level": 3,
+        "options": [
+          {
+            "id": "monge-subclasse",
+            "name": "Escolha uma Subclasse de Monge",
+            "choices": ["Combatente da Mão Espalmada", "Combatente da Misericórdia", "Combatente das Sombras", "Combatente dos Elementos"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Monge à sua escolha. As subclasses Combatente da Mão Espalmada, Combatente da Misericórdia, Combatente das Sombras e Combatente dos Elementos estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que concede a você características em determinados níveis de Monge. Durante toda sua jornada, você adquire cada uma das características de sua subclasse de seu nível de Monge ou menor.</p>"
       },
       {
@@ -1993,7 +2094,29 @@
       {
         "name": "Estilo de Luta",
         "level": 2,
-        "description": "<p>Você adquire um talento Estilo de Luta à sua escolha. Em vez de escolher um desses talentos, você pode escolher a opção abaixo.</p><p><strong>Combatente Abençoado.</strong> Você aprende dois truques de Clérigo à sua escolha. Chama Sagrada e Orientação são recomendados. Os truques escolhidos contam como magias de Paladino para você, e Carisma é o atributo de conjuração para elas. Sempre que você atinge um nível de Paladino, pode substituir um desses truques por outro truque de Clérigo.</p>"
+        "description": "<p>Você adquire um talento Estilo de Luta à sua escolha. Em vez de escolher um desses talentos, você pode escolher a opção abaixo.</p><p><strong>Combatente Abençoado.</strong> Você aprende dois truques de Clérigo à sua escolha. Chama Sagrada e Orientação são recomendados. Os truques escolhidos contam como magias de Paladino para você, e Carisma é o atributo de conjuração para elas. Sempre que você atinge um nível de Paladino, pode substituir um desses truques por outro truque de Clérigo.</p>",
+        "options": [
+          {
+            "id": "paladino-estilo-luta",
+            "name": "Escolha um Estilo de Luta",
+            "choices": [
+              "Combate com Armas Grandes",
+              "Combate Desarmado",
+              "Defensivo",
+              "Duelismo",
+              "Protetivo",
+              "Combatente Abençoado"
+            ],
+            "choiceDetails": {
+              "Combate com Armas Grandes": "Ao jogar dano com arma Corpo a Corpo empunhada com as duas mãos (Duas Mãos ou Versátil), pode tratar qualquer 1 ou 2 em dado de dano como 3.",
+              "Combate Desarmado": "Ao atingir com Ataque Desarmado, pode causar dano Contundente de <strong>1d6 + modificador de Força</strong> (1d8 se sem arma ou Escudo). No início de cada turno, pode causar 1d4 de dano Contundente a criatura Imobilizada por você.",
+              "Defensivo": "Enquanto usar armadura Leve, Média ou Pesada, recebe <strong>+1 na Classe de Armadura</strong>.",
+              "Duelismo": "Ao segurar arma Corpo a Corpo em uma mão e nenhuma outra arma, recebe <strong>+2 nas jogadas de dano</strong> dessa arma.",
+              "Protetivo": "Quando criatura à vista ataca alvo a 1,5m de você, pode usar Reação para impor <strong>Desvantagem no ataque</strong> e em todos contra o alvo até o início do seu próximo turno. Requer Escudo.",
+              "Combatente Abençoado": "Você aprende dois truques de Clérigo à sua escolha. Chama Sagrada e Orientação são recomendados. Os truques escolhidos contam como magias de Paladino para você, e Carisma é o atributo de conjuração para elas."
+            }
+          }
+        ]
       },
       {
         "name": "Canalizar Divindade",
@@ -2003,6 +2126,13 @@
       {
         "name": "Subclasse de Paladino",
         "level": 3,
+        "options": [
+          {
+            "id": "paladino-subclasse",
+            "name": "Escolha uma Subclasse de Paladino",
+            "choices": ["Juramento da Devoção", "Juramento da Glória", "Juramento de Vingança", "Juramento dos Anciões"]
+          }
+        ],
         "description": "<p>Você adquire uma subclasse de Paladino à sua escolha.As subclasses Juramento da Devoção, Juramento da Glória, Juramento de Vingança e Juramento dos Anciões estão detalhadas após a descrição desta classe. Uma subclasse é uma especialidade que lhe concede características em determinados níveis de Paladino. Durante toda sua jornada, você recebe cada uma das características de sua subclasse de seu nível de Paladino ou menor.</p><p>Quebrando Seu Juramento</p><p>Um Paladino busca manter os mais altos padrões de conduta, mas até os mais dedicados podem falhar. Às vezes, um Paladino transgride seu juramento.</p><p>Ao quebrar um voto, um Paladino geralmente busca absolvição, passando a noite em vigília como sinal de penitência ou realizando um jejum. Após um rito de perdão, o Paladino retoma seu caminho.</p><p>Se o seu Paladino violar o juramento sem arrependimento, converse com seu Mestre. Nesse caso, o seu Paladino pode precisar escolher uma subclasse mais adequada ou até abandonar a classe em favor de outra.</p>"
       },
       {

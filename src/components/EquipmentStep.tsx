@@ -13,6 +13,7 @@ import { ItemCatalog } from './equipment/ItemCatalog';
 import { CurrencySection } from './equipment/CurrencySection';
 import { PreparedSpells } from './equipment/PreparedSpells';
 import { SpellCatalog } from './equipment/SpellCatalog';
+import { SkeletonLoader } from './ui/SkeletonLoader';
 
 interface EquipmentStepProps {
   character: any;
@@ -355,7 +356,7 @@ export const EquipmentStep: React.FC<EquipmentStepProps> = ({ character, selecte
             onToggle={() => toggle('spellCatalog')}
           >
             {spellsLoading ? (
-              <div style={{ color: '#64748b', fontSize: '0.85rem', padding: '16px 0', textAlign: 'center' }}>Carregando magias…</div>
+              <SkeletonLoader rows={5} variant="catalog" />
             ) : (
               <SpellCatalog
                 classId={classId}

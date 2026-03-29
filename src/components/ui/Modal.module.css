@@ -32,13 +32,13 @@
   max-height: 85vh;
   overflow-y: auto;
 
-  animation: panelEnter var(--transition-base) cubic-bezier(0.16, 1, 0.3, 1);
+  animation: panelEnter var(--transition-base) var(--ease-out);
 }
 
 .title {
   margin: 0 0 var(--space-md);
   color: var(--text-primary);
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -58,4 +58,9 @@
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop { animation: none; }
+  .panel { animation: none; }
 }

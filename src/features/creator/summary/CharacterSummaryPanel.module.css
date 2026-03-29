@@ -224,18 +224,40 @@
 }
 
 .identityMetaValuePrimary {
-  color: #fdba74;
+  color: var(--color-accent-warm-light);
   font-weight: 700;
 }
 
 .identityMetaValue {
-  color: var(--text-secondary, #cbd5e1);
+  color: var(--text-secondary);
   font-weight: 600;
 }
 
 .identityMetaValueEmpty {
-  color: #64748b;
+  color: var(--text-slate-dim);
   font-style: italic;
+}
+
+.alignmentSelect {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  cursor: pointer;
+  transition: border-color 0.18s;
+  max-width: 140px;
+}
+
+.alignmentSelect:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
+
+.alignmentSelect option {
+  background: var(--surface-card);
+  color: var(--text-body);
 }
 
 .quickFactsGrid {
@@ -247,6 +269,12 @@
 .summaryPillCard {
   padding: 8px 10px;
   transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.pillLabelRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .pillLabel {
@@ -295,20 +323,90 @@
   margin-top: 10px;
 }
 
+/* ── Ficha Rápida (collapsible) ───────────────────────── */
+
+.quickSheetSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  padding: 0;
+}
+
+.quickSheetSummary::-webkit-details-marker {
+  display: none;
+}
+
+.quickSheetChevron {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  transition: transform var(--transition-fast) ease;
+}
+
+details[open] > .quickSheetSummary .quickSheetChevron {
+  transform: rotate(180deg);
+}
+
+.quickSheetBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 10px;
+}
+
+.quickSheetRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.quickSheetRow:last-child {
+  border-bottom: none;
+}
+
+.quickSheetLabel {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.quickSheetValue {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.quickSheetValue strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.quickSheetDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 4px 0;
+}
+
 .pendingCard {
   background: rgba(48, 18, 24, 0.7);
   border-color: rgba(239, 68, 68, 0.35);
 }
 
 .pendingTitle {
-  color: #f87171;
+  color: var(--color-error-vivid);
   font-size: 0.85rem;
   font-weight: 700;
 }
 
 .pendingDescription {
   margin: 2px 0 0;
-  color: #fecaca;
+  color: var(--color-error-pale);
   font-size: 0.75rem;
   line-height: 1.45;
 }
@@ -345,7 +443,7 @@
 }
 
 .pendingLabel {
-  color: #fee2e2;
+  color: var(--color-error-pale);
   font-size: 0.78rem;
 }
 
@@ -359,7 +457,7 @@
   border-radius: 999px;
   background: rgba(249, 115, 22, 0.18);
   border: 1px solid rgba(249, 115, 22, 0.3);
-  color: #fdba74;
+  color: var(--color-accent-warm-light);
   font-size: 0.72rem;
   font-weight: 700;
   flex-shrink: 0;

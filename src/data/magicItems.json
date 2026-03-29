@@ -117,7 +117,8 @@
     "rarity": "incomum",
     "attunement": "Requer sintonização",
     "description": "Você ganha +1 de bônus à CA e salvaguardas enquanto usa este anel.",
-    "baseItem": null
+    "baseItem": null,
+    "effects": { "acBonus": 1, "savingThrowBonus": 1 }
   },
   {
     "name": "Anel de Resistência",
@@ -189,7 +190,8 @@
     "rarity": "raro",
     "attunement": "Requer sintonização",
     "description": "Enquanto segura este bastão, você tem +1 de bônus à CA e salvaguardas. O bastão tem 10 cargas para propriedades de defesa como Escudo e Disco Flutuante.",
-    "baseItem": null
+    "baseItem": null,
+    "effects": { "acBonus": 1, "savingThrowBonus": 1 }
   },
   {
     "name": "Pergaminho de Magia",
@@ -213,7 +215,8 @@
     "rarity": "raro",
     "attunement": "Requer sintonização por um conjurador arcano",
     "description": "Este cajado pode ser usado como foco arcano. Ele concede +2 de bônus às jogadas de ataque de magia, à CD de salvaguarda de magia e à CA. O cajado tem 20 cargas para diversas magias.",
-    "baseItem": null
+    "baseItem": null,
+    "effects": { "acBonus": 2, "spellAttackBonus": 2, "spellDCBonus": 2 }
   },
   {
     "name": "Cajado da Floresta",
@@ -325,7 +328,8 @@
     "rarity": "incomum",
     "attunement": "Requer sintonização",
     "description": "Você ganha +1 de bônus à CA e salvaguardas enquanto usa este manto.",
-    "baseItem": null
+    "baseItem": null,
+    "effects": { "acBonus": 1, "savingThrowBonus": 1 }
   },
   {
     "name": "Amuleto de Saúde",
@@ -397,7 +401,8 @@
     "rarity": "raro",
     "attunement": "Requer sintonização",
     "description": "Enquanto usa este bracelete, você tem +2 de bônus à CA se não estiver usando armadura nem escudo.",
-    "baseItem": null
+    "baseItem": null,
+    "effects": { "acBonusUnarmored": 2 }
   },
   {
     "name": "Pedra Ioun de Absorção",
