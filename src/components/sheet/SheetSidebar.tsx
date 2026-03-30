@@ -4,12 +4,14 @@ import styles from './SheetSidebar.module.css';
 interface SheetSidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  onBack?: () => void;
+  canGoBack?: boolean;
   title: string;
   subtitle?: string;
   children: React.ReactNode;
 }
 
-export function SheetSidebar({ isOpen, onClose, title, subtitle, children }: SheetSidebarProps) {
+export function SheetSidebar({ isOpen, onClose, onBack, canGoBack, title, subtitle, children }: SheetSidebarProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) onClose();
@@ -32,6 +34,15 @@ export function SheetSidebar({ isOpen, onClose, title, subtitle, children }: She
         aria-label={title}
       >
         <header className={styles.header}>
+          {canGoBack && onBack && (
+            <button
+              onClick={onBack}
+              className={styles.backBtn}
+              aria-label="Voltar"
+            >
+              ←
+            </button>
+          )}
           <div className={styles.headerInfo}>
             <h3 className={styles.headerTitle}>{title}</h3>
             {subtitle && <span className={styles.headerSubtitle}>{subtitle}</span>}

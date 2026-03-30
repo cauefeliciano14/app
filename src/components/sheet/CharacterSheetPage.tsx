@@ -4,6 +4,7 @@ import type { CharacterPlayState } from '../../types/playState';
 import type { DiceRollResult, AdvantageMode } from '../../utils/diceRoller';
 import type { CharacterAppearance, PersonalityTraits, CharacterIdentityUpdate } from '../../types/character';
 import { rollD20Check, rollDamage } from '../../utils/diceRoller';
+import { useDice } from '../../context/DiceContext';
 import { signedMod } from '../../utils/format';
 import { ATTR_ABBR } from '../../utils/attributeConstants';
 import { SheetHeader } from './SheetHeader';
@@ -18,6 +19,9 @@ import { DeathSavesCard } from './DeathSavesCard';
 import { SheetTabs } from './SheetTabs';
 import { SheetSidebar } from './SheetSidebar';
 import { DiceResultPanel, AbilityDetailPanel, AttackDetailPanel } from './DiceResultPanel';
+import { ExhaustionTracker } from './ExhaustionTracker';
+import { CollapsibleSection } from './CollapsibleSection';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { RestModal } from './RestModal';
 import { LevelUpModal } from './LevelUpModal';
 import { AddClassModal } from './AddClassModal';
@@ -142,7 +146,25 @@ export function CharacterSheetPage({
   const prevHpRef = useRef(playState.currentHp);
 
   /* ── Sidebar state ── */
-  const [sidebar, setSidebar] = useState<SidebarState>(null);
+  const [sidebarStack, setSidebarStack] = useState<Exclude<SidebarState, null>[]>([]);
+  const sidebar: SidebarState = sidebarStack.length > 0 ? sidebarStack[sidebarStack.length - 1] : null;
+  const setSidebar = useCallback((state: SidebarState) => {
+    if (state === null) setSidebarStack([]);
+    else setSidebarStack([state]);
+  }, []);
+  const pushSidebar = useCallback((state: Exclude<SidebarState, null>) => {
+    setSidebarStack(prev => [...prev, state]);
+  }, []);
+  const popSidebar = useCallback(() => {
+    setSidebarStack(prev => prev.length > 1 ? prev.slice(0, -1) : []);
+  }, []);
+
+  /* ── 3D Dice context ── */
+  const { roll: roll3D } = useDice();
+
+  /* ── Responsive layout ── */
+  const isMobile = useMediaQuery('(max-width: 1023px)');
+  const isDesktopWide = useMediaQuery('(min-width: 1280px)');
 
   /* ── Rest modal state ── */
   const [restModal, setRestModal] = useState<'short' | 'long' | null>(null);
@@ -255,6 +277,7 @@ export function CharacterSheetPage({
       customCounters: (prev.customCounters ?? []).map(c =>
         c.resetOn === 'long' || c.resetOn === 'short' ? { ...c, current: c.max } : c
       ),
+      exhaustionLevel: Math.max(0, (prev.exhaustionLevel ?? 0) - 1),
     }));
     setRestModal(null);
   };
@@ -330,13 +353,27 @@ export function CharacterSheetPage({
     const result = rollD20Check(skill.modifier, `${skill.label} (${abbr})`, 'check', advantageMode);
     setSidebar({ type: 'skill', skill, result });
     addToHistory(result);
-  }, [advantageMode, addToHistory]);
+    roll3D({
+      dice: [{ type: 'd20', count: advantageMode === 'normal' ? 1 : 2 }],
+      label: `${skill.label} (${abbr})`,
+      results: result.rolls,
+      total: result.total,
+      formula: result.formula,
+    });
+  }, [advantageMode, addToHistory, roll3D]);
 
   const handleSaveClick = useCallback((save: DerivedSavingThrow) => {
     const result = rollD20Check(save.modifier, `Teste de Resistência (${save.label})`, 'save', advantageMode);
     setSidebar({ type: 'save', save, result });
     addToHistory(result);
-  }, [advantageMode, addToHistory]);
+    roll3D({
+      dice: [{ type: 'd20', count: advantageMode === 'normal' ? 1 : 2 }],
+      label: `Teste de Resistência (${save.label})`,
+      results: result.rolls,
+      total: result.total,
+      formula: result.formula,
+    });
+  }, [advantageMode, addToHistory, roll3D]);
 
   const handleAbilityClick = useCallback((key: string, label: string, score: number, modifier: number) => {
     setSidebar({ type: 'ability', key, label, score, modifier });
@@ -349,7 +386,19 @@ export function CharacterSheetPage({
     setSidebar({ type: 'attack', attack, hitResult, damageResult });
     addToHistory(hitResult);
     addToHistory(damageResult);
-  }, [advantageMode, addToHistory]);
+    // Parsear dados de dano (ex: "2d6" → {type:'d6',count:2})
+    const diceMatch = attack.damageDice.match(/^(\d+)d(\d+)$/);
+    const damageDice = diceMatch
+      ? [{ type: `d${diceMatch[2]}` as any, count: parseInt(diceMatch[1]) }]
+      : [{ type: 'd6' as const, count: 1 }];
+    roll3D({
+      dice: [{ type: 'd20', count: advantageMode === 'normal' ? 1 : 2 }, ...damageDice],
+      label: attack.weaponName,
+      results: [...hitResult.rolls, ...damageResult.rolls],
+      total: hitResult.total,
+      formula: `${hitResult.formula} | ${damageResult.formula}`,
+    });
+  }, [advantageMode, addToHistory, roll3D]);
 
   /* ── Sidebar reroll helpers ── */
   const rerollSkill = () => {
@@ -387,11 +436,11 @@ export function CharacterSheetPage({
     }
   };
 
-  /* Ability detail: roll from within ability sidebar */
+  /* Ability detail: roll from within ability sidebar (drill-down with push) */
   const handleAbilitySkillRoll = (label: string, modifier: number) => {
     const result = rollD20Check(modifier, label, 'check', advantageMode);
-    const fakeSkill: DerivedSkill = { label, attribute: sidebar?.type === 'ability' ? sidebar.key : '', modifier, proficient: false };
-    setSidebar({ type: 'skill', skill: fakeSkill, result });
+    const fakeSkill: DerivedSkill = { label, attribute: sidebar?.type === 'ability' ? sidebar.key : '', modifier, proficient: false, expertise: false, halfProficient: false, baseAbilityMod: modifier, proficiencyValue: 0 };
+    pushSidebar({ type: 'skill', skill: fakeSkill, result });
     addToHistory(result);
   };
 
@@ -399,7 +448,7 @@ export function CharacterSheetPage({
     if (sidebar?.type === 'ability') {
       const result = rollD20Check(modifier, `Teste de Resistência (${sidebar.label})`, 'save', advantageMode);
       const fakeSave: DerivedSavingThrow = { label: sidebar.label, attribute: sidebar.key, modifier, proficient: false };
-      setSidebar({ type: 'save', save: fakeSave, result });
+      pushSidebar({ type: 'save', save: fakeSave, result });
       addToHistory(result);
     }
   };
@@ -501,14 +550,63 @@ export function CharacterSheetPage({
               : undefined
     : undefined;
 
+  /* ── Sticky header sentinel ── */
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const [isStuck, setIsStuck] = useState(false);
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsStuck(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className={styles.page}>
+      {/* Sentinel para detectar scroll */}
+      <div ref={sentinelRef} style={{ height: 1 }} />
+
+      {/* ===== STICKY CONDENSED HEADER ===== */}
+      {isStuck && (
+        <div className={styles.stickyHeader}>
+          <div className={styles.stickyInner}>
+            <div className={styles.stickyPortrait}>
+              {portrait ? (
+                <img src={`/imgs/portrait_caracter/${portrait}`} alt="" className={styles.stickyPortraitImg} />
+              ) : '🧙'}
+            </div>
+            <div className={styles.stickyInfo}>
+              <span className={styles.stickyName}>{characterName || 'Sem Nome'}</span>
+              <span className={styles.stickyMeta}>{className} · Nv {characterLevel}</span>
+            </div>
+            <div className={styles.stickyStats}>
+              <span className={styles.stickyStat}>
+                <span className={styles.stickyStatLabel}>HP</span>
+                <span style={{ color: playState.currentHp < effectiveMaxHP / 2 ? '#ef4444' : '#22c55e' }}>
+                  {playState.currentHp}/{effectiveMaxHP}
+                </span>
+              </span>
+              <span className={styles.stickyStat}>
+                <span className={styles.stickyStatLabel}>CA</span>
+                {derivedSheet.armorClass}
+              </span>
+              <span className={styles.stickyStat}>
+                <span className={styles.stickyStatLabel}>INIT</span>
+                {signedMod(derivedSheet.initiative)}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ===== TOP BAR (DASHBOARD SUPERIOR) ===== */}
       <div className={styles.topBar}>
 
         {/* ROW 1: Portrait e Rests */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '16px' }}>
+        <div className={styles.topBarRow1}>
           <SheetHeader
             name={characterName}
             portrait={portrait}
@@ -520,7 +618,7 @@ export function CharacterSheetPage({
             subclassName={subclassName}
             classLevels={classLevels}
           />
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <div className={styles.topBarActions}>
             {/* Advantage Mode Toggle */}
             <div className={styles.advantageToggle}>
               {(['normal', 'advantage', 'disadvantage'] as const).map(mode => (
@@ -647,7 +745,7 @@ export function CharacterSheetPage({
           </div>
 
           {/* HP Panel */}
-          <div style={{ flex: 1 }}>
+          <div className={styles.hpPanel}>
             <div
               className={`${styles.redBox} ${hpPulse === 'damage' ? styles.hpPulseDamage : hpPulse === 'heal' ? styles.hpPulseHeal : ''}`}
               style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column' }}
@@ -780,6 +878,10 @@ export function CharacterSheetPage({
                 onRemove={handleRemoveCondition}
                 onStopConcentrating={() => onUpdatePlayState(prev => ({ ...prev, concentratingOn: null }))}
               />
+              <ExhaustionTracker
+                level={playState.exhaustionLevel ?? 0}
+                onChange={(level) => onUpdatePlayState(prev => ({ ...prev, exhaustionLevel: level }))}
+              />
             </div>
           </div>
 
@@ -787,115 +889,148 @@ export function CharacterSheetPage({
       </div>
 
       {/* ===== BOTTOM PANELS (SUB-PAINÉIS) ===== */}
-      <div className={styles.mainGrid} style={{ marginTop: '24px' }}>
+      <div
+        className={`${styles.mainGrid} ${isDesktopWide && sidebar !== null ? styles.mainGridWithSidebar : ''}`}
+        style={{ marginTop: 24 }}
+      >
 
-        {/* Painel Esquerdo */}
+        {/* Coluna 1: Testes de Resistência, Sentidos, Proficiências */}
         <div className={styles.colLeft}>
-          <div className={styles.redBox}>
-            <div className={styles.sectionHeader}>TESTES DE RESISTÊNCIA ⚙</div>
-            <SavingThrowsCard
-              derivedSavingThrows={derivedSheet.derivedSavingThrows}
-              onSaveClick={handleSaveClick}
-            />
-          </div>
+          <CollapsibleSection title="Testes de Resistência" defaultOpen forceOpen={!isMobile}>
+            <div className={styles.redBox}>
+              <div className={styles.sectionHeader}>TESTES DE RESISTÊNCIA ⚙</div>
+              <SavingThrowsCard
+                derivedSavingThrows={derivedSheet.derivedSavingThrows}
+                onSaveClick={handleSaveClick}
+              />
+            </div>
+          </CollapsibleSection>
 
-          <div className={styles.redBox}>
-            <div className={styles.sectionHeader}>SENTIDOS ⚙</div>
-            <SensesCard
-              passivePerception={derivedSheet.passivePerception}
-              passiveInvestigation={derivedSheet.passiveInvestigation}
-              passiveInsight={derivedSheet.passiveInsight}
-              specialSenses={derivedSheet.specialSenses}
-            />
-          </div>
+          <CollapsibleSection title="Sentidos" forceOpen={!isMobile}>
+            <div className={styles.redBox}>
+              <div className={styles.sectionHeader}>SENTIDOS ⚙</div>
+              <SensesCard
+                passivePerception={derivedSheet.passivePerception}
+                passiveInvestigation={derivedSheet.passiveInvestigation}
+                passiveInsight={derivedSheet.passiveInsight}
+                specialSenses={derivedSheet.specialSenses}
+              />
+            </div>
+          </CollapsibleSection>
 
-          <div className={styles.redBox}>
-            <div className={styles.sectionHeader}>PROFICIÊNCIAS E TREINAMENTO ⚙</div>
-            <ProficienciesCard
-              skillProficiencies={derivedSheet.skillProficiencies}
-              armorProficiencies={derivedSheet.armorProficiencies}
-              weaponProficiencies={derivedSheet.weaponProficiencies}
-              toolProficiencies={derivedSheet.toolProficiencies}
-              languages={derivedSheet.languages}
-            />
+          <CollapsibleSection title="Proficiências" forceOpen={!isMobile}>
+            <div className={styles.redBox}>
+              <div className={styles.sectionHeader}>PROFICIÊNCIAS E TREINAMENTO ⚙</div>
+              <ProficienciesCard
+                skillProficiencies={derivedSheet.skillProficiencies}
+                armorProficiencies={derivedSheet.armorProficiencies}
+                weaponProficiencies={derivedSheet.weaponProficiencies}
+                toolProficiencies={derivedSheet.toolProficiencies}
+                languages={derivedSheet.languages}
+              />
+            </div>
+          </CollapsibleSection>
+        </div>
+
+        {/* Coluna 2: Perícias + Abas de Gerenciamento */}
+        <div className={styles.colRight}>
+          <div className={styles.bottomPanel}>
+            {/* Skills */}
+            <div className={`${styles.redBox} ${styles.skillsPanel}`}>
+              <div className={styles.sectionHeader}>PERÍCIAS ⚙</div>
+              <SkillsCard
+                skills={derivedSheet.skills}
+                onSkillClick={handleSkillClick}
+                expertiseSkills={playState.expertiseSkills ?? []}
+                canGrantExpertise={derivedSheet.classGrantsExpertise}
+                expertiseCount={derivedSheet.expertiseCount}
+                onToggleExpertise={(label) => {
+                  onUpdatePlayState(prev => {
+                    const list = prev.expertiseSkills ?? [];
+                    const next = list.includes(label)
+                      ? list.filter(s => s !== label)
+                      : list.length < derivedSheet.expertiseCount
+                        ? [...list, label]
+                        : list;
+                    return { ...prev, expertiseSkills: next };
+                  });
+                }}
+              />
+            </div>
+
+            {/* Tabs */}
+            <div className={`${styles.redBox} ${styles.tabsPanel}`}>
+              <SheetTabs
+                derivedSheet={derivedSheet}
+                playState={playState}
+                onUpdatePlayState={onUpdatePlayState}
+                classFeatures={classFeatures}
+                speciesTraits={speciesTraits}
+                inventory={inventory}
+                learnedCantrips={learnedCantrips}
+                preparedSpells={preparedSpells}
+                onUpdatePreparedSpells={onUpdatePreparedSpells}
+                characterLevel={characterLevel}
+                backgroundName={backgroundName}
+                backgroundDescription={backgroundDescription}
+                backgroundSkills={backgroundSkills}
+                backgroundTool={backgroundTool}
+                backgroundEquipment={backgroundEquipment}
+                equippedArmorId={equippedArmorId}
+                hasShieldEquipped={hasShieldEquipped}
+                onEquipArmor={onEquipArmor}
+                onEquipShield={onEquipShield}
+                onAttackClick={handleAttackClick}
+                currency={currency}
+                onUpdateCurrency={onUpdateCurrency}
+                backstory={backstory}
+                appearance={appearance}
+                personalityTraits={personalityTraits}
+                faith={faith}
+                lifestyle={lifestyle}
+                organizations={organizations}
+                alignment={alignment}
+                onUpdateIdentity={onUpdateIdentity}
+                classId={classId}
+              />
+            </div>
           </div>
         </div>
 
-        {/* Painel Direito */}
-        <div className={styles.bottomPanel}>
-
-          {/* Skills */}
-          <div className={`${styles.redBox} ${styles.skillsPanel}`}>
-            <div className={styles.sectionHeader}>PERÍCIAS ⚙</div>
-            <SkillsCard
-              skills={derivedSheet.skills}
-              onSkillClick={handleSkillClick}
-              expertiseSkills={playState.expertiseSkills ?? []}
-              canGrantExpertise={derivedSheet.classGrantsExpertise}
-              expertiseCount={derivedSheet.expertiseCount}
-              onToggleExpertise={(label) => {
-                onUpdatePlayState(prev => {
-                  const list = prev.expertiseSkills ?? [];
-                  const next = list.includes(label)
-                    ? list.filter(s => s !== label)
-                    : list.length < derivedSheet.expertiseCount
-                      ? [...list, label]
-                      : list;
-                  return { ...prev, expertiseSkills: next };
-                });
-              }}
-            />
+        {/* Coluna 3: Sidebar inline (apenas desktop >= 1280px) */}
+        {isDesktopWide && sidebar !== null && (
+          <div className={styles.colSidebar}>
+            <div className={styles.colSidebarHeader}>
+              <div>
+                {sidebarStack.length > 1 && (
+                  <button onClick={popSidebar} className={styles.colSidebarBack} aria-label="Voltar">←</button>
+                )}
+              </div>
+              <div>
+                <div className={styles.colSidebarTitle}>{sidebarTitle}</div>
+                {sidebarSubtitle && <div className={styles.colSidebarSubtitle}>{sidebarSubtitle}</div>}
+              </div>
+              <button onClick={closeSidebar} className={styles.colSidebarClose} aria-label="Fechar">✕</button>
+            </div>
+            {renderSidebarContent()}
           </div>
-
-          {/* Tabs */}
-          <div className={`${styles.redBox} ${styles.tabsPanel}`}>
-            <SheetTabs
-              derivedSheet={derivedSheet}
-              playState={playState}
-              onUpdatePlayState={onUpdatePlayState}
-              classFeatures={classFeatures}
-              speciesTraits={speciesTraits}
-              inventory={inventory}
-              learnedCantrips={learnedCantrips}
-              preparedSpells={preparedSpells}
-              onUpdatePreparedSpells={onUpdatePreparedSpells}
-              characterLevel={characterLevel}
-              backgroundName={backgroundName}
-              backgroundDescription={backgroundDescription}
-              backgroundSkills={backgroundSkills}
-              backgroundTool={backgroundTool}
-              backgroundEquipment={backgroundEquipment}
-              equippedArmorId={equippedArmorId}
-              hasShieldEquipped={hasShieldEquipped}
-              onEquipArmor={onEquipArmor}
-              onEquipShield={onEquipShield}
-              onAttackClick={handleAttackClick}
-              currency={currency}
-              onUpdateCurrency={onUpdateCurrency}
-              backstory={backstory}
-              appearance={appearance}
-              personalityTraits={personalityTraits}
-              faith={faith}
-              lifestyle={lifestyle}
-              organizations={organizations}
-              alignment={alignment}
-              onUpdateIdentity={onUpdateIdentity}
-              classId={classId}
-            />
-          </div>
-        </div>
+        )}
 
       </div>
 
-      {/* ===== SIDEBAR ===== */}
-      <SheetSidebar
-        isOpen={sidebar !== null}
-        onClose={closeSidebar}
-        title={sidebarTitle}
-        subtitle={sidebarSubtitle}
-      >
-        {renderSidebarContent()}
-      </SheetSidebar>
+      {/* ===== SIDEBAR OVERLAY (apenas < 1280px) ===== */}
+      {!isDesktopWide && (
+        <SheetSidebar
+          isOpen={sidebar !== null}
+          onClose={closeSidebar}
+          onBack={popSidebar}
+          canGoBack={sidebarStack.length > 1}
+          title={sidebarTitle}
+          subtitle={sidebarSubtitle}
+        >
+          {renderSidebarContent()}
+        </SheetSidebar>
+      )}
 
       {/* ===== REST MODAL ===== */}
       <RestModal

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import type { DerivedSheet } from '../../../rules/types/DerivedSheet';
 import type { CharacterPlayState } from '../../../types/playState';
 import { signedMod } from '../../../utils/format';
+import { SpellCardTooltip } from '../SpellCardTooltip';
 import spellsAll from '../../../data/spells/spells_all.json';
 import styles from './SpellsTab.module.css';
 
@@ -398,19 +399,21 @@ function SpellList({
           }
 
           return (
-            <span key={s} onClick={() => setExpandedSpell(s)} className={styles.spellPill}
-              style={{ background: `${accent}1a`, border: `1px solid ${accent}33`, color: accent }}>
-              {s}
-              {(() => {
-                const tags = getSpellTags(rawName);
-                return (
-                  <>
-                    {tags.isRitual && <span className={styles.tagRitualSmall} title="Ritual">R</span>}
-                    {tags.isConcentration && <span className={styles.tagConcentrationSmall} title="Concentração">C</span>}
-                  </>
-                );
-              })()}
-            </span>
+            <SpellCardTooltip key={s} spellName={rawName}>
+              <span onClick={() => setExpandedSpell(s)} className={styles.spellPill}
+                style={{ background: `${accent}1a`, border: `1px solid ${accent}33`, color: accent }}>
+                {s}
+                {(() => {
+                  const tags = getSpellTags(rawName);
+                  return (
+                    <>
+                      {tags.isRitual && <span className={styles.tagRitualSmall} title="Ritual">R</span>}
+                      {tags.isConcentration && <span className={styles.tagConcentrationSmall} title="Concentração">C</span>}
+                    </>
+                  );
+                })()}
+              </span>
+            </SpellCardTooltip>
           );
         })}
       </div>

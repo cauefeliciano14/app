@@ -1,0 +1,55 @@
+.section {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--surface-card);
+}
+
+.toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--surface-inset);
+  border: none;
+  cursor: pointer;
+  color: var(--text-bright);
+  transition: background var(--transition-fast);
+}
+
+.toggle:hover {
+  background: var(--surface-card-hover);
+}
+
+.toggleOpen {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.toggleTitle {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--label-spacing);
+  color: var(--text-secondary);
+}
+
+.toggleIcon {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.content {
+  padding: 12px;
+  animation: accordionOpen 0.2s ease-out;
+}
+
+@keyframes accordionOpen {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 2000px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content { animation: none; }
+}

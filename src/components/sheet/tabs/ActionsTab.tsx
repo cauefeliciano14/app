@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { WeaponAttack } from '../../../rules/types/DerivedSheet';
 import type { CharacterPlayState, CustomAction } from '../../../types/playState';
 import { signedMod } from '../../../utils/format';
+import { ActionTypeBadge } from '../../ui/ActionTypeBadge';
 import styles from './ActionsTab.module.css';
 
 type FilterId = 'all' | 'attack' | 'action' | 'bonus' | 'reaction' | 'other' | 'limited';
@@ -124,7 +125,10 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState, onAtta
               style={onAttackClick ? { cursor: 'pointer' } : undefined}
             >
               <div>
-                <div className={styles.weaponName}>{atk.weaponName}</div>
+                <div className={styles.weaponName}>
+                  {atk.weaponName}
+                  {' '}<ActionTypeBadge type={atk.actionType} />
+                </div>
                 {atk.properties.length > 0 && (
                   <div className={styles.weaponProps}>{atk.properties.join(', ')}</div>
                 )}
@@ -152,7 +156,7 @@ export function ActionsTab({ weaponAttacks, playState, onUpdatePlayState, onAtta
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '3px', flexWrap: 'wrap' }}>
                     <span className={styles.customName}>{ca.name}</span>
-                    <span className={styles.customType}>{TYPE_LABELS[ca.type] ?? ca.type}</span>
+                    <ActionTypeBadge type={ca.type} />
                     {ca.resetOn && (
                       <span className={styles.resetBadge}>{RESET_LABELS[ca.resetOn]}</span>
                     )}

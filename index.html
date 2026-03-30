@@ -9,9 +9,23 @@
     <!-- Google Fonts: D&D Beyond style -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Fira+Code:wght@400;500&family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Fira+Code:wght@400;500&family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;600;700&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=Spectral+SC:wght@600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- Anti-FOUC: aplica tema e accent ANTES do React carregar -->
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('helprpg-theme');
+          if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+          else document.documentElement.setAttribute('data-theme', 'dark');
+          var a = localStorage.getItem('helprpg-accent');
+          if (a) document.documentElement.style.setProperty('--color-user-accent', a);
+          var f = localStorage.getItem('helprpg-classic-font');
+          if (f === 'true') document.documentElement.setAttribute('data-font', 'classic');
+        } catch(e) {}
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

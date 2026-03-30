@@ -1,13 +1,35 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { CharacterSheetPage } from './CharacterSheetPage';
+import { DiceProvider } from '../../context/DiceContext';
 import { deriveSheet } from '../../rules/engine';
 import type { CharacterChoices } from '../../rules/types/CharacterChoices';
 import { DEFAULT_PLAY_STATE } from '../../types/playState';
 
 // @ts-expect-error jsdom test env flag for React act
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+
+beforeAll(() => {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
+  vi.stubGlobal('IntersectionObserver', class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  });
+});
 
 function makeChoices(overrides: Partial<CharacterChoices>): CharacterChoices {
   return {
@@ -42,30 +64,32 @@ function renderSheet(choices: CharacterChoices, spellState?: { learnedCantrips?:
 
   act(() => {
     root.render(
-      <CharacterSheetPage
-        characterName="Teste"
-        portrait={null}
-        speciesName="Espécie Teste"
-        className="Classe Teste"
-        characterLevel={choices.level ?? 1}
-        derivedSheet={derivedSheet}
-        playState={DEFAULT_PLAY_STATE}
-        onUpdatePlayState={() => {}}
-        classFeatures={[]}
-        speciesTraits={[]}
-        inventory={[]}
-        learnedCantrips={spellState?.learnedCantrips ?? choices.spellSelections.cantrips}
-        preparedSpells={spellState?.preparedSpells ?? choices.spellSelections.prepared}
-        backgroundName="Antecedente Teste"
-        backgroundDescription="Descrição"
-        backgroundSkills={[]}
-        backgroundTool=""
-        backgroundEquipment=""
-        equippedArmorId={null}
-        hasShieldEquipped={false}
-        onEquipArmor={() => {}}
-        onEquipShield={() => {}}
-      />
+      <DiceProvider>
+        <CharacterSheetPage
+          characterName="Teste"
+          portrait={null}
+          speciesName="Espécie Teste"
+          className="Classe Teste"
+          characterLevel={choices.level ?? 1}
+          derivedSheet={derivedSheet}
+          playState={DEFAULT_PLAY_STATE}
+          onUpdatePlayState={() => {}}
+          classFeatures={[]}
+          speciesTraits={[]}
+          inventory={[]}
+          learnedCantrips={spellState?.learnedCantrips ?? choices.spellSelections.cantrips}
+          preparedSpells={spellState?.preparedSpells ?? choices.spellSelections.prepared}
+          backgroundName="Antecedente Teste"
+          backgroundDescription="Descrição"
+          backgroundSkills={[]}
+          backgroundTool=""
+          backgroundEquipment=""
+          equippedArmorId={null}
+          hasShieldEquipped={false}
+          onEquipArmor={() => {}}
+          onEquipShield={() => {}}
+        />
+      </DiceProvider>
     );
   });
 
@@ -80,7 +104,11 @@ function renderSheet(choices: CharacterChoices, spellState?: { learnedCantrips?:
 }
 
 function clickTab(container: HTMLElement, label: string) {
-  const button = Array.from(container.querySelectorAll('button')).find(node => node.textContent?.trim() === label) as HTMLButtonElement | undefined;
+  const upper = label.toUpperCase();
+  const button = Array.from(container.querySelectorAll('button')).find(node => {
+    const text = node.textContent?.trim() ?? '';
+    return text === upper || text.startsWith(upper);
+  }) as HTMLButtonElement | undefined;
   if (!button) throw new Error(`Tab "${label}" não encontrada`);
   act(() => {
     button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
@@ -105,9 +133,9 @@ describe('CharacterSheetPage racial/species derived display', () => {
 
     expect(view.derivedSheet.racialCantrips).toContain('Prestidigitação');
     expect(view.container.textContent).toContain('TRUQUES RACIAIS');
-    expect(view.container.textContent).toContain('Origem racial/específica');
+    expect(view.container.textContent).toContain('Racial');
     expect(view.container.textContent).toContain('Prestidigitação');
-    expect(view.container.textContent).toContain('Truques de Classe');
+    expect(view.container.textContent).toContain('TRUQUES CONHECIDOS');
     expect(view.container.textContent).toContain(String(view.derivedSheet.cantripsKnown ?? 0));
 
     view.cleanup();
@@ -126,7 +154,7 @@ describe('CharacterSheetPage racial/species derived display', () => {
     }));
 
     expect(view.derivedSheet.skillProficiencies).toContain('Percepção');
-    expect(view.container.textContent).toContain('PROFICIÊNCIAS E IDIOMAS');
+    expect(view.container.textContent).toContain('PROFICIÊNCIAS E TREINAMENTO');
     expect(view.container.textContent).toContain('PERÍCIAS');
     expect(view.container.textContent).toContain('Percepção');
 
@@ -178,8 +206,7 @@ describe('CharacterSheetPage racial/species derived display', () => {
     }));
 
     expect(view.derivedSheet.derivedDefenses).toContain('Resistência a Ígneo');
-    expect(view.container.textContent).toContain('DEFESAS E RESISTÊNCIAS');
-    expect(view.container.textContent).toContain('DERIVADAS');
+    expect(view.container.textContent).toContain('DEFESAS');
     expect(view.container.textContent).toContain('Resistência a Ígneo');
 
     view.cleanup();

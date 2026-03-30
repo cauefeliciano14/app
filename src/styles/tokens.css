@@ -3,7 +3,9 @@
    Single source of truth for the app
    ═══════════════════════════════════════════════════ */
 
-:root {
+/* ── Anti-FOUC: aplica tema antes do React carregar ── */
+:root,
+[data-theme="dark"] {
   /* ── Colors: Primary (D&D Red) ── */
   --color-primary: #C53131;
   --color-primary-hover: #a82828;
@@ -210,4 +212,272 @@
   --transition-base: 0.25s;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* ── Overlay / Glassmorphism tokens ── */
+  --overlay-black-50: rgba(0, 0, 0, 0.5);
+  --overlay-black-75: rgba(0, 0, 0, 0.75);
+  --overlay-white-03: rgba(255, 255, 255, 0.03);
+  --overlay-white-04: rgba(255, 255, 255, 0.04);
+  --overlay-white-05: rgba(255, 255, 255, 0.05);
+  --overlay-white-06: rgba(255, 255, 255, 0.06);
+  --overlay-white-08: rgba(255, 255, 255, 0.08);
+  --overlay-white-10: rgba(255, 255, 255, 0.1);
+  --overlay-white-20: rgba(255, 255, 255, 0.2);
+  --overlay-white-40: rgba(255, 255, 255, 0.4);
+
+  /* ── Panel / Tooltip surfaces ── */
+  --surface-panel-dark: rgba(17, 18, 24, 0.97);
+  --surface-panel-medium: rgba(17, 18, 24, 0.72);
+  --surface-panel-light: rgba(17, 18, 24, 0.6);
+  --surface-panel-card: rgba(26, 30, 35, 0.88);
+  --surface-panel-field: rgba(17, 18, 24, 0.4);
+
+  /* ── Disabled state ── */
+  --color-disabled-bg: #343a40;
+  --color-disabled-text: #6c757d;
+
+  /* ── Rarity colors (Item tooltips) ── */
+  --color-rarity-common: #94a3b8;
+  --color-rarity-common-bg: rgba(148, 163, 184, 0.15);
+  --color-rarity-common-border: rgba(148, 163, 184, 0.3);
+  --color-rarity-uncommon: #22c55e;
+  --color-rarity-uncommon-bg: rgba(34, 197, 94, 0.15);
+  --color-rarity-uncommon-border: rgba(34, 197, 94, 0.3);
+  --color-rarity-rare: #3b82f6;
+  --color-rarity-rare-bg: rgba(59, 130, 246, 0.15);
+  --color-rarity-rare-border: rgba(59, 130, 246, 0.3);
+  --color-rarity-very-rare: #a855f7;
+  --color-rarity-very-rare-bg: rgba(168, 85, 247, 0.15);
+  --color-rarity-very-rare-border: rgba(168, 85, 247, 0.3);
+  --color-rarity-legendary: #f97316;
+  --color-rarity-legendary-bg: rgba(249, 115, 22, 0.15);
+  --color-rarity-legendary-border: rgba(249, 115, 22, 0.3);
+
+  /* ── Typography: line-height tokens ── */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+
+  /* ── Theme-aware accent (customizável via Color Picker) ── */
+  --color-user-accent: var(--color-accent);
+}
+
+/* ═══════════════════════════════════════════════════
+   Light Theme — Parchment / Classic Manual
+   ═══════════════════════════════════════════════════ */
+[data-theme="light"] {
+  /* ── Colors: Primary (D&D Red) ── */
+  --color-primary: #b72b2b;
+  --color-primary-hover: #9a2323;
+  --color-primary-dark: #7d1c1c;
+  --color-primary-light: #dc4f4f;
+  --color-primary-glow: rgba(183, 43, 43, 0.25);
+  --color-primary-subtle: rgba(183, 43, 43, 0.1);
+  --color-primary-faint: rgba(183, 43, 43, 0.05);
+
+  /* ── Colors: Accent (gold/orange) ── */
+  --color-accent: #b8860b;
+  --color-accent-hover: #9a7209;
+  --color-accent-light: #d4a017;
+  --color-accent-warm: #e06c0a;
+  --color-accent-warm-light: #f09850;
+  --color-accent-warm-pale: #f5c89a;
+  --color-accent-glow: rgba(184, 134, 11, 0.25);
+  --color-accent-subtle: rgba(184, 134, 11, 0.1);
+  --color-accent-bg: rgba(184, 134, 11, 0.05);
+  --color-accent-bg-hover: rgba(184, 134, 11, 0.1);
+  --color-accent-border: rgba(184, 134, 11, 0.3);
+  --color-accent-border-strong: rgba(184, 134, 11, 0.5);
+  --color-orange-subtle: rgba(224, 108, 10, 0.1);
+  --color-orange-glow: rgba(224, 108, 10, 0.25);
+  --color-orange-bg: rgba(224, 108, 10, 0.06);
+  --color-orange-bg-hover: rgba(224, 108, 10, 0.1);
+  --color-orange-border: rgba(224, 108, 10, 0.2);
+  --color-orange-border-strong: rgba(224, 108, 10, 0.45);
+
+  /* ── Semantic Colors ── */
+  --color-error: #dc2626;
+  --color-error-vivid: #ef4444;
+  --color-error-pale: #fecaca;
+  --color-error-light: #f87171;
+  --color-error-bg: rgba(220, 38, 38, 0.06);
+  --color-error-bg-hover: rgba(220, 38, 38, 0.12);
+  --color-error-border: rgba(220, 38, 38, 0.2);
+  --color-error-border-strong: rgba(220, 38, 38, 0.5);
+  --color-error-btn-bg: rgba(220, 38, 38, 0.15);
+  --color-error-btn-hover: rgba(220, 38, 38, 0.25);
+  --color-danger-gradient: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  --color-danger-gradient-hover: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+
+  --color-success: #16a34a;
+  --color-success-vivid: #22c55e;
+  --color-success-light: #4ade80;
+  --color-success-bg: rgba(22, 163, 74, 0.1);
+  --color-success-bg-subtle: rgba(22, 163, 74, 0.06);
+  --color-success-border: rgba(22, 163, 74, 0.3);
+  --color-success-border-subtle: rgba(22, 163, 74, 0.2);
+
+  --color-info: #2563eb;
+  --color-info-light: #60a5fa;
+  --color-info-bg: rgba(37, 99, 235, 0.08);
+  --color-info-border: rgba(37, 99, 235, 0.2);
+
+  --color-magic: #7c3aed;
+  --color-magic-vivid: #8b5cf6;
+  --color-magic-deep: #7c3aed;
+  --color-magic-bg: rgba(124, 58, 237, 0.1);
+  --color-magic-bg-subtle: rgba(124, 58, 237, 0.05);
+  --color-magic-bg-deep: rgba(124, 58, 237, 0.08);
+  --color-magic-border: rgba(124, 58, 237, 0.3);
+  --color-magic-border-subtle: rgba(124, 58, 237, 0.2);
+  --color-magic-border-deep: rgba(124, 58, 237, 0.25);
+
+  --color-warning: #d97706;
+  --color-warning-bg: rgba(217, 119, 6, 0.08);
+  --color-warning-bg-hover: rgba(217, 119, 6, 0.12);
+  --color-warning-border: rgba(217, 119, 6, 0.2);
+  --color-warning-border-strong: rgba(217, 119, 6, 0.3);
+
+  --color-indigo: #4f46e5;
+  --color-indigo-light: #6366f1;
+  --color-indigo-bg: rgba(79, 70, 229, 0.08);
+  --color-indigo-bg-hover: rgba(79, 70, 229, 0.15);
+  --color-indigo-border: rgba(79, 70, 229, 0.2);
+
+  --color-attunement: #92400e;
+  --color-expertise: #d97706;
+  --color-expertise-border: #b45309;
+  --color-expertise-glow: rgba(217, 119, 6, 0.25);
+  --color-proficient: #65a30d;
+
+  /* ── HP Colors ── */
+  --color-hp-positive: #059669;
+  --color-hp-positive-bg: rgba(5, 150, 105, 0.08);
+  --color-hp-positive-border: rgba(5, 150, 105, 0.2);
+  --color-hp-negative: #b72b2b;
+
+  /* ── Dice ── */
+  --color-dice: #2563eb;
+  --color-pink: #db2777;
+
+  /* ── Surfaces (Parchment Light) ── */
+  --surface-base: #f5f0e8;
+  --surface-card: rgba(255, 255, 255, 0.85);
+  --surface-elevated: rgba(255, 255, 255, 0.95);
+  --surface-inset: rgba(235, 228, 215, 0.6);
+  --surface-inset-deep: rgba(225, 218, 205, 0.5);
+  --surface-input: rgba(255, 255, 255, 0.9);
+  --surface-input-hover: rgba(255, 255, 255, 1);
+  --surface-input-alt: rgba(0, 0, 0, 0.03);
+  --surface-overlay: rgba(245, 240, 232, 0.9);
+  --surface-overlay-heavy: rgba(0, 0, 0, 0.5);
+  --surface-tooltip: rgba(255, 255, 255, 0.97);
+  --surface-dark: #e8e0d0;
+  --surface-dark-alt: #ddd5c5;
+  --surface-subtle: rgba(183, 43, 43, 0.04);
+  --surface-subtle-hover: rgba(183, 43, 43, 0.08);
+  --surface-ghost: rgba(183, 43, 43, 0.03);
+  --surface-row-alt: rgba(0, 0, 0, 0.02);
+  --surface-row-hover: rgba(0, 0, 0, 0.04);
+  --surface-accordion: rgba(255, 255, 255, 0.6);
+  --surface-header: rgba(245, 240, 232, 0.95);
+  --surface-name-container: rgba(245, 240, 232, 0.6);
+  --surface-glass: rgba(0, 0, 0, 0.02);
+  --surface-glass-hover: rgba(0, 0, 0, 0.04);
+  --surface-selection: rgba(255, 255, 255, 0.9);
+  --surface-selection-active: linear-gradient(135deg, rgba(224, 108, 10, 0.1), rgba(224, 108, 10, 0.04));
+
+  /* ── Borders ── */
+  --border-default: rgba(0, 0, 0, 0.12);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-faint: rgba(0, 0, 0, 0.04);
+  --border-ghost: rgba(0, 0, 0, 0.06);
+  --border-input: rgba(0, 0, 0, 0.18);
+  --border-input-hover: rgba(0, 0, 0, 0.3);
+  --border-accent: rgba(184, 134, 11, 0.4);
+  --border-accent-subtle: rgba(184, 134, 11, 0.15);
+  --border-primary: rgba(183, 43, 43, 0.4);
+  --border-separator: rgba(0, 0, 0, 0.06);
+  --border-theme: #b72b2b;
+  --border-theme-dark: #7d1c1c;
+  --border-slate: rgba(100, 116, 139, 0.2);
+
+  /* ── Text ── */
+  --text-primary: #1a1a2e;
+  --text-secondary: #3d3d56;
+  --text-muted: #5c5c73;
+  --text-dim: #8b8b9e;
+  --text-faint: #a8a8b8;
+  --text-bright: #0f0f1a;
+  --text-body: #2d2d42;
+  --text-white: #ffffff;
+  --text-slate: #1e293b;
+  --text-slate-muted: #475569;
+  --text-slate-dim: #64748b;
+
+  /* ── Shadows (lighter for parchment) ── */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.2);
+  --shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-glow-accent: 0 0 8px rgba(184, 134, 11, 0.25);
+  --shadow-glow-primary: 0 2px 8px rgba(183, 43, 43, 0.2);
+  --shadow-glow-orange: 0 0 8px rgba(224, 108, 10, 0.25);
+  --shadow-input: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-focus-accent: 0 0 0 2px rgba(184, 134, 11, 0.15);
+  --shadow-focus-orange: 0 0 0 2px rgba(224, 108, 10, 0.1);
+  --shadow-hover: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-hover-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-danger: 0 2px 8px rgba(220, 38, 38, 0.15);
+
+  /* ── Overlay / Glassmorphism tokens ── */
+  --overlay-black-50: rgba(0, 0, 0, 0.35);
+  --overlay-black-75: rgba(0, 0, 0, 0.55);
+  --overlay-white-03: rgba(0, 0, 0, 0.02);
+  --overlay-white-04: rgba(0, 0, 0, 0.03);
+  --overlay-white-05: rgba(0, 0, 0, 0.03);
+  --overlay-white-06: rgba(0, 0, 0, 0.04);
+  --overlay-white-08: rgba(0, 0, 0, 0.06);
+  --overlay-white-10: rgba(0, 0, 0, 0.08);
+  --overlay-white-20: rgba(0, 0, 0, 0.12);
+  --overlay-white-40: rgba(0, 0, 0, 0.2);
+
+  /* ── Panel / Tooltip surfaces ── */
+  --surface-panel-dark: rgba(255, 255, 255, 0.98);
+  --surface-panel-medium: rgba(255, 255, 255, 0.92);
+  --surface-panel-light: rgba(255, 255, 255, 0.8);
+  --surface-panel-card: rgba(255, 255, 255, 0.92);
+  --surface-panel-field: rgba(245, 240, 232, 0.6);
+
+  /* ── Disabled state ── */
+  --color-disabled-bg: #d1d5db;
+  --color-disabled-text: #9ca3af;
+
+  /* ── Rarity colors ── */
+  --color-rarity-common: #64748b;
+  --color-rarity-common-bg: rgba(100, 116, 139, 0.1);
+  --color-rarity-common-border: rgba(100, 116, 139, 0.25);
+  --color-rarity-uncommon: #16a34a;
+  --color-rarity-uncommon-bg: rgba(22, 163, 74, 0.1);
+  --color-rarity-uncommon-border: rgba(22, 163, 74, 0.25);
+  --color-rarity-rare: #2563eb;
+  --color-rarity-rare-bg: rgba(37, 99, 235, 0.1);
+  --color-rarity-rare-border: rgba(37, 99, 235, 0.25);
+  --color-rarity-very-rare: #7c3aed;
+  --color-rarity-very-rare-bg: rgba(124, 58, 237, 0.1);
+  --color-rarity-very-rare-border: rgba(124, 58, 237, 0.25);
+  --color-rarity-legendary: #e06c0a;
+  --color-rarity-legendary-bg: rgba(224, 108, 10, 0.1);
+  --color-rarity-legendary-border: rgba(224, 108, 10, 0.25);
+
+  /* ── Theme-aware accent (customizável) ── */
+  --color-user-accent: var(--color-accent);
+}
+
+/* ═══════════════════════════════════════════════════
+   Classic Font Mode — Spectral (serif manual style)
+   ═══════════════════════════════════════════════════ */
+[data-font="classic"] {
+  --font-body: 'Spectral', Georgia, serif;
+  --font-label: 'Spectral SC', 'Roboto Condensed', serif;
 }

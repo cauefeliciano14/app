@@ -50,7 +50,7 @@ function clickButton(container: HTMLElement, label: string, index = 0) {
 
 function getEquipButtons(container: HTMLElement) {
   return Array.from(container.querySelectorAll('button')).filter(
-    button => ['Equipado', 'Equipar'].includes(button.textContent?.trim() ?? ''),
+    button => ['EQUIPADO', 'EQUIPAR'].includes(button.textContent?.trim() ?? ''),
   );
 }
 
@@ -114,7 +114,7 @@ describe('InventoryTab authoritative equipped state', () => {
     );
 
     const equipButtons = getEquipButtons(view.container);
-    expect(equipButtons.map(button => button.textContent?.trim())).toEqual(['Equipado', 'Equipar']);
+    expect(equipButtons.map(button => button.textContent?.trim())).toEqual(['EQUIPADO', 'EQUIPAR']);
 
     view.cleanup();
   });
@@ -131,7 +131,7 @@ describe('InventoryTab authoritative equipped state', () => {
       />,
     );
 
-    expect(getEquipButtons(view.container).map(button => button.textContent?.trim())).toEqual(['Equipado']);
+    expect(getEquipButtons(view.container).map(button => button.textContent?.trim())).toEqual(['EQUIPADO']);
 
     view.cleanup();
   });
@@ -148,12 +148,12 @@ describe('InventoryTab authoritative equipped state', () => {
       />,
     );
 
-    expect(getEquipButtons(view.container).map(button => button.textContent?.trim())).toEqual(['Equipado']);
+    expect(getEquipButtons(view.container).map(button => button.textContent?.trim())).toEqual(['EQUIPADO']);
 
     clickButton(view.container, 'Remove leather');
 
     expect(getEquipButtons(view.container)).toHaveLength(0);
-    expect(view.container.textContent).toContain('Inventário vazio.');
+    expect(view.container.textContent).toContain('Nenhum item encontrado.');
 
     view.cleanup();
   });

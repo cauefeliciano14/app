@@ -62,8 +62,8 @@ button:hover {
 }
 
 button:disabled {
-  background: #343a40;
-  color: #6c757d;
+  background: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
@@ -82,7 +82,7 @@ textarea:focus {
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: rgba(26, 30, 35, 0.5); border-radius: 4px; }
+::-webkit-scrollbar-track { background: var(--surface-panel-field); border-radius: 4px; }
 ::-webkit-scrollbar-thumb { background: var(--border-theme-dark); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border-theme); }
 
@@ -838,7 +838,7 @@ details[open] > summary .summary-chevron {
 
 /* ── Character Name Input ── */
 .character-name-input {
-  background: rgba(0, 0, 0, 0.2) !important;
+  background: var(--surface-input) !important;
   border: 1px solid var(--border-input) !important;
   border-radius: var(--radius-sm) !important;
   padding: 8px 12px !important;
@@ -853,7 +853,7 @@ details[open] > summary .summary-chevron {
 
 .character-name-input:focus {
   border-color: var(--color-accent) !important;
-  background: rgba(0, 0, 0, 0.3) !important;
+  background: var(--surface-input-hover) !important;
   box-shadow: var(--shadow-focus-accent) !important;
 }
 

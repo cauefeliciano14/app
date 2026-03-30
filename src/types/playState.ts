@@ -55,6 +55,8 @@ export interface CharacterPlayState {
   containers: Container[];
   /** Nome da magia em concentração ativa (null = nenhuma) */
   concentratingOn: string | null;
+  /** Nível de exaustão (0-10 nas regras 2024) */
+  exhaustionLevel: number;
 }
 
 export const DEFAULT_PLAY_STATE: CharacterPlayState = {
@@ -79,4 +81,5 @@ export const DEFAULT_PLAY_STATE: CharacterPlayState = {
   sheetItems: [],
   containers: [],
   concentratingOn: null,
+  exhaustionLevel: 0,
 };

@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.pips {
+  display: flex;
+  gap: 3px;
+}
+
+.pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid var(--border-default);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  padding: 0;
+}
+
+.pip:hover {
+  border-color: var(--color-accent-warm);
+}
+
+.pipActive {
+  composes: pip;
+  background: var(--color-error);
+  border-color: var(--color-error);
+  box-shadow: 0 0 4px var(--color-error);
+}
+
+.penalty {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  color: var(--color-error-vivid);
+  font-weight: 600;
+}
+
+.levelText {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}

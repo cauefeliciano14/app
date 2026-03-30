@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from 'react';
 import type { CharacterPlayState, Container } from '../../../types/playState';
 import { getArmorByName } from '../../../rules/data/armorRules';
 import { Modal } from '../../ui/Modal';
+import { ItemCardTooltip } from '../ItemCardTooltip';
 import styles from './InventoryTab.module.css';
 
 const ItemCatalog = lazy(() => import('../../equipment/ItemCatalog').then(m => ({ default: m.ItemCatalog })));
@@ -241,33 +242,52 @@ export function InventoryTab({
           </div>
           {currency && (
             <div className={styles.totalGold}>
-              Total em PO: {(currency.pp * 10 + currency.gp + currency.ep * 0.5 + currency.sp * 0.1 + currency.cp * 0.01).toFixed(2)}
+              <span>Total em PO: {(currency.pp * 10 + currency.gp + currency.ep * 0.5 + currency.sp * 0.1 + currency.cp * 0.01).toFixed(2)}</span>
+              <button
+                className={styles.convertBtn}
+                title="Converter moedas automaticamente (10 pc→1 pp, 10 pp→1 po, 10 po→1 pl)"
+                onClick={() => {
+                  if (!onUpdateCurrency) return;
+                  let cp = currency.cp;
+                  let sp = currency.sp + Math.floor(cp / 10); cp = cp % 10;
+                  let gp = currency.gp + Math.floor(sp / 10); sp = sp % 10;
+                  let pp = currency.pp + Math.floor(gp / 10); gp = gp % 10;
+                  onUpdateCurrency({ cp, sp, ep: currency.ep, gp, pp });
+                }}
+              >
+                Converter ⇄
+              </button>
             </div>
           )}
         </div>
       )}
 
       {/* Weight bar */}
-      {showWeight && (
-        <div className={styles.weightSection}>
-          <div className={styles.weightHeader}>
-            <span className={styles.weightLabel}>PESO E CARGA</span>
-            <span className={styles.weightValue} style={{ color: isOverweight ? '#ef4444' : 'var(--text-bright)' }}>
-              {totalWeight.toFixed(1)} / {carryingCapacity.toFixed(1)} kg
-            </span>
+      {showWeight && (() => {
+        const ratio = carryingCapacity > 0 ? totalWeight / carryingCapacity : 0;
+        const barColor = isOverweight ? '#ef4444' : ratio > 0.66 ? '#f59e0b' : ratio > 0.33 ? '#eab308' : '#22c55e';
+        const textColor = isOverweight ? '#ef4444' : ratio > 0.66 ? '#f59e0b' : 'var(--text-bright)';
+        return (
+          <div className={styles.weightSection}>
+            <div className={styles.weightHeader}>
+              <span className={styles.weightLabel}>CAPACIDADE DE CARGA</span>
+              <span className={styles.weightValue} style={{ color: textColor }}>
+                {totalWeight.toFixed(1)} / {carryingCapacity.toFixed(1)} kg
+              </span>
+            </div>
+            <div className={styles.weightBar}>
+              <div
+                className={styles.weightBarFill}
+                style={{
+                  width: `${Math.min(ratio * 100, 100)}%`,
+                  background: barColor,
+                }}
+              />
+            </div>
+            {isOverweight && <div className={styles.weightWarning}>⚠ Personagem sobrecarregado.</div>}
           </div>
-          <div className={styles.weightBar}>
-            <div
-              className={styles.weightBarFill}
-              style={{
-                width: `${Math.min((totalWeight / carryingCapacity) * 100, 100)}%`,
-                background: isOverweight ? '#ef4444' : 'var(--color-primary)'
-              }}
-            />
-          </div>
-          {isOverweight && <div className={styles.weightWarning}>⚠ Personagem sobrecarregado.</div>}
-        </div>
-      )}
+        );
+      })()}
 
       {/* Attunement slots */}
       <div className={styles.attunementSlots}>
@@ -318,7 +338,9 @@ export function InventoryTab({
               return (
                 <div key={i} className={styles.tableRow}>
                   <div>
-                    <div className={styles.itemName}>{item.name}</div>
+                    <ItemCardTooltip itemName={item.name}>
+                      <div className={styles.itemName}>{item.name}</div>
+                    </ItemCardTooltip>
                     {item.notes && <div className={styles.itemNotes}>{item.notes}</div>}
                   </div>
                   <div className={styles.itemQty}>{item.quantity ?? 1}</div>
@@ -362,7 +384,9 @@ export function InventoryTab({
                 {containerItems.map(item => (
                   <div key={item.id} className={styles.sheetItemRow}>
                     <div className={styles.sheetItemInfo}>
-                      <span className={styles.itemName}>{item.name}</span>
+                      <ItemCardTooltip itemName={item.name}>
+                        <span className={styles.itemName}>{item.name}</span>
+                      </ItemCardTooltip>
                       {item.notes && <span className={styles.itemNotes}>{item.notes}</span>}
                       {item.weight != null && <span className={styles.itemWeight}>{(item.weight * item.quantity).toFixed(1)} kg</span>}
                     </div>
@@ -400,7 +424,9 @@ export function InventoryTab({
             {filteredLoose.map(item => (
               <div key={item.id} className={styles.sheetItemRow}>
                 <div className={styles.sheetItemInfo}>
-                  <span className={styles.itemName}>{item.name}</span>
+                  <ItemCardTooltip itemName={item.name}>
+                    <span className={styles.itemName}>{item.name}</span>
+                  </ItemCardTooltip>
                   {item.notes && <span className={styles.itemNotes}>{item.notes}</span>}
                   {item.weight != null && <span className={styles.itemWeight}>{(item.weight * item.quantity).toFixed(1)} kg</span>}
                 </div>
