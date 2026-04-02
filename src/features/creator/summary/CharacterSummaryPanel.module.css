@@ -214,6 +214,7 @@
   font-size: 0.68rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 .identityMetaValue,
@@ -247,7 +248,11 @@
   padding: 2px 6px;
   cursor: pointer;
   transition: border-color 0.18s;
-  max-width: 140px;
+  max-width: 120px;
+  flex: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .alignmentSelect:focus {

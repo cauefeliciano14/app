@@ -1,4 +1,5 @@
 import { lazy, Suspense, useMemo, useState, useEffect } from 'react';
+import confetti from 'canvas-confetti';
 import { useDice } from '../../context/DiceContext';
 import type { DieType } from './diceGeometries';
 import { getDieFaces } from './diceGeometries';
@@ -6,8 +7,10 @@ import styles from './DiceTrayOverlay.module.css';
 
 const DiceTray = lazy(() => import('./DiceTray').then(m => ({ default: m.DiceTray })));
 
+type CritType = 'nat20' | 'fumble' | null;
+
 export function DiceTrayOverlay() {
-  const { currentRoll, settled, dismiss, themeId, webglAvailable } = useDice();
+  const { currentRoll, settled, markSettled, dismiss, themeId, webglAvailable } = useDice();
   const isVisible = currentRoll !== null;
 
   // Build dice array for 3D scene
@@ -22,6 +25,34 @@ export function DiceTrayOverlay() {
     }
     return arr;
   }, [currentRoll]);
+
+  const results = currentRoll?.results ?? [];
+
+  // Detectar Nat20 / Critical Fail (apenas d20)
+  const critType: CritType = useMemo(() => {
+    if (!currentRoll || !settled) return null;
+    for (let i = 0; i < diceArray.length; i++) {
+      if (diceArray[i].type === 'd20') {
+        if (currentRoll.results[i] === 20) return 'nat20';
+        if (currentRoll.results[i] === 1) return 'fumble';
+      }
+    }
+    return null;
+  }, [currentRoll, settled, diceArray]);
+
+  // Efeito de confete para Nat20
+  useEffect(() => {
+    if (critType !== 'nat20') return;
+    const duration = 1500;
+    const end = Date.now() + duration;
+    const colors = ['#ffd700', '#f97316', '#fbbf24', '#ffffff'];
+    const frame = () => {
+      confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0, y: 0.7 }, colors });
+      confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1, y: 0.7 }, colors });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    };
+    frame();
+  }, [critType]);
 
   // Fallback 2D animation state
   const [fallbackFaces, setFallbackFaces] = useState<number[]>([]);
@@ -40,9 +71,15 @@ export function DiceTrayOverlay() {
     return () => clearTimeout(timer);
   }, [settled, dismiss]);
 
+  const trayClass = [
+    styles.trayContainer,
+    settled && critType === 'nat20' ? styles.critSuccess : '',
+    settled && critType === 'fumble' ? styles.critFail : '',
+  ].filter(Boolean).join(' ');
+
   return (
     <div className={`${styles.overlay} ${isVisible ? styles.overlayVisible : ''}`}>
-      <div className={styles.trayContainer}>
+      <div className={trayClass}>
         {/* 3D Canvas or 2D Fallback */}
         <div className={styles.canvasWrapper}>
           {isVisible && webglAvailable && (
@@ -53,8 +90,9 @@ export function DiceTrayOverlay() {
             }>
               <DiceTray
                 dice={diceArray}
+                results={results}
                 themeId={themeId}
-                onAllSettled={() => {/* handled by DiceContext timeout */}}
+                onAllSettled={markSettled}
               />
             </Suspense>
           )}
@@ -74,6 +112,14 @@ export function DiceTrayOverlay() {
             </div>
           )}
         </div>
+
+        {/* Indicador Nat20 / Fumble */}
+        {settled && critType === 'nat20' && (
+          <div className={styles.critBanner}>ACERTO CRÍTICO!</div>
+        )}
+        {settled && critType === 'fumble' && (
+          <div className={styles.fumbleBanner}>FALHA CRÍTICA</div>
+        )}
 
         {/* Results */}
         {currentRoll && (

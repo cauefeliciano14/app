@@ -182,9 +182,72 @@
   to { transform: scale(1); }
 }
 
+/* Nat20 — Acerto Crítico */
+.critSuccess {
+  border-color: rgba(255, 215, 0, 0.6);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(255, 215, 0, 0.25),
+    inset 0 0 40px rgba(255, 215, 0, 0.05);
+  animation: critGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes critGlow {
+  from { box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.2); }
+  to { box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.6), 0 0 50px rgba(255, 215, 0, 0.4); }
+}
+
+.critBanner {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 6px 0;
+  color: #ffd700;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.6), 0 0 24px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.08), transparent);
+  animation: bannerIn 0.4s ease-out;
+}
+
+/* Fumble — Falha Crítica */
+.critFail {
+  border-color: rgba(197, 49, 49, 0.6);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(197, 49, 49, 0.2),
+    inset 0 0 40px rgba(197, 49, 49, 0.05);
+  animation: fumbleGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes fumbleGlow {
+  from { box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(197, 49, 49, 0.15); }
+  to { box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.6), 0 0 40px rgba(197, 49, 49, 0.35); }
+}
+
+.fumbleBanner {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 6px 0;
+  color: var(--color-primary-light, #e05555);
+  text-shadow: 0 0 12px rgba(197, 49, 49, 0.6), 0 0 24px rgba(197, 49, 49, 0.3);
+  background: linear-gradient(90deg, transparent, rgba(197, 49, 49, 0.08), transparent);
+  animation: bannerIn 0.4s ease-out;
+}
+
+@keyframes bannerIn {
+  from { opacity: 0; transform: scaleX(0.5); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .overlay { transition: none; }
   .fallbackDie { animation: none; }
   .fallbackDieSettled { animation: none; }
   .waiting { animation: none; }
+  .critSuccess { animation: none; }
+  .critFail { animation: none; }
+  .critBanner { animation: none; }
+  .fumbleBanner { animation: none; }
 }

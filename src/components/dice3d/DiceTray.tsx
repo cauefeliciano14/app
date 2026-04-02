@@ -8,6 +8,7 @@ import type { Mesh } from 'three';
 
 interface DiceTrayProps {
   dice: Array<{ type: DieType; id: string }>;
+  results: number[];
   themeId: string;
   onAllSettled?: () => void;
 }
@@ -37,7 +38,7 @@ function Wall({ position, rotation }: { position: [number, number, number]; rota
   return <mesh ref={ref}><boxGeometry args={[10, 4, 0.2]} /><meshStandardMaterial visible={false} /></mesh>;
 }
 
-export function DiceTray({ dice, themeId, onAllSettled }: DiceTrayProps) {
+export function DiceTray({ dice, results, themeId, onAllSettled }: DiceTrayProps) {
   const theme = useMemo(() => getTheme(themeId), [themeId]);
   const settledCount = useMemo(() => ({ current: 0 }), [dice]);
 
@@ -79,6 +80,7 @@ export function DiceTray({ dice, themeId, onAllSettled }: DiceTrayProps) {
               key={die.id}
               type={die.type}
               theme={theme}
+              targetFace={results[i] ?? 1}
               position={[
                 (Math.random() - 0.5) * 2,
                 3 + i * 0.5,

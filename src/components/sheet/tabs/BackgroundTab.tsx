@@ -1,3 +1,4 @@
+import { ParsedRuleText } from '../../ui/RuleTooltip';
 import styles from './BackgroundTab.module.css';
 
 interface BackgroundTabProps {
@@ -26,7 +27,7 @@ export function BackgroundTab({
       <div className={styles.section}>
         <div className={styles.title}>{backgroundName}</div>
         {backgroundDescription && (
-          <div className={styles.description}>{backgroundDescription}</div>
+          <div className={styles.description}><ParsedRuleText text={backgroundDescription} /></div>
         )}
 
         {backgroundSkills && backgroundSkills.length > 0 && (

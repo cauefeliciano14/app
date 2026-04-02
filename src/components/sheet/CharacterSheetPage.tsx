@@ -4,7 +4,7 @@ import type { CharacterPlayState } from '../../types/playState';
 import type { DiceRollResult, AdvantageMode } from '../../utils/diceRoller';
 import type { CharacterAppearance, PersonalityTraits, CharacterIdentityUpdate } from '../../types/character';
 import { rollD20Check, rollDamage } from '../../utils/diceRoller';
-import { useDice } from '../../context/DiceContext';
+
 import { signedMod } from '../../utils/format';
 import { ATTR_ABBR } from '../../utils/attributeConstants';
 import { SheetHeader } from './SheetHeader';
@@ -159,8 +159,7 @@ export function CharacterSheetPage({
     setSidebarStack(prev => prev.length > 1 ? prev.slice(0, -1) : []);
   }, []);
 
-  /* ── 3D Dice context ── */
-  const { roll: roll3D } = useDice();
+  /* ── 3D Dice context omitted ── */
 
   /* ── Responsive layout ── */
   const isMobile = useMediaQuery('(max-width: 1023px)');
@@ -353,27 +352,13 @@ export function CharacterSheetPage({
     const result = rollD20Check(skill.modifier, `${skill.label} (${abbr})`, 'check', advantageMode);
     setSidebar({ type: 'skill', skill, result });
     addToHistory(result);
-    roll3D({
-      dice: [{ type: 'd20', count: advantageMode === 'normal' ? 1 : 2 }],
-      label: `${skill.label} (${abbr})`,
-      results: result.rolls,
-      total: result.total,
-      formula: result.formula,
-    });
-  }, [advantageMode, addToHistory, roll3D]);
+  }, [advantageMode, addToHistory]);
 
   const handleSaveClick = useCallback((save: DerivedSavingThrow) => {
     const result = rollD20Check(save.modifier, `Teste de Resistência (${save.label})`, 'save', advantageMode);
     setSidebar({ type: 'save', save, result });
     addToHistory(result);
-    roll3D({
-      dice: [{ type: 'd20', count: advantageMode === 'normal' ? 1 : 2 }],
-      label: `Teste de Resistência (${save.label})`,
-      results: result.rolls,
-      total: result.total,
-      formula: result.formula,
-    });
-  }, [advantageMode, addToHistory, roll3D]);
+  }, [advantageMode, addToHistory]);
 
   const handleAbilityClick = useCallback((key: string, label: string, score: number, modifier: number) => {
     setSidebar({ type: 'ability', key, label, score, modifier });
@@ -386,19 +371,7 @@ export function CharacterSheetPage({
     setSidebar({ type: 'attack', attack, hitResult, damageResult });
     addToHistory(hitResult);
     addToHistory(damageResult);
-    // Parsear dados de dano (ex: "2d6" → {type:'d6',count:2})
-    const diceMatch = attack.damageDice.match(/^(\d+)d(\d+)$/);
-    const damageDice = diceMatch
-      ? [{ type: `d${diceMatch[2]}` as any, count: parseInt(diceMatch[1]) }]
-      : [{ type: 'd6' as const, count: 1 }];
-    roll3D({
-      dice: [{ type: 'd20', count: advantageMode === 'normal' ? 1 : 2 }, ...damageDice],
-      label: attack.weaponName,
-      results: [...hitResult.rolls, ...damageResult.rolls],
-      total: hitResult.total,
-      formula: `${hitResult.formula} | ${damageResult.formula}`,
-    });
-  }, [advantageMode, addToHistory, roll3D]);
+  }, [advantageMode, addToHistory]);
 
   /* ── Sidebar reroll helpers ── */
   const rerollSkill = () => {

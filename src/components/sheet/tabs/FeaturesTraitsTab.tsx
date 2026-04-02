@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { ActiveTalentSummary } from '../../../rules/types/DerivedSheet';
+import { ParsedRuleText } from '../../ui/RuleTooltip';
 import styles from './FeaturesTraitsTab.module.css';
 
 interface Feature {
@@ -104,7 +105,7 @@ export function FeaturesTraitsTab({
       {derivedTraits.length > 0 && (
         <Section title="EFEITOS DERIVADOS">
           <ul className={styles.derivedList}>
-            {derivedTraits.map((trait) => <li key={trait}>{trait}</li>)}
+            {derivedTraits.map((trait) => <li key={trait}><ParsedRuleText text={trait} /></li>)}
           </ul>
         </Section>
       )}
@@ -155,7 +156,7 @@ function FeatureEntry({ title, badge, description }: { title: string; badge?: st
         {badge && <span className={styles.featureBadge}>{badge}</span>}
       </div>
       <div className={styles.featureDesc}>
-        {shown}
+        <ParsedRuleText text={shown} />
         {long && (
           <button onClick={() => setExpanded(prev => !prev)} className={styles.moreBtn}>
             {expanded ? 'MENOS' : 'MAIS'}

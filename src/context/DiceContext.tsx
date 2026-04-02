@@ -21,6 +21,8 @@ interface DiceContextValue {
   currentRoll: DiceRollRequest | null;
   /** Se a animação 3D terminou */
   settled: boolean;
+  /** Chamado pelo DiceTray quando todos os dados pararam */
+  markSettled: () => void;
   /** Fechar o dice tray */
   dismiss: () => void;
   /** Tema de dados selecionado */
@@ -53,38 +55,35 @@ export function DiceProvider({ children }: { children: ReactNode }) {
   const [settled, setSettled] = useState(false);
   const [themeId, setThemeId] = useState('crimson');
   const webglAvailable = useRef(detectWebGL()).current;
+  const safetyTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const markSettled = useCallback(() => {
+    setSettled(true);
+  }, []);
 
   const roll = useCallback((request: DiceRollRequest) => {
+    if (safetyTimer.current) clearTimeout(safetyTimer.current);
     setSettled(false);
     setCurrentRoll(request);
 
-    // Se não tem WebGL, mostrar resultado após breve delay (fallback 2D)
     if (!webglAvailable) {
-      setTimeout(() => setSettled(true), 800);
+      // Fallback 2D: mostrar resultado após breve delay
+      safetyTimer.current = setTimeout(markSettled, 800);
+    } else {
+      // Safety timeout: se a física não resolver em 4s, forçar settled
+      safetyTimer.current = setTimeout(markSettled, 4000);
     }
-  }, [webglAvailable]);
+  }, [webglAvailable, markSettled]);
 
   const dismiss = useCallback(() => {
+    if (safetyTimer.current) clearTimeout(safetyTimer.current);
     setCurrentRoll(null);
     setSettled(false);
   }, []);
 
-  // Chamado pelo DiceTray quando todos os dados pararem
-  const handleAllSettled = useCallback(() => {
-    setSettled(true);
-  }, []);
-
   return (
-    <DiceContext.Provider value={{ roll, currentRoll, settled, dismiss, themeId, setThemeId, webglAvailable }}>
+    <DiceContext.Provider value={{ roll, currentRoll, settled, markSettled, dismiss, themeId, setThemeId, webglAvailable }}>
       {children}
     </DiceContext.Provider>
   );
-}
-
-/** Hook interno para o DiceTray obter o callback de settled */
-export function useDiceSettled() {
-  const [, setSettled] = useState(false);
-  const ctx = useContext(DiceContext);
-  // Retorna o setter do contexto real via o próprio contexto
-  return ctx;
 }

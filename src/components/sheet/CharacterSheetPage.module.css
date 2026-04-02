@@ -33,14 +33,6 @@
   font-family: var(--font-body, 'Roboto', sans-serif);
   padding: 16px;
   background-color: var(--surface-base);
-  background-image:
-    linear-gradient(to bottom, rgba(16, 22, 26, 0.45) 0%, rgba(16, 22, 26, 0.85) 100%),
-    radial-gradient(circle at top left, rgba(20, 30, 40, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at top right, rgba(40, 20, 20, 0.25) 0%, transparent 50%),
-    url('/sheet_bg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   color: var(--text-body);
 }
 

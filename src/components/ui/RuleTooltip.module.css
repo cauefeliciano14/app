@@ -1,0 +1,136 @@
+/* ── Trigger (texto clicável/hoverable) ── */
+.trigger {
+  cursor: help;
+  border-bottom: 1px dotted currentColor;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+  padding: 0 1px;
+  border-radius: 2px;
+}
+
+.trigger:hover,
+.trigger:focus-visible {
+  filter: brightness(1.2);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Tag type colors ── */
+.tagFeitico {
+  color: var(--color-magic-vivid, #c084fc);
+  border-bottom-color: var(--color-magic-border, rgba(167, 139, 250, 0.4));
+}
+
+.tagCondicao {
+  color: var(--color-error-vivid, #f87171);
+  border-bottom-color: var(--color-error-border, rgba(239, 68, 68, 0.25));
+}
+
+.tagItem {
+  color: var(--color-accent-light, #f0d060);
+  border-bottom-color: var(--color-accent-border, rgba(212, 160, 23, 0.3));
+}
+
+.tagRegra {
+  color: var(--color-info-light, #93c5fd);
+  border-bottom-color: var(--color-info-border, rgba(56, 189, 248, 0.3));
+}
+
+.tagAtributo {
+  color: var(--color-success-vivid, #4ade80);
+  border-bottom-color: var(--color-success-border, rgba(34, 197, 94, 0.4));
+}
+
+.tagAcao {
+  color: var(--color-accent-warm-light, #fdba74);
+  border-bottom-color: var(--color-orange-border, rgba(249, 115, 22, 0.25));
+}
+
+.tagDano {
+  color: var(--color-primary-light, #ff6b6b);
+  border-bottom-color: var(--color-primary-glow, rgba(197, 49, 49, 0.4));
+}
+
+/* ── Tooltip floating container ── */
+.tooltip {
+  background: var(--surface-panel-dark, var(--surface-tooltip));
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 12px 14px;
+  max-width: 380px;
+  min-width: 200px;
+  box-shadow: var(--shadow-elevated);
+  z-index: var(--z-tooltip);
+  animation: tooltipIn 0.15s ease-out;
+}
+
+@keyframes tooltipIn {
+  from { opacity: 0; transform: scale(0.96) translateY(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Header ── */
+.tooltipHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--overlay-white-08, rgba(255,255,255,0.08));
+}
+
+.tooltipBadge {
+  font-family: var(--font-label);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  background: currentColor;
+  color: var(--surface-base);
+  /* Use the tag color as background */
+}
+
+/* Override badge to use bg from tag type */
+.tooltipBadge.tagFeitico { background: var(--color-magic, #a78bfa); color: var(--surface-base); }
+.tooltipBadge.tagCondicao { background: var(--color-error, #ef4444); color: var(--text-white); }
+.tooltipBadge.tagItem { background: var(--color-accent, #d4a017); color: var(--surface-base); }
+.tooltipBadge.tagRegra { background: var(--color-info, #38bdf8); color: var(--surface-base); }
+.tooltipBadge.tagAtributo { background: var(--color-success, #22c55e); color: var(--surface-base); }
+.tooltipBadge.tagAcao { background: var(--color-accent-warm, #f97316); color: var(--surface-base); }
+.tooltipBadge.tagDano { background: var(--color-primary, #C53131); color: var(--text-white); }
+
+.tooltipTitle {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+/* ── Body ── */
+.tooltipBody {
+  font-size: 0.8rem;
+  line-height: var(--line-height-relaxed, 1.65);
+  color: var(--text-secondary);
+}
+
+.tooltipLoading {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.tooltipEmpty {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .tooltip { animation: none; }
+  .trigger { transition: none; }
+}

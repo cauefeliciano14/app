@@ -39,7 +39,7 @@ export const GlossaryTooltipProvider: React.FC<{ children: React.ReactNode }> = 
       {children}
       {activeTerm && (
         <ContextualOverlay anchorRect={anchorRect} width={380} title={activeTerm} onClose={() => { setActiveTerm(null); setAnchorRect(null); }}>
-          <div style={{ color: '#cbd5e1', fontSize: '0.8rem', lineHeight: 1.65 }}>{GLOSSARY[activeTerm]}</div>
+          <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', lineHeight: 1.65 }}>{GLOSSARY[activeTerm]}</div>
         </ContextualOverlay>
       )}
     </>

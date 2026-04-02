@@ -21,6 +21,7 @@ import { useSound } from '../../context/SoundContext';
 import { ChangeHistoryLogger } from '../../components/ChangeHistoryLogger';
 import { AccordionWizard } from './AccordionWizard';
 import { OnboardingModal } from '../../components/ui/OnboardingModal';
+import { ThemeControls } from '../../components/ui/ThemeControls';
 
 export function CreatorShell() {
   const {
@@ -136,6 +137,7 @@ export function CreatorShell() {
         </button>
         <button onClick={undo} disabled={!canUndo} className={styles.undoBtn} title="Desfazer (Ctrl+Z)">↩</button>
         <button onClick={redo} disabled={!canRedo} className={styles.undoBtn} title="Refazer (Ctrl+Shift+Z)">↪</button>
+        <ThemeControls activeClassId={character.classId ?? undefined} />
       </div>
       {showSaved && <div className="saved-indicator">✓ Progresso salvo</div>}
       {isMobile ? (
